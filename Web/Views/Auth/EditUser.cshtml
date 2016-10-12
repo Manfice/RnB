@@ -1,0 +1,18 @@
+﻿@model Web.Models.AppUser
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EditUser</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(o => o.Id)
+    @Html.Label("Name")
+    @Html.TextBoxFor(view => view.Fio)<br/>
+    @Html.LabelFor(view => view.Email)
+    @Html.TextBoxFor(view => view.Email)<br/>
+    <button type="submit">Save</button>
+    <a href="@Url.Action("Index")">Cancel</a>
+}

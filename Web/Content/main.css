@@ -1,0 +1,818 @@
+﻿@font-face {
+    font-family: "Impact";
+    src: url("/Content/fonts/IMPACT.TTF") format("truetype");
+}
+@font-face {
+    font-family: "rBold";
+    src: url("/Content/fonts/RobotoCondensed-Bold.ttf") format("truetype");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "rNormal";
+    src: url("/Content/fonts/RobotoCondensed-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "rLight";
+    src: url("/Content/fonts/RobotoCondensed-Light.ttf") format("truetype");
+}
+.redColor {
+    color: #fe0000;
+}
+.grayColor {
+    color: #484848;
+}
+.redBack {
+    background-color: #fe0000;
+}
+p,ul,h2,h3 {
+    margin: 0;
+    font-family: "rNormal";
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    font-family: "rNormal";
+    display: inline-block;
+}
+.flexRow {
+    display: flex;
+    flex-flow: row;
+}
+.flexCol {
+    display: flex;
+    flex-flow: column;
+}
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #fefefe;
+}
+header, nav, footer {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.row960 {
+    flex: 1 0 auto;
+    max-width: 970px;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.row960w {
+    flex: 1 0 auto;
+    max-width: 960px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+.hBlock {
+    padding: 10px 0;
+}
+.hMidle {
+    flex: 1 0 auto;
+    align-self: flex-start;
+}
+.hMidle h1 {
+    font-family: "rBold";
+    text-align: center;
+    margin: 0;
+    font-size: 18pt;
+}
+.hLeft {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+.redButton {
+    display: block;
+    margin: 0;
+    padding: 5px 30px 7px;
+    font-family: "rLight";
+    color: #fff;
+    font-size: 15pt;
+    font-weight: 100;
+    text-align: center;
+    /* ReSharper disable once UnknownCssVendorExtension */
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    border: none;
+    border-bottom: solid 3px #cc0b00;
+    background-color: red;
+}
+.grayButton {
+    display: block;
+    margin: 0;
+    padding: 5px 30px 7px;
+    font-family: "rLight";
+    color: #666666;
+    font-size: 15pt;
+    font-weight: 100;
+    text-align: center;
+    /* ReSharper disable once UnknownCssVendorExtension */
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    border-bottom: solid 3px #b5b5b5;
+    background-color: #dfdfdf;
+}
+.socLinks {
+    flex: 1 0 auto;
+}
+.socLinks a {
+    margin: 3px 3px
+}
+.hLeft p {
+    flex: 1 0 auto;
+    font-family: "rNormal";
+    margin: 7px;
+}
+.hMidle h1 span {
+    font-family: "Impact";
+    font-size: 20pt;
+    font-weight: normal
+}
+.hRight {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.hRight p img {
+    margin: 0 7px 0 0;
+}
+.hRight a img {
+    margin: 0 15px 0 0;
+}
+.hRight p {
+    margin: 0;
+    font-family: "rNormal";
+    font-size: 17pt;
+    color: #484848;
+}
+.hRight>a {
+    font-family: "rNormal";
+    display: block;
+    font-size: 15pt;
+    text-decoration: none;
+    color: #484848;
+    letter-spacing: -1px;
+}
+.regBlock {
+    padding: 3px 0;
+}
+
+.regBlock span {
+    font-family: "rNormal";
+    color: #484848;
+    padding: 0 5px;
+    font-size: 14pt;
+}
+nav {
+    height: 48px;
+    background-color: whitesmoke;
+    border-top: solid 1px #e9e9e9;
+    border-bottom: solid 1px #e9e9e9;
+
+}
+.lMenu {
+    flex: 1 0 40%;
+    align-self: center;
+}
+.mLogo {
+    flex: 0 0 auto;
+    position: relative;
+    width: 122px;
+    margin: 0 20px;
+}
+.mLogo img {
+    position: absolute;
+    top: -61px;
+    left: 0;
+    z-index: 2;
+}
+.rMenu {
+    flex: 1 0 40%;
+    align-self: center;
+}
+.topMenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "rNormal";
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 15pt;
+    text-transform: uppercase;
+}
+.topMenu ul li {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.topMenu ul li a:hover {
+    border-bottom: solid 3px red;
+}
+.topMenu ul li i {
+    color: #898989;
+    margin: 0 0 0 10px;
+    display: inline;
+}
+.topMenu ul li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    margin: 0 0 0 30px;
+    border-bottom: solid 3px transparent;
+    padding: 9px 0;
+}
+.topMenu ul li:first-child a {
+    margin: 0 0 0 10px;
+}
+/****************************************************/
+footer {
+    flex: 0 0 auto;
+    width: 100%;
+    background-color: #e8e8e8;
+}
+.fBlock {
+    flex: 1 0 20%;
+    margin: 30px 0;
+    color: #585858;
+    font-size: 11pt;
+    padding: 0 10px;
+    align-self: flex-start;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.fWe {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+.fWe p {
+    margin: 0 10px 20px 0;
+}
+.lList ul {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.lList ul li {
+    flex: 1 0 auto;
+    margin: 2px 0;
+}
+.lList ul li a {
+    line-height: 22px;
+    text-decoration: underline;
+}
+.fContact {
+    flex: 1 0 auto;
+    align-items: flex-start;
+}
+.fContact h2{
+    text-transform: uppercase;
+    color: red;
+    margin: 0;
+    font-size: 14pt;
+    font-weight: 100;
+}
+.fContact h3 {
+    font-weight: 100;
+    font-size: 15pt;
+}
+.fLogo p{
+    margin: 30px 0 10px;
+}
+.mainContent {
+    flex: 1 0 auto;
+    width: 100%;
+}
+/*Top slider*/
+.topSlider {
+    flex: 0 0 auto;
+    position: relative;
+}
+.dotsLayer {
+    position: absolute;
+    z-index: 7;
+
+}
+.dotsLayer>div {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: solid 2px white;
+    background-color: transparent;
+    margin: 0 5px;
+}
+.dotsLayer>div.active {
+    background-color: red;
+}
+.topSlider>img {
+    z-index: 2;
+    height: 100%;
+}
+.slItem h2 {
+    position: absolute;
+    text-transform: uppercase;
+    color: white;
+    top: 6%;
+    right: 30%;
+    word-spacing: 30px;
+    font-size: 2em;
+}
+.slItem img {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    /* ReSharper disable once CssNotResolved */
+    filter: grayscale(100%);
+    transition: 0.5s;   
+}
+.slItem img:hover {
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    filter: none;
+    transition: 0.5s;
+}
+
+/*Top Slider End*/
+/*Paty*/
+.nearParty {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 0 40px 0; 
+}
+.nearParty h2 {
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 30px 0 0 0;
+    font-size: 24pt;
+}
+.nearParty>div>span {
+    width: 100px;
+    border-bottom: solid 2px red;
+    margin: 5px 0;
+    padding: 0 30px;
+}
+.nearParty>div>span:first-child, .nearParty>div>span:last-child {
+    border-bottom: solid 1px #c7c7c7;
+    padding: 0 43px;
+}
+.patyCarousel {
+    flex: 1 0 auto; 
+    margin: 40px  0;
+}
+.patyItem {
+    padding: 20px;
+    width: 250px;
+    height: 240px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.patyItem h3 {
+    color: red;
+    font-size: 12pt;
+    letter-spacing: 1px;
+    padding: 0 0 20px 0;
+}
+.patyItem p {
+    font-weight: 100;
+    font-family: "rLight";
+    font-size: 13pt;
+}
+.redLink {
+    font-family: "rNormal";
+    text-decoration: none;
+    color: #fe0000;
+    font-size: 14pt;
+    letter-spacing: -1px;
+    border-bottom: dotted 2px red;
+}
+.carItem {
+    position: relative;
+    width: 320px;
+    height: 300px;
+}
+.patyItem a {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    letter-spacing: 1px;
+}
+.pImgAva {
+    border-bottom: solid 2px red;
+    height: 90px;
+    width: 90px;
+    position: relative;
+    float: left;
+    margin: 0 10px 10px 0;  
+}
+.pImgAva>img {
+    position: absolute;
+    width: 123px !important;
+    height: 123px;
+    right: 0;
+    bottom: 0;
+}
+.prevItem, .nextItem {
+    padding: 0 10px;
+    cursor: pointer;
+}
+/*Paty End*/
+/*Offer*/
+.offerBlock {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px;
+}
+.offerBlock>p {
+    color: gray;
+}
+.offerWrapper {
+    flex: 0 0 auto;
+    max-width: 970px;
+    width: 100%;
+    border: solid 2px red;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    padding: 40px 0 20px 0;
+    margin-bottom: 30px;
+
+}
+.buttonBorder {
+    border-left: solid 5px white;
+    border-right: solid 5px white;
+    position: absolute;
+    bottom: -25px;
+}
+form>p {
+    text-align: center;
+    display: block;
+    margin: 15px;
+}
+.titleBorder {
+    border-left: solid 5px white;
+    border-right: solid 5px white;
+    position: absolute;
+    top: -18px;
+    background-color: white;
+}
+.inputRow {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 25px;
+}
+.inpItem {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 7px 15px;
+}
+.inpItem p {
+    color: red;
+    padding: 0 5px;
+}
+.inpItem input {
+    flex: 0 0 auto;
+    border: solid 1px gray;
+    border-radius: 3px;
+    padding: 5px 0 5px 10px;
+    width: 230px;
+}
+.socRow {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 20px 50px;
+}
+.socRow button {
+    flex: 1 0 auto;
+    margin: 0 5px;
+    font-family: "rlight";
+    font-size: 14pt;
+    padding: 10px 10px;
+    text-align: left;
+    border-radius: 3px;
+    border: none;
+}
+.inpItem input[placeholder] {
+    font-family: "rNormal";
+    font-size: 12pt;
+}
+/*Offer END*/
+/*Short Descr */
+.sDescrBlock {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background: url("/Content/img/4fon.jpg") no-repeat;
+    background-position: 0 -280px;
+    padding: 100px 0;
+    position: relative;
+}
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.4;
+    z-index: 2;
+}
+.sDescrWrapper {
+    flex: 0 0 auto;
+    max-width: 960px;
+    z-index: 3;
+}
+.sDescrWrapper p {
+    margin: 20px;
+    color: white;
+    font-size: 14pt;
+}
+.sDescrWrapper p span {
+    font-family: "Impact";
+    font-size: 15pt;
+    font-weight: normal}
+/*Short Descr END*/
+/*Paty List*/
+.pListItem {
+    flex: 0 0 28%;
+    height: 258px;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.bTitle {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 0 22px 0;
+}
+.pListItem:hover .bTitle>a {
+    display: block;
+}
+
+.bTitle a {
+    display: none;
+    color: white;
+    text-align: center;
+    padding: 0 0 20px;
+}
+.bTitle a span {
+    padding: 0;
+    border-bottom: dotted 1px 
+}
+.bTitle a:hover {
+    color: red;
+}
+.pListTitel {
+    color: red;
+    text-transform: uppercase;
+    font-family: "rBold";
+    font-weight: bolder;
+    text-align: center;
+}
+
+/*Paty List END*/
+/*Prevelegii */
+.prevelegiiItem {
+    flex: 0 0 28%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+    z-index: 3;
+    cursor: pointer;
+}
+.pImgWrapper {
+    flex: 0 0 auto;
+    width: 90%;
+    align-self: flex-start;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    /* ReSharper disable once CssNotResolved */
+    filter: grayscale(100%);
+}
+.pImgWrapper:hover {
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    filter: none;
+    transition: 1s;
+}
+
+.pImgWrapper img {
+    width: 100%;
+    border-top: solid 15px rgba(128, 128, 128, 0.8);
+    border-left: solid 15px rgba(128, 128, 128, 0.8);
+    box-shadow: 15px 15px black;
+    margin: 10px 0 20px;
+}
+.prevelegiiItem h3 {
+    flex: 0 0 28%;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: red;
+    font-family: "rBold";
+    font-size: 12pt;
+    margin: 15px 0;
+}
+/*Prevelegii END*/
+/*PhotoGalary */
+.pvImageWr {
+    flex: 0 0 23%;
+    position: relative;
+    margin: 20px;
+    height: 181px;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    /* ReSharper disable once CssNotResolved */
+    transition: 1s;
+    filter: grayscale(100%);
+}
+.pvBorder {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: solid 10px rgba(255, 255, 255, 0.7);
+    z-index: 2;
+}
+.pvImageWr img {
+    width: 100%;
+}
+.pvImageWr:hover {
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    filter: none;
+    transition: 1s;
+}
+.btnBlock {
+    flex: 0 0 auto;
+    display: flex;
+}
+.btnBlock a {
+    margin: 20px 10px;
+}
+/*PhotoGalary END*/
+
+/*Partners*/
+.partnersCarousel {
+    flex: 0 0 auto;
+    align-self: center;
+}
+.pLogoWrapper {
+    height: 154px;
+    width: 154px;
+    border-radius: 50%;
+    background-color: #c2c2c2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pLogoWrapper>img {
+    margin: 20px;
+}
+/*Partners END*/
+/*PopUp Windows Common*/
+.popUpWrapper {
+    position: fixed;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.formWrapper {
+    flex: 0 0 auto;
+    padding: 25px 30px 15px;
+    background-color: white;
+    position: relative;
+
+}
+.formWrapper>form {
+    display: flex;
+    border: solid 2px red;
+    position: relative;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 50px 0 30px;
+    margin: 10px 0 30px 0;
+}
+.formWrapper>p {
+    font-size: 8pt;
+    color: darkgray;
+    text-align: center;
+}
+.formTitle {
+    position: absolute;
+    text-align: center;
+    top: -16px;
+    background-color: white;
+    padding: 0 20px;
+    font-size: 10pt;
+}
+.formFooter {
+    position: absolute;
+    bottom: -20px;
+    padding: 0 20px;
+    background-color: white;
+}
+.formClose {
+    width: 20px;
+    height: 20px;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    padding: 0px 3px 5px 3px;
+    text-align: center;
+    font-weight: 100;
+    border: solid 2px white;
+    top: -35px;
+    right: -35px;
+    cursor: pointer;
+}
+.socLogin {
+    border: solid 2px darkgray;
+    position: relative;
+    align-items: center;
+    padding: 50px 20px 30px;
+    margin: 10px 0 30px 30px;
+
+}
+.socLogin p {
+    max-width: 180px;
+    text-align: center;
+    font-size: 10pt;
+    display: block;
+    margin: 0 20px 20px ;
+    color: #848484;
+}
+/*PopUp Windows Common END*/
+
+.secBlock {
+    height: 500px;
+}

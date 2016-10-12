@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Web.Models.AppUser>
+@{
+    ViewBag.Title = "TEST";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var i = 0;
+}
+<h2>Users</h2>
+<table>
+@foreach (var item in Model)
+{
+    i++;
+    <tr>
+        <td>@i</td>
+        <td>@item.Fio</td>
+        <td>@item.Email</td>
+        <td>
+            <a href="@Url.Action("Delete", "Auth", new {id = item.Id})">Delete</a> / <a href="@Url.Action("EditUser", "Auth", new {id = item.Id})">Edit</a>
+        </td>
+    </tr>
+}
+</table>

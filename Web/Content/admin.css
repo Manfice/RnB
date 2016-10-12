@@ -1,0 +1,32 @@
+﻿body {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+header {
+    flex: 0 0 auto;
+    background-color: darkgray;
+    width: 250px;
+    display: flex;
+    flex-flow: column;
+}
+.headTop {
+    flex: 0 0 auto;
+    height: 50px;
+    background-color: lightpink;
+}
+.bodyContent {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+}
+.bodyTop {
+    flex: 0 0 auto;
+    height: 50px;
+    background-color: lightgreen;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}

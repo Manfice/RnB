@@ -1,0 +1,18 @@
+﻿@model Web.Domen.Viewmodels.UserView
+@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>CreateUser</h2>
+@Html.ValidationSummary(false)
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(view => view.Name)
+    @Html.TextBoxFor(view => view.Name)
+    @Html.LabelFor(view => view.Email)
+    @Html.TextBoxFor(view => view.Email)
+    @Html.LabelFor(view => view.Password)
+    @Html.PasswordFor(view => view.Password)
+    <button type="submit">Create</button>
+}

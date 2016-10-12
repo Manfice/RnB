@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Red & Black</title>
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript">
+        var appInsights=window.appInsights||function(config){
+            function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace","Ajax"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+        }({
+            instrumentationKey:"42959d51-35cd-43ba-a2e5-0c0ee9f0f11b"
+        });
+
+        window.appInsights=appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body>
+<header id="head">
+@Html.Action("RegisterPopUp", "Home")
+@Html.Action("LoginPopUp", "Home")
+@Html.Action("ThankYou", "Home")
+    
+    <div class="row960 hBlock">
+        <div class="hLeft">
+            <a class="redButton">Задать вопрос</a>
+            <p>Подписывайтесь на нас!</p>
+            <div class="socLinks">
+                <a><img alt="" src="/Content/img/soc/t.png" width="23"/></a>
+                <a><img alt="" src="/Content/img/soc/f.png" width="23"/></a>
+                <a><img alt="" src="/Content/img/soc/b.png" width="23"/></a>
+                <a><img alt="" src="/Content/img/soc/o.png" width="23"/></a>
+                <a><img alt="" src="/Content/img/soc/y.png" width="23"/></a>
+                <a><img alt="" src="/Content/img/soc/i.png" width="23"/></a>
+            </div>
+        </div>
+        <div class="hMidle">
+            <h1 class="grayColor">КЛУБ <span class="redColor">KRASNOE </span><span>&amp; ЧЕРНОЕ</span> - СООБЩЕСТВО АКТИВНЫХ,<br/>ИНТЕРЕСНЫХ И ПРЕДПРИИМЧИВЫХ ЛЮДЕЙ
+            </h1>
+        </div>
+        <div class="hRight">
+            <p><img alt="" src="/Content/img/pt.png"/>+7(962)459-98-51
+            </p>
+            <p><img alt="" src="/Content/img/pt.png"/>+7(918)741-88-03
+            </p>
+            <a href="mailto:info@redblackclub.ru"><img alt="" src="/Content/img/letter.png"/>info@redblackclub.ru</a>
+            <div class="regBlock">
+                <a href="#" class="redLink" data-bind="click:popUp.registerMe">Регистрация</a><span>|</span><a href="#" class="redLink" data-bind="click:popUp.loginMe">Войти</a>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="row960 navBlock">
+            <div class="lMenu topMenu">
+                <ul>
+                    <li><a href="#">Главная</a> <i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                    <li><a href="#">Услуги</a> <i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                    <li><a href="#">Мероприятия</a> <i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                </ul>
+            </div>
+            <div class="mLogo">
+                <img src="/Content/img/logo.png" alt="" width="122"/>
+            </div>
+            <div class="rMenu topMenu">
+                <ul>
+                    <li><a href="#">галерея</a></li>
+                    <li><a href="#">отзывы</a></li>
+                    <li><a href="#">блог</a></li>
+                    <li><a href="#">контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="index" class="mainContent">
+    @RenderBody()
+</div>
+<footer>
+    <div class="row960">
+        <div class="fBlock fWe">
+            <p>Подписывайтесь и читайте нас в социальных сетях и смотрите нас на канале Youtube:</p>
+            <div class="socLinks">
+                <a><img alt="" src="/Content/img/soc/t.png" width="30"/></a>
+                <a><img alt="" src="/Content/img/soc/f.png" width="30"/></a>
+                <a><img alt="" src="/Content/img/soc/b.png" width="30"/></a>
+            </div>
+            <div class="socLinks">
+                <a><img alt="" src="/Content/img/soc/o.png" width="30"/></a>
+                <a><img alt="" src="/Content/img/soc/y.png" width="30"/></a>
+                <a><img alt="" src="/Content/img/soc/i.png" width="30"/></a>
+            </div>
+        </div>
+        <div class="fBlock lList">
+            <ul>
+                <li><a href="#">О клубе</a></li>
+                <li><a href="#">Привилегии</a></li>
+                <li><a href="#">Члены клуба</a></li>
+                <li><a href="#">Мероприятия</a></li>
+                <li><a href="#">Бизнес ужины</a></li>
+                <li><a href="#">Политика <br/> конфиденциальности</a></li>
+            </ul>
+        </div>
+        <div class="fBlock lList">
+            <ul>
+                <li><a href="#">Сотрудничество</a></li>
+                <li><a href="#">Лидогенерация</a></li>
+                <li><a href="#">PR-сопровождение</a></li>
+                <li><a href="#">Сопровождение мероприятий</a></li>
+                <li><a href="#">Поддержка мероприятий</a></li>
+                <li><a href="#">Галерея</a></li>
+                <li><a href="#">Оферта</a></li>
+            </ul>
+        </div>
+        <div class="fBlock fContact">
+            <h2>контакты:</h2>
+            <h3>355008, <br/> г. Ставрополь, <br/> ул. 8 Марта 121
+            </h3>
+            <h3 style="font-weight: 600">+7(962) 459-98-51</h3>
+            <h3 style="font-weight: 600">+7(918) 741-88-03</h3>
+            <h3>E-mail:info@club.ru</h3>
+        </div>
+        <div class="fBlock fLogo">
+            <a href="#" class="redButton">Задать вопрос</a>
+            <p>Разработка сайта:</p>
+            <img alt="developer" src="/Content/img/logoWA.png"/>
+        </div>
+    </div>
+</footer>
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/mainJS.js"></script>
+</body>
+</html>

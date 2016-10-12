@@ -1,0 +1,61 @@
+﻿<div class="nearParty">
+    <h2>Посмотрите фото и видео с наших мероприятий</h2>
+    <div><span> </span><span> </span><span> </span></div>
+    <div class="btnBlock">
+        <a href="#" class="" data-bind="click:photoView.bind($data, 'PHOTO'), css:{redButton:photoView()==='PHOTO',grayButton:photoView()!=='PHOTO' }">Фото</a>
+        <a href="#" class="" data-bind="click:photoView.bind($data, 'VIDEO'), css:{redButton:photoView()!=='PHOTO',grayButton:photoView()==='PHOTO' }">Видео</a>
+    </div>
+    <div class="row960w" style="display: none;" data-bind="visible:photoView()==='PHOTO'">
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <img alt="" src="/Content/img/1.jpg"/>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <img alt="" src="/Content/img/1.jpg"/>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <img alt="" src="/Content/img/1.jpg"/>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <img alt="" src="/Content/img/1.jpg"/>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <img alt="" src="/Content/img/1.jpg"/>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <img alt="" src="/Content/img/1.jpg"/>
+        </div>
+    </div>
+    <div class="row960w" style="display: none;" data-bind="visible:photoView()==='VIDEO'">
+      @*<div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
+        </div>
+        <div class="pvImageWr">
+            <div class="pvBorder"></div>
+            <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
+        </div>*@
+    </div>
+    <a class="redLink" href="#">Смотреть еще</a>
+</div>
