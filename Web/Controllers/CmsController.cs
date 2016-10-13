@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using Web.Domen.Viewmodels;
 using Web.Infrastructure;
 using Web.Models;
@@ -27,7 +25,6 @@ namespace Web.Controllers
         }
         private AppUserManager UserMeneger => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
         private AppRoleManager RoleMeneger => HttpContext.GetOwinContext().GetUserManager<AppRoleManager>();
-        private IAuthenticationManager AuthManager => HttpContext.GetOwinContext().Authentication;
 
         // GET: Cms
         public ActionResult Index()
@@ -70,12 +67,12 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    return View("Error", result.Errors);
+                    return View("Error", (string[]) result.Errors);
                 }
             }
             else
             {
-                return View("Error", new string[] { "Role not found" });
+                return View("Error", new[] { "Role not found" });
             }
         }
 
@@ -91,14 +88,14 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<ActionResult> EditRole(RoleModModel model)
         {
-            if (!ModelState.IsValid) return View("Error", new string[] { "Role not found" });
+            if (!ModelState.IsValid) return View("Error", new[] { "Role not found" });
             IdentityResult result;
             foreach (var toAdd in model.IdsToAdd ?? new string[] { })
             {
                 result = await UserMeneger.AddToRoleAsync(toAdd, model.Name);
                 if (!result.Succeeded)
                 {
-                    return View("Error", result.Errors);
+                    return View("Error", (string[]) result.Errors);
                 }
             }
             foreach (var toRem in model.IdsToRemove ?? new string[] { })
@@ -106,7 +103,7 @@ namespace Web.Controllers
                 result = await UserMeneger.RemoveFromRoleAsync(toRem, model.Name);
                 if (!result.Succeeded)
                 {
-                    return View("Error", result.Errors);
+                    return View("Error", (string[]) result.Errors);
                 }
             }
             return RedirectToAction("Roles");
@@ -135,19 +132,19 @@ namespace Web.Controllers
         public async Task<ActionResult> Delete(string id)
         {
             var user = await UserMeneger.FindByIdAsync(id);
-            if (user == null) return View("Error", new string[] { "User was not found" });
+            if (user == null) return View("Error", new[] { "User was not found" });
             var result = await UserMeneger.DeleteAsync(user);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index");
             }
-            return View("Error", result.Errors);
+            return View("Error", (string[]) result.Errors);
         }
 
         public async Task<ActionResult> EditUser(string id)
         {
             var user = await UserMeneger.FindByIdAsync(id);
-            return user == null ? View("Error", new string[] { "Something wrong" }) : View(user);
+            return user == null ? View("Error", new[] { "Something wrong" }) : View(user);
         }
         [HttpPost]
         public async Task<ActionResult> EditUser(AppUser model)

@@ -4,7 +4,7 @@ namespace Web.Domen.Infrastructure
 {
     public class Context:DbContext
     {
-        public Context():base("RnB")
+        public Context():base("RnBData")
         {
             Database.SetInitializer(new RnBDbInitiliser());
         }

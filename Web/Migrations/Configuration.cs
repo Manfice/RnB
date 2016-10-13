@@ -1,21 +1,28 @@
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Web.Infrastructure;
+using Web.Models;
+
 namespace Web.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Web.Infrastructure.AppIdentityDbContext>
+
+    internal sealed class Configuration : DbMigrationsConfiguration<AppIdentityDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "Web.Infrastructure.AppIdentityDbContext";
+            //ContextKey = "Web.Infrastructure.AppIdentityDbContext";
             AutomaticMigrationDataLossAllowed = false;
         }
 
-        protected override void Seed(Web.Infrastructure.AppIdentityDbContext context)
+        protected override void Seed(AppIdentityDbContext context)
         {
+            PerformInitialSetup(context);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -29,5 +36,33 @@ namespace Web.Migrations
             //    );
             //
         }
+        public void PerformInitialSetup(AppIdentityDbContext context)
+        {
+            var userManager = new AppUserManager(new UserStore<AppUser>(context));
+            var roleManager = new AppRoleManager(new RoleStore<AppRole>(context));
+
+            var role = "Admin";
+            var userName = "Administrator";
+            var passs = "1q2w3eOP";
+            var email = "c592@yandex.ru";
+
+            if (!roleManager.RoleExists(role))
+            {
+                roleManager.Create(new AppRole(role));
+            }
+
+            var user = userManager.FindByName(email);
+            if (user == null)
+            {
+                userManager.Create(new AppUser { Email = email, UserName = email, Fio = userName }, passs);
+            }
+            user = userManager.FindByName(email);
+            if (!userManager.IsInRole(user.Id, role))
+            {
+                userManager.AddToRole(user.Id, role);
+            }
+
+        }
+
     }
 }
