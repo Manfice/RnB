@@ -182,18 +182,29 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
+    <Compile Include="Infrastructure\AppRoleManager.cs" />
     <Compile Include="Infrastructure\AppUserManager.cs" />
+    <Compile Include="Infrastructure\IdentityHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Migrations\201610120948178_InitialCreate.cs" />
+    <Compile Include="Migrations\201610120948178_InitialCreate.Designer.cs">
+      <DependentUpon>201610120948178_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Viewmodels\AuthViews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\1.jpg" />
     <Content Include="Content\img\4fon.jpg" />
     <Content Include="Content\img\7fon.jpg" />
@@ -236,7 +247,10 @@
     <Content Include="Content\img\topSlider\6.jpg" />
     <Content Include="Content\main.css" />
     <Content Include="Content\owl.carousel.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\fonts\IMPACT.TTF" />
@@ -246,6 +260,12 @@
     <Content Include="Content\fonts\RobotoCondensed-Light.ttf" />
     <Content Include="Content\fonts\RobotoCondensed-LightItalic.ttf" />
     <Content Include="Content\fonts\RobotoCondensed-Regular.ttf" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\redandblack - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
@@ -286,15 +306,19 @@
     <Content Include="Views\Home\PatyList.cshtml" />
     <Content Include="Views\Home\PhotoVideo.cshtml" />
     <Content Include="Views\Home\Prevelegii.cshtml" />
-    <Content Include="Views\Home\RegisterPopUp.cshtml" />
+    <Content Include="Views\Home\RegisterPartnerPopUp.cshtml" />
     <Content Include="Views\Home\Sdescr.cshtml" />
     <Content Include="Views\Home\ThankYou.cshtml" />
     <Content Include="Views\Home\TopSlider.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Auth\CreateUser.cshtml" />
-    <Content Include="Views\Auth\Index.cshtml" />
-    <Content Include="Views\Auth\EditUser.cshtml" />
+    <Content Include="Views\Cms\CreateUser.cshtml" />
+    <Content Include="Views\Cms\Index.cshtml" />
+    <Content Include="Views\Cms\EditUser.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Cms\Roles.cshtml" />
+    <Content Include="Views\Cms\CreateRole.cshtml" />
+    <Content Include="Views\Cms\EditRole.cshtml" />
+    <Content Include="Views\Home\RegisterPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -308,6 +332,11 @@
       <Project>{5a23ebbd-1d97-4f7c-9d45-79ec418f8672}</Project>
       <Name>Web.Domen</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610120948178_InitialCreate.resx">
+      <DependentUpon>201610120948178_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

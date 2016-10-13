@@ -1,0 +1,63 @@
+﻿@using Web.Infrastructure
+@model IEnumerable<Web.Models.AppRole>
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var i = 0;
+    var j = 0;
+}
+
+<h2>Roles</h2>
+
+<a href="@Url.Action("CreateRole")">Добавить роль</a>
+<hr/>
+<table>
+    @if (!Model.Any())
+    {
+        <thead>
+            <tr>
+                <td>No roles</td>
+            </tr>        
+        </thead>
+    }
+    else
+    {
+        foreach (var item in Model.OrderBy(role => role.Name))
+        {
+            i++;
+            <thead>
+                <tr>
+                    <td>@i</td>
+                    <td colspan="2">@item.Name</td>
+                    <td>
+                        <a href="@Url.Action("EditRole","Cms", new {id=item.Id})">Edit</a> /
+                        <a href="@Url.Action("DeleteRole","Cms", new {id=item.Id})">Delete</a>
+                    </td>
+                </tr>            
+            </thead>
+            if (item.Users != null && item.Users.Count > 0)
+            {
+                j = 0;
+                foreach (var user in item.Users)
+                {
+                    j++;
+                    <tr>
+                        <td>@i.@j</td>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@Html.GetUserName(user.UserId)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>Role contains no users</td>
+                </tr>
+            }
+        }
+    }
+</table>

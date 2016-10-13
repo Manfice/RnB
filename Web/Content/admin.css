@@ -5,6 +5,9 @@
     margin: 0;
     padding: 0;
 }
+a {
+    color: inherit;
+}
 header {
     flex: 0 0 auto;
     background-color: darkgray;
@@ -29,4 +32,15 @@ header {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+}
+table {
+    border: solid 1px darkgray;
+    margin: 5px;
+}
+table thead {
+    background-color: gray;
+    color: white;
+}
+td,th {
+    padding: 5px 10px;
 }

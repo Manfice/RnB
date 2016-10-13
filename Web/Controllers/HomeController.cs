@@ -49,6 +49,10 @@ namespace Web.Controllers
         {
             return PartialView();
         }
+        public ActionResult RegisterPartnerPopUp()
+        {
+            return PartialView();
+        }
         public ActionResult RegisterPopUp()
         {
             return PartialView();

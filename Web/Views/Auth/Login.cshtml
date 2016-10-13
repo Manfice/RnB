@@ -11,7 +11,10 @@
                 <p>x</p>
             </a>
         </div>
-        <form>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false)
             <div class="formTitle">
                 <h2>
                     Войти в личный <br />кабинет
@@ -24,9 +27,9 @@
                 <input type="password" name="passdata" value="" placeholder="Пароль" />
             </div>
             <div class="formFooter">
-                <a href="@Url.Action("Index","Auth")" class="redButton">Войти</a>
+                <button type="submit" class="redButton">Войти</button>
             </div>
-        </form>
+        }
         <div class="socLogin flexCol">
             <div class="formTitle">
                 <h2>

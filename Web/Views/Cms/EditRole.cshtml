@@ -1,0 +1,81 @@
+﻿@model Web.Models.Viewmodels.RoleEditView
+@{
+    ViewBag.Title = "EditRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EditRole</h2>
+@Html.ValidationSummary()
+<hr/>
+@using (Html.BeginForm())
+{
+    @Html.Hidden("Name", Model.Role.Name)
+    <table>
+        <thead>
+        <tr>
+            <td colspan="3">Добавить пользователей к роли <strong>@Model.Role.Name</strong></td>
+        </tr>
+        </thead>
+        <tbody>
+        @if (!Model.NonMember.Any())
+        {
+            <tr>
+                <td>Нет пользователей</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <th>Имя</th>
+                <th>E-mail</th>
+                <th>Добвить</th>
+            </tr>
+            foreach (var user in Model.NonMember)
+            {
+                <tr>
+                    <td>@user.Fio</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <input type="checkbox" name="IdsToAdd" value="@user.Id"/>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+        <tr>
+            <td colspan="3">Удалить пользователей из роли: <strong>@Model.Role.Name</strong></td>
+        </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Members.Any())
+        {
+            <tr>
+                <td>Нет пользователей</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <th>Имя</th>
+                <th>E-mail</th>
+                <th>Удалить</th>
+            </tr>
+            foreach (var user in Model.Members)
+            {
+                <tr>
+                    <td>@user.Fio</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <input type="checkbox" name="IdsToRemove" value="@user.Id"/>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+    <button type="submit">Сохранить</button>
+}

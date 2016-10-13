@@ -10,12 +10,13 @@
 <header>
     <div class="headTop">
     </div>
-    @Html.ActionLink("Index","Index","Auth", null, new {@class=ViewBag.active})
-    <a class="@ViewBag.active" href="@Url.Action("CreateUser","Auth")">Create user</a>
+    @Html.ActionLink("Index","Index","Cms", null, new {@class=ViewBag.active})
+    <a class="@ViewBag.active" href="@Url.Action("Roles","Cms")">Roles</a>
 </header>
 <div class="bodyContent">
     <div class="bodyTop">
-        @Html.ActionLink("Main","Index","Home")
+        @Html.ActionLink("Main", "Index", "Home")
+        @Html.ActionLink("Выход","LogOut","Auth")
     </div>
     <div class="mainContent">
         @RenderBody()

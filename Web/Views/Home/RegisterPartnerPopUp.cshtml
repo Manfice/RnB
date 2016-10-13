@@ -1,0 +1,36 @@
+﻿<div style="display: none;">
+    <div class="popUpWrapper">
+        <div class="formWrapper">
+            <div class="formClose">
+                <p data-bind="click:popUp.registerMe">x</p>
+            </div>
+            <form data-bind="submit:popUp.clReg">
+                <div class="formTitle">
+                    <h2>
+                        Станьте нашим <br />партнером!
+                    </h2>
+                </div>
+                <div class="inpItem">
+                    <p>*</p>
+                    <input type="text" name="fio" value="" placeholder="ФИО (полностью)" />
+                </div>
+                <div class="inpItem">
+                    <p>*</p>
+                    <input type="tel" name="phone" value="" placeholder="Телефон" />
+                </div>
+                <div class="inpItem">
+                    <p>*</p>
+                    <input type="email" name="email" value="" placeholder="E-mail" />
+                </div>
+                <div class="inpItem">
+                    <input style="margin-left: 17px;" type="text" name="company" value="" placeholder="Название компании" />
+                </div>
+
+                <div class="formFooter">
+                    <button type="submit" class="redButton" >Отправить</button>
+                </div>
+            </form>
+            <p>Поля отмеченные звездочкой (*) обязательны для заполнения</p>
+        </div>
+    </div>
+</div>

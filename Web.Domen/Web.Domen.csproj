@@ -49,8 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IEvents.cs" />
     <Compile Include="Infrastructure\Context.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Paty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Viewmodels\UserView.cs" />
   </ItemGroup>

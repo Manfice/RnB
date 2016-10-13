@@ -6,7 +6,15 @@ namespace Web.Domen.Infrastructure
     {
         public Context():base("RnB")
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<Context>());
+            Database.SetInitializer(new RnBDbInitiliser());
+        }
+    }
+
+    public class RnBDbInitiliser : CreateDatabaseIfNotExists<Context>
+    {
+        protected override void Seed(Context context)
+        {
+            base.Seed(context);
         }
     }
 }

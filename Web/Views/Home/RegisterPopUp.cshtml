@@ -4,33 +4,54 @@
             <div class="formClose">
                 <p data-bind="click:popUp.registerMe">x</p>
             </div>
-            <form data-bind="submit:popUp.clReg">
-                <div class="formTitle">
-                    <h2>
-                        Станьте нашим <br />партнером!
-                    </h2>
-                </div>
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="text" name="fio" value="" placeholder="ФИО (полностью)" />
-                </div>
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="tel" name="phone" value="" placeholder="Телефон" />
-                </div>
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="email" name="email" value="" placeholder="E-mail" />
-                </div>
-                <div class="inpItem">
-                    <input style="margin-left: 17px;" type="text" name="company" value="" placeholder="Название компании" />
-                </div>
 
-                <div class="formFooter">
-                    <button type="submit" class="redButton" >Отправить</button>
+            <form action="/" method="post">
+                <div class="titleBorder">
+                    <h2>Оставьте заявку на вступление в сообщество!</h2>
+                </div>
+                <div class="inputRow">
+                    <div class="inpItem">
+                        <p>*</p>
+                        <input type="text" name="fio" value="" placeholder="Имя"/>
+                    </div>
+                    <div class="inpItem">
+                        <p>*</p>
+                        <input type="tel" name="phone" value="" placeholder="Телефон"/>
+                    </div>
+                    <div class="inpItem">
+                        <p>*</p>
+                        <input type="email" name="email" value="" placeholder="E-mail"/>
+                    </div>
+                </div>
+                <div class="inputRow">
+                    <div class="inpItem">
+                        <p></p>
+                        <input type="text" name="town" value="" placeholder="Город"/>
+                    </div>
+                    <div class="inpItem">
+                        <p></p>
+                        <input type="text" name="birthday" value="" placeholder="Дата рождения"/>
+                    </div>
+                    <div class="inpItem">
+                        <p></p>
+                        <input type="text" name="workplace" value="" placeholder="Место работы, должность"/>
+                    </div>
+                </div>
+                <p>
+                    Укажите ваши профили в социальных сетях (это дает возможность своевременного оповещения о ближайших <br/>мероприятиях клуба, скидки на посещение платных мероприятий и отображение групп на вашей странице)
+                </p>
+                <div class="socRow">
+                    <button type="button">Facebook</button>
+                    <button type="button">Вконтакте</button>
+                    <button type="button">Instagram</button>
+                    <button type="button">Одноклассники</button>
+                </div>
+                <div class="buttonBorder">
+                    <a class="redButton" href="#">Стать членом клуба</a>
                 </div>
             </form>
-            <p>Поля отмеченные звездочкой (*) обязательны для заполнения</p>
         </div>
+        <p style="color: white">* Поля, отмеченные звездочкой "*" - обязательны к заполнению</p>
+        <p style="color: white">** Ваши данные ни при каких условиях не будут переданы третьим лицам</p>
     </div>
 </div>

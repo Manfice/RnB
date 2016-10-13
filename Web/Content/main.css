@@ -486,6 +486,7 @@ footer {
     position: absolute;
     bottom: -25px;
 }
+
 form>p {
     text-align: center;
     display: block;
@@ -510,11 +511,14 @@ form>p {
     flex: 1 0 auto;
     display: flex;
     flex-flow: row nowrap;
-    margin: 7px 15px;
+    margin: 7px 20px;
+    position: relative;
 }
 .inpItem p {
     color: red;
-    padding: 0 5px;
+    position: absolute;
+    top: 0;
+    left: -10px;
 }
 .inpItem input {
     flex: 0 0 auto;
@@ -522,15 +526,16 @@ form>p {
     border-radius: 3px;
     padding: 5px 0 5px 10px;
     width: 230px;
+
 }
 .socRow {
-    flex: 1 0 auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    margin: 20px 50px;
+    margin: 20px 0;
+    width: 90%;
 }
-.socRow button {
+.socRow>button {
     flex: 1 0 auto;
     margin: 0 5px;
     font-family: "rlight";

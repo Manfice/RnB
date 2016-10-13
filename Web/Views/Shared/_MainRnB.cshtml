@@ -51,7 +51,23 @@
             </p>
             <a href="mailto:info@redblackclub.ru"><img alt="" src="/Content/img/letter.png"/>info@redblackclub.ru</a>
             <div class="regBlock">
-                <a href="#" class="redLink" data-bind="click:popUp.registerMe">Регистрация</a><span>|</span><a href="#" class="redLink" data-bind="click:popUp.loginMe">Войти</a>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <a href="@Url.Action("Index", "Cms")" class="redLink">ADMIN</a>
+                    <span>|</span>
+                    <a href="@Url.Action("LogOut", "Auth")" class="redLink">Выйти</a>
+                }
+                else
+                {
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Index","Home")" class="redLink">@User.Identity.Name</a><span>|</span><a href="@Url.Action("LogOut","Auth")" class="redLink">Выйти</a>
+                    }
+                    else
+                    {
+                        <a href="#" class="redLink" data-bind="click:popUp.registerMe">Регистрация</a><span>|</span><a href="#" class="redLink" data-bind="click:popUp.loginMe">Войти</a>
+                    }
+                }
             </div>
         </div>
     </div>

@@ -1,18 +1,20 @@
-namespace Web.Domen.Migrations
+namespace Web.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Web.Domen.Infrastructure.Context>
+    internal sealed class Configuration : DbMigrationsConfiguration<Web.Infrastructure.AppIdentityDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            ContextKey = "Web.Infrastructure.AppIdentityDbContext";
+            AutomaticMigrationDataLossAllowed = false;
         }
 
-        protected override void Seed(Web.Domen.Infrastructure.Context context)
+        protected override void Seed(Web.Infrastructure.AppIdentityDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
