@@ -51,14 +51,24 @@
   <ItemGroup>
     <Compile Include="Abstract\IEvents.cs" />
     <Compile Include="Infrastructure\Context.cs" />
+    <Compile Include="Migrations\201610141017441_ChangeIdToGuid.cs" />
+    <Compile Include="Migrations\201610141017441_ChangeIdToGuid.Designer.cs">
+      <DependentUpon>201610141017441_ChangeIdToGuid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Paty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorys\DbPaty.cs" />
     <Compile Include="Viewmodels\UserView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610141017441_ChangeIdToGuid.resx">
+      <DependentUpon>201610141017441_ChangeIdToGuid.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

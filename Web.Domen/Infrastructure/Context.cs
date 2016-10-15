@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using Web.Domen.Models;
 
 namespace Web.Domen.Infrastructure
 {
@@ -8,13 +9,14 @@ namespace Web.Domen.Infrastructure
         {
             Database.SetInitializer(new RnBDbInitiliser());
         }
+
+        public DbSet<Paty> Paties { get; set; }
+        public DbSet<PatyCategory> PatyCategories { get; set; }
+        public DbSet<PatyImage> PatyImages { get; set; }  
+
     }
 
     public class RnBDbInitiliser : CreateDatabaseIfNotExists<Context>
     {
-        protected override void Seed(Context context)
-        {
-            base.Seed(context);
-        }
     }
 }

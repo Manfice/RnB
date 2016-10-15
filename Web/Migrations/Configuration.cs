@@ -1,7 +1,3 @@
-using System;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Web.Infrastructure;
@@ -9,34 +5,20 @@ using Web.Models;
 
 namespace Web.Migrations
 {
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-
-    internal sealed class Configuration : DbMigrationsConfiguration<AppIdentityDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Web.Infrastructure.AppIdentityDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            //ContextKey = "Web.Infrastructure.AppIdentityDbContext";
-            AutomaticMigrationDataLossAllowed = false;
+            ContextKey = "Web.Infrastructure.AppIdentityDbContext";
         }
 
-        protected override void Seed(AppIdentityDbContext context)
-        {
-            PerformInitialSetup(context);
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
-        }
-        public void PerformInitialSetup(AppIdentityDbContext context)
+        protected override void Seed(Web.Infrastructure.AppIdentityDbContext context)
         {
             var userManager = new AppUserManager(new UserStore<AppUser>(context));
             var roleManager = new AppRoleManager(new RoleStore<AppRole>(context));
@@ -61,7 +43,19 @@ namespace Web.Migrations
             {
                 userManager.AddToRole(user.Id, role);
             }
+            context.SaveChanges();
+            //  This method will be called after migrating to the latest version.
 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data. E.g.
+            //
+            //    context.People.AddOrUpdate(
+            //      p => p.FullName,
+            //      new Person { FullName = "Andrew Peters" },
+            //      new Person { FullName = "Brice Lambson" },
+            //      new Person { FullName = "Rowan Miller" }
+            //    );
+            //
         }
 
     }

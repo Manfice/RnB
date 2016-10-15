@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PatyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,6 +193,11 @@
     <Compile Include="Infrastructure\AppUserManager.cs" />
     <Compile Include="Infrastructure\IdentityHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Migrations\201610120948178_InitialCreate.cs" />
+    <Compile Include="Migrations\201610120948178_InitialCreate.Designer.cs">
+      <DependentUpon>201610120948178_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Viewmodels\AuthViews.cs" />
@@ -265,6 +271,7 @@
     <None Include="Properties\PublishProfiles\redandblack - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Web20161013094658 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="Scripts\AdminJs\paty.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
@@ -275,6 +282,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout.validation.min.js" />
     <Content Include="Scripts\mainJS.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\owl.carousel.js" />
@@ -317,9 +325,12 @@
     <Content Include="Views\Cms\CreateRole.cshtml" />
     <Content Include="Views\Cms\EditRole.cshtml" />
     <Content Include="Views\Home\RegisterPopUp.cshtml" />
+    <Content Include="Views\Paty\Index.cshtml" />
+    <Content Include="Views\Paty\placeholders\_PatyCategorys.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\patyCategorys\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -330,6 +341,11 @@
       <Project>{5a23ebbd-1d97-4f7c-9d45-79ec418f8672}</Project>
       <Name>Web.Domen</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610120948178_InitialCreate.resx">
+      <DependentUpon>201610120948178_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

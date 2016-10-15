@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ninject;
+using Ninject.Web.Common;
+using Web.Domen.Abstract;
+using Web.Domen.Repositorys;
 
 namespace Web.Infrastructure
 {
@@ -27,7 +30,7 @@ namespace Web.Infrastructure
 
         private void AddBindings()
         {
-            
+            _kernel.Bind<IEvents>().To<DbPaty>().InRequestScope();
         }
     }
 }

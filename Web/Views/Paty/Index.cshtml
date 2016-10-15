@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Web.Domen.Models.PatyCategory>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div id="patySection">
+    <div class="controlsBlock">
+        <button type="button" data-bind="click:Paty.viewmodel.currView.bind($data,'INDEX')">Главная</button>
+        <button type="button" data-bind="click:Paty.viewmodel.currView.bind($data,'CATEGORYS')">Категории</button>
+        <button type="button" data-bind="click:Paty.viewmodel.currView.bind($data,'PATYS')">Мероприятия</button>
+    </div>
+    <div class="patyIndex" style="display: none" data-bind="visible:Paty.viewmodel.currView()==='INDEX'">
+        <h2>INDEX</h2>
+    </div>
+    <div class="PatyCategorys" style="display: none" data-bind="visible:Paty.viewmodel.currView()==='CATEGORYS'">
+        @Html.Partial("placeholders/_PatyCategorys")
+    </div>
+    <div class="patys" style="display: none" data-bind="visible:Paty.viewmodel.currView()==='PATYS'">
+        <h2>PAT</h2>
+        
+    </div>
+</div>
+
+@section scripts
+{
+<script src="~/Scripts/AdminJs/paty.js"></script>
+}

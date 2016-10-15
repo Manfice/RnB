@@ -1,0 +1,48 @@
+﻿<div class="column rootCat">
+    <div class="columnHead">
+        <h3>Категории</h3>
+        <button type="button" data-bind="click:Paty.viewmodel.addRoot.bind($data,true),visible:Paty.viewmodel.addRoot()==false"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Добавить</button>
+        <button type="button" data-bind="click:Paty.viewmodel.addRoot.bind($data,false),visible:Paty.viewmodel.addRoot"><i class="fa fa-angle-double-up" aria-hidden="true"></i>Скрыть</button>
+    </div>
+    <form id="formRootCat" class="column" style="display: none" data-bind="visible:Paty.viewmodel.addRoot, submit:Paty.submit">
+        <input id="inpRootTitle" name="title" placeholder="Наименование"/>
+        <textarea id="inpRootDescr" rows="5" placeholder="Описание" name="descr"></textarea>
+        <div class="imgWrapper">
+            <img alt="" src="" id="prv" style="display: none" data-bind="visible:Paty.viewmodel.newPhoto" width="298" height="258"/>
+            <div class="photoPlaceholder" id="plHolder" data-bind="visible:Paty.viewmodel.newPhoto()===null">
+                <h3>нет изображения</h3>
+                <p>
+                    Для загрузки принимаются изображения в формате <span>*.jped / *.png</span>, размером не более 512кб
+                </p>
+                <p style="color: red">Размер изображения 298px*258px.</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <label>
+                    Выберите файл
+                    <input id="imgInput" type="file" accept="image/jpeg,image/png" />
+                </label>
+            </li>
+            <li id="saveImage" style="display: none">
+                <label>сохранить</label>
+            </li>
+        </ul>
+        <button type="submit">Сохранить</button>
+    </form>
+    <ul>
+        <li>Игровые мероприятия</li>
+    </ul>
+</div>
+
+
+<div class="column subCat">
+    <h3>Настройка</h3>
+    <div class="imgWrapper">
+        <img alt="" src="/Content/img/pList/1.jpg" />       
+    </div>
+    <textarea rows="5"></textarea>
+    <ul>
+        <li>Мафия</li>
+    </ul>
+</div>

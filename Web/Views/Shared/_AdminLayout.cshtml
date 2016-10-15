@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/admin.css" rel="stylesheet" />
 </head>
 <body>
@@ -11,7 +12,9 @@
     <div class="headTop">
     </div>
     @Html.ActionLink("Index","Index","Cms", null, new {@class=ViewBag.active})
-    <a class="@ViewBag.active" href="@Url.Action("Roles","Cms")">Roles</a>
+    <a class="@ViewBag.active" href="@Url.Action("Roles", "Cms")">Roles</a>
+    <hr/>
+    @Html.ActionLink("Мероприятия","Index","Paty")
 </header>
 <div class="bodyContent">
     <div class="bodyTop">
@@ -22,6 +25,9 @@
         @RenderBody()
     </div>
 </div>
-<script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/knockout.validation.min.js"></script>
+    @RenderSection("scripts",false)
 </body>
 </html>

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web.Domen.Models
 {
     public class Paty
     {
-        public string Id { get; set; }
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime PatyDate { get; set; }
@@ -20,15 +22,18 @@ namespace Web.Domen.Models
 
     public class PatyCategory
     {
-        public string Id { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public virtual PatyImage Avatar { get; set; }
         public virtual PatyCategory ParentCategory { get; set; }
     }
 
     public class PatyImage
     {
-        public string Id { get; set; }
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public string Path { get; set; }
         public string FullPath { get; set; }
         public string ContentType { get; set; }
