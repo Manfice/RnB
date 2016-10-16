@@ -5,7 +5,6 @@
                 type: "GET",
                 url: "/paty/GetCategorys",
                 success: function (data) {
-                    console.log(data);
                     callback(data);
                 }
             });
@@ -41,11 +40,22 @@
             all: ko.observableArray([]),
             current: ko.observable(),
             root: ko.observableArray([]),
-            sub:ko.observableArray()
+            sub: ko.observableArray()
         },
-        currentCategory: ko.observableArray([]),
-        
+        currentCategory: ko.observableArray([])
     };
+
+    model.categorys.all.subscribe(function(newCategorys) {
+        model.categorys.root.removeAll();
+        var tempArr = [];
+        tempArr.push.apply(tempArr, model.categorys.all().map(function(c) {
+            return c;
+        }).filter(function (value, index, self) {
+            return value.parentCat() === "";
+        }).sort());
+        model.categorys.root(tempArr);
+
+    });
 
     /*Models*/
     var category = function(data) {
@@ -64,23 +74,22 @@
         ParentCategory:{Id:""}
     }
     /*Callbacks*/
-    var getCatCallback = function (data) {
+    var getCatCallback = function(data) {
         model.categorys.all.removeAll();
-        data.forEach(function (item) {
+        data.forEach(function(item) {
             var dt = catData;
             dt.Id = item.Id;
             dt.Title = item.Title;
             dt.Description = item.Description;
-            if (item.Avatar!==null) {
+            if (item.Avatar !== null) {
                 dt.Avatar.Path = item.Avatar.Path;
             }
-            if (item.ParentCategory!==null) {
+            if (item.ParentCategory !== null) {
                 dt.ParentCategory.Id = item.ParentCategory.Id;
             }
-            console.log(dt);
             model.categorys.all.push(new category((dt)));
         });
-    }
+    };
 
     /*Methods*/
     function previewImg(input) {

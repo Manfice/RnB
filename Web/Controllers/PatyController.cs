@@ -9,6 +9,7 @@ using Web.Domen.Abstract;
 using Web.Domen.Models;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using Web.Helpers;
 
 namespace Web.Controllers
 {
@@ -53,15 +54,22 @@ namespace Web.Controllers
             if (HttpContext.Request.Files.Count>0)
             {
                 var logo = HttpContext.Request.Files["UploadedImage"];
-                filePath += logo?.FileName;
-                logo?.SaveAs(filePath);
-                MakeFile298X258(filePath);
-                img = new PatyImage
+                if (logo!=null && logo.ContentLength>0)
                 {
-                    ContentType = logo?.ContentType,
-                    FullPath = filePath,
-                    Path = "/Uploads/patyCategorys/" + guid + "_sep_" + logo?.FileName
-                };
+                    var photo = ImageCrop.Crop(logo, 298, 258, ImageCrop.AnchorPosition.Center);
+                    if (photo != null)
+                    {
+                        filePath += logo.FileName;
+                        photo.Save(filePath, ImageFormat.Jpeg);
+                        img = new PatyImage
+                        {
+                            ContentType = logo.ContentType,
+                            FullPath = filePath,
+                            Path = "/Uploads/patyCategorys/" + guid + "_sep_"+logo.FileName
+                        };
+
+                    }
+                }
             }
             var result = await _repository.AddCategoryAsync(data, img);
             return Json(result, JsonRequestBehavior.AllowGet);
