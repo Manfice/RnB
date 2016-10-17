@@ -91,6 +91,7 @@ button i {
     display: flex;
     justify-content: space-between;
 }
+/*
 .photoPlaceholder {
     border: solid 1px gray;
     width: 292px;
@@ -110,33 +111,33 @@ button i {
     margin: 10px 20px;
     text-align: center;
 }
-form {
+.newRootForm {
     flex: 0 0 auto;
     max-width: 500px;
     align-self: center;
     width: 100%;
 }
-form>input {
+.newRootForm>input {
     margin: 10px 10px 5px 10px;
     border-radius: 5px;
     border: solid 1px gray;
     padding: 5px;
 }
-form>textarea {
+.newRootForm>textarea {
     border-radius: 5px;
     border: solid 1px gray;
     padding: 5px;
     margin: 5px 10px 10px;    
 }
-form>.imgWrapper {
+.newRootForm>.imgWrapper {
     flex: 0 0 auto;
     align-self: center;
 }
-form>ul {
+.newRootForm>ul {
     flex: 0 0 auto;
     align-self: center;
 }
-form>ul>li {
+.newRootForm>ul>li {
     border: solid 1px black;
     margin: 5px
 }
@@ -148,7 +149,7 @@ li>label {
 label>input[type=file] {
     display: none;
 }
-form>button {
+.newRootForm>button {
     flex: 0 0 auto;
     align-self: flex-end;
     border: none;
@@ -156,4 +157,136 @@ form>button {
     padding: 10px;
     font-weight: bolder;
 }
+.displayRow {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row;
+}
+.fleft {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column;
+}
+.fright {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+}
+.fright input {
+    margin: 10px 10px 5px 10px;
+    border-radius: 5px;
+    border: solid 1px gray;
+    padding: 5px;
+}
+.fright textarea {
+    border-radius: 5px;
+    border: solid 1px gray;
+    padding: 5px;
+    margin: 5px 10px 10px;    
+}
+.fright>button {
+        flex: 0 0 auto;
+    align-self: flex-end;
+    border: none;
+    background: lightgreen;
+    padding: 10px;
+    font-weight: bolder
+}
 /*Paty End*/
+
+.formPopUp {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.formWrapper {
+    flex: 0 0 auto;
+    background-color: white;
+    padding: 20px;
+    position: relative;
+}
+.closeButton {
+    position: absolute;
+    top: -30px;
+    right: -35px;
+}
+form {
+    border: solid 2px red;
+    position: relative;
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
+}
+.photoPlaceholder {
+    border: solid 1px gray;
+    width: 292px;
+    height: 258px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    font-family: "Arial";
+}
+.photoPlaceholder h3 {
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+.photoPlaceholder p {
+    margin: 10px 20px;
+    text-align: center;
+}
+.displayRow {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: flex-start
+}
+.fleft {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column;
+}
+.fright {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+}
+.fright input {
+    margin: 10px 10px 5px 10px;
+    border-radius: 5px;
+    border: solid 1px gray;
+    padding: 5px;
+    width: 300px;
+}
+.fright textarea {
+    border-radius: 5px;
+    border: solid 1px gray;
+    padding: 5px;
+    margin: 5px 10px 10px;    
+}
+.fright>button {
+        flex: 0 0 auto;
+    align-self: flex-end;
+    border: none;
+    background: lightgreen;
+    padding: 10px;
+    font-weight: bolder
+}
+li>label {
+    padding: 10px 20px;
+    display: block;
+    cursor: pointer;
+}
+label>input[type=file] {
+    display: none;
+}
+/*Paty form END*/

@@ -43,6 +43,9 @@ namespace Web.Controllers
         {
             var guid = Guid.NewGuid();
             var data = new PatyCategory();
+            var parent = 0;
+            var currId = 0;
+            var avaId = 0;
             PatyImage img = null;
             var filePath = Server.MapPath("~/Uploads/patyCategorys/" + guid + "_sep_");
             var formData = HttpContext.Request.Form.AllKeys;
@@ -50,12 +53,26 @@ namespace Web.Controllers
             {
                 data.Title = HttpContext.Request.Form["title"];
                 data.Description = HttpContext.Request.Form["descr"];
+                int.TryParse(HttpContext.Request.Form["ParentId"], out parent);
+                int.TryParse(HttpContext.Request.Form["id"], out currId);
+                int.TryParse(HttpContext.Request.Form["avaId"], out avaId);
             }
             if (HttpContext.Request.Files.Count>0)
             {
                 var logo = HttpContext.Request.Files["UploadedImage"];
                 if (logo!=null && logo.ContentLength>0)
                 {
+                    if (avaId>0)
+                    {
+                        var fileToDelete = await _repository.ImgToDeleteAsync(avaId);
+                        if (fileToDelete!=null)
+                        {
+                            if (System.IO.File.Exists(fileToDelete.FullPath))
+                            {
+                                System.IO.File.Delete(fileToDelete.FullPath);
+                            }
+                        }
+                    }
                     var photo = ImageCrop.Crop(logo, 298, 258, ImageCrop.AnchorPosition.Center);
                     if (photo != null)
                     {
@@ -71,7 +88,10 @@ namespace Web.Controllers
                     }
                 }
             }
-            var result = await _repository.AddCategoryAsync(data, img);
+
+            data.Id = currId;
+            var result = await _repository.AddCategoryAsync(parent,avaId,data, img);
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

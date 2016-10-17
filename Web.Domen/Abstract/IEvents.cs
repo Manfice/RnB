@@ -7,6 +7,7 @@ namespace Web.Domen.Abstract
     public interface IEvents
     {
         IEnumerable<PatyCategory> GetCategorys { get; }
-        Task<PatyCategory> AddCategoryAsync(PatyCategory model, PatyImage image);
+        Task<PatyCategory> AddCategoryAsync(int p,int a,PatyCategory model, PatyImage image);
+        Task<PatyImage> ImgToDeleteAsync(int id);
     }
 }
