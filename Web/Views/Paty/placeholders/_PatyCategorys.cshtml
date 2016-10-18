@@ -2,83 +2,61 @@
     <div class="columnHead">
         <h3>Категории</h3>
     </div>
-    @*<form id="formRootCat" class="column newRootForm" style="display: none" data-bind="visible:Paty.viewmodel.addRoot, submit:Paty.submitNewRoot">
-        <input id="inpRootTitle" name="title" placeholder="Наименование"/>
-        <textarea id="inpRootDescr" rows="5" placeholder="Описание" name="descr"></textarea>
-        <div class="imgWrapper">
-            <img alt="" src="" id="prv" style="display: none" data-bind="visible:Paty.viewmodel.newPhoto" width="298" height="258"/>
-            <div class="photoPlaceholder" id="plHolder" data-bind="visible:Paty.viewmodel.newPhoto()===null">
-                <h3>нет изображения</h3>
-                <p>
-                    Для загрузки принимаются изображения в формате <span>*.jped / *.png</span>, размером не более 512кб
-                </p>
-                <p style="color: red">Размер изображения 298px*258px.</p>
-            </div>
-        </div>
-        <ul>
-            <li>
-                <label>
-                    Выберите файл
-                    <input id="imgInput" type="file" accept="image/jpeg,image/png"/>
-                </label>
-            </li>
-        </ul>
-        <button type="submit">Сохранить</button>
-    </form>*@
-
-    <table>
-        <thead>
-        <tr>
-            <th colspan="2">Категории</th>
-            <th>
-                <button type="button" data-bind="click:Paty.addRoot,visible:Paty.viewmodel.addRoot()==false"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Добавить</button>
-                <button type="button" data-bind="click:Paty.viewmodel.addRoot.bind($data,false),visible:Paty.viewmodel.addRoot"><i class="fa fa-angle-double-up" aria-hidden="true"></i>Скрыть</button>
-            </th>
-        </tr>
-        </thead>
-        <tbody data-bind="foreach:categorys.root">
-        <tr data-bind="click:Paty.setWorkDirectory">
-            <td data-bind="text:$index()+1"></td>
-            <td data-bind="text:title"></td>
-            <td>
-                <a href="#" data-bind="click: Paty.setCurrCat">Редактировать</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table data-bind="visible:categorys.sub().length>0">
-        <thead>
-            <tr>
-                <th colspan="2">Подкатегории</th>
-                <th>
-                    <button type="button" data-bind="click:Paty.addRoot,visible:Paty.viewmodel.addRoot()==false"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Добавить</button>
-                    <button type="button" data-bind="click:Paty.viewmodel.addRoot.bind($data,false),visible:Paty.viewmodel.addRoot"><i class="fa fa-angle-double-up" aria-hidden="true"></i>Скрыть</button>
-                </th>
-            </tr>        
-        </thead>
-        <tbody data-bind="foreach:categorys.sub">
-            <tr>
-                <td data-bind="text:$index()+1"></td>
-                <td data-bind="text:title"></td>
-                <td>
-                    <a href="#" data-bind="click: Paty.setCurrCat">Редактировать</a>
-                </td>
-            </tr>        
-        </tbody>
-    </table>
+    <div class="rowFlex">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Категории</th>
+                    <th>
+                        <button type="button" data-bind="click:Paty.addRoot"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Добавить</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:categorys.root">
+                <tr data-bind="click:Paty.setWorkDirectory" style="cursor: pointer">
+                    <td data-bind="text:$index()+1"></td>
+                    <td data-bind="text:title"></td>
+                    <td>
+                        <a href="#" data-bind="click: Paty.setCurrCat">Редактировать</a> /
+                        <a href="#" data-bind="click:Paty.deleteCategory">Удалить</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Подкатегории</th>
+                    <th>
+                        <button type="button" data-bind="click:Paty.addSubRoot"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Добавить</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:categorys.sub">
+                <tr>
+                    <td data-bind="text:$index()+1"></td>
+                    <td data-bind="text:title"></td>
+                    <td>
+                        <a href="#" data-bind="click: Paty.setCurrCat">Редактировать</a> /
+                        <a href="#">Событие</a> /
+                        <a href="#" data-bind="click:Paty.deleteCategory">Удалить</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
 </div>
 
-<div class="formPopUp" data-bind="visible:categorys.current().mode()==='EDIT'" style="display: none">
+<div class="formPopUp" data-bind="visible:Paty.viewmodel.editCategory().mode()==='EDIT'" style="display: none">
     <div class="formWrapper">
         <div class="closeButton">
-            <button type="button" data-bind="click:categorys.current().mode.bind($data, 'VIEW')">X</button>
+            <button type="button" data-bind="click:Paty.viewmodel.editCategory().mode.bind($data, 'VIEW')">X</button>
         </div>
         <form id="updRoot" class="updRoot" data-bind="submit:Paty.submitNewRoot">
             <div class="displayRow">
                 <div class="fleft">
                     <div class="imgWrapper">
-                        <img alt="" data-bind="attr:{src:categorys.current().avatar.path()}, visible:Paty.viewmodel.newPhoto()===null" />
+                        <img alt="" data-bind="attr:{src:Paty.viewmodel.editCategory().avatar.path()}, visible:Paty.viewmodel.newPhoto()===null" />
                         <img alt="" src="" id="updImg" style="display: none" data-bind="visible:Paty.viewmodel.newPhoto" width="298" height="258" />
                         <div class="photoPlaceholder" id="upplHolder" data-bind="visible:Paty.viewmodel.haveAvatar()===false">
                             <h3>нет изображения</h3>
@@ -102,54 +80,14 @@
                     </div>
                 </div>
                 <div class="fright">
-                    <input name="id" type="hidden" data-bind="value:categorys.current().id()" />
-                    <input name="ParentId" type="hidden" data-bind="value:categorys.current().parentCat()" />
-                    <input name="avaId" type="hidden" data-bind="value:categorys.current().avatar.id()" />
-                    <input type="text" name="title" data-bind="value:categorys.current().title()" />
-                    <textarea rows="8" name="descr" data-bind="textInput:categorys.current().description()"></textarea>
-                    <button type="submit" data-bind="visible:categorys.current().id()!==''">Сохранить изменения</button>
+                    <input name="id" type="hidden" data-bind="value:Paty.viewmodel.editCategory().id()" />
+                    <input name="ParentId" type="hidden" data-bind="value:Paty.viewmodel.editCategory().parentCat()" />
+                    <input name="avaId" type="hidden" data-bind="value:Paty.viewmodel.editCategory().avatar.id()" />
+                    <input type="text" name="title" data-bind="value:Paty.viewmodel.editCategory().title()" />
+                    <textarea rows="8" name="descr" data-bind="textInput:Paty.viewmodel.editCategory().description()"></textarea>
+                    <button type="submit">Сохранить</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-@*<div class="column subCat" data-bind="visible:categorys.current().mode()==='EDIT'">
-    <h3 data-bind="text:'Настройка: '+categorys.current().title()"></h3>
-    <form id="updRoot" class="updRoot">
-        <div class="displayRow">
-            <div class="fleft">
-                <div class="imgWrapper">
-                    <img alt="" data-bind="attr:{src:categorys.current().avatar.path()}, visible:Paty.viewmodel.newPhoto()===null" />
-                    <img alt="" src="" id="updImg" style="display: none" data-bind="visible:Paty.viewmodel.newPhoto" width="298" height="258" />
-                    <div class="photoPlaceholder" id="upplHolder" data-bind="visible:Paty.viewmodel.haveAvatar()===false">
-                        <h3>нет изображения</h3>
-                        <p>
-                            Для загрузки принимаются изображения в формате <span>*.jped / *.png</span>, размером не более 512кб
-                        </p>
-                        <p style="color: red">Размер изображения 298px*258px.</p>
-                    </div>
-                    <ul>
-                        <li>
-                            <label>
-                                Выберите файл
-                                <input id="upimgInput" type="file" accept="image/jpeg,image/png" />
-                            </label>
-                        </li>
-                        <li id="saveImage" style="display: none">
-                            <label>сохранить</label>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="fright">
-                <input name="id" type="hidden" data-bind="value:categorys.current().id()"/>
-                <input type="text" name="title" data-bind="value:categorys.current().title()"/>
-                <textarea rows="5" data-bind="textInput:categorys.current().description()"></textarea>
-                <button type="submit" data-bind="visible:categorys.current().id()!==''">Сохранить изменения</button>
-                <button type="button" data-bind="click:categorys.current().mode.bind($data, 'VIEW')">Отмена</button>
-            </div>
-        </div>        
-    </form>
-</div>*@

@@ -15,7 +15,7 @@ namespace Web.Domen.Models
         public string Descr { get; set; }
         public int MaxGuests { get; set; }
         public decimal Price { get; set; }
-        public string[] PatyInterest { get; set; }
+        public string PatyInterest { get; set; }
         public virtual PatyImage Avatar { get; set; }
         public virtual PatyCategory Category { get; set; }
     }

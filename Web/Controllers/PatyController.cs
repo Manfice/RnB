@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Web.Domen.Abstract;
 using Web.Domen.Models;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using Web.Helpers;
 
 namespace Web.Controllers
@@ -17,11 +13,6 @@ namespace Web.Controllers
     public class PatyController : Controller
     {
         private readonly IEvents _repository;
-
-        private static void MakeFile298X258(string filepath)
-        {
-
-        }
         
         public PatyController(IEvents repository)
         {
@@ -94,5 +85,21 @@ namespace Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> DeleteCategory(int id)
+        {
+            var photos = await _repository.GetImagesAsync(id);
+
+            var result = await _repository.DeleteCategoryAsync(id);
+
+            foreach (var item in photos.Where(item => System.IO.File.Exists(item.FullPath)))
+            {
+                System.IO.File.Delete(item.FullPath);
+            }
+
+             _repository.DeleteImagesAsync(photos);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        } 
     }
 }

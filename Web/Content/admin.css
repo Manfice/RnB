@@ -15,6 +15,12 @@ ul {
     margin: 0;
     padding: 0;
 }
+.rowFlex {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
 header {
     flex: 0 0 auto;
     background-color: darkgray;
@@ -57,6 +63,9 @@ button i {
 }
 
 /*Paty*/
+.rowFlex>table {
+    flex: 1 0 auto;
+}
 #patySection {
     flex: 1 0 auto;
     display: flex;
@@ -91,109 +100,6 @@ button i {
     display: flex;
     justify-content: space-between;
 }
-/*
-.photoPlaceholder {
-    border: solid 1px gray;
-    width: 292px;
-    height: 258px;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: lighter;
-    font-family: "Arial";
-}
-.photoPlaceholder h3 {
-    text-transform: uppercase;
-    margin: 10px 0;
-}
-.photoPlaceholder p {
-    margin: 10px 20px;
-    text-align: center;
-}
-.newRootForm {
-    flex: 0 0 auto;
-    max-width: 500px;
-    align-self: center;
-    width: 100%;
-}
-.newRootForm>input {
-    margin: 10px 10px 5px 10px;
-    border-radius: 5px;
-    border: solid 1px gray;
-    padding: 5px;
-}
-.newRootForm>textarea {
-    border-radius: 5px;
-    border: solid 1px gray;
-    padding: 5px;
-    margin: 5px 10px 10px;    
-}
-.newRootForm>.imgWrapper {
-    flex: 0 0 auto;
-    align-self: center;
-}
-.newRootForm>ul {
-    flex: 0 0 auto;
-    align-self: center;
-}
-.newRootForm>ul>li {
-    border: solid 1px black;
-    margin: 5px
-}
-li>label {
-    padding: 10px 20px;
-    display: block;
-    cursor: pointer;
-}
-label>input[type=file] {
-    display: none;
-}
-.newRootForm>button {
-    flex: 0 0 auto;
-    align-self: flex-end;
-    border: none;
-    background: lightgreen;
-    padding: 10px;
-    font-weight: bolder;
-}
-.displayRow {
-    flex: 0 0 auto;
-    display: flex;
-    flex-flow: row;
-}
-.fleft {
-    flex: 0 0 auto;
-    display: flex;
-    flex-flow: column;
-}
-.fright {
-    flex: 1 0 auto;
-    display: flex;
-    flex-flow: column;
-}
-.fright input {
-    margin: 10px 10px 5px 10px;
-    border-radius: 5px;
-    border: solid 1px gray;
-    padding: 5px;
-}
-.fright textarea {
-    border-radius: 5px;
-    border: solid 1px gray;
-    padding: 5px;
-    margin: 5px 10px 10px;    
-}
-.fright>button {
-        flex: 0 0 auto;
-    align-self: flex-end;
-    border: none;
-    background: lightgreen;
-    padding: 10px;
-    font-weight: bolder
-}
-/*Paty End*/
-
 .formPopUp {
     position: fixed;
     top: 0;

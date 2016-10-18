@@ -13,6 +13,7 @@ namespace Web.Domen.Repositorys
     {
         private readonly Context _context = new Context();
         public IEnumerable<PatyCategory> GetCategorys => _context.PatyCategories.ToList();
+        public IEnumerable<Paty> GetPatys => _context.Paties.ToList(); 
 
         public async Task<PatyCategory> AddCategoryAsync(int p, int a,PatyCategory model, PatyImage image)
         {
@@ -60,6 +61,46 @@ namespace Web.Domen.Repositorys
             }
             await _context.SaveChangesAsync();
             return current;
+        }
+
+        public async Task<PatyCategory> DeleteCategoryAsync(int id)
+        {
+            var dbCat = await _context.PatyCategories.FindAsync(id);
+
+            if (dbCat!=null)
+            {
+                var pCat = await _context.PatyCategories.Where(c => c.ParentCategory.Id == dbCat.Id).ToListAsync();
+                if (pCat.Any())
+                {
+                    _context.PatyCategories.RemoveRange(pCat);
+                }
+                _context.PatyCategories.Remove(dbCat);
+
+            }
+            await _context.SaveChangesAsync();
+            return dbCat;
+        }
+
+        public async void DeleteImagesAsync(List<PatyImage> images)
+        {
+            if (images.Any())
+            {
+                _context.PatyImages.RemoveRange(images);
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<PatyImage>> GetImagesAsync(int id)
+        {
+            var imgList = new List<PatyImage>();
+            var dbCat = await _context.PatyCategories.FindAsync(id);
+            var sDb = await _context.PatyCategories.Where(c => c.ParentCategory.Id == dbCat.Id).ToListAsync();
+            if (sDb!=null)
+            {
+                imgList.AddRange(sDb.Select(category => category.Avatar));
+            }
+            imgList.Add(dbCat.Avatar);
+            return imgList;
         }
 
         public async Task<PatyImage> ImgToDeleteAsync(int id)
