@@ -119,7 +119,7 @@ namespace Web.Controllers
         public async Task<ActionResult> CreateUser(UserView model)
         {
             if (!ModelState.IsValid) return View(model);
-            var user = new AppUser { UserName = model.Email, Fio = model.Name, Email = model.Email };
+            var user = new AppUser { UserName = model.Email, Email = model.Email };
             var result = await UserMeneger.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -154,7 +154,6 @@ namespace Web.Controllers
             {
                 user.Email = model.Email;
                 user.UserName = model.Email;
-                user.Fio = model.Fio;
                 var validEmail = await UserMeneger.UserValidator.ValidateAsync(user);
                 if (!validEmail.Succeeded)
                 {
@@ -168,7 +167,6 @@ namespace Web.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-
             }
             else
             {

@@ -33,7 +33,7 @@
             foreach (var user in Model.NonMember)
             {
                 <tr>
-                    <td>@user.Fio</td>
+                    <td>@user.UserName</td>
                     <td>@user.Email</td>
                     <td>
                         <input type="checkbox" name="IdsToAdd" value="@user.Id"/>
@@ -67,7 +67,7 @@
             foreach (var user in Model.Members)
             {
                 <tr>
-                    <td>@user.Fio</td>
+                    <td>@user.UserName</td>
                     <td>@user.Email</td>
                     <td>
                         <input type="checkbox" name="IdsToRemove" value="@user.Id"/>

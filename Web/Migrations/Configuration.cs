@@ -23,10 +23,10 @@ namespace Web.Migrations
             var userManager = new AppUserManager(new UserStore<AppUser>(context));
             var roleManager = new AppRoleManager(new RoleStore<AppRole>(context));
 
-            var role = "Admin";
-            var userName = "Administrator";
-            var passs = "1q2w3eOP";
-            var email = "c592@yandex.ru";
+            const string role = "Admin";
+            const string userName = "Administrator";
+            const string passs = "1q2w3eOP";
+            const string email = "c592@yandex.ru";
 
             if (!roleManager.RoleExists(role))
             {
@@ -36,26 +36,14 @@ namespace Web.Migrations
             var user = userManager.FindByName(email);
             if (user == null)
             {
-                userManager.Create(new AppUser { Email = email, UserName = email, Fio = userName }, passs);
+                userManager.Create(new AppUser { Email = email, UserName = userName}, passs);
             }
-            user = userManager.FindByName(email);
+            user = userManager.FindByEmail(email);
             if (!userManager.IsInRole(user.Id, role))
             {
                 userManager.AddToRole(user.Id, role);
             }
             context.SaveChanges();
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
         }
 
     }

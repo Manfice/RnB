@@ -10,7 +10,7 @@ namespace Web.Infrastructure
         {
             var manager = HttpContext.Current.GetOwinContext().GetUserManager<AppUserManager>();
             var user =  manager.FindByIdAsync(id);
-            return new MvcHtmlString(user.Result.Fio+" "+user.Result.Email);
+            return new MvcHtmlString(user.Result.Email);
         }
     }
 }

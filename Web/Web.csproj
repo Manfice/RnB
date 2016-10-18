@@ -194,10 +194,6 @@
     <Compile Include="Infrastructure\AppUserManager.cs" />
     <Compile Include="Infrastructure\IdentityHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Migrations\201610120948178_InitialCreate.cs" />
-    <Compile Include="Migrations\201610120948178_InitialCreate.Designer.cs">
-      <DependentUpon>201610120948178_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\AppUser.cs" />
@@ -342,11 +338,6 @@
       <Project>{5a23ebbd-1d97-4f7c-9d45-79ec418f8672}</Project>
       <Name>Web.Domen</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610120948178_InitialCreate.resx">
-      <DependentUpon>201610120948178_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
