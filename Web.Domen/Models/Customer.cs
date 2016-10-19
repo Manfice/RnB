@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Web.Domen.Models
 {
@@ -14,7 +15,9 @@ namespace Web.Domen.Models
         public string Work { get; set; }
         public string WorkPlace { get; set; }
         public string User { get; set; }
+        public int Rate { get; set; }
         public virtual CustImage Avatar { get; set; }
+        public virtual ICollection<Paty> Paties { get; set; }
     }
 
     public class CustImage

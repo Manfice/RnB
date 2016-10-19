@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,8 +17,11 @@ namespace Web.Domen.Models
         public int MaxGuests { get; set; }
         public decimal Price { get; set; }
         public string PatyInterest { get; set; }
+        public int AddRate { get; set; }
+        public string Dres { get; set; }
         public virtual PatyImage Avatar { get; set; }
         public virtual PatyCategory Category { get; set; }
+        public virtual ICollection<Customer> Guests { get; set; }
     }
 
     public class PatyCategory

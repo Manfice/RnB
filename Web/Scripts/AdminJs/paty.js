@@ -31,7 +31,20 @@
 
             });
         };
-        var delCat = function(data, callback) {
+        var savePaty = function (fData, callback) {
+            $.ajax({
+                type: "POST",
+                url: "/Paty/AddPatyAsync",
+                data: fData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    report(data);
+                }
+
+            });
+        };
+        var delCat = function (data, callback) {
             $.ajax({
                 type: "GET",
                 url: "/Paty/DeleteCategory/"+data.id(),
@@ -41,7 +54,7 @@
             });
         }
         return {
-            getCategorys: getCategorys, saveRootCat: saveRootCat, delCat: delCat
+            getCategorys: getCategorys, saveRootCat: saveRootCat, delCat: delCat, savePaty: savePaty
         };
     };
 
@@ -53,7 +66,8 @@
         newPhoto: ko.observable(null),
         editPhoto: ko.observable(false),
         haveAvatar: ko.observable(false),
-        editCategory:ko.observable()
+        editCategory: ko.observable(),
+        editPaty:ko.observable(null)
     };
 
     var model = {
@@ -111,10 +125,41 @@
         self.info.ExpDate = ko.observable(data.PatyDate);
         self.info.Title = ko.observable(data.Title);
         self.info.Description = ko.observable(data.Descr);
-        self.info.Guests = ko.observable(data.MaxGuests);
+        self.info.MaxGuests = ko.observable(data.MaxGuests);
         self.info.Price = ko.observable(data.Price);
-
+        self.info.Guests = ko.observableArray(data.Guests);
+        self.info.Dres = ko.observableArray(data.Dres);
+        self.info.Avatar = {};
+        self.info.Avatar.Id = ko.observable(data.AvatarId);
+        self.info.Avatar.Path = ko.observable(data.AvatarPath);
+        self.info.Category = ko.observable(data.Category);
+        self.info.Rate = ko.observable(data.Rate);
+        self.SeetsFree = ko.pureComputed(function() {
+            return info.MaxGuests() - info.Guests().length();
+        },self);
         self.mode = ko.observable(mode);
+    }
+    var patyData = function() {
+        var self = this;
+        self.Id = 0;
+        self.ExpDate = new Date().toLocaleDateString();
+        self.Title = "";
+        self.Description = "";
+        self.MaxGuests = "";
+        self.Price = "";
+        self.Guests = [];
+        self.Dres = "";
+        self.AvatarId = 0;
+        self.AvatarPath = "";
+        self.Category = 0;
+        self.Rate = "";
+    }
+    var guest = function(data) {
+        var self = this;
+        self.Id = ko.observable(data.Id);
+        self.Fio = ko.observable(data.Fio);
+        self.Email = ko.observable(data.Email);
+        self.Phone = ko.observable(data.Phone);
     }
     var catData = function () {
         var self = this;
@@ -193,6 +238,22 @@
         viewmodel.haveAvatar(true);
     });
 
+    function previewPatyImg(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                viewmodel.haveAvatar(true);
+                $("#patyAvatar").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+    $("#patyInput").change(function () {
+        previewPatyImg(this);
+        viewmodel.newPhoto(true);
+        viewmodel.haveAvatar(true);
+    });
+
     var submitNewRoot = function () {
         var data = new FormData($("#updRoot")[0]);
         var img = $("#upimgInput").get(0).files;
@@ -200,6 +261,15 @@
             data.append("UploadedImage", img[0]);
         }
         pClient.saveRootCat(data, saveRootCallback);
+    };
+
+    var submitPaty = function() {
+        var data = new FormData($("#patyForm")[0]);
+        var img = $("#patyInput").get(0).files;
+        if (img.length>0) {
+            data.append("Avatar", img[0]);
+        }
+        pClient.savePaty(data);
     };
 
     var setCurrCat = function (data) {
@@ -216,6 +286,9 @@
     }
     var setWorkDirectory = function (data) {
         model.categorys.current(data);
+    }
+    var serSubDir = function(data) {
+        model.workDirectory(data);
     }
     var deleteCategory = function(data) {
         if (confirm("Удалить категорию: " + data.title())) {
@@ -241,10 +314,20 @@
         viewmodel.haveAvatar(false);
         viewmodel.addRoot(true);
     }
+    var addPaty = function(data) {
+        var dt = new patyData();
+        dt.Category = data.id();
+        viewmodel.editPaty(new paty(dt, displayMode.edit));
+        viewmodel.newPhoto(null);
+        viewmodel.haveAvatar(false);
+        report(dt);
+    }
     var init = function () {
         var dt = new catData();
         dt.Id = 0;
         model.categorys.current(new category(dt));
+        model.workDirectory(new category(dt));
+        viewmodel.editPaty(new paty(new patyData(), displayMode.view));
         viewmodel.editCategory(new category(dt, displayMode.view));
         pClient.getCategorys(getCatCallback);
         ko.applyBindings(model, document.getElementById("patySection"));
@@ -254,7 +337,7 @@
     return {
         viewmodel: viewmodel, submitNewRoot: submitNewRoot, setCurrCat: setCurrCat,
         setWorkDirectory: setWorkDirectory, addRoot: addRoot, addSubRoot: addSubRoot,
-        deleteCategory: deleteCategory
+        deleteCategory: deleteCategory, serSubDir: serSubDir, addPaty: addPaty, submitPaty: submitPaty
     };
 }();
 

@@ -100,6 +100,34 @@ namespace Web.Controllers
              _repository.DeleteImagesAsync(photos);
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        } 
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AddPatyAsync()
+        {
+            var paty = new Paty();
+            var catId = 0;
+            var avaId = 0;
+
+            var formData = HttpContext.Request.Form.AllKeys;
+            if (formData.Length > 0)
+            {
+                paty.Title = HttpContext.Request.Form["title"];
+                paty.PatyInterest = HttpContext.Request.Form["descr"];
+                paty.PatyDate = DateTime.Parse(HttpContext.Request.Form["date"]);
+                paty.AddRate = int.Parse(HttpContext.Request.Form["rate"]);
+                paty.MaxGuests = int.Parse(HttpContext.Request.Form["maxGuests"]);
+                paty.Id = int.Parse(HttpContext.Request.Form["id"]);
+                paty.Dres = HttpContext.Request.Form["Dres"];
+                paty.Price = decimal.Parse(HttpContext.Request.Form["Price"]);
+
+                int.TryParse(HttpContext.Request.Form["category"], out catId);
+                int.TryParse(HttpContext.Request.Form["avaId"], out avaId);
+            }
+
+            var result = await _repository.AddPatyAsync(catId, avaId, paty, null);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

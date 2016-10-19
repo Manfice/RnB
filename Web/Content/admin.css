@@ -55,6 +55,12 @@ table thead {
     background-color: gray;
     color: white;
 }
+.selectedRowRoot {
+    background-color: lightskyblue;
+}
+.selectedRowSub {
+    background-color: lightgreen;
+}
 td,th {
     padding: 5px 10px;
 }

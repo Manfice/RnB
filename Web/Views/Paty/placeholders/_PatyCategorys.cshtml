@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody data-bind="foreach:categorys.root">
-                <tr data-bind="click:Paty.setWorkDirectory" style="cursor: pointer">
+                <tr data-bind="click:Paty.setWorkDirectory, css:{selectedRowRoot:title()===$root.categorys.current().title()}" style="cursor: pointer">
                     <td data-bind="text:$index()+1"></td>
                     <td data-bind="text:title"></td>
                     <td>
@@ -33,12 +33,12 @@
                 </tr>
             </thead>
             <tbody data-bind="foreach:categorys.sub">
-                <tr>
+                <tr data-bind="click:Paty.serSubDir, css:{selectedRowSub:title()===$root.workDirectory().title()}" style="cursor: pointer ">
                     <td data-bind="text:$index()+1"></td>
                     <td data-bind="text:title"></td>
                     <td>
                         <a href="#" data-bind="click: Paty.setCurrCat">Редактировать</a> /
-                        <a href="#">Событие</a> /
+                        <a href="#" data-bind="click:Paty.addPaty">Событие</a> /
                         <a href="#" data-bind="click:Paty.deleteCategory">Удалить</a>
                     </td>
                 </tr>
@@ -56,8 +56,8 @@
             <div class="displayRow">
                 <div class="fleft">
                     <div class="imgWrapper">
-                        <img alt="" data-bind="attr:{src:Paty.viewmodel.editCategory().avatar.path()}, visible:Paty.viewmodel.newPhoto()===null" />
-                        <img alt="" src="" id="updImg" style="display: none" data-bind="visible:Paty.viewmodel.newPhoto" width="298" height="258" />
+                        <img alt="" data-bind="attr:{src:Paty.viewmodel.editCategory().avatar.path()}, visible:Paty.viewmodel.newPhoto()===null"/>
+                        <img alt="" src="" id="updImg" style="display: none" data-bind="visible:Paty.viewmodel.newPhoto" width="298" height="258"/>
                         <div class="photoPlaceholder" id="upplHolder" data-bind="visible:Paty.viewmodel.haveAvatar()===false">
                             <h3>нет изображения</h3>
                             <p>
@@ -69,7 +69,7 @@
                             <li>
                                 <label>
                                     Выберите файл
-                                    <input id="upimgInput" type="file" accept="image/jpeg,image/png" />
+                                    <input id="upimgInput" type="file" accept="image/jpeg,image/png"/>
                                 </label>
                             </li>
                             <li id="saveImage" style="display: none">
@@ -80,11 +80,58 @@
                     </div>
                 </div>
                 <div class="fright">
-                    <input name="id" type="hidden" data-bind="value:Paty.viewmodel.editCategory().id()" />
-                    <input name="ParentId" type="hidden" data-bind="value:Paty.viewmodel.editCategory().parentCat()" />
-                    <input name="avaId" type="hidden" data-bind="value:Paty.viewmodel.editCategory().avatar.id()" />
-                    <input type="text" name="title" data-bind="value:Paty.viewmodel.editCategory().title()" />
+                    <input name="id" type="hidden" data-bind="value:Paty.viewmodel.editCategory().id()"/>
+                    <input name="ParentId" type="hidden" data-bind="value:Paty.viewmodel.editCategory().parentCat()"/>
+                    <input name="avaId" type="hidden" data-bind="value:Paty.viewmodel.editCategory().avatar.id()"/>
+                    <input type="text" name="title" data-bind="value:Paty.viewmodel.editCategory().title()"/>
                     <textarea rows="8" name="descr" data-bind="textInput:Paty.viewmodel.editCategory().description()"></textarea>
+                    <button type="submit">Сохранить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="formPopUp" style="display: none" data-bind="visible:Paty.viewmodel.editPaty().mode()==='EDIT'">
+    <div class="formWrapper">
+        <div class="closeButton">
+            <button type="button" data-bind="click:Paty.viewmodel.editPaty().mode.bind($data, 'VIEW')">X</button>
+        </div>
+        <form id="patyForm" class="updRoot" data-bind="submit:Paty.submitPaty">
+            <div class="displayRow">
+                <div class="fleft">
+                    <div class="imgWrapper">
+                        <img alt="" data-bind="attr:{src:Paty.viewmodel.editPaty().info.Avatar.Path()}, visible:Paty.viewmodel.newPhoto()===null" />
+                        <img alt="" src="" id="patyAvatar" style="display: none" data-bind="visible:Paty.viewmodel.newPhoto" width="298" height="258" />
+                        <div class="photoPlaceholder" id="AvatarHolder" data-bind="visible:Paty.viewmodel.haveAvatar()===false">
+                            <h3>нет изображения</h3>
+                            <p>
+                                Для загрузки принимаются изображения в формате <span>*.jped / *.png</span>, размером не более 512кб
+                            </p>
+                            <p style="color: red">Размер изображения 298px*258px.</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <label>
+                                    Выберите файл
+                                    <input id="patyInput" type="file" accept="image/jpeg,image/png" />
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fright">
+                    <input name="id" type="hidden" data-bind="value:Paty.viewmodel.editPaty().info.Id()" />
+                    <input name="category" type="hidden" data-bind="value:Paty.viewmodel.editPaty().info.Category()" />
+                    <input name="avaId" type="hidden" data-bind="value:Paty.viewmodel.editPaty().info.Avatar.Id()"/>
+
+                    <input type="text" name="title" data-bind="value:Paty.viewmodel.editPaty().info.Title()" placeholder="Наименование" />
+                    <input type="datetime-local" name="date" data-bind="value:Paty.viewmodel.editPaty().info.ExpDate()"/>
+                    <input type="number" name="maxGuests" min="1" data-bind="value:Paty.viewmodel.editPaty().info.MaxGuests()" placeholder="Места" />
+                    <input type="number" name="rate" min="1" data-bind="value:Paty.viewmodel.editPaty().info.Rate()" placeholder="Рейтинг" />
+                    <input type="number" name="price" min="1" data-bind="value:Paty.viewmodel.editPaty().info.Price()" placeholder="Стоимость" />
+                    <input type="text" name="Dres" data-bind="value:Paty.viewmodel.editPaty().info.Dres()" placeholder="Дресс-код" />
+                    <textarea rows="8" name="descr" data-bind="textInput:Paty.viewmodel.editPaty().info.Description()"></textarea>
                     <button type="submit">Сохранить</button>
                 </div>
             </div>

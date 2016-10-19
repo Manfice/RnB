@@ -63,6 +63,47 @@ namespace Web.Domen.Repositorys
             return current;
         }
 
+        public async Task<Paty> AddPatyAsync(int c, int a, Paty model, PatyImage image)
+        {
+            var result = new Paty();
+            var dbCat = await _context.PatyCategories.FindAsync(c);
+            if (dbCat==null)
+            {
+                return null;
+            }
+            if (model.Id > 0)
+            {
+                result = await _context.Paties.FindAsync(model.Id);
+                result.AddRate = model.AddRate;
+                result.Descr = model.Dres;
+                result.Dres = model.Dres;
+                result.MaxGuests = model.MaxGuests;
+                result.PatyDate = model.PatyDate;
+                result.PatyInterest = model.PatyInterest;
+                result.Price = model.Price;
+                result.Title = model.Title;
+            }
+            else
+            {
+                result = model;
+                _context.Paties.Add(result);
+                result.Category = dbCat;
+            }
+
+            if (image!=null)
+            {
+                _context.PatyImages.Add(image);
+            }
+            result.Avatar = image;
+            if (a>0)
+            {
+                var dbImage = await _context.PatyImages.FindAsync(a);
+                _context.PatyImages.Remove(dbImage);
+            }
+            await _context.SaveChangesAsync();
+            return result;
+        }
+
         public async Task<PatyCategory> DeleteCategoryAsync(int id)
         {
             var dbCat = await _context.PatyCategories.FindAsync(id);
