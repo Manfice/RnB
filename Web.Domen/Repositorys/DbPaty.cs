@@ -75,7 +75,7 @@ namespace Web.Domen.Repositorys
             {
                 result = await _context.Paties.FindAsync(model.Id);
                 result.AddRate = model.AddRate;
-                result.Descr = model.Dres;
+                result.Descr = model.Descr;
                 result.Dres = model.Dres;
                 result.MaxGuests = model.MaxGuests;
                 result.PatyDate = model.PatyDate;
@@ -93,8 +93,9 @@ namespace Web.Domen.Repositorys
             if (image!=null)
             {
                 _context.PatyImages.Add(image);
+                result.Avatar = image;
+
             }
-            result.Avatar = image;
             if (a>0)
             {
                 var dbImage = await _context.PatyImages.FindAsync(a);

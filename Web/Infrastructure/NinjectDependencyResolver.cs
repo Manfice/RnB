@@ -31,6 +31,7 @@ namespace Web.Infrastructure
         private void AddBindings()
         {
             _kernel.Bind<IEvents>().To<DbPaty>().InRequestScope();
+            _kernel.Bind<IHome>().To<DbHome>().InRequestScope();
         }
     }
 }

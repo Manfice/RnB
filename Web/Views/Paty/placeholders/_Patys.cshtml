@@ -1,0 +1,37 @@
+﻿<div class="column">
+    <div class="columnHead">
+        <h1>Мероприятия</h1>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Наименование</th>
+            <th>Дата и время</th>
+            <th>Мест / Свободно</th>
+            <th>Стоимость</th>
+            <th>Категория</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach:events.all">
+        <tr>
+            <td data-bind="text:$index()+1"></td>
+            <td data-bind="text:info.Title"></td>
+            <td data-bind="text:info.ExpDate"></td>
+            <td data-bind="text:info.MaxGuests()+' / '+SeetsFree()"></td>
+            <!-- ko if: info.Price()>0 -->
+            <td data-bind="text:info.Price()+'p.'"></td>
+            <!-- /ko -->
+            <!-- ko if: info.Price()===0 -->
+            <td>Бесплатно</td>
+            <!-- /ko -->
+            <td data-bind="text:info.Category().Title"></td>
+            <td>
+                <a href="#" data-bind="click:Paty.editPaty">Редактировать</a> /
+                <a href="#">Отменить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

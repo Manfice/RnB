@@ -1,9 +1,17 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using Web.Domen.Abstract;
 
 namespace Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IHome _home;
+
+        public HomeController(IHome home)
+        {
+            _home = home;
+        }
         public ActionResult Index()
         {
             return View();
@@ -16,7 +24,8 @@ namespace Web.Controllers
 
         public ActionResult NearPaty()
         {
-            return PartialView();
+            var model = _home.GetPatys.OrderBy(paty => paty.PatyDate);
+            return PartialView(model);
         }
 
         public ActionResult Offer()

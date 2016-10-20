@@ -29,6 +29,12 @@ namespace Web.Controllers
             var result = _repository.GetCategorys;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetPatys()
+        {
+            var model = _repository.GetPatys;
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public async Task<JsonResult> AddRootCat()
         {
@@ -106,8 +112,11 @@ namespace Web.Controllers
         public async Task<JsonResult> AddPatyAsync()
         {
             var paty = new Paty();
+            var guid = Guid.NewGuid();
             var catId = 0;
             var avaId = 0;
+            var filePath = Server.MapPath("~/Uploads/patyAvatar/" +guid+ "_sep_");
+            PatyImage img = null;
 
             var formData = HttpContext.Request.Form.AllKeys;
             if (formData.Length > 0)
@@ -120,12 +129,45 @@ namespace Web.Controllers
                 paty.Id = int.Parse(HttpContext.Request.Form["id"]);
                 paty.Dres = HttpContext.Request.Form["Dres"];
                 paty.Price = decimal.Parse(HttpContext.Request.Form["Price"]);
+                paty.PatyInterest = HttpContext.Request.Form["interest"];
+                paty.Descr = HttpContext.Request.Form["descr"];
 
                 int.TryParse(HttpContext.Request.Form["category"], out catId);
                 int.TryParse(HttpContext.Request.Form["avaId"], out avaId);
             }
+            if (HttpContext.Request.Files.Count > 0)
+            {
+                var logo = HttpContext.Request.Files["Avatar"];
+                if (logo != null && logo.ContentLength > 0)
+                {
+                    //Todo: перевести в отдельную процедуру
+                    if (avaId > 0)
+                    {
+                        var fileToDelete = await _repository.ImgToDeleteAsync(avaId);
+                        if (fileToDelete != null)
+                        {
+                            if (System.IO.File.Exists(fileToDelete.FullPath))
+                            {
+                                System.IO.File.Delete(fileToDelete.FullPath);
+                            }
+                        }
+                    }
+                    var photo = ImageCrop.Crop(logo, 123, 123, ImageCrop.AnchorPosition.Center);
+                    if (photo != null)
+                    {
+                        filePath += logo.FileName;
+                        photo.Save(filePath, ImageFormat.Jpeg);
+                        img = new PatyImage
+                        {
+                            ContentType = logo.ContentType,
+                            FullPath = filePath,
+                            Path = "/Uploads/patyAvatar/" + guid + "_sep_" + logo.FileName
+                        };
+                    }
+                }
+            }
 
-            var result = await _repository.AddPatyAsync(catId, avaId, paty, null);
+            var result = await _repository.AddPatyAsync(catId, avaId, paty, img);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

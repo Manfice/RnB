@@ -9,16 +9,25 @@
     }
 
     var patyClient = function () {
-        var getCategorys = function (callback) {
+        var getCategorys = function(callback) {
             $.ajax({
                 type: "GET",
                 url: "/paty/GetCategorys",
+                success: function(data) {
+                    callback(data);
+                }
+            });
+        };
+        var getPatys = function (callback) {
+            $.ajax({
+                type: "GET",
+                url: "/paty/GetPatys",
                 success: function (data) {
                     callback(data);
                 }
             });
-        }
-        var saveRootCat = function(fData, callback) {
+        };
+        var saveRootCat = function (fData, callback) {
             $.ajax({
                 type: "POST",
                 url: "/Paty/AddRootCat",
@@ -39,7 +48,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    report(data);
+                    callback(data);
                 }
 
             });
@@ -54,14 +63,15 @@
             });
         }
         return {
-            getCategorys: getCategorys, saveRootCat: saveRootCat, delCat: delCat, savePaty: savePaty
+            getCategorys: getCategorys, saveRootCat: saveRootCat, delCat: delCat, savePaty: savePaty,
+            getPatys: getPatys
         };
     };
 
     var pClient = patyClient();
 
     var viewmodel = {
-        currView: ko.observable("CATEGORYS"),
+        currView: ko.observable("PATYS"),
         addRoot: ko.observable(false),
         newPhoto: ko.observable(null),
         editPhoto: ko.observable(false),
@@ -122,27 +132,29 @@
         var self = this;
         self.info = {};
         self.info.Id = ko.observable(data.Id);
-        self.info.ExpDate = ko.observable(data.PatyDate);
+        self.info.ExpDate = ko.observable(moment(data.ExpDate).format("DD.MM.YYYY HH:mm"));
         self.info.Title = ko.observable(data.Title);
-        self.info.Description = ko.observable(data.Descr);
+        self.info.Description = ko.observable(data.Description);
         self.info.MaxGuests = ko.observable(data.MaxGuests);
         self.info.Price = ko.observable(data.Price);
         self.info.Guests = ko.observableArray(data.Guests);
-        self.info.Dres = ko.observableArray(data.Dres);
+        self.info.Dres = ko.observable(data.Dres);
         self.info.Avatar = {};
         self.info.Avatar.Id = ko.observable(data.AvatarId);
         self.info.Avatar.Path = ko.observable(data.AvatarPath);
         self.info.Category = ko.observable(data.Category);
         self.info.Rate = ko.observable(data.Rate);
+        self.info.PatyInterest = ko.observable(data.PatyInterest);
         self.SeetsFree = ko.pureComputed(function() {
-            return info.MaxGuests() - info.Guests().length();
+            return self.info.MaxGuests() - self.info.Guests.length;
         },self);
         self.mode = ko.observable(mode);
+        self.statys = ko.observable(data.Statys);
     }
     var patyData = function() {
         var self = this;
         self.Id = 0;
-        self.ExpDate = new Date().toLocaleDateString();
+        self.ExpDate = "";
         self.Title = "";
         self.Description = "";
         self.MaxGuests = "";
@@ -151,8 +163,12 @@
         self.Dres = "";
         self.AvatarId = 0;
         self.AvatarPath = "";
-        self.Category = 0;
+        self.Category = {};
+        self.Category.Id = 0;
+        self.Category.Title = "";
         self.Rate = "";
+        self.PatyInterest = "";
+        self.Statys = "NEW";
     }
     var guest = function(data) {
         var self = this;
@@ -160,6 +176,13 @@
         self.Fio = ko.observable(data.Fio);
         self.Email = ko.observable(data.Email);
         self.Phone = ko.observable(data.Phone);
+    }
+    var guestData = function() {
+        var self = this;
+        self.Id = 0;
+        self.Fio = "";
+        self.Email = "";
+        self.Phone = "";
     }
     var catData = function () {
         var self = this;
@@ -192,6 +215,42 @@
             model.categorys.all.push(new category(dt, displayMode.view));
         });
     };
+    var getPatysCallback = function (data) {
+        var tempArr = [];
+        data.forEach(function(item) {
+            var dt = new patyData();
+            dt.Id = item.Id;
+            dt.Rate = item.AddRate;
+            dt.Description = item.Descr;
+            dt.Dres = item.Dres;
+            dt.MaxGuests = item.MaxGuests;
+            dt.ExpDate = new Date(parseInt(item.PatyDate.replace("/Date(", "").replace(")/", ""), 10));
+            dt.PatyInterest = item.PatyInterest;
+            dt.Price = item.Price;
+            dt.Title = item.Title;
+            dt.Statys = "UPDATE";
+            if (item.Avatar!==null) {
+                dt.AvatarId = item.Avatar.Id;
+                dt.AvatarPath = item.Avatar.Path;
+            };
+            if (item.Guests.length>0) {
+                item.Guests.forEach(function(g) {
+                    var gst = new guestData();
+                    gst.Id = g.Id;
+                    gst.Fio = g.Fio;
+                    gst.Email = g.Email;
+                    gst.Phone = g.Phone;
+                    dt.Guests.push(new guest(gst));
+                });
+            };
+            if (item.Category!==null) {
+                dt.Category.Id = item.Category.Id;
+                dt.Category.Title = item.Category.Title;
+            }
+            tempArr.push(new paty(dt, displayMode.view));
+        });
+        model.events.all(tempArr);
+    }
     var saveRootCallback = function (item) {
         var dt = new catData();
         dt.Id = item.Id;
@@ -213,6 +272,32 @@
         viewmodel.editCategory().mode(displayMode.view);
         clearInputField("upimgInput");
         alert(ko.toJSON(item));
+    };
+    var savePatyCallback = function(item) {
+        var dt = new patyData();
+        dt.Id = item.Id;
+        dt.Rate = item.AddRate;
+        dt.Description = item.Descr;
+        dt.Dres = item.Dres;
+        dt.MaxGuests = item.MaxGuests;
+        dt.ExpDate = new Date(parseInt(item.PatyDate.replace("/Date(", "").replace(")/", ""), 10));
+        dt.PatyInterest = item.PatyInterest;
+        dt.Price = item.Price;
+        dt.Title = item.Title;
+        if (item.Avatar!==null) {
+            dt.AvatarId = item.Avatar.Id;
+            dt.AvatarPath = item.Avatar.Path;
+        };
+        if (item.Category!==null) {
+            dt.Category.Id = item.Category.Id;
+            dt.Category.Title = item.Category.Title;
+        };
+        model.events.all.push(new paty(dt, displayMode.view));
+        viewmodel.editPaty(new paty(new patyData(), displayMode.view));
+    };
+    var updPaty = function(data) {
+        alert("Сохранено");
+        viewmodel.editPaty().mode(displayMode.view);
     };
     var deleteCatCb = function (data, result) {
         if (data.parentCat() !== "") {
@@ -269,7 +354,11 @@
         if (img.length>0) {
             data.append("Avatar", img[0]);
         }
-        pClient.savePaty(data);
+        if (viewmodel.editPaty().statys() === "NEW") {
+            pClient.savePaty(data, savePatyCallback);
+        } else {
+            pClient.savePaty(data, updPaty);
+        }
     };
 
     var setCurrCat = function (data) {
@@ -322,6 +411,18 @@
         viewmodel.haveAvatar(false);
         report(dt);
     }
+    var editPaty = function (data) {
+        report(data);
+        data.mode(displayMode.edit);
+        var newPaty = data;
+        viewmodel.editPaty(newPaty);
+        viewmodel.newPhoto(false);
+        viewmodel.haveAvatar(false);
+        if (data.info.Avatar.Id() !== 0) {
+            viewmodel.haveAvatar(true);
+            viewmodel.newPhoto(null);
+        }
+    }
     var init = function () {
         var dt = new catData();
         dt.Id = 0;
@@ -330,6 +431,8 @@
         viewmodel.editPaty(new paty(new patyData(), displayMode.view));
         viewmodel.editCategory(new category(dt, displayMode.view));
         pClient.getCategorys(getCatCallback);
+        pClient.getPatys(getPatysCallback);
+        $("#dt").datetimepicker();
         ko.applyBindings(model, document.getElementById("patySection"));
     };
 
@@ -337,7 +440,8 @@
     return {
         viewmodel: viewmodel, submitNewRoot: submitNewRoot, setCurrCat: setCurrCat,
         setWorkDirectory: setWorkDirectory, addRoot: addRoot, addSubRoot: addSubRoot,
-        deleteCategory: deleteCategory, serSubDir: serSubDir, addPaty: addPaty, submitPaty: submitPaty
+        deleteCategory: deleteCategory, serSubDir: serSubDir, addPaty: addPaty, submitPaty: submitPaty,
+        editPaty: editPaty
     };
 }();
 
