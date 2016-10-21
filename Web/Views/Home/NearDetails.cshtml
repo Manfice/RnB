@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Web.Domen.Models.Paty>
+@{
+    ViewBag.Title = "Ближайшие мероприятия";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="nearParty nearPartyDetails">
+    <h2>В нашем клубе вы найдете занятие, которое вам по душе:</h2>
+    <div><span> </span><span> </span><span> </span></div>
+    <div class="row960w">
+        @foreach (var item in Model)
+        {
+            <div class="patyItemDetails">
+                <div class="descrTop">
+                    <h3>@item.PatyDate.ToString("M")</h3>
+                    
+                    @if (item.Avatar != null)
+                    {
+                        <img alt="" src="@item.Avatar.Path"/>
+                    }
+                    else
+                    {
+                        <img alt="" src="/Content/img/pList/454x312.jpg" height="312"/>
+                    }
+                    <div class="patyOnHover">
+                        <a href="@Url.Action("PatyDetails", "Home", new {id=item.Id})" class="redButton">Подробнее</a>
+                        <h2>@item.Title</h2>
+                    </div>
+                </div>
+                <div class="descrBottom">
+                    <p>@item.Descr</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

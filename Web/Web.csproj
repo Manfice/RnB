@@ -198,6 +198,7 @@
     <Compile Include="Models\AppRole.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Viewmodels\AuthViews.cs" />
+    <Compile Include="Models\Viewmodels\CatDetVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +220,7 @@
     <Content Include="Content\img\pList\3.jpg" />
     <Content Include="Content\img\pList\3g.jpg" />
     <Content Include="Content\img\pList\4.jpg" />
+    <Content Include="Content\img\pList\454x312.jpg" />
     <Content Include="Content\img\pList\4g.jpg" />
     <Content Include="Content\img\pList\5.jpg" />
     <Content Include="Content\img\pList\5g.jpg" />
@@ -226,6 +228,7 @@
     <Content Include="Content\img\pList\6g.jpg" />
     <Content Include="Content\img\pList\7.jpg" />
     <Content Include="Content\img\pList\7g.jpg" />
+    <Content Include="Content\img\pList\942x434.jpg" />
     <Content Include="Content\img\prevBtn.png" />
     <Content Include="Content\img\prive\1.jpg" />
     <Content Include="Content\img\pt.jpg" />
@@ -331,6 +334,8 @@
     <Content Include="Views\Paty\Index.cshtml" />
     <Content Include="Views\Paty\placeholders\_PatyCategorys.cshtml" />
     <Content Include="Views\Paty\placeholders\_Patys.cshtml" />
+    <Content Include="Views\Home\NearDetails.cshtml" />
+    <Content Include="Views\Home\PatyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

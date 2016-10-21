@@ -94,13 +94,13 @@ namespace Web.Domen.Repositorys
             {
                 _context.PatyImages.Add(image);
                 result.Avatar = image;
+                if (a > 0)
+                {
+                    var dbImage = await _context.PatyImages.FindAsync(a);
+                    _context.PatyImages.Remove(dbImage);
+                }
+            }
 
-            }
-            if (a>0)
-            {
-                var dbImage = await _context.PatyImages.FindAsync(a);
-                _context.PatyImages.Remove(dbImage);
-            }
             await _context.SaveChangesAsync();
             return result;
         }

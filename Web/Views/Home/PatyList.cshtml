@@ -1,43 +1,21 @@
-﻿<div class="nearParty">
+﻿@model IEnumerable<Web.Domen.Models.PatyCategory>
+<div class="nearParty">
     <h2>В нашем клубе вы найдете занятие, которое вам по душе:</h2>
     <div><span> </span><span> </span><span> </span></div>
     <div class="row960w" style="margin: 30px 0;">
-        <div class="pListItem" style="background: url('/Content/img/pList/1.jpg') no-repeat">
-            <div class="bTitle">
-                <a href="#"><span>Comedy</span></a>
-                <a href="#"><span>Вечеринка со звездой</span></a>
-                <p class="pListTitel">Развлекательный формат</p>
+        @foreach (var root in Model.Where(category => category.ParentCategory == null))
+        {
+            <div class="pListItem" style="background: url(@root.Avatar.Path) no-repeat">
+                <div class="bTitle">
+                    <ul>
+                        @foreach (var item in Model.Where(category => category.ParentCategory!= null && category.ParentCategory.Id==root.Id))
+                        {
+                            <li><a href="#">@item.Title</a></li>
+                        }
+                    </ul>
+                    <a href="#" class="pListTitel">Развлекательный формат</a>
+                </div>
             </div>
-        </div>
-        <div class="pListItem" style="background: url('/Content/img/pList/2.jpg') no-repeat">
-            <div class="bTitle">
-                <p class="pListTitel">Игровые мероприятия</p>
-            </div>            
-        </div>
-        <div class="pListItem" style="background: url('/Content/img/pList/3.jpg') no-repeat">
-            <div class="bTitle">
-                <p class="pListTitel">Спортивные мероприятия</p>
-            </div>
-        </div>
-        <div class="pListItem" style="background: url('/Content/img/pList/4.jpg') no-repeat">
-            <div class="bTitle">
-                <p class="pListTitel">Бизнес встречи</p>
-            </div>
-        </div>
-        <div class="pListItem" style="background: url('/Content/img/pList/5.jpg') no-repeat">
-            <div class="bTitle">
-                <p class="pListTitel">Развитие навыков</p>
-            </div>
-        </div>
-        <div class="pListItem" style="background: url('/Content/img/pList/6.jpg') no-repeat">
-            <div class="bTitle">
-                <p class="pListTitel">Активный отдых</p>
-            </div>
-        </div>
-        <div class="pListItem" style="background: url('/Content/img/pList/7.jpg') no-repeat">
-            <div class="bTitle">
-                <p class="pListTitel">благотворительность</p>
-            </div>
-        </div>
+        }
     </div>
 </div>

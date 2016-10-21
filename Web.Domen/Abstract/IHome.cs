@@ -6,5 +6,7 @@ namespace Web.Domen.Abstract
     public interface IHome
     {
         IEnumerable<Paty> GetPatys { get; }  
+        IEnumerable<PatyCategory> GetCategorys { get; }
+        Paty GetPaty(int id);
     }
 }

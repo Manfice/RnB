@@ -1,0 +1,64 @@
+﻿@model Web.Domen.Models.Paty
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+    var t1 = Model.Category.Title.Split(' ')[0];
+    var t2 = Model.Category.Title.Remove(0, t1.Length);
+    var d1 = Model.PatyDate.ToLongDateString().Split(' ');
+    var d2 = Model.PatyDate.ToLongDateString().Remove(0, d1.Length-1);
+    
+}
+
+<div class="column">
+    <div class="topPicture" style="background: url('/Content/img/pList/942x434.jpg')">
+        <h1>@Model.Category.Title</h1>
+        <div class="gRg"><span> </span><span> </span><span> </span></div>
+    </div>
+    <div class="topPicture">
+        <div class="order">
+            <div class="l">
+                <div class="grayDate">
+                    <div class="itm">
+                        <h3>@t1</h3>
+                        <h3>@t2.Trim()</h3>
+                    </div>
+                    <div class="itm" style="width: 120px; align-self: flex-start">
+                        <h4>@Model.PatyDate.Day</h4>
+                    </div>
+                    <div class="itm" style="text-align: left">
+                        <h5>@d2.Remove(d2.Length - 2)</h5>
+                        <h5 style="margin-top: 13px;">в @Model.PatyDate.ToShortTimeString()</h5>
+                    </div>
+                </div>
+                <h2 style="text-align: left">@Model.Title</h2>
+                <div class="interest bordered">
+                    <p>На мероприятии вы сможете:</p>
+                    @foreach (var s in Model.PatyInterest.Split('\n'))
+                    {
+                        <p> - @s.Trim(new []{' ','-',';'}) ;</p>
+                    }
+                </div>
+                <div class="bordered">
+                    @if (Model.Price > 0)
+                    {
+                        <p>Стоимость: <span>@Model.Price руб.</span> <span>(рассчитывается с учетом скидки и кол-ва мест)</span></p>
+                    }
+                    else
+                    {
+                        <p>Стоимость: <span>БЕСПЛАТНО</span></p>
+                    }
+                </div>
+                <div class="terms bordered">
+                    <p>Условия участия:</p>
+                    @if (Model.Price>0)
+                    {
+                        <p> - </p>
+                    }
+                </div>
+            </div>
+            <div class="r">
+                
+            </div>
+        </div>
+    </div>
+</div>

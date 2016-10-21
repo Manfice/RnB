@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Web.Domen.Abstract;
 
@@ -39,7 +40,8 @@ namespace Web.Controllers
         }
         public ActionResult PatyList()
         {
-            return PartialView();
+            var model = _home.GetCategorys;
+            return PartialView(model);
         }
         public ActionResult Prevelegii()
         {
@@ -71,5 +73,16 @@ namespace Web.Controllers
             return PartialView();
         }
 
-    }
+        public ActionResult NearDetails()
+        {
+            var model = _home.GetPatys.Where(paty => paty.PatyDate >= DateTime.Today).ToList();
+            return View(model);
+        }
+
+        public ActionResult PatyDetails(int id)
+        {
+            var model = _home.GetPaty(id);
+            return View(model);
+        }
+     }
 }
