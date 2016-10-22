@@ -1,4 +1,5 @@
-﻿@model Web.Domen.Models.Paty
+﻿@using Newtonsoft.Json
+@model Web.Domen.Models.Paty
 @{
     ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_MainRnB.cshtml";
@@ -11,10 +12,10 @@
 
 <div class="column">
     <div class="topPicture" style="background: url('/Content/img/pList/942x434.jpg')">
-        <h1>@Model.Category.Title</h1>
+        <h1>@Model.Category.ParentCategory.Title</h1>
         <div class="gRg"><span> </span><span> </span><span> </span></div>
     </div>
-    <div class="topPicture">
+    <div class="formBlock">
         <div class="order">
             <div class="l">
                 <div class="grayDate">
@@ -35,7 +36,7 @@
                     <p>На мероприятии вы сможете:</p>
                     @foreach (var s in Model.PatyInterest.Split('\n'))
                     {
-                        <p> - @s.Trim(new []{' ','-',';'}) ;</p>
+                        <p> - @s.Trim(new[] {' ', '-', ';'}) ;</p>
                     }
                 </div>
                 <div class="bordered">
@@ -45,20 +46,121 @@
                     }
                     else
                     {
-                        <p>Стоимость: <span>БЕСПЛАТНО</span></p>
+                        <p><strong>Стоимость: </strong><span>БЕСПЛАТНО</span></p>
                     }
                 </div>
                 <div class="terms bordered">
-                    <p>Условия участия:</p>
-                    @if (Model.Price>0)
+                    <p><strong>Условия участия:</strong>
+                    </p>
+                    @if (Model.Price == 0)
                     {
-                        <p> - </p>
+                        <p> 1) вступите в одну из наших групп в соц сетях:</p>
+                        <p style="padding-left: 20px"> если уже вступил ранее, то вы очень большой молодец!
+                            <a href="#"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
+                            <a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20"/></a>
+                            <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
+                            <a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20"/></a>
+                            <a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20"/></a>
+                        </p>
+                        <p>2) сделайте репост этой записи в одной из социальных сетей:</p>
+                        <p>
+                            <a href="#"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
+                            <a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20"/></a>
+                            <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
+                            <a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20"/></a>
+                            <a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20"/></a>
+                        </p>
+                        <p>3) получите приглашение по почте, заполнив форму заявки</p>
                     }
+                    else
+                    {
+                        <p>1) заполните форму заявки</p>
+                        <p>2) оплатите орг. взнос на странице оплаты</p>
+                        <p>3) получите приглашение на эл. почту</p>
+                    }
+                </div>
+                <div class="counter bordered">
+                    <p><strong>Вход строго по приглашениям.</strong>
+                    </p>
+                    <p><strong>Дресс-код: </strong>@Model.Dres</p>
+                    <div class="grayDate" style="margin: 20px 0 0 0">
+                        <div class="reg">
+                            <h4>До конца<br/> регистрации<br/> осталось:</h4>
+                        </div>
+                        <div class="reg count">
+                            <div id="flipCd"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="r">
-                
+                <div class="info">
+                    <p>Более подробная информация о месте проведения будет выслана лицам, подавшим заявку</p>
+                </div>
+                <div class="freepalce">
+                    <p>Осталось мест:</p> <span style="color: red">@(Model.MaxGuests - @Model.Guests.Count)</span><span>/</span><span>@Model.MaxGuests</span>
+                </div>
+                <div class="formWrapper">
+                    <form>
+                        <div class="titleBorder">
+                            <h3 style="text-align: center; padding: 0 20px;">Заполните заявку<br/> на участие
+                            </h3>
+                        </div>
+
+                        @if (Model.Price > 0)
+                        {
+                            <div class="inpItem">
+                                <p>*</p>
+                                <input type="tel" name="phone" value="" placeholder="ФИО(полностью)"/>
+                            </div>
+                            <div class="inpItem">
+                                <p>*</p>
+                                <input type="tel" name="phone" value="" placeholder="Телефон"/>
+                            </div>
+                            <div class="inpItem">
+                                <p>*</p>
+                                <input type="tel" name="phone" value="" placeholder="E-mail"/>
+                            </div>
+                            <div class="inpItem">
+                                <input type="tel" name="phone" value="" placeholder="Место работы, должность" />
+                            </div>
+                            <div class="buttonBorder">
+                                <a class="redButton" href="#">Перейти на страницу<br/>оплаты</a>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="buttonBorder">
+                                <a class="redButton" href="#">Получить приглашение</a>
+                            </div>
+                        }
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+@section scripts
+{
+    <script src="~/Scripts/flipclock.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model.PatyDate.ToUniversalTime()));
+            var clock = $("#flipCd").FlipClock({
+                clockFace: "DailyCounter",
+                autoStart: true,
+                language:"ru-ru"
+            });
+            clock.setCountdown(true);
+            
+            var dt = (new Date(model) - Date.now())/1000;
+            clock.setTime(dt);
+            clock.start();
+        });
+    </script>
+}
+@section links
+{
+<link href="~/Content/flipclock.css" rel="stylesheet" />
+}

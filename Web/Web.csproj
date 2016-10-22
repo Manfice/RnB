@@ -203,6 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin.css" />
+    <Content Include="Content\flipclock.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\1.jpg" />
     <Content Include="Content\img\4fon.jpg" />
@@ -273,6 +274,7 @@
     <None Include="Properties\PublishProfiles\Web20161013094658 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\AdminJs\paty.js" />
+    <Content Include="Scripts\flipclock.min.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />

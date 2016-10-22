@@ -6,7 +6,8 @@
     <title>@ViewBag.Title - Red & Black</title>
     <link href="~/Content/main.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet"/>
+    @RenderSection("links",false)
 
     @Scripts.Render("~/bundles/modernizr")
 
@@ -151,6 +152,7 @@
     <script src="~/Scripts/jquery-2.2.4.min.js"></script>
     <script src="~/Scripts/knockout-3.4.0.js"></script>
     <script src="~/Scripts/owl.carousel.min.js"></script>
+    @RenderSection("scripts", false)
     <script src="~/Scripts/mainJS.js"></script>
 </body>
 </html>

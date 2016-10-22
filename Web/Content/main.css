@@ -484,7 +484,7 @@ footer {
     border-left: solid 5px white;
     border-right: solid 5px white;
     position: absolute;
-    bottom: -25px;
+    bottom: -15%;
 }
 
 form>p {
@@ -900,13 +900,18 @@ form>p {
 /*Near Details END*/
 /*PAty details*/
 .column {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
     margin: 50px 0;
     box-sizing: border-box;
+}
+.formBlock {
+    flex: 0 0 auto;
+    max-width: 960px;
+    width: 100%;
 }
 .topPicture {
     flex: 0 0 auto;
@@ -934,7 +939,7 @@ form>p {
 }
 .order {
     border: solid 1px gray;
-    padding: 5px;
+    padding: 10px;
     margin: 10px 0;
     display: flex;
     flex-flow: row nowrap;
@@ -952,7 +957,8 @@ form>p {
 .l .bordered {
     border-top: dotted 1px;
     width: 100%;
-    padding: 10px 0;
+    padding: 10px 0 0 0;
+    margin: 5px;
 }
 .bordered p {
     margin-left: 20px;
@@ -961,7 +967,6 @@ form>p {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
-    align-items: flex-start;
 }
 .r {
     flex: 1 0 40%;
@@ -975,6 +980,10 @@ form>p {
 .grayDate .itm {
     flex: 0 0 auto;
     position: relative;
+    padding: 5px;
+}
+.grayDate .reg {
+    flex: 0 0 auto;
     padding: 5px;
 }
 .itm:first-child {
@@ -1011,4 +1020,28 @@ form>p {
 .interest p {
     text-transform: lowercase;
 }
+.flip-clock-wrapper {
+    zoom: 0.7;
+}
+.r>div {
+    flex: 0 0 auto;
+    margin: 10px;
+}
+.freepalce {
+    border: solid 3px red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.freepalce p {
+    font-family: "rBold";
+    font-size: 15pt;
+    margin: 0 20px 0 0;
+}
+.freepalce span {
+    font-size: 30pt;
+    font-family: "rBold";
+    margin: 0;
+}
+
 /*PAty details END*/
