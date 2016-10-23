@@ -269,9 +269,6 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\redandblack - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\redandblack - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\redandblack - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\Web20161013094658 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\AdminJs\paty.js" />
     <Content Include="Scripts\flipclock.min.js" />
@@ -338,6 +335,7 @@
     <Content Include="Views\Paty\placeholders\_Patys.cshtml" />
     <Content Include="Views\Home\NearDetails.cshtml" />
     <Content Include="Views\Home\PatyDetails.cshtml" />
+    <Content Include="Views\Home\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

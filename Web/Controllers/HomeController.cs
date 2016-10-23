@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Web.Domen.Abstract;
+using Web.Domen.Models;
 
 namespace Web.Controllers
 {
@@ -84,5 +86,13 @@ namespace Web.Controllers
             var model = _home.GetPaty(id);
             return View(model);
         }
+
+        public async Task<ActionResult> Order(OrderViewmodel model)
+        {
+            var customer = await _home.GetCustomerAsync(model);
+            var order = await _home.RegOnPatyAsync(model.Paty, customer);
+            return View(order);
+        }
+
      }
 }

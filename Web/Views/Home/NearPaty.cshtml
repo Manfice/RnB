@@ -25,7 +25,7 @@
                         <p>
                             @item.Descr
                         </p>
-                        <a class="redLink" href="#">Подробнее ></a>
+                        <a class="redLink" href="@Url.Action("PatyDetails","Home", new {id=item.Id})">Подробнее ></a>
                     </div>
                 </div>
             }

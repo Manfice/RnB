@@ -11,7 +11,7 @@ namespace Web.Domen.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string City { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
         public string Work { get; set; }
         public string WorkPlace { get; set; }
         public string User { get; set; }
@@ -28,4 +28,5 @@ namespace Web.Domen.Models
         public string ContentType { get; set; }
 
     }
+    
 }
