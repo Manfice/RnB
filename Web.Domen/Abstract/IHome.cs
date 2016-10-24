@@ -10,6 +10,6 @@ namespace Web.Domen.Abstract
         IEnumerable<PatyCategory> GetCategorys { get; }
         Paty GetPaty(int id);
         Task<Customer> GetCustomerAsync(OrderViewmodel model);
-        Task<Order> RegOnPatyAsync(int id, Customer customer);
+        Task<Order> RegOnPatyAsync(int id,int places ,Customer customer);
     }
 }

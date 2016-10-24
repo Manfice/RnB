@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public int Place { get; set; }
         public virtual Paty Paty { get; set; }
-        public virtual Customer Customer { get; set; } 
+        public virtual Customer Customer { get; set; }
     }
 
     public class OrderViewmodel

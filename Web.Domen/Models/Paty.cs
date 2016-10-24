@@ -21,7 +21,8 @@ namespace Web.Domen.Models
         public string Dres { get; set; }
         public virtual PatyImage Avatar { get; set; }
         public virtual PatyCategory Category { get; set; }
-        public virtual ICollection<Customer> Guests { get; set; }
+        //public virtual ICollection<Customer> Guests { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 
     public class PatyCategory

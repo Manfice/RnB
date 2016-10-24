@@ -32,7 +32,10 @@ namespace Web.Migrations
             {
                 roleManager.Create(new AppRole(role));
             }
-
+            if (!roleManager.RoleExists("Customer"))
+            {
+                roleManager.Create(new AppRole("Customer"));
+            }
             var user = userManager.FindByName(email);
             if (user == null)
             {

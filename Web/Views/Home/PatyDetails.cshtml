@@ -115,7 +115,19 @@
                     <p>Более подробная информация о месте проведения будет выслана лицам, подавшим заявку</p>
                 </div>
                 <div class="freepalce">
-                    <p>Осталось мест:</p> <span style="color: red">@(Model.MaxGuests - @Model.Guests.Count)</span><span>/</span><span>@Model.MaxGuests</span>
+                    @if (Model.Orders!=null)
+                    {
+                        <p>Осталось мест:</p>
+                        <span style="color: red">@(Model.MaxGuests - @Model.Orders.Sum(o => o.Place))</span>
+                        <span>/</span>
+                        <span>@Model.MaxGuests</span>
+                    }
+                    else
+                    {
+                        <p>Осталось мест:</p>
+                        <span style="color: red">@Model.MaxGuests</span><span>/</span><span>@Model.MaxGuests</span>
+
+                    }
                 </div>
                 <div class="regFormWrapper">
                     <form class="regToPaty" action="@Url.Action("Order")">

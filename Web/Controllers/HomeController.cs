@@ -90,7 +90,7 @@ namespace Web.Controllers
         public async Task<ActionResult> Order(OrderViewmodel model)
         {
             var customer = await _home.GetCustomerAsync(model);
-            var order = await _home.RegOnPatyAsync(model.Paty, customer);
+            var order = await _home.RegOnPatyAsync(model.Paty,model.Place ,customer);
             return View(order);
         }
 

@@ -38,16 +38,17 @@ namespace Web.Domen.Repositorys
             return _context.Paties.Find(id);
         }
 
-        public async Task<Order> RegOnPatyAsync(int id, Customer customer)
+        public async Task<Order> RegOnPatyAsync(int id,int places ,Customer customer)
         {
             var paty = await _context.Paties.FindAsync(id);
-            paty.Guests.Add(customer);
             var order = new Order
             {
                 Customer = customer,
                 Paty = paty,
-                Place = 1
+                Place = places
             };
+            _context.Orders.Add(order);
+            paty.Orders.Add(order);
             await _context.SaveChangesAsync();
 
             return order;

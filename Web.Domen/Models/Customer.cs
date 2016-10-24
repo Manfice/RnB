@@ -17,7 +17,7 @@ namespace Web.Domen.Models
         public string User { get; set; }
         public int Rate { get; set; }
         public virtual CustImage Avatar { get; set; }
-        public virtual ICollection<Paty> Paties { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 
     public class CustImage
@@ -28,5 +28,15 @@ namespace Web.Domen.Models
         public string ContentType { get; set; }
 
     }
-    
+
+    public class CustomerViewModel
+    {
+        public string Title { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string City { get; set; }
+        public string Birthday { get; set; }
+        public string Workplace { get; set; }
+        public string UserId { get; set; }
+    }
 }
