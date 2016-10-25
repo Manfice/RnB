@@ -13,7 +13,7 @@ namespace Web.Domen.Repositorys
     {
         private readonly Context _context = new Context();
         public IEnumerable<PatyCategory> GetCategorys => _context.PatyCategories.ToList();
-        public IEnumerable<Paty> GetPatys => _context.Paties.ToList(); 
+        public IEnumerable<Paty> GetPatys => _context.Paties.Include(paty => paty.Orders).ToList(); 
 
         public async Task<PatyCategory> AddCategoryAsync(int p, int a,PatyCategory model, PatyImage image)
         {

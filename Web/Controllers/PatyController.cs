@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Web.Domen.Abstract;
 using Web.Domen.Models;
 using Web.Helpers;
@@ -29,10 +31,22 @@ namespace Web.Controllers
             var result = _repository.GetCategorys;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult GetPatys()
         {
-            var model = _repository.GetPatys;
+            var model = _repository.GetPatys.Select(p => new
+            {
+                p.PatyDate,p.Avatar,p.Descr,p.Title,p.AddRate,p.Category, p.Dres,p.Id,p.MaxGuests,p.PatyInterest,p.Place,p.Price, ord = p.Orders.Select(order => new
+                {
+                    order.Id,
+                    order.Place,
+                    order.PlaceNumbers,
+
+                    order.Customer.Fio,
+                    order.Customer.Email,
+                    order.Customer.Phone
+                }),
+                UsedPlaceCount = p.Orders.Sum(order => order.Place)
+            });
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -152,7 +166,7 @@ namespace Web.Controllers
                             }
                         }
                     }
-                    var photo = ImageCrop.Crop(logo, 123, 123, ImageCrop.AnchorPosition.Center);
+                    var photo = ImageCrop.Crop(logo, 454, 312, ImageCrop.AnchorPosition.Center);
                     if (photo != null)
                     {
                         filePath += logo.FileName;
@@ -169,7 +183,7 @@ namespace Web.Controllers
 
             var result = await _repository.AddPatyAsync(catId, avaId, paty, img);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(result.Id, JsonRequestBehavior.AllowGet);
         }
     }
 }

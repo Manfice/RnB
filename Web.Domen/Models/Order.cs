@@ -3,7 +3,8 @@
     public class Order
     {
         public int Id { get; set; }
-        public int Place { get; set; }
+        public int Place { get; set; }//кол-во мест
+        public string PlaceNumbers { get; set; }
         public virtual Paty Paty { get; set; }
         public virtual Customer Customer { get; set; }
     }

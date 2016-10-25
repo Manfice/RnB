@@ -120,6 +120,14 @@ header, nav, footer {
     border-bottom: solid 3px #cc0b00;
     background-color: red;
 }
+.redLink {
+    font-family: "rNormal";
+    text-decoration: none;
+    color: #fe0000;
+    font-size: 14pt;
+    letter-spacing: -1px;
+    border-bottom: dotted 2px red;
+}
 .grayButton {
     display: block;
     margin: 0;
@@ -395,60 +403,37 @@ footer {
 .patyCarousel {
     flex: 1 0 auto; 
     margin: 40px  0;
-}
-.patyItem {
-    padding: 20px;
-    width: 250px;
-    height: 240px;
-    background-color: white;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-.patyItem h3 {
-    color: red;
-    font-size: 12pt;
-    letter-spacing: 1px;
-    padding: 0 0 20px 0;
-}
-.patyItem p {
-    font-weight: 100;
-    font-family: "rLight";
-    font-size: 13pt;
-}
-.redLink {
-    font-family: "rNormal";
-    text-decoration: none;
-    color: #fe0000;
-    font-size: 14pt;
-    letter-spacing: -1px;
-    border-bottom: dotted 2px red;
+    box-sizing: border-box;
 }
 .carItem {
     position: relative;
-    width: 320px;
-    height: 300px;
 }
-.patyItem a {
+.topString {
+    height: 40px;
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    letter-spacing: 1px;
+    top: 0;
+    width: 100%;
+    background-color: #e8e8e8;
 }
-.pImgAva {
-    border-bottom: solid 2px red;
-    height: 90px;
-    width: 90px;
-    position: relative;
-    float: left;
-    margin: 0 10px 10px 0;  
+.whiteBg {
+    background-color: white;
+    height: 100%;
+    padding: 0 30px;
 }
-.pImgAva>img {
-    position: absolute;
-    width: 123px !important;
-    height: 123px;
-    right: 0;
-    bottom: 0;
+.whiteBg .redline {
+    background-color: red;
+    height: 3px;
+    width: 100px;
+}
+.whiteBg .pD {
+    height: 100px;
+    overflow: hidden;
+}
+.whiteBg>a {
+    text-align: right;
+    margin-bottom: 5px;
+    display: block;
+
 }
 .prevItem, .nextItem {
     padding: 0 10px;
@@ -835,67 +820,64 @@ form>p {
 /*PopUp Windows Common END*/
 /*Near Details*/
 .nearPartyDetails {
-
     padding: 50px 0;
 }
 .patyItemDetails {
     flex: 0 0 45%;
-    height: 387px;
-    width: 454px;
-    margin: 15px;
-    overflow: hidden;
-    position: relative;
-}
-.descrTop {
-    position: relative;
-    width: 100%;
-    height: 312px;
+    margin: 20px;
     overflow: hidden;
 }
-.descrTop img {
+.npImgWrapper {
     width: 100%;
-}
-.descrBottom {
     position: relative;
-    background-color: #e8e8e8;
-    height: 100px;
-    padding: 10px;
-    font-size: 16pt;
+    height: 297px;
 }
-.descrTop h3 {
-    color: white;
-    background-color: red;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    text-transform: uppercase;
-    padding: 10px 20px;
+.npImgWrapper img {
+    width: 100%;
+    margin: 0;padding: 0;
+    max-height: 297px;
 }
-.patyOnHover {
+.itmDescr {
+    height: 70px;
+    overflow: hidden;
+    padding: 0 5px;
+    font-size: 18pt;
+    background-color: rgb(232, 232, 232);
+}
+.itmDescr p {
+    margin: 0;padding: 0;
+}
+.npImgWrapper .title {
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     background-color: #000000;
     background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
+    text-align: center;
+    color: white;
+    padding: 20px 0;
     cursor: pointer;
 }
-.patyOnHover:hover {
-    top: 0;
+.npImgWrapper .title:hover {
+    color: red;
 }
-.patyOnHover:hover a {
-    display: block;
-}
-.patyOnHover a {
-    display: none;
-    margin: 115px 140px;
-}
-.patyOnHover h2 {
+.npImgWrapper>h3 {
+    position: absolute;
+    z-index: 2;
+    background-color: red;
     color: white;
-    display: block;
-    margin: 20px;
-    font-size: 14pt;
+    padding: 5px 20px;
+    font-size: 16pt;
 }
+.title a {
+    display: none;
+}
+.title:hover a {
+    display: block;
+    margin: 105px 130px;
+
+}
+
 /*Near Details END*/
 /*PAty details*/
 .column {

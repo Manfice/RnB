@@ -135,9 +135,10 @@
         self.info.ExpDate = ko.observable(moment(data.ExpDate).format("DD.MM.YYYY HH:mm"));
         self.info.Title = ko.observable(data.Title);
         self.info.Description = ko.observable(data.Description);
+        self.info.Place = ko.observable(data.Place);
         self.info.MaxGuests = ko.observable(data.MaxGuests);
         self.info.Price = ko.observable(data.Price);
-        self.info.Guests = ko.observableArray(data.Guests);
+        self.info.Orders = ko.observableArray(data.Orders);
         self.info.Dres = ko.observable(data.Dres);
         self.info.Avatar = {};
         self.info.Avatar.Id = ko.observable(data.AvatarId);
@@ -145,11 +146,12 @@
         self.info.Category = ko.observable(data.Category);
         self.info.Rate = ko.observable(data.Rate);
         self.info.PatyInterest = ko.observable(data.PatyInterest);
-        self.SeetsFree = ko.pureComputed(function() {
-            return self.info.MaxGuests() - self.info.Guests.length;
-        },self);
+        self.info.SeetsUsed = ko.observable(data.SeetsUsed);
         self.mode = ko.observable(mode);
         self.statys = ko.observable(data.Statys);
+        self.seetsFree = ko.pureComputed(function() {
+            return self.info.MaxGuests() - self.info.SeetsUsed();
+        },self);
     }
     var patyData = function() {
         var self = this;
@@ -157,9 +159,9 @@
         self.ExpDate = "";
         self.Title = "";
         self.Description = "";
+        self.Place = "";
         self.MaxGuests = "";
         self.Price = "";
-        self.Guests = [];
         self.Dres = "";
         self.AvatarId = 0;
         self.AvatarPath = "";
@@ -168,21 +170,27 @@
         self.Category.Title = "";
         self.Rate = "";
         self.PatyInterest = "";
+        self.Orders = [];
         self.Statys = "NEW";
+        self.SeetsUsed = 0;
     }
-    var guest = function(data) {
+    var order = function(data) {
         var self = this;
         self.Id = ko.observable(data.Id);
         self.Fio = ko.observable(data.Fio);
         self.Email = ko.observable(data.Email);
         self.Phone = ko.observable(data.Phone);
+        self.Seets = ko.observable(data.Place);
+        self.SeetsNumbers = ko.observable(data.SeetsNumbers);
     }
-    var guestData = function() {
+    var orderData = function() {
         var self = this;
         self.Id = 0;
         self.Fio = "";
         self.Email = "";
         self.Phone = "";
+        self.Place = "";
+        self.SeetsNumbers = "";
     }
     var catData = function () {
         var self = this;
@@ -228,19 +236,22 @@
             dt.PatyInterest = item.PatyInterest;
             dt.Price = item.Price;
             dt.Title = item.Title;
+            dt.SeetsUsed = item.UsedPlaceCount;
             dt.Statys = "UPDATE";
             if (item.Avatar!==null) {
                 dt.AvatarId = item.Avatar.Id;
                 dt.AvatarPath = item.Avatar.Path;
             };
-            if (item.Guests.length>0) {
-                item.Guests.forEach(function(g) {
-                    var gst = new guestData();
-                    gst.Id = g.Id;
-                    gst.Fio = g.Fio;
-                    gst.Email = g.Email;
-                    gst.Phone = g.Phone;
-                    dt.Guests.push(new guest(gst));
+            if (item.ord.length>0) {
+                item.ord.forEach(function(g) {
+                    var ord = new orderData();
+                    ord.Id = g.Id;/* id заказа*/
+                    ord.Fio = g.Fio;/* фио заказчика*/
+                    ord.Email = g.Email; /* мыло заказчика*/
+                    ord.Phone = g.Phone;/* телефон*/
+                    ord.Place = g.Place;/*кол-во мест*/
+                    ord.SeetsNumbers = g.PlaceNumbers;
+                    dt.Orders.push(new order(ord));
                 });
             };
             if (item.Category!==null) {
@@ -412,7 +423,6 @@
         report(dt);
     }
     var editPaty = function (data) {
-        report(data);
         data.mode(displayMode.edit);
         var newPaty = data;
         viewmodel.editPaty(newPaty);

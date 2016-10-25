@@ -11,24 +11,30 @@
         @foreach (var item in Model)
         {
             <div class="patyItemDetails">
-                <div class="descrTop">
+                <div class="npImgWrapper">
                     <h3>@item.PatyDate.ToString("M")</h3>
-                    
                     @if (item.Avatar != null)
                     {
                         <img alt="" src="@item.Avatar.Path"/>
                     }
                     else
                     {
-                        <img alt="" src="/Content/img/pList/454x312.jpg" height="312"/>
+                        <img alt="" src="/Content/img/pList/454x312.jpg"/>
                     }
-                    <div class="patyOnHover">
-                        <a href="@Url.Action("PatyDetails", "Home", new {id=item.Id})" class="redButton">Подробнее</a>
-                        <h2>@item.Title</h2>
+                    <div class="title">
+                        <a href="@Url.Action("PatyDetails","Home", new {id=item.Id})" class="redButton">Подробнее</a>
+                        <h3>@item.Title</h3>
                     </div>
                 </div>
-                <div class="descrBottom">
-                    <p>@item.Descr</p>
+                <div class="itmDescr">
+                    @if (item.Descr.Length >= 100)
+                    {
+                        <p>@item.Descr.Substring(0, 100) ...</p>
+                    }
+                    else
+                    {
+                        <p>@item.Descr</p>
+                    }
                 </div>
             </div>
         }

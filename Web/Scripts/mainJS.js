@@ -9,7 +9,7 @@
         loop: true,
         autoplaySpeed: 3000,
         dotsContainer: ".dotsLayer",
-        autoHeight: true,
+        autoHeight: false
     });
 
     var paty = $("#paty");
@@ -23,7 +23,7 @@
         dots: false,
         autoplaySpeed: 3000,
         dotsContainer: '.dotsLayer',
-        autoHeight: true,
+        autoHeight: false,
         margin: 10
     });
 
@@ -70,6 +70,7 @@ var mainJS = function () {
     return {
     };
 }();
+
 var popUp = function () {
 
     var modelPopUp = {
