@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Web.Domen.Abstract;
@@ -57,8 +60,9 @@ namespace Web.Controllers
             var parent = 0;
             var currId = 0;
             var avaId = 0;
+            var ex = "";
             PatyImage img = null;
-            var filePath = Server.MapPath("~/Uploads/patyCategorys/" + guid + "_sep_");
+            var filePath = Server.MapPath("/Uploads/patyCategorys/" + guid + "_sep_");// @"C:\inetpub\vhosts\u0251088.plsk.regruhosting.ru\httpdocs\redblackclub.ru\Uploads\patyCategorys\" + guid + "_sep_";
             var formData = HttpContext.Request.Form.AllKeys;
             if (formData.Length>0)
             {
@@ -88,20 +92,35 @@ namespace Web.Controllers
                     if (photo != null)
                     {
                         filePath += logo.FileName;
-                        photo.Save(filePath, ImageFormat.Jpeg);
-                        img = new PatyImage
+                        try
                         {
-                            ContentType = logo.ContentType,
-                            FullPath = filePath,
-                            Path = "/Uploads/patyCategorys/" + guid + "_sep_"+logo.FileName
-                        };
-
+                            using (var m = new MemoryStream())
+                            {
+                                using (var f = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
+                                {
+                                    photo.Save(m, ImageFormat.Jpeg);
+                                    var bytes = m.ToArray();
+                                    f.Write(bytes,0,bytes.Length);
+                                }
+                            }
+                            img = new PatyImage
+                            {
+                                ContentType = logo.ContentType,
+                                FullPath = filePath,
+                                Path = "/Uploads/patyCategorys/" + guid + "_sep_" + logo.FileName
+                            };
+                        }
+                        catch (Exception e)
+                        {
+                            ex = e.Message;
+                        }
                     }
                 }
             }
 
             data.Id = currId;
             var result = await _repository.AddCategoryAsync(parent,avaId,data, img);
+           // result.Description = "FilePath >>> "+filePath + "Exception: >> "+ex;
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

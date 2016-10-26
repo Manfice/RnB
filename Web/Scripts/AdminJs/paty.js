@@ -97,6 +97,7 @@
 
     model.categorys.all.subscribe(function(newCategorys) {
         model.categorys.root.removeAll();
+        report(model.categorys.all());
         var tempArr = [];
         tempArr.push.apply(tempArr, model.categorys.all().map(function(c) {
             return c;
@@ -273,7 +274,7 @@
         }
         if (item.ParentCategory !== null) {
             dt.ParentCategory = item.ParentCategory.Id;
-        }        //pClient.getCategorys(getCatCallback);
+        }       
         model.categorys.all.push(new category(dt, displayMode.view));
         if (dt.ParentCategory !== "") {
             model.categorys.sub.push(new category(dt, displayMode.view));
@@ -281,7 +282,6 @@
             model.categorys.root.push(new category(dt, displayMode.view));
         }
         viewmodel.editCategory().mode(displayMode.view);
-        clearInputField("upimgInput");
         alert(ko.toJSON(item));
     };
     var savePatyCallback = function(item) {
