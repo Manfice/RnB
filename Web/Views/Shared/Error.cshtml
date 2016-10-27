@@ -1,9 +1,14 @@
 ﻿@model string[]
-    <hgroup>
-        <h1>Ошибка</h1>
-        <h2>Отчет:</h2>
-        @foreach (var item in Model)
-        {
-            <p>@item</p>
-        }
-    </hgroup>
+@{
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="columnBlock">
+    <h2>Ошибка.</h2>
+    <p>Если эта ошибка повторится, обратитесь к администратору портала.</p>
+    <h3>Текст ошибки:</h3>
+    @foreach (var item in Model)
+    {
+        <p>@item</p>
+    }
+</div>

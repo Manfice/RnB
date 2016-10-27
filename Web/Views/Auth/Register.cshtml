@@ -1,39 +1,48 @@
-﻿<div class="offerBlock">
+﻿@model Web.Domen.Models.CustomerViewModel
+@{
+    ViewBag.Title = "Форма заявки";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="offerBlock">
     <div class="formWrapper">
-            @using (Html.BeginForm("Register","Auth", FormMethod.Post)) { 
-                @Html.AntiForgeryToken()
+        @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
             <div class="titleBorder">
                 <h2>Оставьте заявку на вступление в сообщество!</h2>
             </div>
             <div class="inputRow">
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="text" name="Title" value="" placeholder="Имя, фамилия"/>
+                    @Html.TextBoxFor(model => model.Title, new {placeholder= "Имя, фамилия" })
                 </div>
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="tel" name="Phone" value="" placeholder="Телефон"/>
+                    <input type="tel" name="Phone" value="" placeholder="Телефон" />
                 </div>
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="email" name="Email" value="" placeholder="E-mail"/>
+                    <input type="email" name="Email" value="" placeholder="E-mail" />
                 </div>
             </div>
             <div class="inputRow">
                 <div class="inpItem">
                     <p></p>
-                    <input type="text" name="City" value="" placeholder="Город"/>
+                    <input type="text" name="City" value="" placeholder="Город" />
                 </div>
                 <div class="inpItem">
                     <p></p>
-                    <input type="text" name="Birthday" value="" placeholder="Дата рождения"/>
+                    <input type="text" name="Birthday" value="" placeholder="Дата рождения" />
                 </div>
                 <div class="inpItem">
                     <p></p>
-                    <input type="text" name="Workplace" value="" placeholder="Место работы, должность"/>
+                    <input type="text" name="Workplace" value="" placeholder="Место работы, должность" />
                 </div>
             </div>
-            <p>Укажите ваши профили в социальных сетях (это дает возможность своевременного оповещения о ближайших <br/>мероприятиях клуба, скидки на посещение платных мероприятий и отображение групп на вашей странице)
+            <p>
+                Укажите ваши профили в социальных сетях (это дает возможность своевременного оповещения о ближайших <br />мероприятиях клуба, скидки на посещение платных мероприятий и отображение групп на вашей странице)
             </p>
             <div class="socRow">
                 <button type="button">Facebook</button>

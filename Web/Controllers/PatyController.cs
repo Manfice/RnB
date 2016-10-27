@@ -202,7 +202,7 @@ namespace Web.Controllers
 
             var result = await _repository.AddPatyAsync(catId, avaId, paty, img);
 
-            return Json(result.Id, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Web.Domen.Abstract;
 using Web.Domen.Infrastructure;
@@ -11,6 +12,7 @@ namespace Web.Domen.Repositorys
         private readonly Context _context = new Context();
         public async Task<Customer> RegCustomer(CustomerViewModel model)
         {
+            DateTime bD;
             var customer = new Customer
             {
                 Fio = model.Title,
@@ -19,9 +21,12 @@ namespace Web.Domen.Repositorys
                 Rate = 0,
                 City = model.City,
                 Work = model.Workplace,
-                Birthday = DateTime.Parse(model.Birthday),
                 User = model.UserId
             };
+            if (DateTime.TryParse(model.Birthday, out bD))
+            {
+                customer.Birthday = bD;
+            }
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
             return customer;

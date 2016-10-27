@@ -62,25 +62,44 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(CustomerViewModel model)
         {
-            if (!ModelState.IsValid) return RedirectToAction("Index", "Home");
+            if (!ModelState.IsValid) return View(model);
+            
             var user = await UserMeneger.FindByEmailAsync(model.Email.ToLower());
-            if (user==null)
+            if (user == null)
             {
                 var pass = System.Web.Security.Membership.GeneratePassword(8, 3);
-                user = new AppUser { Email = model.Email, UserName = model.Email, PhoneNumber = model.Phone };
+                user = new AppUser {Email = model.Email, UserName = model.Email, PhoneNumber = model.Phone};
                 await UserMeneger.CreateAsync(user, pass);
                 var result = await UserMeneger.AddToRoleAsync(user.Id, "Customer");
+                model.UserId = user.Id;
+                await _auth.RegCustomer(model);
                 if (result.Succeeded)
                 {
-                    var a = Url.Action("Login", "Auth", new { pass = pass, title = Guid.NewGuid() });
-                    var link = $"<a href=\"{a}\" target=\"_blanck\">Завершить регистрацию</a>";
-
+                    var body = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/register.html"));
+                    var confToken = await UserMeneger.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var a = Url.Action("ConfirmEmail", "Auth", new {user = user.Id, token = confToken});
+                    var link = $"<a href=\"http://redblackclub.ru/{a}\" target=\"_blanck\">Завершить регистрацию</a>";
+                    body = body.Replace("{0}", model.Email);
+                    body = body.Replace("{1}", pass);
+                    body = body.Replace("{2}", link);
+                    await PassAuth.SendMyMailAsync(body, model.Email, "KRASNOE & Черное - подтверждение e-mail адреса");
                 }
             }
-            AddErrorsFormResult(new IdentityResult(new []{"Пользователь с таким E-mail уже зарегистрирован."}));
-            return RedirectToAction("Index","Home");
+            else
+            {
+                var result = new[] {$"Пользователь с e-mail:{model.Email} уже зарегестрирован в нашем клубе."};
+                return View("Error", result);
+            }
+            var thankyou = new[] { @"<h3>Ваша заявка принята.</h3><p>Мы отправили на ваш адрес электронной почты сообщение в вашими учетными данными и ссылкой на подтверждение вашего e-mail адреса.</p><p>Для завершения процедуры регистрации, пожалуйста проверьте почту.</p>" };            
+            return View("Thankyou");
         }
-        
+
+        public ActionResult ConfirmEmail(string user, string token)
+        {
+            var result = UserMeneger.ConfirmEmail(user, token);
+            return View(result);
+        }
+
         [Authorize]
         public ActionResult LogOut()
         {
@@ -88,6 +107,10 @@ namespace Web.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        public ActionResult Thankyou()
+        {
+            return View();
+        }
         private void AddErrorsFormResult(IdentityResult result)
         {
             foreach (var item in result.Errors)

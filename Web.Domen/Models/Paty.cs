@@ -18,7 +18,8 @@ namespace Web.Domen.Models
         public int AddRate { get; set; }
         public string Dres { get; set; }
         public string Seets { get; set; }
-        public string Place { get; set; }
+        public string Place { get; set; }//Посадочные места.
+        public string Address { get; set; }//Адрес вечеринки.
         public virtual PatyImage Avatar { get; set; }
         public virtual PatyCategory Category { get; set; }
         public virtual ICollection<Order> Orders { get; set; }

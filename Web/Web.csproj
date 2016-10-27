@@ -251,8 +251,6 @@
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\owl.carousel.css" />
-    <Content Include="css\font-awesome.css" />
-    <Content Include="css\font-awesome.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -341,6 +339,9 @@
     <Content Include="Views\Home\NearDetails.cshtml" />
     <Content Include="Views\Home\PatyDetails.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Auth\ConfirmEmail.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Shared\Thankyou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

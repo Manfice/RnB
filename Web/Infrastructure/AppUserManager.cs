@@ -25,6 +25,12 @@ namespace Web.Infrastructure
                 }
             };
 
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider!=null)
+            {
+                manager.UserTokenProvider = new DataProtectorTokenProvider<AppUser>(dataProtectionProvider.Create("Red&Black Club"));
+            }
+
             manager.UserValidator = new UserValidator<AppUser>(manager)
             {
                 RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true

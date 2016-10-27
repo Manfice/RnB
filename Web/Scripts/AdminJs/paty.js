@@ -97,7 +97,6 @@
 
     model.categorys.all.subscribe(function(newCategorys) {
         model.categorys.root.removeAll();
-        report(model.categorys.all());
         var tempArr = [];
         tempArr.push.apply(tempArr, model.categorys.all().map(function(c) {
             return c;
@@ -284,7 +283,8 @@
         viewmodel.editCategory().mode(displayMode.view);
         alert(ko.toJSON(item));
     };
-    var savePatyCallback = function(item) {
+    var savePatyCallback = function (item) {
+        report(item);
         var dt = new patyData();
         dt.Id = item.Id;
         dt.Rate = item.AddRate;
@@ -361,6 +361,7 @@
 
     var submitPaty = function() {
         var data = new FormData($("#patyForm")[0]);
+        report(data);
         var img = $("#patyInput").get(0).files;
         if (img.length>0) {
             data.append("Avatar", img[0]);
@@ -420,7 +421,6 @@
         viewmodel.editPaty(new paty(dt, displayMode.edit));
         viewmodel.newPhoto(null);
         viewmodel.haveAvatar(false);
-        report(dt);
     }
     var editPaty = function (data) {
         data.mode(displayMode.edit);

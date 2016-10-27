@@ -9,15 +9,16 @@ namespace Web.Helpers
     {
         public static async Task<string> SendMyMailAsync(string body, string to, string subject)
         {
-            var fromAddress = new MailAddress("admin@id-racks.ru", "Красное & Черное");
+            var fromAddress = new MailAddress("no-replay@redblackclub.ru", "Красное & Черное");
             var smtp = new SmtpClient
             {
-                Host = "smtp.yandex.ru",
+                Host = "redblackclub.ru",
                 Port = 25,
-                EnableSsl = true,
+                EnableSsl = false,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, "1q2w3eZX")
+                Credentials = new NetworkCredential(fromAddress.Address, "^*J_ewv@"),//^*J_ewv@
+                
             };
             System.Net.ServicePointManager.ServerCertificateValidationCallback =
                 (sender, certificate, chain, errors) => true;
