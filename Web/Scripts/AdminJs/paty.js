@@ -62,9 +62,18 @@
                 }
             });
         }
+        var delPaty = function (data, callback) {
+            $.ajax({
+                type: "GET",
+                url: "/Paty/RemovePaty/" + data.info.Id(),
+                success: function(result) {
+                    callback(data, result);
+                }
+            });
+        }
         return {
             getCategorys: getCategorys, saveRootCat: saveRootCat, delCat: delCat, savePaty: savePaty,
-            getPatys: getPatys
+            getPatys: getPatys, delPaty: delPaty
         };
     };
 
@@ -135,7 +144,7 @@
         self.info.ExpDate = ko.observable(moment(data.ExpDate).format("DD.MM.YYYY HH:mm"));
         self.info.Title = ko.observable(data.Title);
         self.info.Description = ko.observable(data.Description);
-        self.info.Place = ko.observable(data.Place);
+        self.info.Place = ko.observable(data.Place);//Место проведения
         self.info.MaxGuests = ko.observable(data.MaxGuests);
         self.info.Price = ko.observable(data.Price);
         self.info.Orders = ko.observableArray(data.Orders);
@@ -160,16 +169,19 @@
         self.Title = "";
         self.Description = "";
         self.Place = "";
-        self.MaxGuests = "";
-        self.Price = "";
+        self.MaxGuests = 1;
+        self.Price = 0;
         self.Dres = "";
+        self.Rate = 1;
+        self.PatyInterest = "";
+
         self.AvatarId = 0;
         self.AvatarPath = "";
+
         self.Category = {};
         self.Category.Id = 0;
         self.Category.Title = "";
-        self.Rate = "";
-        self.PatyInterest = "";
+
         self.Orders = [];
         self.Statys = "NEW";
         self.SeetsUsed = 0;
@@ -283,32 +295,44 @@
         viewmodel.editCategory().mode(displayMode.view);
         alert(ko.toJSON(item));
     };
-    var savePatyCallback = function (item) {
-        report(item);
-        var dt = new patyData();
-        dt.Id = item.Id;
-        dt.Rate = item.AddRate;
-        dt.Description = item.Descr;
-        dt.Dres = item.Dres;
-        dt.MaxGuests = item.MaxGuests;
-        dt.ExpDate = new Date(parseInt(item.PatyDate.replace("/Date(", "").replace(")/", ""), 10));
-        dt.PatyInterest = item.PatyInterest;
-        dt.Price = item.Price;
-        dt.Title = item.Title;
-        if (item.Avatar!==null) {
-            dt.AvatarId = item.Avatar.Id;
-            dt.AvatarPath = item.Avatar.Path;
-        };
-        if (item.Category!==null) {
-            dt.Category.Id = item.Category.Id;
-            dt.Category.Title = item.Category.Title;
-        };
-        model.events.all.push(new paty(dt, displayMode.view));
-        viewmodel.editPaty(new paty(new patyData(), displayMode.view));
+    var savePatyCallback = function (data) {
+        if (!data.Success) {
+            data.Errors.forEach(function(e) {
+                alert(e);
+            });
+        } else {
+            var dt = new patyData();
+            var item = data.Paty;
+            dt.Id = item.Id;
+            dt.Rate = item.AddRate;
+            dt.Description = item.Descr;
+            dt.Dres = item.Dres;
+            dt.MaxGuests = item.MaxGuests;
+            dt.ExpDate = new Date(parseInt(item.PatyDate.replace("/Date(", "").replace(")/", ""), 10));
+            dt.PatyInterest = item.PatyInterest;
+            dt.Price = item.Price;
+            dt.Title = item.Title;
+            if (item.Avatar!==null) {
+                dt.AvatarId = item.Avatar.Id;
+                dt.AvatarPath = item.Avatar.Path;
+            };
+            if (item.Category!==null) {
+                dt.Category.Id = item.Category.Id;
+                dt.Category.Title = item.Category.Title;
+            };
+            model.events.all.push(new paty(dt, displayMode.view));
+            viewmodel.editPaty(new paty(new patyData(), displayMode.view));
+        }
     };
-    var updPaty = function(data) {
-        alert("Сохранено");
-        viewmodel.editPaty().mode(displayMode.view);
+    var updPaty = function (data) {
+        if (!data.Success) {
+            data.Errors.forEach(function (e) {
+                alert(e);
+            });
+        } else {
+            alert("Сохранено");
+            viewmodel.editPaty().mode(displayMode.view);
+        }
     };
     var deleteCatCb = function (data, result) {
         if (data.parentCat() !== "") {
@@ -318,6 +342,17 @@
         }
         alert("Категория удалена: "+result.Title);
     }
+    var deletePatyCb = function(data, result) {
+        if (!result.Success) {
+            result.Errors.forEach(function(e) {
+                alert(e);
+            });
+        } else {
+            model.events.all.remove(data);
+            alert("Событие удалено");
+        }
+    }
+    /*Methods*/
     function previewUpdImg(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -346,8 +381,8 @@
     };
     $("#patyInput").change(function () {
         previewPatyImg(this);
-        viewmodel.newPhoto(true);
-        viewmodel.haveAvatar(true);
+        viewmodel.haveAvatar("NO");
+        viewmodel.newPhoto("PREVIEW");
     });
 
     var submitNewRoot = function () {
@@ -361,7 +396,6 @@
 
     var submitPaty = function() {
         var data = new FormData($("#patyForm")[0]);
-        report(data);
         var img = $("#patyInput").get(0).files;
         if (img.length>0) {
             data.append("Avatar", img[0]);
@@ -415,22 +449,33 @@
         viewmodel.haveAvatar(false);
         viewmodel.addRoot(true);
     }
-    var addPaty = function(data) {
+    var addPaty = function (data) {
         var dt = new patyData();
-        dt.Category = data.id();
+        dt.Category.Id = data.id;
+        dt.Category.Title = data.title;
+        dt.ExpDate = Date.now();
         viewmodel.editPaty(new paty(dt, displayMode.edit));
         viewmodel.newPhoto(null);
-        viewmodel.haveAvatar(false);
+        viewmodel.haveAvatar("NO");
     }
     var editPaty = function (data) {
+        report(data);
         data.mode(displayMode.edit);
-        var newPaty = data;
-        viewmodel.editPaty(newPaty);
+        viewmodel.editPaty(data);
         viewmodel.newPhoto(false);
         viewmodel.haveAvatar(false);
         if (data.info.Avatar.Id() !== 0) {
-            viewmodel.haveAvatar(true);
+            viewmodel.haveAvatar("YES");
             viewmodel.newPhoto(null);
+        } else {
+            viewmodel.haveAvatar(false);
+            viewmodel.newPhoto(null);
+        }
+    }
+    var removePaty = function (data) {
+        report(data);
+        if (confirm("Вы хотите удалить мероприятие! Вы уверены?")) {
+            pClient.delPaty(data,deletePatyCb);
         }
     }
     var init = function () {
@@ -451,7 +496,7 @@
         viewmodel: viewmodel, submitNewRoot: submitNewRoot, setCurrCat: setCurrCat,
         setWorkDirectory: setWorkDirectory, addRoot: addRoot, addSubRoot: addSubRoot,
         deleteCategory: deleteCategory, serSubDir: serSubDir, addPaty: addPaty, submitPaty: submitPaty,
-        editPaty: editPaty
+        editPaty: editPaty, removePaty: removePaty
     };
 }();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Web.Domen.Abstract;
 using Web.Domen.Infrastructure;
@@ -63,31 +64,48 @@ namespace Web.Domen.Repositorys
             return current;
         }
 
-        public async Task<Paty> AddPatyAsync(int c, int a, Paty model, PatyImage image)
+        public async Task<PatyActionResult> AddPatyAsync(int c, int a, Paty model, PatyImage image)
         {
-            var result = new Paty();
+            Paty result = null;
+            var action = new PatyActionResult();
             var dbCat = await _context.PatyCategories.FindAsync(c);
             if (dbCat==null)
             {
-                return null;
+                action.Success = false;
+                action.Errors = new[] { "Событие не имеет категории." };
+                return action;
             }
+
             if (model.Id > 0)
             {
-                result = await _context.Paties.FindAsync(model.Id);
-                result.AddRate = model.AddRate;
-                result.Descr = model.Descr;
-                result.Dres = model.Dres;
-                result.MaxGuests = model.MaxGuests;
-                result.PatyDate = model.PatyDate;
-                result.PatyInterest = model.PatyInterest;
-                result.Price = model.Price;
-                result.Title = model.Title;
+                var orders = await _context.Orders.Where(o => o.Paty.Id == model.Id).ToListAsync();
+                if (!orders.Any())
+                {
+                    result = await _context.Paties.FindAsync(model.Id); //1
+                    result.PatyDate = model.PatyDate; //2
+                    result.Title = model.Title; //3
+                    result.Descr = model.Descr; //4
+                    result.MaxGuests = model.MaxGuests; //5
+                    result.Price = model.Price; //6
+                    result.PatyInterest = model.PatyInterest; //7
+                    result.AddRate = model.AddRate; //8
+                    result.Dres = model.Dres; //9
+                    result.Place = model.Place; //11
+                    result.Seets = MakeSeats(model.MaxGuests); //10
+                }
+                else
+                {
+                    action.Success = false;
+                    action.Errors = new[] {"Нельзя редактировать компанию, в которой есть заказы!"};
+                    return action;
+                }
             }
             else
             {
                 result = model;
-                _context.Paties.Add(result);
+                result.Seets = MakeSeats(model.MaxGuests); //10
                 result.Category = dbCat;
+                _context.Paties.Add(result);
             }
 
             if (image!=null)
@@ -102,7 +120,9 @@ namespace Web.Domen.Repositorys
             }
 
             await _context.SaveChangesAsync();
-            return result;
+            action.Success = true;
+            action.Paty = result;
+            return action;
         }
 
         public async Task<PatyCategory> DeleteCategoryAsync(int id)
@@ -132,6 +152,28 @@ namespace Web.Domen.Repositorys
             await _context.SaveChangesAsync();
         }
 
+        public async Task<PatyActionResult> DeletePatyAsync(int id)
+        {
+            var result = await _context.Paties.FindAsync(id);
+            if (result.Orders.Any())
+            {
+                return new PatyActionResult
+                {
+                    Success = false,
+                    Errors = new []{"Нельзя удалить мероприятия на которое проданы места!"},
+                    Paty = result
+                };
+            }
+            _context.Paties.Remove(result);
+            await _context.SaveChangesAsync();
+            return new PatyActionResult
+            {
+                Success = true,
+                Errors = null,
+                Paty = result
+            };
+        }
+
         public async Task<List<PatyImage>> GetImagesAsync(int id)
         {
             var imgList = new List<PatyImage>();
@@ -145,11 +187,46 @@ namespace Web.Domen.Repositorys
             return imgList;
         }
 
+        public async Task<PatyActionResult> GetPatyByIdAsync(int id)
+        {
+            var dbPaty = await _context.Paties.FindAsync(id);
+
+            return dbPaty == null
+                ? new PatyActionResult
+                {
+                    Success = false,
+                    Paty = null,
+                    Errors = new[] {"Такого мероприятия не существует! Обновите страницу"}
+                }
+                : new PatyActionResult
+                {
+                    Paty = dbPaty,
+                    Success = true,
+                    Errors = null
+                };
+
+        }
+
         public async Task<PatyImage> ImgToDeleteAsync(int id)
         {
             var result = await _context.PatyImages.FindAsync(id);
 
             return result;
+        }
+
+        private string MakeSeats(int maxGuests)
+        {
+            if (maxGuests<=0)
+            {
+                return string.Empty;
+            }
+            var seets = new StringBuilder();
+            for (var i = 1; i < maxGuests; i++)
+            {
+                seets.Append(i+",");
+            }
+            seets.Append(maxGuests);
+            return seets.ToString();
         }
     }
 }

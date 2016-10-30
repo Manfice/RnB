@@ -44,4 +44,11 @@ namespace Web.Domen.Models
         public string ContentType { get; set; }
         public int ContentLength { get; set; }
     }
+
+    public class PatyActionResult
+    {
+        public string[] Errors { get; set; }
+        public bool Success { get; set; }
+        public Paty Paty { get; set; }
+    }
 }

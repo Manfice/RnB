@@ -33,8 +33,8 @@ namespace Web.Controllers
             return View();
         }
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<ActionResult> Login(LogivVm model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -58,8 +58,8 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<ActionResult> Register(CustomerViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -69,7 +69,7 @@ namespace Web.Controllers
             {
                 var pass = System.Web.Security.Membership.GeneratePassword(8, 3);
                 user = new AppUser {Email = model.Email, UserName = model.Email, PhoneNumber = model.Phone};
-                await UserMeneger.CreateAsync(user, pass);
+                var u = await UserMeneger.CreateAsync(user, pass);
                 var result = await UserMeneger.AddToRoleAsync(user.Id, "Customer");
                 model.UserId = user.Id;
                 await _auth.RegCustomer(model);

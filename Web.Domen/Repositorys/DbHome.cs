@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Web.Domen.Abstract;
 using Web.Domen.Infrastructure;
@@ -38,14 +39,19 @@ namespace Web.Domen.Repositorys
             return _context.Paties.Find(id);
         }
 
-        public async Task<Order> RegOnPatyAsync(int id,int places ,Customer customer)
+        public async Task<Order> RegOnPatyAsync(int id,int places,decimal discount, Customer customer)
         {
             var paty = await _context.Paties.FindAsync(id);
+            var pls = GetTickets(places, paty.Seets);
+            paty.Seets = pls[1];
             var order = new Order
             {
                 Customer = customer,
                 Paty = paty,
-                Place = places
+                Place = places,
+                PlaceNumbers = pls[0],
+                OrderDate = DateTime.Now,
+                TotalCost = paty.Price*places*discount
             };
             _context.Orders.Add(order);
             paty.Orders.Add(order);
@@ -53,6 +59,16 @@ namespace Web.Domen.Repositorys
 
             return order;
 
+        }
+
+        private string[] GetTickets(int quantity, string pls)
+        {
+            var places = pls.Split(',');
+            var result = new[] {"",""};
+            result[0] = string.Join(",",places.Where((s, i) => i<=quantity-1));
+            result[1] = string.Join(",", places.Where((s, i) => i > quantity - 1));
+
+            return result;
         }
     }
 }

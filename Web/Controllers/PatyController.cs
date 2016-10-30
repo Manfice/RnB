@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -60,9 +61,9 @@ namespace Web.Controllers
             var parent = 0;
             var currId = 0;
             var avaId = 0;
-            var ex = "";
+
             PatyImage img = null;
-            var filePath = Server.MapPath("/Uploads/patyCategorys/" + guid + "_sep_");// @"C:\inetpub\vhosts\u0251088.plsk.regruhosting.ru\httpdocs\redblackclub.ru\Uploads\patyCategorys\" + guid + "_sep_";
+            var filePath = Server.MapPath("/Uploads/patyCategorys/" + guid + "_sep_");
             var formData = HttpContext.Request.Form.AllKeys;
             if (formData.Length>0)
             {
@@ -110,9 +111,9 @@ namespace Web.Controllers
                                 Path = "/Uploads/patyCategorys/" + guid + "_sep_" + logo.FileName
                             };
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
-                            ex = e.Message;
+                            img = null;
                         }
                     }
                 }
@@ -120,7 +121,6 @@ namespace Web.Controllers
 
             data.Id = currId;
             var result = await _repository.AddCategoryAsync(parent,avaId,data, img);
-           // result.Description = "FilePath >>> "+filePath + "Exception: >> "+ex;
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -150,23 +150,23 @@ namespace Web.Controllers
             var avaId = 0;
             var filePath = Server.MapPath("~/Uploads/patyAvatar/" +guid+ "_sep_");
             PatyImage img = null;
-
+            
             var formData = HttpContext.Request.Form.AllKeys;
             if (formData.Length > 0)
             {
-                paty.Title = HttpContext.Request.Form["title"];
-                paty.PatyInterest = HttpContext.Request.Form["descr"];
-                paty.PatyDate = DateTime.Parse(HttpContext.Request.Form["date"]);
-                paty.AddRate = int.Parse(HttpContext.Request.Form["rate"]);
-                paty.MaxGuests = int.Parse(HttpContext.Request.Form["maxGuests"]);
-                paty.Id = int.Parse(HttpContext.Request.Form["id"]);
-                paty.Dres = HttpContext.Request.Form["Dres"];
-                paty.Price = decimal.Parse(HttpContext.Request.Form["Price"]);
-                paty.PatyInterest = HttpContext.Request.Form["interest"];
-                paty.Descr = HttpContext.Request.Form["descr"];
+                paty.Id = int.Parse(HttpContext.Request.Form["id"]);//1
+                paty.PatyDate = DateTime.Parse(HttpContext.Request.Form["date"]);//2
+                paty.Title = HttpContext.Request.Form["title"];//3
+                paty.Descr = HttpContext.Request.Form["descr"];//4
+                paty.MaxGuests = int.Parse(HttpContext.Request.Form["maxGuests"]);//5
+                paty.Price = decimal.Parse(HttpContext.Request.Form["Price"]);//6
+                paty.PatyInterest = HttpContext.Request.Form["interest"];//7
+                paty.AddRate = int.Parse(HttpContext.Request.Form["rate"]);//8
+                paty.Dres = HttpContext.Request.Form["dres"];//9
+                paty.Place = HttpContext.Request.Form["place"];//10
 
-                int.TryParse(HttpContext.Request.Form["category"], out catId);
-                int.TryParse(HttpContext.Request.Form["avaId"], out avaId);
+                int.TryParse(HttpContext.Request.Form["category"], out catId);//13
+                int.TryParse(HttpContext.Request.Form["avaId"], out avaId);//14
             }
             if (HttpContext.Request.Files.Count > 0)
             {
@@ -204,5 +204,31 @@ namespace Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<JsonResult> RemovePaty(int id)
+        {
+            var paty = await _repository.GetPatyByIdAsync(id);
+
+            if (!paty.Success) return Json(paty, JsonRequestBehavior.AllowGet);
+
+            if (paty.Paty.Orders.Any())
+            {
+                paty.Success = false;
+                paty.Errors = new[] {"Нельзя удалить мероприятие на которое уже проданы места!"};
+                return Json(paty, JsonRequestBehavior.AllowGet);
+            }
+
+            if (paty.Paty.Avatar!=null)
+            {
+                if (System.IO.File.Exists(paty.Paty.Avatar.FullPath))
+                {
+                    System.IO.File.Delete(paty.Paty.Avatar.FullPath);
+                }
+            }
+
+            paty = await _repository.DeletePatyAsync(paty.Paty.Id);
+
+            return Json(paty, JsonRequestBehavior.AllowGet);
+        } 
     }
 }

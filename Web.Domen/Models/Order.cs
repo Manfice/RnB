@@ -1,8 +1,12 @@
-﻿namespace Web.Domen.Models
+﻿using System;
+
+namespace Web.Domen.Models
 {
     public class Order
     {
         public int Id { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal TotalCost { get; set; }
         public int Place { get; set; }//кол-во мест
         public string PlaceNumbers { get; set; }
         public virtual Paty Paty { get; set; }

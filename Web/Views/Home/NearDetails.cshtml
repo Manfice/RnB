@@ -8,7 +8,7 @@
     <h2>В нашем клубе вы найдете занятие, которое вам по душе:</h2>
     <div><span> </span><span> </span><span> </span></div>
     <div class="row960w">
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderBy(paty => paty.PatyDate))
         {
             <div class="patyItemDetails">
                 <div class="npImgWrapper">

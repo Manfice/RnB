@@ -27,7 +27,7 @@ namespace Web.Controllers
 
         public ActionResult NearPaty()
         {
-            var model = _home.GetPatys.OrderBy(paty => paty.PatyDate);
+            var model = _home.GetPatys.Where(paty => paty.PatyDate>=DateTime.Now).OrderBy(paty => paty.PatyDate);
             return PartialView(model);
         }
 
@@ -90,9 +90,24 @@ namespace Web.Controllers
         public async Task<ActionResult> Order(OrderViewmodel model)
         {
             var customer = await _home.GetCustomerAsync(model);
-            var order = await _home.RegOnPatyAsync(model.Paty,model.Place ,customer);
+            decimal disc = 1;
+            if (User.Identity.IsAuthenticated)
+            {
+                disc = disc - (decimal) 0.05;
+            }
+            var order = await _home.RegOnPatyAsync(model.Paty,model.Place,disc,customer);
+            if (order.Paty.Price>0)
+            {
+                return View(order);
+            }
+
             return View(order);
         }
 
+    [Authorize(Roles = "Admin, Moderator")]
+        public ActionResult Ticket()
+        {
+            return View();
+        }
      }
 }

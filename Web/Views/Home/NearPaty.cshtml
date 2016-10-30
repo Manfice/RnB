@@ -21,61 +21,14 @@
                         }
                         <div class="redline"></div>
                         <p>@item.PatyDate.ToShortDateString()</p>
-                        <h3>@item.Title</h3>
-                        <p class="pD">@item.Descr</p>
-                        <a href="@Url.Action("PatyDetails","Home", new {id=item.Id})"><span class="redLink">Подробнее ></span></a>
+                        <h3 title="@item.Title">@(item.Title.Length>=29 ? item.Title.Substring(0, 26)+"..." : item.Title)</h3>
+                        <p class="pD">@(item.Descr.Length >= 125 ? item.Descr.Substring(0, 121) + "..." : item.Descr)</p>
+                        <a style="padding-bottom: 20px;" href="@Url.Action("PatyDetails", "Home", new {id = item.Id})"><span class="redLink">Подробнее ></span></a>
+
                     </div>
                 </div>
 
             }
-            @*<div class="carItem">
-                <div class="patyItem" href="#">
-                    <div class="pImgAva">
-                        <img alt="" src="/Content/img/pt.jpg"/>
-                    </div>
-                    <p>01.10.16</p>
-                    <h3>Турнир по бильярду среди новичков и профессионалов</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim
-                    </p>
-                    <a class="redLink" href="#">Подробнее ></a>
-                </div>
-            </div>
-            <div class="carItem">
-                <div class="patyItem" href="#">
-                    <div class="pImgAva">
-                        <img alt="" src="/Content/img/pt.jpg"/>
-                    </div>
-                    <p>01.10.16</p>
-                    <h3>Турнир по бильярду среди новичков и профессионалов</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim
-                    </p>
-                    <a class="redLink" href="#">Подробнее ></a>
-                </div>
-            </div>
-            <div class="carItem">
-                <div class="patyItem" href="#">
-                    <div class="pImgAva">
-                        <img alt="" src="/Content/img/pt.jpg"/>
-                    </div>
-                    <p>01.10.16</p>
-                    <h3>Турнир по бильярду среди новичков и профессионалов</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim
-                    </p>
-                    <a class="redLink" href="#">Подробнее ></a>
-                </div>
-            </div>*@
         </div>
         <div class="nextItem" id="next">
             <img alt="" src="/Content/img/nextBtn.png"/>

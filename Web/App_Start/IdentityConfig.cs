@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.DataProtection;
 using Owin;
 using Web.Infrastructure;
 
