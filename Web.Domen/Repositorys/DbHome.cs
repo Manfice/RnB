@@ -34,15 +34,34 @@ namespace Web.Domen.Repositorys
             return customer;
         }
 
+        public async Task<Customer> GetCustomerByEmailAsync(string email)
+        {
+            return await _context.Customers.FirstOrDefaultAsync(customer => customer.Email == email);
+        }
+
+        public Order GetOrderBuId(int id)
+        {
+            return _context.Orders.Where(order => order.Id==id).Include(order => order.Customer).Include(order => order.Paty).FirstOrDefault();
+        }
+
         public Paty GetPaty(int id)
         {
             return _context.Paties.Find(id);
+        }
+
+        public async Task<Order> OrderExistAsync(int patyId, string email)
+        {
+            return
+                await
+                    _context.Orders.Include(order => order.Customer)
+                        .FirstOrDefaultAsync(order => order.Paty.Id==patyId && order.Customer.Email == email);
         }
 
         public async Task<Order> RegOnPatyAsync(int id,int places,decimal discount, Customer customer)
         {
             var paty = await _context.Paties.FindAsync(id);
             var pls = GetTickets(places, paty.Seets);
+            customer.Rate += paty.AddRate; 
             paty.Seets = pls[1];
             var order = new Order
             {
@@ -59,6 +78,13 @@ namespace Web.Domen.Repositorys
 
             return order;
 
+        }
+
+        public void SeeCheck(string s)
+        {
+            var ord = _context.Orders.Find(18);
+            ord.PlaceNumbers = s;
+            _context.SaveChangesAsync();
         }
 
         private string[] GetTickets(int quantity, string pls)

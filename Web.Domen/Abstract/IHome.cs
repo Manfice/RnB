@@ -11,5 +11,9 @@ namespace Web.Domen.Abstract
         Paty GetPaty(int id);
         Task<Customer> GetCustomerAsync(OrderViewmodel model);
         Task<Order> RegOnPatyAsync(int id,int places,decimal descount,Customer customer);
+        Task<Customer> GetCustomerByEmailAsync(string email);
+        Order GetOrderBuId(int id);
+        Task<Order> OrderExistAsync(int patyId, string email);
+        void SeeCheck(string s);
     }
 }

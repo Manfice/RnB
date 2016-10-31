@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PatyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -344,6 +345,8 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Shared\Thankyou.cshtml" />
     <Content Include="Views\Home\Ticket.cshtml" />
+    <Content Include="Views\Home\OrderDetails.cshtml" />
+    <Content Include="Views\Order\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,79 @@
+﻿@model Web.Domen.Models.Order
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+    var dp = Model.Paty.PatyDate.ToLongDateString().Split(' ');
+    var dO = Model.OrderDate.ToLongDateString().Split(' ');
+}
+
+<div class="columnBlock">
+    <div class="row960">
+        <table style="width: 100%; vertical-align: baseline; text-align: center;">
+            <tr>
+                <td colspan="5">
+                    <p style="text-align: center; font-weight: normal; font-size: 16pt; margin: 0 0 10px 0; padding: 0">
+                        Организатор: "<span style="color: red; font-family: 'Impact'; font-weight: normal; font-size: 18pt;">KRASNOE</span><span style="color: black; font-family: 'Impact'; font-weight: normal; font-size: 18pt;">&ЧЕРНОЕ</span>" redblackclub.ru
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 20px;">
+                    <p style="font-weight: bolder; font-size: 38pt; margin: 0; padding: 0">@dp[0]</p>
+                    <p style="border-bottom: dotted 2px gray; font-weight: bolder; padding: 0 0 10px 0;">@dp[1], @dp[2]</p>
+                    <p style="font-weight: bolder; font-size: 38pt; margin: 0; padding: 0">@Model.Paty.PatyDate.ToShortTimeString()</p>
+
+                </td>
+                <td colspan="3" style="border: solid 1px black; max-width: 400px;">
+                    <p style="font-weight: bolder; font-size: 30pt; text-align: center">
+                        @Model.Paty.Title
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <p style="text-align: left; font-weight: normal; font-size: 16pt">
+                        Место проведения: @Model.Paty.Place
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top: dotted 2px gray; border-bottom: dotted 2px gray">
+                    <div style="height: 60px; border-right: dotted 2px gray; margin: 10px 0; padding: 0 0 15px 0">
+                        <p style="font-weight: bolder; color: gray; font-size: 12pt; text-align: center; margin: 0 0 15px 0; padding: 0;">Имя участника</p>
+                        <p style="margin: 0; padding: 0; font-weight: bold">@Model.Customer.Fio</p>
+                    </div>
+                </td>
+                <td style="border-top: dotted 2px gray; border-bottom: dotted 2px gray">
+                    <div style="height: 60px; border-right: dotted 2px gray; margin: 10px 0; padding: 0 0 15px 0">
+                        <p style="font-weight: bolder; color: gray; font-size: 12pt; text-align: center; margin: 0 0 15px 0; padding: 0;">№ места</p>
+                        <p style="margin: 0; padding: 0; font-weight: bold">@Model.PlaceNumbers</p>
+                    </div>
+                </td>
+                <td style="border-top: dotted 2px gray; border-bottom: dotted 2px gray">
+                    <div style="height: 60px; border-right: dotted 2px gray; margin: 10px 0; padding: 0 0 15px 0">
+                        <p style="font-weight: bolder; color: gray; font-size: 12pt; text-align: center; margin: 0 0 15px 0; padding: 0;">Стоимость</p>
+                        <p style="margin: 0; padding: 0; font-weight: bold">@(Model.TotalCost>0? Model.TotalCost+" руб.":"БЕСПЛАТНО")</p>
+                    </div>
+                </td>
+                <td style="border-top: dotted 2px gray; border-bottom: dotted 2px gray">
+                    <div style="height: 60px; border-right: dotted 2px gray; margin: 10px 0; padding: 0 0 15px 0">
+                        <p style="font-weight: bolder; color: gray; font-size: 12pt; text-align: center; margin: 0 0 15px 0; padding: 0;">Дата заказа</p>
+                        <p style="margin: 0; padding: 0; font-weight: bold">@Model.OrderDate.ToString("M"),</p>
+                        <p style="margin: 0; padding: 0; font-weight: bold">@Model.OrderDate.ToShortTimeString()</p>
+                    </div>
+                </td>
+                <td style="border-top: dotted 2px gray; border-bottom: dotted 2px gray">
+                    <div style="height: 60px; margin: 10px 0; padding: 0 0 15px 0">
+                        <p style="font-weight: bolder; color: gray; font-size: 12pt; text-align: center; margin: 0 0 15px 0; padding: 0;">№ заказа</p>
+                        <p style="margin: 0; padding: 0; font-weight: bold">@Model.Id</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" style="text-align: center;">
+                    <p style="font-weight: bolder; font-size: 10pt; padding: 0; margin: 0">Данный контрольный документ согласован с организатором и дает право на посещение события его владельцу</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

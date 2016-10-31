@@ -19,7 +19,9 @@ namespace Web.Domen.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Workplace { get; set; }
-        public int Paty { get; set; }
+        public int PatyId { get; set; }
         public int Place { get; set; }
+        public Paty Paty { get; set; }
+        public Customer Customer { get; set; }
     }
 }

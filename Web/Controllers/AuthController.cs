@@ -51,7 +51,14 @@ namespace Web.Controllers
                 var ident = await UserMeneger.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
                 AuthManager.SignOut();
                 AuthManager.SignIn(new AuthenticationProperties {IsPersistent = false, ExpiresUtc = DateTimeOffset.MaxValue},ident);
-                return RedirectToAction("Index","Home");
+                if (string.IsNullOrEmpty(returnUrl))
+                {
+                    return RedirectToAction("Index","Home");
+                }
+                else
+                {
+                    return Redirect(returnUrl);
+                }
             }
             ViewBag.fromUrl = returnUrl;
             return View(model);
@@ -60,7 +67,7 @@ namespace Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<ActionResult> Register(CustomerViewModel model)
+        public async Task<ActionResult> Register(CustomerViewModel model, string returnUrl="")
         {
             if (!ModelState.IsValid) return View(model);
             
@@ -90,8 +97,14 @@ namespace Web.Controllers
                 var result = new[] {$"Пользователь с e-mail:{model.Email} уже зарегестрирован в нашем клубе."};
                 return View("Error", result);
             }
-            var thankyou = new[] { @"<h3>Ваша заявка принята.</h3><p>Мы отправили на ваш адрес электронной почты сообщение в вашими учетными данными и ссылкой на подтверждение вашего e-mail адреса.</p><p>Для завершения процедуры регистрации, пожалуйста проверьте почту.</p>" };            
-            return View("Thankyou");
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                return View("Thankyou");
+            }
+            else
+            {
+               return Redirect(returnUrl);
+            }
         }
 
         public ActionResult ConfirmEmail(string user, string token)

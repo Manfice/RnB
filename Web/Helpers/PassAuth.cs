@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Web.Helpers
@@ -32,6 +34,19 @@ namespace Web.Helpers
                 await smtp.SendMailAsync(message);
             }
             return $"Письмо отправленно на адрес: {to}";
+        }
+        public static string EncodeMd5(string s)
+        {
+            var md5 = MD5.Create();
+            var inputButes = Encoding.UTF8.GetBytes(s);
+            var hash = md5.ComputeHash(inputButes);
+
+            var sb = new StringBuilder();
+            for (var i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
         }
     }
 }
