@@ -1,0 +1,119 @@
+﻿@model Web.Domen.Models.PhotoAlbom
+@{
+    ViewBag.Title = "AlbomDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="albomDetails">
+    <div class="albomDescr">
+        <div class="albomAvatar">
+            <img alt="" src="@(Model.Avatar ?? "/Content/img/1.jpg")"/>
+        </div>
+        <div class="albomText">
+            <p>@Model.Title</p>
+            <p>@Model.Description</p>
+            <p>
+                <a href="@Url.Action("EditAlbom", new {id = Model.Id})">Редактировать</a>
+                <a href="@Url.Action("DeleteAlbom", new {id = Model.Id})">Удалить</a>
+            </p>
+        </div>
+    </div>
+    <hr/>
+    @foreach (var region in Model.Regions)
+    {
+
+        <div class="albomRegion">
+            <h3>@region.Title</h3>
+            <a href="#">Изменить</a> / <a href="#">Удалить</a>
+            <div class="addPhotoForm">
+                @using (Html.BeginForm("BulkAddPhotos", "ImageGalary", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                {
+                    @Html.Hidden("regId", region.Id)
+                    @Html.Hidden("Albom.Id", Model.Id)
+                    @Html.ValidationSummary()
+                    <input type="file" name="photos" multiple="multiple"/>
+                    <button type="submit">Добавить</button>
+                }
+            </div>
+        </div>
+        <div class="alboms">
+            @if (region.Photos.Any())
+            {
+                foreach (var image in region.Photos.Where(data => data.Path != null))
+                {
+                    <div class="albomItem">
+                        <div class="albomAvatar">
+                            <img alt="" src="@image.Path"/>
+                        </div>
+                        @if (image.TitleView)
+                        {
+                            <a class="offTitle" href="@Url.Action("OnTitlePage", new {id = image.Id})">Убрать с главной</a>
+                        }
+                        else
+                        {
+                            <a class="onTitle" href="@Url.Action("OnTitlePage", new {id = image.Id})">На главную</a>
+                        }
+                        <a href="@Url.Action("DeletePhoto", new {id = image.Id})">Удалить</a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h2>Раздел не содержит фотографий</h2>
+            }
+
+        </div>
+        <hr/>
+    }
+
+
+    <hr/>
+    <div class="addRegionForm">
+        @using (Html.BeginForm("CreateRegion", "ImageGalary", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            <p>Добавить раздел:</p>
+            @Html.Hidden("Albom.Id", Model.Id)
+            <input type="text" name="Title" value="" placeholder="Название раздела"/>
+            <textarea rows="2" name="Description" placeholder="Описание раздела"></textarea>
+            <button type="submit">Добавить</button>
+        }
+    </div>
+    <hr/>
+</div>
+
+
+@*<div class="addPhotoForm">
+        @using (Html.BeginForm("BulkAddPhotos","ImageGalary", FormMethod.Post, new {enctype="multipart/form-data"}))
+        {
+            @Html.HiddenFor(albom => albom.Id)
+            <input type="file" name="photos" multiple="multiple" />
+                <button type="submit">Добавить</button>
+        }
+    </div>
+    <hr/>
+    <div class="alboms">
+        @if (Model.Images.Any())
+        {
+            foreach (var image in Model.Images.Where(data => data.Path != null))
+            {
+                <div class="albomItem" >
+                    <div class="albomAvatar">
+                        <img alt="" src="@image.Path"/>
+                    </div>
+                    @if (image.TitleView)
+                    {
+                        <a class="offTitle" href="@Url.Action("OnTitlePage", new {id = image.Id})">Убрать с главной</a>
+                    }
+                    else
+                    {
+                        <a class="onTitle" href="@Url.Action("OnTitlePage", new {id = image.Id})">На главную</a>
+                    }
+                    <a href="@Url.Action("DeletePhoto", new {id=image.Id})">Удалить</a>
+                </div>
+            }
+        }
+        else
+        {
+            <h2>Альбом не содержит фотографий</h2>
+        }
+    </div>*@

@@ -33,6 +33,7 @@ namespace Web.Infrastructure
             _kernel.Bind<IEvents>().To<DbPaty>().InRequestScope();
             _kernel.Bind<IHome>().To<DbHome>().InRequestScope();
             _kernel.Bind<IAuth>().To<DbAuth>().InRequestScope();
+            _kernel.Bind<IPhoto>().To<DbPhoto>().InRequestScope();
         }
     }
 }

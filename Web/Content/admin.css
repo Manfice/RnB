@@ -1,6 +1,6 @@
 ﻿body {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -10,6 +10,11 @@ a,h1,h2,h3,h4,h5,h6 {
     margin: 0;
     padding: 0;
 }
+.validation-summary-errors {
+    color: red;
+    padding: 10px;
+}
+
 ul {
     list-style: none;
     margin: 0;
@@ -19,33 +24,55 @@ ul {
     flex: 0 0 auto;
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 header {
     flex: 0 0 auto;
-    background-color: darkgray;
-    width: 250px;
     display: flex;
-    flex-flow: column;
+    flex-flow: row nowrap;
+    height: 50px;
+    background-color: red;
 }
 .headTop {
     flex: 0 0 auto;
-    height: 50px;
-    background-color: lightpink;
+    width: 250px;
 }
 .bodyContent {
     flex: 1 0 auto;
     display: flex;
-    flex-flow: column;
+    flex-flow: row nowrap;
+}
+.mainContent {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
 }
 .bodyTop {
-    flex: 0 0 auto;
-    height: 50px;
+    flex: 1 0 auto;
     background-color: lightgreen;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
+}
+.leftMenu {
+    display: flex;
+    flex-flow: column;
+    background: linear-gradient(-67deg, #8b8bff, #75cf75, #dfff0b, #ffc2d9);
+}
+.leftMenu a {
+    margin: 20px;
+    border: solid 3px white;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-family: "Arial";
+    font-weight: bolder;
+    background-color: whitesmoke
 }
 table {
     border: solid 1px darkgray;
@@ -69,13 +96,11 @@ button i {
 }
 
 /*Paty*/
-.rowFlex>table {
-    flex: 1 0 auto;
-}
 #patySection {
     flex: 1 0 auto;
     display: flex;
     flex-flow: column;
+    width: 100%;
 }
 .column {
     flex: 1 0 45%;
@@ -101,23 +126,20 @@ button i {
     align-items: center;
     padding: 0 10px;
 }
-.PatyCategorys {
-    flex: 1 0 auto;
-    display: flex;
-    justify-content: space-between;
-}
 .formPopUp {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    background-color: #000000;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
 }
+
 .formWrapper {
     flex: 0 0 auto;
     background-color: white;
@@ -135,6 +157,7 @@ form {
     padding: 10px;
     display: flex;
     flex-flow: column;
+    margin: 20px;
 }
 .photoPlaceholder {
     border: solid 1px gray;
@@ -174,17 +197,21 @@ form {
 }
 .fright input {
     margin: 10px 10px 5px 10px;
+    -ms-border-radius: 5px;
     border-radius: 5px;
     border: solid 1px gray;
     padding: 5px;
     width: 300px;
 }
+
 .fright textarea {
+    -ms-border-radius: 5px;
     border-radius: 5px;
     border: solid 1px gray;
     padding: 5px;
-    margin: 5px 10px 10px;    
+    margin: 5px 10px 10px;
 }
+
 .fright>button {
         flex: 0 0 auto;
     align-self: flex-end;
@@ -202,3 +229,114 @@ label>input[type=file] {
     display: none;
 }
 /*Paty form END*/
+
+/*Image galary*/
+.albomIndex {
+    flex: 1 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+.alboms {
+    display: flex;
+    flex-flow: row wrap;
+
+}
+.albomItem {
+    margin: 10px;
+    text-align: center;
+    border: solid 2px transparent;
+}
+.albomItem:hover {
+    border: solid 2px gray;
+}
+.albomAvatar {
+    max-width: 210px;
+    overflow: hidden;
+}
+.albomAvatar img {
+    width: 100%;
+}
+.formAlbom {
+    flex: 0 0 auto;
+    width: 400px;
+}
+.formAlbom form {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+form input[type=text] {
+    margin: 10px 0;
+    align-self: center;
+    border-radius: 5px;
+    border: solid 1px gray;
+    font-size: 12pt;
+    padding: 5px;
+    width: 300px;
+}
+form textarea {
+    margin: 10px 0;
+    align-self: center;
+    border-radius: 5px;
+    border: solid 1px gray;
+    font-size: 12pt;
+    padding: 5px;
+    width: 300px;    
+}
+.albomDetails {
+    display: block;
+    width: 100%;
+}
+.addPhotoForm {
+    display: block;
+}
+.addPhotoForm form {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+.addRegionForm {
+    display: block;
+}
+.addRegionForm form {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 310px;
+}
+.addRegionForm form input {
+    align-self: flex-start;
+}
+.addRegionForm form textarea {
+    align-self: flex-start;
+}
+.addRegionForm form p {
+    margin: 0;
+    padding: 0;
+}
+.albomDescr {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 20px;
+}
+.offTitle {
+    background-color: rgb(255, 93, 93);
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    font-family: "Arial";
+    font-weight: bold;
+    color: whitesmoke;
+}
+.onTitle {
+    background-color: rgb(35, 140, 74);
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    font-family: "Arial";
+    font-weight: bold;
+    color: whitesmoke;
+}
+/*Image galary END*/

@@ -1,0 +1,12 @@
+﻿@model Web.Domen.Models.Order
+@{
+    ViewBag.Title = "Спасибо, ваша заявка принята";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="columnBlock">
+    <h2>Спасибо за регистрацию</h2>
+    <h3>Ваша заявка принята.</h3>
+    <p>После подтверждения оплаты, вы получите на почту приглашение.</p>
+    <a class="redButton" href="@Url.Action("Index","Home")">На главную</a>
+</div>

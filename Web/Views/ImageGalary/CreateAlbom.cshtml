@@ -1,0 +1,26 @@
+﻿@model Web.Domen.Models.PhotoAlbom
+@{
+    ViewBag.Title = "CreateAlbom";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="formAlbom">
+    @using (Html.BeginForm("CreateAlbom","ImageGalary",FormMethod.Post, new {enctype="multipart/form-data"}))
+    {
+        <h3>Новый фотоальбом</h3>
+        @Html.HiddenFor(albom => albom.Id);
+        @Html.HiddenFor(model=>model.Category.Id)
+        @Html.ValidationSummary()
+
+        <input type="file" name="avatar" accept="image/jpeg,image/png"/>
+        @Html.TextBoxFor(albom => albom.Title, new {placeholder="Название альбома"})
+        <input type="text" id="ad" value="@Model.AlbomDate.ToShortDateString()" name="AlbomDate"/>
+        @Html.TextAreaFor(albom => albom.Description, new {rows = 5, placeholder="Описание альбома"})
+        <button type="submit">Сохранить</button>
+    }
+</div>
+
+
+@section scripts{
+<script src="~/Scripts/AdminJs/imageGalary.js"></script>
+}

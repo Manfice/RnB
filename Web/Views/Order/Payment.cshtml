@@ -76,12 +76,15 @@
         </table>
     </div>
 
-        <form action="https://demomoney.yandex.ru/eshop.xml" method="post">
+        <form action="https://demomoney.yandex.ru/eshop.xml" method="post" class="payOrder">
             <input name="shopId" value="@Model.ShopId" type="hidden" />
             <input name="scid" value="@Model.Scid" type="hidden" />
             <input name="sum" value="@Model.Sum" type="hidden">
             <input name="customerNumber" value="@Model.CustomerNumber" type="hidden" />
             <input name="orderNumber" value="@Model.OrderNumber" type="hidden" />
+            <input name="shopSuccessURL" value="http://www.redblackclub.ru/Order/SuccessTest" type="hidden" />
+            <input name="shopFailURL" value="http://www.redblackclub.ru/Order/FailTest" type="hidden" />
+            <input name="shopDefaultUrl" value="http://www.redblackclub.ru/" type="hidden" />
             <input name="cps_phone" value="@Model.Cpsphone" type="hidden" />
             <input name="cps_email" value="@Model.Cpsemail" type="hidden" />
             <input type="submit" value="Заплатить" />

@@ -5,24 +5,25 @@
     <div class="rowFlex">
         <table>
             <thead>
-                <tr>
-                    <th colspan="2">Категории</th>
-                    <th>
-                        <button type="button" data-bind="click:Paty.addRoot"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Добавить</button>
-                    </th>
-                </tr>
+            <tr>
+                <th colspan="2">Категории</th>
+                <th>
+                    <button type="button" data-bind="click:Paty.addRoot"><i class="fa fa-angle-double-down" aria-hidden="true"></i>Добавить</button>
+                </th>
+            </tr>
             </thead>
             <tbody data-bind="foreach:categorys.root">
-                <tr data-bind="click:Paty.setWorkDirectory, css:{selectedRowRoot:title()===$root.categorys.current().title()}" style="cursor: pointer">
-                    <td data-bind="text:$index()+1"></td>
-                    <td data-bind="text:title"></td>
-                    <td>
-                        <a href="#" data-bind="click: Paty.setCurrCat">Редактировать</a> /
-                        <a href="#" data-bind="click:Paty.deleteCategory">Удалить</a>
-                    </td>
-                </tr>
+            <tr data-bind="click:Paty.setWorkDirectory, css:{selectedRowRoot:title()===$root.categorys.current().title()}" style="cursor: pointer">
+                <td data-bind="text:$index()+1"></td>
+                <td data-bind="text:title"></td>
+                <td>
+                    <a href="#" data-bind="click: Paty.setCurrCat">Редактировать</a> /
+                    <a href="#" data-bind="click:Paty.deleteCategory">Удалить</a>
+                </td>
+            </tr>
             </tbody>
         </table>
+
         <table>
             <thead>
                 <tr>

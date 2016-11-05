@@ -35,6 +35,32 @@ namespace Web.Helpers
             }
             return $"Письмо отправленно на адрес: {to}";
         }
+        public static string SendMyMail(string body, string to, string subject)
+        {
+            var fromAddress = new MailAddress("no-replay@redblackclub.ru", "Красное & Черное");
+            var smtp = new SmtpClient
+            {
+                Host = "redblackclub.ru",
+                Port = 25,
+                EnableSsl = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, "^*J_ewv@"),//^*J_ewv@
+
+            };
+            System.Net.ServicePointManager.ServerCertificateValidationCallback =
+                (sender, certificate, chain, errors) => true;
+            using (var message = new MailMessage(fromAddress, new MailAddress(to))
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+            {
+                smtp.Send(message);
+            }
+            return $"Письмо отправленно на адрес: {to}";
+        }
         public static string EncodeMd5(string s)
         {
             var md5 = MD5.Create();

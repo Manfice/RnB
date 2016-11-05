@@ -18,6 +18,26 @@ namespace Web.Domen.Repositorys
 
         public IEnumerable<Paty> GetPatys => _context.Paties.ToList();
 
+        public void AcceptPayAsync(PaymentAviso aviso, Order order)
+        {
+            if (aviso!=null)
+            {
+                _context.Avisos.Add(aviso);
+            }
+            order.Aviso = aviso;
+            _context.SaveChanges();
+        }
+
+        public void DiscardOrderAsync(int id)
+        {
+            var order = _context.Orders.Find(id);
+            if (order!=null)
+            {
+                _context.Orders.Remove(order);
+            }
+            _context.SaveChanges();
+        }
+
         public async Task<Customer> GetCustomerAsync(OrderViewmodel model)
         {
             var customer = await _context.Customers.FirstOrDefaultAsync(c =>c.Email==model.Email);
@@ -82,11 +102,10 @@ namespace Web.Domen.Repositorys
 
         public void SeeCheck(string s)
         {
-            var ord = _context.Orders.Find(18);
-            ord.PlaceNumbers = s;
+            var ord = _context.Orders.Find(35);
+            ord.AvisoLog = s;
             _context.SaveChangesAsync();
         }
-
         private string[] GetTickets(int quantity, string pls)
         {
             var places = pls.Split(',');

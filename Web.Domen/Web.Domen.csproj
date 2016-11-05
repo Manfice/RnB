@@ -56,15 +56,18 @@
     <Compile Include="Abstract\IAuth.cs" />
     <Compile Include="Abstract\IEvents.cs" />
     <Compile Include="Abstract\IHome.cs" />
+    <Compile Include="Abstract\IPhoto.cs" />
     <Compile Include="Infrastructure\Context.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\ImageGalary.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Paty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorys\DbAuth.cs" />
     <Compile Include="Repositorys\DbHome.cs" />
     <Compile Include="Repositorys\DbPaty.cs" />
+    <Compile Include="Repositorys\DbPhoto.cs" />
     <Compile Include="Viewmodels\UserView.cs" />
   </ItemGroup>
   <ItemGroup>

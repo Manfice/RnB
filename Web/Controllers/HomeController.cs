@@ -80,7 +80,6 @@ namespace Web.Controllers
         {
             return PartialView();
         }
-
         public ActionResult NearDetails()
         {
             var model = _home.GetPatys.Where(paty => paty.PatyDate >= DateTime.Today).ToList();
@@ -111,7 +110,7 @@ namespace Web.Controllers
         {
             var customer = await _home.GetCustomerAsync(model);
             var order = await _home.OrderExistAsync(model.PatyId, model.Email);
-            if (order!=null)
+            if (order!=null && order.Paty.Price<=0)
             {
                 var ebody = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticket.html"));
                 var emessageBody = MakeOrderBody(ebody, order);

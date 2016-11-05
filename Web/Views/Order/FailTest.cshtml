@@ -1,0 +1,12 @@
+﻿@model Web.Domen.Models.Order
+@{
+    ViewBag.Title = "FailTest";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+<div class="columnBlock">
+    <h1>Ошибка платежа</h1>
+    <p>В процессе оплаты возникла ошибка.</p>
+    <p>Возможно эта проблемма будет устранена при повторном процессе оплаты.</p>
+
+    <a class="redButton" href="@Url.Action("OrderDetails","Home", new {id=Model.Id})">Вернуться к мероприятию.</a>
+</div>

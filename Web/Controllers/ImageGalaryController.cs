@@ -1,0 +1,171 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Web.Domen.Abstract;
+using Web.Domen.Models;
+using Web.Helpers;
+
+namespace Web.Controllers
+{
+    public class ImageGalaryController : Controller
+    {
+        private readonly IPhoto _photo;
+
+        public ImageGalaryController(IPhoto photo)
+        {
+            _photo = photo;
+        }
+        // GET: ImageGalary
+        public ActionResult Index()
+        {
+            return View(_photo.GetAlboms.OrderByDescending(albom => albom.Id));
+        }
+
+        public ActionResult CreateAlbom(string patyCategory=null)
+        {
+            var patyCat = new PatyCategory();
+            if (patyCategory!=null)
+            {
+                patyCat = _photo.GetCategoryById(int.Parse(patyCategory));
+            }
+            var model = new PhotoAlbom
+            {
+                Category = patyCat,
+                AlbomDate = DateTime.Now
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateRegion(ImageGalary region)
+        {
+            var albom = _photo.GetAlbomById(region.Albom.Id);
+            _photo.SaveRegion(region);
+            return RedirectToAction("AlbomDetails", new {id = albom.Id});
+        }
+
+        [HttpPost]
+        public ActionResult CreateAlbom(PhotoAlbom albom, HttpPostedFileBase avatar)
+        {
+
+            if (albom.AlbomDate.Year<2010)
+            {
+                ModelState.AddModelError("date","Дата не должна быть меньше 01 января 2010г.");
+                return View(albom);
+            }
+            if (!ModelState.IsValid) return View(albom);
+            if (avatar!=null)
+            {
+                if (avatar.FileName.EndsWith("jpg",StringComparison.OrdinalIgnoreCase) || avatar.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase) || avatar.FileName.EndsWith("jpeg", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (albom.AvatarFullPath != null)
+                    {
+                        if (System.IO.File.Exists(albom.AvatarFullPath))
+                        {
+                            System.IO.File.Delete(albom.AvatarFullPath);
+                        }
+                    }
+
+                    var img = ImageCrop.Crop(avatar, 210, 174, ImageCrop.AnchorPosition.Center);
+                    var path = Server.MapPath("~/Uploads/ImageGalary/" + "_" + albom.Title + "_" + avatar.FileName);
+                    img?.Save(path, ImageFormat.Jpeg);
+                    albom.Avatar = "/Uploads/ImageGalary/" + "_" + albom.Title + "_" + avatar.FileName;
+                    albom.AvatarFullPath = path;
+                }
+            }
+            _photo.SaveAlbom(albom);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult EditAlbom(int id)
+        {
+            var model = _photo.GetAlbomById(id);
+            return View("CreateAlbom", model);
+        }
+
+        public ActionResult DeleteAlbom(int id)
+        {
+            var albom = _photo.GetAlbomById(id);
+            var childs = _photo.GetChildElements(albom.Id);
+            var paths = childs as IList<string> ?? childs.ToList();
+            if (paths.Any())
+            {
+                foreach (var path in paths.Where(System.IO.File.Exists))
+                {
+                    System.IO.File.Delete(path);
+                }
+            }
+            if (System.IO.File.Exists(albom.AvatarFullPath))
+            {
+                System.IO.File.Delete(albom.AvatarFullPath);
+            }
+            _photo.DeleteAlbom(albom.Id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AlbomDetails(int id)
+        {
+            var albom = _photo.GetAlbomById(id);
+            return View(albom);
+        }
+        public ActionResult PhotoDetails(int id)
+        {
+            var albom = _photo.Photo(id);
+            return View(albom);
+        }
+
+        public ActionResult OnTitlePage(int id)
+        {
+            var model = _photo.ShowOnTitlePage(id);
+            var albom = model.Region.Albom.Id;
+            return RedirectToAction("AlbomDetails", new { id = albom });
+        }
+
+        public ActionResult DeletePhoto(int id)
+        {
+            var photo = _photo.Photo(id);
+            var albom = photo.Region.Albom.Id;
+            if (!string.IsNullOrEmpty(photo.FullPath))
+            {
+                if (System.IO.File.Exists(photo.FullPath))
+                {
+                    System.IO.File.Delete(photo.FullPath);
+                }
+            }
+            _photo.DeletePhoto(id);
+            return RedirectToAction("AlbomDetails", new {id = albom});
+        }
+
+        [HttpPost]
+        public ActionResult BulkAddPhotos(ImageGalary region, int regId, List<HttpPostedFileBase> photos)
+        {
+            if (!photos.Any()) RedirectToAction("AlbomDetails", region.Albom.Id);
+            region.Id = regId;
+            var imgs = new List<ImageData>();
+            var alb = _photo.GetGalaryById(regId);
+            foreach (var data in photos.Where(data => data.FileName.EndsWith("jpg",StringComparison.OrdinalIgnoreCase) || data.FileName.EndsWith("png",StringComparison.OrdinalIgnoreCase) || data.FileName.EndsWith("jpeg",StringComparison.OrdinalIgnoreCase)))
+            {
+
+                var img = ImageCrop.Crop(data, 1024, 768, ImageCrop.AnchorPosition.Center);
+                var pathS = Server.MapPath("~/Uploads/ImageGalary/"+"_"+ region.Id+"_"+ data.FileName);
+                img?.Save(pathS, ImageFormat.Jpeg);
+                var pt = new ImageData
+                {
+                    FullPath = pathS,
+                    Height = 768,
+                    Width = 1024,
+                    Path = "/Uploads/ImageGalary/" + "_" +region.Id+ "_" + data.FileName,
+                    Title = data.FileName,
+                    TitleView = false,
+                    Region = alb
+                };
+                imgs.Add(pt);
+            }
+            _photo.BulkAddPhotos(imgs);
+            return RedirectToAction("AlbomDetails", new {id= region.Albom.Id});
+        }
+    }
+}

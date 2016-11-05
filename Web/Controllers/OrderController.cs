@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web.Domen.Abstract;
@@ -13,7 +14,7 @@ namespace Web.Controllers
 {
     public class OrderController : Controller
     {
-        private IHome _home;
+        private readonly IHome _home;
 
         public OrderController(IHome home)
         {
@@ -38,36 +39,100 @@ namespace Web.Controllers
             };
             return View(model);
         }
+
         [HttpPost]
-        public string CheckTest(DateTime requestDatetime,
-                                string action,
-                                string orderSumAmount,
-                                string orderSumCurrencyPaycash,
-                                string orderSumBankPaycash,
-                                string shopId,
-                                string invoiceId,
-                                string customerNumber,
-                                string orderNumber,
-                                string md5
-                                )
+        public string CheckTest(DateTime requestDatetime,string action,string orderSumAmount,string orderSumCurrencyPaycash,string orderSumBankPaycash,string shopId,string invoiceId,string customerNumber,string orderNumber,string md5)
         {
-            var toHash = string.Join(";", new[] {"checkTest", orderSumAmount, orderSumCurrencyPaycash, orderSumBankPaycash, shopId, invoiceId, customerNumber, orderNumber});
+            const string shopPassword = "Kjhk&*lk%$h211KU6";
+            var order = _home.GetOrderBuId(int.Parse(orderNumber));
+            var price = order.TotalCost.ToString("F").Replace(",", ".");
+            var customer = order.Customer.Id + ":" + order.Customer.Email;
+            var toHash = string.Join(";", action, price, orderSumCurrencyPaycash, orderSumBankPaycash, shopId, invoiceId, customer, shopPassword);
             var myMd5 = PassAuth.EncodeMd5(toHash);
 
             var code = 0;
-            var message = string.Empty;
 
             if (!string.Equals(myMd5, md5, StringComparison.CurrentCultureIgnoreCase))
             {
                 code = 1;
-                message = "Несовпадение значения параметра md5 с результатом расчета хэш-функции. Окончательная ошибка.";
             }
+
+            var dt = DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffzzz");
             HttpContext.Response.ContentType = "application/xml";
-            var resp = $"<?xml version=\"1.0\" encoding=\"UTF - 8\"?><checkOrderResponse performedDatetime=\"{DateTime.Now}\" code=\"{code}\" invoiceId=\"{invoiceId}\" shopId=\"{shopId}\" message=\"{message}\"/>";
-            _home.SeeCheck(toHash+">"+md5);
+            var resp = $"<?xml version=\"1.0\" encoding=\"UTF-8\"?><checkOrderResponse performedDatetime=\"{dt}\" code=\"{code}\" invoiceId=\"{invoiceId}\" shopId=\"{shopId}\"/>";
 
             return resp;
         }
+
+        [HttpPost]
+        public string AvisoTest(DateTime requestDatetime, string action, string orderSumAmount, string orderSumCurrencyPaycash, string orderSumBankPaycash, string shopId, string invoiceId, string customerNumber, string orderNumber, string paymentPayerCode, string shopSumAmount, string md5)
+        {
+            const string shopPassword = "Kjhk&*lk%$h211KU6";
+            var order = _home.GetOrderBuId(int.Parse(orderNumber));
+            var price = order.TotalCost.ToString("F").Replace(",", ".");
+            var customer = order.Customer.Id + ":" + order.Customer.Email;
+            var toHash = string.Join(";", action, price, orderSumCurrencyPaycash, orderSumBankPaycash, shopId, invoiceId, customer, shopPassword);
+            var myMd5 = PassAuth.EncodeMd5(toHash);
+
+            var code = 0;
+            var eq = false;
+            if (!string.Equals(myMd5, md5, StringComparison.CurrentCultureIgnoreCase))
+            {
+                code = 1;
+            }
+            if (code == 0)
+            {
+                eq = true;
+                var aviso = new PaymentAviso
+                {
+                    InvoiceId = invoiceId,
+                    PayDate = DateTime.Now,
+                    PaymentPayerCode = paymentPayerCode,
+                    ShopSumAmount = shopSumAmount
+                };
+                _home.AcceptPayAsync(aviso, order);
+                var body = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticket.html"));
+                var emessageBody = MakeOrderBody(body, order);
+                PassAuth.SendMyMail(emessageBody, order.Customer.Email, "Приглашение на мероприятие с сайта redblackclub.ru");
+            }
+            var dt = DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffzzz");
+            HttpContext.Response.ContentType = "application/xml";
+            var resp = $"<?xml version=\"1.0\" encoding=\"UTF-8\"?><paymentAvisoResponse performedDatetime=\"{dt}\" code=\"{code}\" invoiceId=\"{invoiceId}\" shopId=\"{shopId}\"/>";
+
+            //_home.SeeCheck(toHash+" MD5: "+md5+" Equals:" + eq+" RESP: > "+resp+"ORD: #"+order.Id);
+            return resp;
+        }
+
+        public ActionResult SuccessTest(string orderNumber)
+        {
+            var order = _home.GetOrderBuId(int.Parse(orderNumber));
+            return View(order);
+        }
+
+        public ActionResult FailTest(string orderNumber)
+        {
+            var model = string.IsNullOrEmpty(orderNumber) ? new Order() : _home.GetOrderBuId(int.Parse(orderNumber));
+            return View(model);
+        }
+        private string MakeOrderBody(string body, Order order)
+        {
+            var result = body;
+            var oDate = order.OrderDate.ToLongDateString().Split(' ');
+            var pDate = order.Paty.PatyDate.ToLongDateString().Split(' ');
+            result = result.Replace("{0}", pDate[0]);
+            result = result.Replace("{1}", pDate[1] + "," + pDate[2]);
+            result = result.Replace("{2}", order.Paty.PatyDate.ToShortTimeString());
+            result = result.Replace("{3}", order.Paty.Title);
+            result = result.Replace("{4}", order.Paty.Place);
+            result = result.Replace("{5}", order.Customer.Fio);
+            result = result.Replace("{6}", order.PlaceNumbers);
+            result = result.Replace("{7}", order.TotalCost.ToString());
+            result = result.Replace("{8}", oDate[0] + " " + oDate[1]);
+            result = result.Replace("{9}", order.OrderDate.ToShortTimeString());
+            result = result.Replace("{10}", order.Id.ToString());
+            return result;
+        }
+
     }
 
     public class Ykassa

@@ -14,8 +14,12 @@ namespace Web.Helpers
 
         public static Image Crop(HttpPostedFileBase image, int width, int height, AnchorPosition position)
         {
-            var original = Image.FromStream(image.InputStream, true, true);
 
+            var original = Image.FromStream(image.InputStream, true, true);
+            if (original.Width<=width && original.Height<=height)
+            {
+                return original;
+            }
             var sourceWidht = original.Width;
             var sourceHeight = original.Height;
             var sourceX = 0;
@@ -42,7 +46,7 @@ namespace Web.Helpers
                         destY = (int)(height - (sourceHeight * nPercent));
                         break;
                     default:
-                        destY = (int)((height - (sourceHeight + nPercent)) / 2);
+                        destY = (int)((height - (sourceHeight * nPercent)) / 2);
                         break;
                 }
             }
@@ -58,6 +62,7 @@ namespace Web.Helpers
                         destX = (int)((width - (sourceWidht * nPercent)) / 2); break;
                 }
             }
+
             int destWidth = (int)(sourceWidht * nPercent);
             int destHeight = (int)(sourceHeight * nPercent);
 
@@ -68,7 +73,7 @@ namespace Web.Helpers
             grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
             grPhoto.DrawImage(original, 
-                new Rectangle(destX, destY, destWidth, destHeight),
+                new Rectangle(destX-1, destY-1, destWidth+2, destHeight),
                 new Rectangle(sourceX, sourceY, sourceWidht, sourceHeight),GraphicsUnit.Pixel );
 
             grPhoto.Dispose();

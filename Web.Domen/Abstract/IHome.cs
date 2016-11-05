@@ -15,5 +15,7 @@ namespace Web.Domen.Abstract
         Order GetOrderBuId(int id);
         Task<Order> OrderExistAsync(int patyId, string email);
         void SeeCheck(string s);
+        void AcceptPayAsync(PaymentAviso aviso, Order order);
+        void DiscardOrderAsync(int id);
     }
 }
