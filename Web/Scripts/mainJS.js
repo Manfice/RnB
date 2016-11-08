@@ -78,6 +78,27 @@
     $("#nextPar").click(function () {
         partner.trigger("next.owl.carousel", [500]);
     });
+
+    function previewUpdImg(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var i = $("#avaImage");
+                var f = $(".emptyAvatar");
+                $(".avaControls label").css("display", "none");
+                $(".avaControls input").css("display", "block");
+                f.css("display","none");
+                i.attr("src", e.target.result);
+                i.css("display","block");
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+    $("#castAva").change(function () {
+        previewUpdImg(this);
+    });
+
+    
 });
 
 var mainJS = function () {

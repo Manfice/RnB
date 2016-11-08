@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Web.Domen.Abstract;
+using Web.Domen.Models;
 using Web.Infrastructure;
 using Web.Models;
 
@@ -29,6 +30,10 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var customer = _customer.GetCustomerByUserId(_user);
+            if (customer.Avatar==null)
+            {
+                customer.Avatar = new CustImage();
+            }
 
             return View(customer);
         }

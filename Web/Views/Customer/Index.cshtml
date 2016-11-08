@@ -4,6 +4,38 @@
     Layout = "~/Views/Shared/_MainRnB.cshtml";
 }
 
-<div class="columnBlock">
-    
+<div class="customerColumn">
+    <div class="customerRow">
+        <div class="rowLeft">
+            <div class="customerAvatar" id="CustomerAvatar">
+                <h2>@Model.Fio</h2>
+                <div class="customerImageWrapper">
+                    <div class="emptyAvatar">
+                        <h3>ФОТО</h3>
+                        <p>К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
+                    </div>
+
+                    <img id="avaImage" alt="" src="@Model.Avatar.Path"/>
+                    <div class="avaControls">
+                        <label><span>Сменить / загрузить фото</span>
+                            <input type="file" name="avatar" id="castAva"/>
+                        </label>
+                        <input type="submit" value="СОХРАНИТЬ"/>
+                    </div>
+                </div>
+                <p>Рейтинг: <span>@Model.Rate</span></p>
+                <p>Скидка на мероприятия: <span>5%</span></p>
+            </div>
+        </div>
+        <div class="rowRight">
+            <nav>
+                <ul>
+                    <li><a class="redButton">Профиль</a></li>
+                    <li><a class="grayButton">Личная страница</a></li>
+                    <li><a class="grayButton">Компания</a></li>
+                    <li><a class="grayButton">Оплаты и заявки</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </div>

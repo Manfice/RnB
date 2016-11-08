@@ -62,7 +62,7 @@
                 {
                     if (User.Identity.IsAuthenticated)
                     {
-                        <a href="@Url.Action("Index","Home")" class="redLink">@User.Identity.Name</a><span>|</span><a href="@Url.Action("LogOut","Auth")" class="redLink">Выйти</a>
+                        <a href="@Url.Action("Index","Customer")" class="redLink">@User.Identity.Name</a><span>|</span><a href="@Url.Action("LogOut","Auth")" class="redLink">Выйти</a>
                     }
                     else
                     {

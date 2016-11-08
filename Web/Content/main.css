@@ -344,6 +344,7 @@ footer {
     flex: 1 0 auto;
     width: 100%;
 }
+
 /*Top slider*/
 .topSlider {
     flex: 0 0 auto;
@@ -1260,3 +1261,139 @@ form>p {
 }
 
 /*PhotoGalary END*/
+
+/*Customer*/
+.customerColumn {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 60px 0 20px 0;
+}
+.customerRow {
+    flex: 1 0 auto;
+    max-width: 970px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+
+}
+.rowLeft {
+    flex: 0 0 30%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 10px 0 0;
+}
+.customerAvatar {
+    flex: 1 0 auto;
+    display: block;
+    width: 100%;
+    background-color: whitesmoke;
+}
+.customerAvatar h2 {
+    padding: 10px;
+
+}
+.customerAvatar p {
+    display: block;
+    margin: 10px 0;
+}
+.customerAvatar p span {
+    color: red;
+    font-weight: bolder;
+}
+.customerImageWrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+.customerImageWrapper:hover .avaControls {
+    bottom: 0;
+    -webkit-transition: 2s;
+    -moz-transition: 2s;
+    -ms-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+}
+
+.customerImageWrapper img {
+    display: none;
+    width: 100%;
+}
+.emptyAvatar {
+    width: 100%;
+    border: dotted 1px gray;
+    height: 300px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.emptyAvatar p{
+    width: 80%;
+    text-align: center;
+}
+.avaControls {
+    position: absolute;
+    bottom: -31px;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.7);
+    -webkit-transition: 2s;
+    -moz-transition: 2s;
+    -ms-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+}
+
+.avaControls input {
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    display: none;
+    padding: 5px;
+    cursor: pointer;
+    font-family: "rNormal";
+    color: red;
+    width: 100%;
+    font-size: 12pt;
+}
+.avaControls label {
+    display: block;
+}
+.avaControls label span{
+    text-align: center;
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    font-family: "rNormal";
+    color: red;
+    font-size: 12pt;
+}
+.rowRight {
+    flex: 1 0 auto;
+}
+.rowRight nav {
+    display: block;
+    background-color: whitesmoke;
+    border-bottom: solid 3px #e8e8e8;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+/*Customer END*/
