@@ -28,13 +28,13 @@
                     </p>
                 </td>
             </tr>
-            <tr>
+            @*<tr>
                 <td colspan="5">
                     <p style="text-align: left; font-weight: normal; font-size: 16pt">
                         Место проведения: @Model.Order.Paty.Place
                     </p>
                 </td>
-            </tr>
+            </tr>*@
             <tr>
                 <td style="border-top: dotted 2px gray; border-bottom: dotted 2px gray">
                     <div style="height: 60px; border-right: dotted 2px gray; margin: 10px 0; padding: 0 0 15px 0">
@@ -87,7 +87,7 @@
             <input name="shopDefaultUrl" value="http://www.redblackclub.ru/" type="hidden" />
             <input name="cps_phone" value="@Model.Cpsphone" type="hidden" />
             <input name="cps_email" value="@Model.Cpsemail" type="hidden" />
-            <input type="submit" value="Заплатить" />
+            <input type="submit" class="redButton" value="Оплатить мероприятие >>>" />
         </form>
 
 </div>

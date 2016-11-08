@@ -75,14 +75,14 @@ namespace Web.Controllers
             var myMd5 = PassAuth.EncodeMd5(toHash);
 
             var code = 0;
-            var eq = false;
+            //var eq = false;
             if (!string.Equals(myMd5, md5, StringComparison.CurrentCultureIgnoreCase))
             {
                 code = 1;
             }
             if (code == 0)
             {
-                eq = true;
+                //eq = true;
                 var aviso = new PaymentAviso
                 {
                     InvoiceId = invoiceId,

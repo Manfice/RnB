@@ -21,6 +21,8 @@ namespace Web.Domen.Models
         public string Description { get; set; }
         public string Avatar { get; set; }
         public string AvatarFullPath { get; set; }
+        public int Viewed { get; set; }
+        public int Likes { get; set; }
         public bool Active { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -38,6 +40,9 @@ namespace Web.Domen.Models
         public int Width { get; set; }
         public int Height { get; set; }
         public bool TitleView { get; set; }
+        public int Viewed { get; set; }
+        public int Likes { get; set; }
+        public string VideoLink { get; set; }
         public virtual ImageGalary Region { get; set; }
     }
 }

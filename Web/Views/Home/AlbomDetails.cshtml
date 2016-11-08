@@ -1,0 +1,57 @@
+﻿@model Web.Domen.Models.PhotoAlbom
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+@section links
+{
+<link href="~/Content/lightbox.min.css" rel="stylesheet" />
+}
+<div class="myColumn" id="pt">
+    <div class="albomHead">
+        <h1 class="albomTitle"><span>@Model.AlbomDate.ToShortDateString()</span><span>@Model.Title</span></h1>
+    </div>
+    @foreach (var video in Model.Regions)
+    {
+
+        <div class="regionTitle">
+            <p><span>@video.Title</span></p>
+            <p class="regionDescr">@video.Description</p>
+        </div>
+        <div class="row960w">
+            @foreach (var item in video.Photos)
+            {
+                <div class="pvImageWr">
+                    <a href="@item.Path" data-lightbox="@item.Region.Title" data-title="@item.Region.Description">
+                        <img class="example-image" alt="" src="@item.Path" />
+                        <div class="pvBorder"></div>
+                    </a>
+                    <div class="actions albomStat">
+                            <i class="fa fa-eye"></i>
+                            <p>125</p>
+                        <a href="">
+                            <i class="fa fa-heart"></i>
+                            <p>0</p>
+                        </a>
+                        <a href="@Url.Content(item.Path)" target="_blanck">
+                            <i class="fa fa-download"></i>
+                        </a>
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>
+<a href="@ViewBag.returnUrl">Назад к коллекции</a>
+@section scripts
+{
+    <script src="~/Scripts/lightbox.min.js"></script>
+    <script>
+        lightbox.option({
+            "disableScrolling": true,
+            "albumLabel":"@Model.Title"
+        });
+    </script>
+}

@@ -17,5 +17,8 @@ namespace Web.Domen.Abstract
         void SeeCheck(string s);
         void AcceptPayAsync(PaymentAviso aviso, Order order);
         void DiscardOrderAsync(int id);
+        IEnumerable<ImageData> GetPhotos { get; } 
+        IEnumerable<PhotoAlbom> GetAlboms { get; }
+        PhotoAlbom GetAlbomById(int id);
     }
 }

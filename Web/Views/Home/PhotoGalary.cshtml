@@ -1,0 +1,51 @@
+﻿@using Web.Helpers
+@model Web.Domen.Viewmodels.AlbomsViewmodel
+@{
+    ViewBag.Title = "Галерея";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+@section scripts
+{
+<script src="~/Scripts/PhotoGalary.js"></script>
+}
+<div class="myColumn" id="pt">
+    <h1>ГАЛЕРЕЯ</h1>
+    <div class="ds"><span> </span><span> </span><span> </span></div>
+
+    <div class="albomsRow">
+        @foreach (var item in Model.Alboms)
+        {
+            <div class="alItem">
+                <p>@item.AlbomDate.ToShortDateString()</p>
+                <h3>@(item.Title.Length >= 35 ? item.Title.Substring(0, 31) + "..." : item.Title)</h3>
+                <a href="@Url.Action("AlbomDetails", new {id = item.Id, returnUrl = Request.Url.PathAndQuery})">
+                    <div class="pGimgWrapper">
+                        <img alt="" src="@item.Avatar"/>
+                        <div class="watchAlbom">
+                            <i class="fa fa-search fa-2x"></i>
+                            <p><span class="redLink">Смотреть все ></span></p>
+                        </div>
+                    </div>
+                </a>
+                <div class="albomStat">
+                    <i class="fa fa-eye"></i>
+                    <p>125</p>
+                    <i class="fa fa-heart"></i>
+                    <p>227</p>
+                    <i class="fa fa-photo"></i>
+                    <p>125</p>
+                    <i class="fa fa-film"></i>
+                    <p>125</p>
+                    <i class="fa fa-share-alt"></i>
+                </div>
+            </div>
+        }
+    </div>
+    @if (Model.PagingInfo.TotalPages > 1)
+    {
+        <div class="pageLinks">
+            @Html.PageLinks(Model.PagingInfo, x=>Url.Action("PhotoGalary", new {page=x}))
+        </div>
+    }
+</div>

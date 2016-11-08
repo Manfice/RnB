@@ -53,6 +53,13 @@
 
             });
         };
+        var addPhotoAlbom = function (fData) {
+            window.location.href = "/ImageGalary/CreateAlbom/" + fData.Id();
+            //$.ajax({
+            //    type: "GET",
+            //    url: "/ImageGalary/CreateAlbom/"+fData.Id()
+            //});
+        };
         var delCat = function (data, callback) {
             $.ajax({
                 type: "GET",
@@ -73,7 +80,7 @@
         }
         return {
             getCategorys: getCategorys, saveRootCat: saveRootCat, delCat: delCat, savePaty: savePaty,
-            getPatys: getPatys, delPaty: delPaty
+            getPatys: getPatys, delPaty: delPaty,addPhotoAlbom:addPhotoAlbom
         };
     };
 
@@ -478,6 +485,9 @@
             pClient.delPaty(data,deletePatyCb);
         }
     }
+    var addAlbom = function (data) {
+        pClient.addPhotoAlbom(data.info);
+    }
     var init = function () {
         var dt = new catData();
         dt.Id = 0;
@@ -496,7 +506,7 @@
         viewmodel: viewmodel, submitNewRoot: submitNewRoot, setCurrCat: setCurrCat,
         setWorkDirectory: setWorkDirectory, addRoot: addRoot, addSubRoot: addSubRoot,
         deleteCategory: deleteCategory, serSubDir: serSubDir, addPaty: addPaty, submitPaty: submitPaty,
-        editPaty: editPaty, removePaty: removePaty
+        editPaty: editPaty, removePaty: removePaty, addAlbom: addAlbom
     };
 }();
 

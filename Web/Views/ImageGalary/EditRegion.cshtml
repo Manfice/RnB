@@ -1,0 +1,32 @@
+﻿@model Web.Domen.Models.ImageGalary
+
+@{
+    ViewBag.Title = "Редактировать раздел";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("EditRegion", "ImageGalary", FormMethod.Post))
+{
+    <h4>Раздел фотоальбома</h4>
+    <hr/>
+    @Html.ValidationSummary()
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Albom.Id)
+
+
+            @Html.Label("Название группы:")
+                @Html.EditorFor(model => model.Title)
+
+            @Html.Label("Описание группы")
+                @Html.TextAreaFor(model => model.Description, new {rows = 5})
+    <button type="submit">Сохранить</button>
+
+}
+
+<div>
+    @Html.ActionLink("Назад в альбом", "AlbomDetails", new {id = Model.Albom.Id})
+</div>
+

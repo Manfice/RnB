@@ -6,7 +6,7 @@ namespace Web.Domen.Abstract
     public interface IPhoto
     {
         IEnumerable<PhotoAlbom> GetAlboms { get; }
-        PatyCategory GetCategoryById(int id);
+        Paty GetPatyById(int id);
         void SaveAlbom(PhotoAlbom albom);
         PhotoAlbom GetAlbomById(int id);
         void DeleteAlbom(int id);
@@ -17,5 +17,7 @@ namespace Web.Domen.Abstract
         void DeletePhoto(int id);
         ImageGalary SaveRegion(ImageGalary model);
         ImageGalary GetGalaryById(int id);
+        void DeleteRegion(int id);
+        IEnumerable<string> GetPhotoPath(int id);
     }
 }

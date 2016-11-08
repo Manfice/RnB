@@ -8,7 +8,7 @@
     @using (Html.BeginForm("CreateAlbom","ImageGalary",FormMethod.Post, new {enctype="multipart/form-data"}))
     {
         <h3>Новый фотоальбом</h3>
-        @Html.HiddenFor(albom => albom.Id);
+        <input type="hidden" name="Id" value="@Model.Id"/>
         @Html.HiddenFor(model=>model.Category.Id)
         @Html.ValidationSummary()
 

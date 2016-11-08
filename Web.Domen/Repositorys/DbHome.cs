@@ -18,6 +18,10 @@ namespace Web.Domen.Repositorys
 
         public IEnumerable<Paty> GetPatys => _context.Paties.ToList();
 
+        public IEnumerable<ImageData> GetPhotos => _context.Photos.ToList();
+        public IEnumerable<PhotoAlbom> GetAlboms => _context.Alboms.ToList();
+
+
         public void AcceptPayAsync(PaymentAviso aviso, Order order)
         {
             if (aviso!=null)
@@ -114,6 +118,11 @@ namespace Web.Domen.Repositorys
             result[1] = string.Join(",", places.Where((s, i) => i > quantity - 1));
 
             return result;
+        }
+
+        public PhotoAlbom GetAlbomById(int id)
+        {
+            return _context.Alboms.Find(id);
         }
     }
 }

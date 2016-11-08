@@ -41,9 +41,9 @@ namespace Web.Domen.Repositorys
             return _context.Alboms.Find(id);
         }
 
-        public PatyCategory GetCategoryById(int id)
+        public Paty GetPatyById(int id)
         {
-            return _context.PatyCategories.Find(id);
+            return _context.Paties.Find(id);
         }
 
         public IEnumerable<string> GetChildElements(int albomId)
@@ -62,7 +62,7 @@ namespace Web.Domen.Repositorys
             PatyCategory cat = null;
             if (albom.Category.Id>0)
             {
-                cat = GetCategoryById(albom.Category.Id);
+                cat = _context.PatyCategories.Find(albom.Category.Id);
             }
             if (albom.Id > 0)
             {
@@ -121,6 +121,19 @@ namespace Web.Domen.Repositorys
             _context.SaveChanges();
             return data;
         }
-      
+
+        public void DeleteRegion(int id)
+        {
+            var dbRegion = _context.Galaries.Find(id);
+            _context.Photos.RemoveRange(dbRegion.Photos);
+            _context.Galaries.Remove(dbRegion);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<string> GetPhotoPath(int id)
+        {
+            var dbregion = _context.Galaries.Find(id);
+            return dbregion.Photos.Select(data => data.FullPath).ToList();
+        }
     }
 }

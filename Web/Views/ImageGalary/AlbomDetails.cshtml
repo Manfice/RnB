@@ -1,6 +1,6 @@
 ﻿@model Web.Domen.Models.PhotoAlbom
 @{
-    ViewBag.Title = "AlbomDetails";
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -14,7 +14,14 @@
             <p>@Model.Description</p>
             <p>
                 <a href="@Url.Action("EditAlbom", new {id = Model.Id})">Редактировать</a>
-                <a href="@Url.Action("DeleteAlbom", new {id = Model.Id})">Удалить</a>
+                @if (!Model.Regions.Any())
+                {
+                    <a href="@Url.Action("DeleteAlbom", new {id = Model.Id})">Удалить</a>
+                }
+                else
+                {
+                    <p style="color: red">Для удаления альбома, удалите все разделы в данном фотоальбоме.</p>
+                }
             </p>
         </div>
     </div>
@@ -23,11 +30,13 @@
     {
 
         <div class="albomRegion">
-            <h3>@region.Title</h3>
-            <a href="#">Изменить</a> / <a href="#">Удалить</a>
             <div class="addPhotoForm">
-                @using (Html.BeginForm("BulkAddPhotos", "ImageGalary", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                @using (Html.BeginForm("BulkAddPhotos", "ImageGalary", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
+                    <h3 title="@region.Description">@region.Title</h3>
+                    <a href="@Url.Action("EditRegion", new {id= region.Id})" title="Редактировать раздел">Изменить</a> 
+                    <a href="@Url.Action("DeleteRegion", new {id=region.Id})" title="Удалить раздел с фотографиями">Удалить</a>
+
                     @Html.Hidden("regId", region.Id)
                     @Html.Hidden("Albom.Id", Model.Id)
                     @Html.ValidationSummary()

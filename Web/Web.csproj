@@ -183,6 +183,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CmsController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageGalaryController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -191,6 +192,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ImageCrop.cs" />
+    <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Helpers\PassAuth.cs" />
     <Compile Include="Infrastructure\AppIdentityDbContext.cs" />
     <Compile Include="Infrastructure\AppRoleManager.cs" />
@@ -251,6 +253,7 @@
     <Content Include="Content\img\topSlider\5.jpg" />
     <Content Include="Content\img\topSlider\6.jpg" />
     <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\lightbox.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -294,7 +297,6 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -313,6 +315,11 @@
     <None Include="Properties\PublishProfiles\redandblack - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\rnb-FTP.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
+    <Content Include="images\close.png" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\next.png" />
+    <Content Include="images\prev.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\AdminJs\imageGalary.js" />
     <Content Include="Scripts\AdminJs\paty.js" />
     <Content Include="Scripts\flipclock.min.js" />
@@ -330,6 +337,7 @@
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\knockout.validation.min.js" />
+    <Content Include="Scripts\lightbox.min.js" />
     <Content Include="Scripts\mainJS.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
@@ -338,6 +346,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\PhotoGalary.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -398,6 +407,11 @@
     <Content Include="Views\ImageGalary\CreateAlbom.cshtml" />
     <Content Include="Views\ImageGalary\AlbomDetails.cshtml" />
     <Content Include="Views\ImageGalary\PhotoDetails.cshtml" />
+    <Content Include="Views\ImageGalary\EditRegion.cshtml" />
+    <Content Include="Views\Home\PhotoGalary.cshtml" />
+    <Content Include="Views\Home\AlbomDetails.cshtml" />
+    <Content Include="Scripts\lightbox.min.map" />
+    <Content Include="Views\Customer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -416,6 +430,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

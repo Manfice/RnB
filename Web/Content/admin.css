@@ -234,8 +234,11 @@ label>input[type=file] {
 .albomIndex {
     flex: 1 0 auto;
     width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .alboms {
     display: flex;
     flex-flow: row wrap;
@@ -245,6 +248,8 @@ label>input[type=file] {
     margin: 10px;
     text-align: center;
     border: solid 2px transparent;
+    display: block;
+    max-width: 210px;
 }
 .albomItem:hover {
     border: solid 2px gray;
@@ -267,21 +272,25 @@ label>input[type=file] {
 form input[type=text] {
     margin: 10px 0;
     align-self: center;
+    -ms-border-radius: 5px;
     border-radius: 5px;
     border: solid 1px gray;
     font-size: 12pt;
     padding: 5px;
     width: 300px;
 }
+
 form textarea {
     margin: 10px 0;
     align-self: center;
+    -ms-border-radius: 5px;
     border-radius: 5px;
     border: solid 1px gray;
     font-size: 12pt;
     padding: 5px;
-    width: 300px;    
+    width: 300px;
 }
+
 .albomDetails {
     display: block;
     width: 100%;
@@ -292,7 +301,7 @@ form textarea {
 .addPhotoForm form {
     display: flex;
     flex-flow: row;
-    justify-content: center;
+    justify-content: space-around;
 }
 .addRegionForm {
     display: block;

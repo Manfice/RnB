@@ -50,6 +50,16 @@ a {
     display: flex;
     flex-flow: column;
 }
+.ds>span {
+    width: 100px;
+    border-bottom: solid 2px red;
+    margin: 5px 0;
+    padding: 0 30px;
+}
+.ds>span:first-child, .ds>span:last-child {
+    border-bottom: solid 1px #c7c7c7;
+    padding: 0 43px;
+}
 body {
     display: flex;
     flex-flow: column nowrap;
@@ -256,7 +266,7 @@ nav {
 }
 .topMenu ul li i {
     color: #898989;
-    margin: 0 0 0 10px;
+    /*margin: 0 0 0 10px;*/
     display: inline;
 }
 .topMenu ul li a {
@@ -581,7 +591,7 @@ form>p {
 .sDescrWrapper p span {
     font-family: "Impact";
     font-size: 15pt;
-    font-weight: normal}
+    font-weight: lighter}
 /*Short Descr END*/
 /*Paty List*/
 .pListItem {
@@ -688,17 +698,58 @@ form>p {
 }
 /*Prevelegii END*/
 /*PhotoGalary */
+.myColumn {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 40px 0;
+    font-family: "rNormal"
+}
+.myColumn h2 {
+    font-size: 26pt;
+    text-transform: uppercase;
+}
+.myColumn h1 {
+    font-size: 26pt;
+    text-transform: uppercase;
+    margin: 0;    
+}
 .pvImageWr {
-    flex: 0 0 23%;
+    flex: 0 0 auto;
+    max-width: 280px;
     position: relative;
     margin: 20px;
-    height: 181px;
-
+    overflow: hidden;
 }
+.actions {
+    position: absolute;
+    background-color: whitesmoke;
+    left: 0;
+    right: 0;
+    bottom: -42px;
+    z-index: 2;
+}
+.actions a {
+    display: block;
+}
+.actions a:hover {
+    color: red;
+}
+.pvImageWr:hover .actions {
+    bottom: 0;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+}
+
 .pvBorder {
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 4px;
     left: 0;
     right: 0;
     border: solid 10px #ffffff;
@@ -1069,3 +1120,143 @@ form>p {
     padding: 10px 0;
 }
 /*PAty details END*/
+/*PhotoGalary*/
+.albomsRow {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 970px;
+    width: 100%;
+    margin-top: 20px;
+}
+.alItem {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    height: 350px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 300px;
+    width: 300px;
+    margin: 15px 10px;
+    text-align: center;
+}
+.alItem p {
+    margin: 0;
+}
+.alItem h3 {
+    margin: 10px 10px;
+}
+.pGimgWrapper {
+    width: 100%;
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+}
+.pGimgWrapper img {
+    width: 100%;
+}
+.watchAlbom {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: red;
+    max-height: 240px;
+}
+.watchAlbom:hover {
+    top: 0;
+}
+.watchAlbom:hover i {
+    display: block;
+}
+.watchAlbom i {
+    margin: 25%;
+    display: none;
+}
+.watchAlbom p {
+    padding: 10px;
+}
+.watchAlbom p span{
+    font-size: 18pt;
+}
+.pageLinks {
+    margin: 20px 0 0 0;
+}
+.pageLinks a{
+    margin: 0 2px;
+    border: solid 1px gray;
+    width: 25px;
+    line-height: 25px;
+    text-align: center;
+    background-color: lightgray;
+}
+.pageLinks a:hover {
+    background-color: white;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.albomStat {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
+    padding: 10px; 
+}
+.albomStat p {
+    padding: 0 15px 0 5px; 
+}
+.albomStat i:last-child {
+    flex: 1 0 auto;
+}
+.albomStat a {
+    display: inline-block;
+    flex: 2 0 auto;
+}
+.albomStat a p {
+    display: inline
+}
+.albomHead {
+    background-color: whitesmoke;
+    width: 970px;
+    display: block;
+    text-align: center;
+    padding: 0 0 10px;
+}
+.regionTitle {
+    text-align: left;
+    max-width: 970px;
+    width: 100%;
+    background-color: whitesmoke
+}
+.regionTitle>p>span {
+    font-size: 16pt;
+    margin-right: 20px;
+    color: gray;
+}
+.regionTitle p {
+    text-align: justify;
+}
+.regionDescr:first-letter {
+    padding-left: 20px;
+}
+.albomTitle span{
+    font-size: 16pt;
+    margin-right: 20px;
+}
+.albomTitle span:first-child {
+    color: gray;
+}
+
+/*PhotoGalary END*/

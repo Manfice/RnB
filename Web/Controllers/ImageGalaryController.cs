@@ -10,6 +10,7 @@ using Web.Helpers;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin, Moderator")]
     public class ImageGalaryController : Controller
     {
         private readonly IPhoto _photo;
@@ -24,21 +25,20 @@ namespace Web.Controllers
             return View(_photo.GetAlboms.OrderByDescending(albom => albom.Id));
         }
 
-        public ActionResult CreateAlbom(string patyCategory=null)
+        public ActionResult CreateAlbom(int id=0)
         {
-            var patyCat = new PatyCategory();
-            if (patyCategory!=null)
-            {
-                patyCat = _photo.GetCategoryById(int.Parse(patyCategory));
-            }
             var model = new PhotoAlbom
             {
-                Category = patyCat,
-                AlbomDate = DateTime.Now
+                AlbomDate = DateTime.Now,
+                Category = new PatyCategory()
             };
+            if (id == 0) return View(model);
+            var patyEvent = _photo.GetPatyById(id);
+            model.Title = patyEvent.Title;
+            model.AlbomDate = patyEvent.PatyDate;
+            model.Category = patyEvent.Category;
             return View(model);
         }
-
         [HttpPost]
         public ActionResult CreateRegion(ImageGalary region)
         {
@@ -68,11 +68,12 @@ namespace Web.Controllers
                             System.IO.File.Delete(albom.AvatarFullPath);
                         }
                     }
-
+                    var guid = Guid.NewGuid();
                     var img = ImageCrop.Crop(avatar, 210, 174, ImageCrop.AnchorPosition.Center);
-                    var path = Server.MapPath("~/Uploads/ImageGalary/" + "_" + albom.Title + "_" + avatar.FileName);
+                    var filename = avatar.FileName.Replace(" ", "_");
+                    var path = Server.MapPath("~/Uploads/ImageGalary/" + "_" + guid + "_" + filename);
                     img?.Save(path, ImageFormat.Jpeg);
-                    albom.Avatar = "/Uploads/ImageGalary/" + "_" + albom.Title + "_" + avatar.FileName;
+                    albom.Avatar = "/Uploads/ImageGalary/" + "_" + guid + "_" + filename;
                     albom.AvatarFullPath = path;
                 }
             }
@@ -150,14 +151,15 @@ namespace Web.Controllers
             {
 
                 var img = ImageCrop.Crop(data, 1024, 768, ImageCrop.AnchorPosition.Center);
-                var pathS = Server.MapPath("~/Uploads/ImageGalary/"+"_"+ region.Id+"_"+ data.FileName);
+                var filename = data.FileName.Replace(" ", "_");
+                var pathS = Server.MapPath("~/Uploads/ImageGalary/" + "_" + alb.Id + "_" + "_" + region.Id+"_"+ filename);
                 img?.Save(pathS, ImageFormat.Jpeg);
                 var pt = new ImageData
                 {
                     FullPath = pathS,
                     Height = 768,
                     Width = 1024,
-                    Path = "/Uploads/ImageGalary/" + "_" +region.Id+ "_" + data.FileName,
+                    Path = "/Uploads/ImageGalary/" + "_" + alb.Id + "_" + "_" + region.Id + "_" + filename,
                     Title = data.FileName,
                     TitleView = false,
                     Region = alb
@@ -166,6 +168,39 @@ namespace Web.Controllers
             }
             _photo.BulkAddPhotos(imgs);
             return RedirectToAction("AlbomDetails", new {id= region.Albom.Id});
+        }
+
+        public ActionResult EditRegion(int id)
+        {
+            return View(_photo.GetGalaryById(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditRegion(ImageGalary model)
+        {
+            if (string.IsNullOrEmpty(model.Title))
+            {
+                ModelState.AddModelError("title", "Наименование не должно быть пустым");
+                return View(model);
+            }
+            var data = _photo.SaveRegion(model);
+            return RedirectToAction("AlbomDetails", new {id=data.Albom.Id});
+        }
+
+        public ActionResult DeleteRegion(int id)
+        {
+            var albom = _photo.GetGalaryById(id).Albom.Id;
+            var photos = _photo.GetPhotoPath(id);
+            var items = photos as IList<string> ?? photos.ToList();
+            if (items.Any())
+            {
+                foreach (var item in items.Where(System.IO.File.Exists))
+                {
+                    System.IO.File.Delete(item);
+                }
+            }
+            _photo.DeleteRegion(id);
+            return RedirectToAction("AlbomDetails", new {id=albom});
         }
     }
 }

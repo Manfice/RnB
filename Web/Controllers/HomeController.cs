@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Web.Domen.Abstract;
 using Web.Domen.Models;
+using Web.Domen.Viewmodels;
 using Web.Helpers;
 using Web.Infrastructure;
 
@@ -58,7 +59,30 @@ namespace Web.Controllers
 
         public ActionResult PhotoVideo()
         {
-            return PartialView();
+            var model = _home.GetPhotos.Where(data => data.TitleView).Take(9).ToList();
+            return PartialView(model);
+        }
+
+        public ActionResult PhotoGalary(int page=1)
+        {
+            const int itemsPerPage = 9;
+            var model = new AlbomsViewmodel
+            {
+                Alboms = _home.GetAlboms.OrderByDescending(albom => albom.AlbomDate).Skip((page-1)*itemsPerPage).Take(itemsPerPage),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    TotalItems = _home.GetAlboms.Count(),
+                    ItemsPerPage = itemsPerPage
+                }
+            };
+            return View(model);
+        }
+
+        public ActionResult AlbomDetails(int id, string returnUrl)
+        {
+            ViewBag.returnUrl = returnUrl;
+            return View(_home.GetAlbomById(id));
         }
         public ActionResult Partners()
         {

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function() {
     $("#topSlider").owlCarousel({
         items: 1,
-        autoplay: false,
+        autoplay: true,
         autoplayTimeout: 10000,
         autoplayHoverPause: true,
         nav: false,
@@ -24,7 +24,18 @@
         autoplaySpeed: 3000,
         dotsContainer: '.dotsLayer',
         autoHeight: false,
-        margin: 10
+        margin: 10,
+        responsive: {
+            0: {
+                items:1
+            },
+            650: {
+                items:2
+            },
+            960: {
+                items:3
+            }
+        }
     });
 
     var partner = $(".partnersCarousel");
@@ -39,7 +50,19 @@
         dotsContainer: '.dotsLayer',
         autoHeight: false,
         loop: true,
-        margin: 10
+        margin: 10,
+        responsive: {
+            0: {
+                items: 3
+            },
+            650: {
+                items: 4
+            },
+            960: {
+                items: 5
+            }
+        }
+
     });
     $("#prev").click(function () {
         paty.trigger("prev.owl.carousel", [500]);
@@ -63,8 +86,11 @@ var mainJS = function () {
         photoView: ko.observable("PHOTO")
     };
 
-    var init = function() {
-        ko.applyBindings(modelView, document.getElementById("index"));
+    var init = function () {
+        var photoBlock = document.getElementById("photoBlock");
+        if (photoBlock) {
+            ko.applyBindings(modelView, document.getElementById("photoBlock"));
+        }
     };
     $(init);
     return {
