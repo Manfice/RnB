@@ -22,7 +22,8 @@ namespace Web
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Auth/Login"),
-                ExpireTimeSpan = TimeSpan.FromDays(10)
+                ExpireTimeSpan = TimeSpan.FromDays(1),
+                SlidingExpiration = true
             });
         }
     }

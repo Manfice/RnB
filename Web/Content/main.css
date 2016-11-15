@@ -149,16 +149,17 @@ nav {
     align-items: center;
 }
 
-.middleLogoTopMenu>a {
-    z-index: 2;
-    display: block;
-    height: 48px;
-}
+    .middleLogoTopMenu > a {
+        z-index: 2;
+        display: block;
+        height: 48px;
+    }
+
     .middleLogoTopMenu img {
         width: 100%;
         top: -30px;
         width: 122px;
-        position: relative
+        position: relative;
     }
 
 @media only screen and (max-device-width: 720px) {
@@ -411,7 +412,7 @@ header, footer {
     color: #484848;
 }
 
-.hRightWrapper>a {
+.hRightWrapper > a {
     font-family: "rNormal";
     display: block;
     font-size: 15pt;
@@ -466,7 +467,7 @@ header, footer {
         font-size: 14pt;
     }
 
-    .hRightWrapper>a {
+    .hRightWrapper > a {
         font-size: 13pt;
     }
 }
@@ -542,9 +543,11 @@ footer {
     margin: 5px 0 0px;
     text-align: left;
 }
+
 .fLogo a {
     font-size: 12pt;
 }
+
 @media only screen and (max-device-width: 720px) {
     .fBlock {
         margin: 10px 0;
@@ -559,9 +562,11 @@ footer {
     .fContact {
         order: 1;
     }
-    .fContact h3 a {
-        font-size: 13pt;
-    }
+
+        .fContact h3 a {
+            font-size: 13pt;
+        }
+
     .fLogo {
         order: 2;
     }
@@ -570,9 +575,11 @@ footer {
         flex: 0 0 100%;
         order: 3;
     }
-    .fLogo>a {
+
+    .fLogo > a {
         font-size: 12pt;
     }
+
     .fLogo img {
         width: 150px;
     }
@@ -588,20 +595,35 @@ footer {
     flex: 0 0 auto;
     position: relative;
 }
-
+.slideTitle {
+    position: absolute;
+    color: white;
+    z-index: 2;
+    right: 30%;
+    top: 20px;
+    font-size: 30pt;
+    font-weight: bold;
+    display: none;
+}
+.slideTitle.active {
+    display: block;
+}
 .dotsLayer {
     position: absolute;
     z-index: 7;
+    bottom: 10px;
+    left: 45%;
 }
 
     .dotsLayer > div {
-        width: 7px;
-        height: 7px;
+        width: 14px;
+        height: 15px;
         -ms-border-radius: 50%;
         border-radius: 50%;
         border: solid 2px white;
-        background-color: transparent;
+        background-color: white;
         margin: 0 5px;
+        display: inline-block;
     }
 
         .dotsLayer > div.active {
@@ -708,10 +730,12 @@ footer {
     width: 100%;
     padding: 40px 15px 0px;
 }
-.patyBlock a {
-    display: block;
-    margin: 0 0 50px 0;
-}
+
+    .patyBlock a {
+        display: block;
+        margin: 0 0 50px 0;
+    }
+
 .patyWrapper {
     width: 100%;
     position: relative;
@@ -750,14 +774,15 @@ footer {
     .nearParty h2 {
         font-size: 15pt;
     }
+
     .redline {
-    width: 100px;
-    background-color: red;
-    height: 3px;
-    position: relative;
-    top: -10px;
-    left: 20px;
-}
+        width: 100px;
+        background-color: red;
+        height: 3px;
+        position: relative;
+        top: -10px;
+        left: 20px;
+    }
 }
 /*Paty End*/
 /*Offer*/
@@ -883,7 +908,8 @@ form > p {
     .buttonBorder {
         bottom: -20px;
     }
-    .popUpWrapper>p {
+
+    .popUpWrapper > p {
         text-align: center;
         font-size: 10pt;
     }
@@ -1295,22 +1321,23 @@ form > p {
         padding: 50px 0 40px;
         margin: 15px 0 30px 0;
     }
-    .formLoginItem > form {
-        display: flex;
-        border: solid 2px red;
-        position: relative;
-        flex-flow: column nowrap;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 50px 0 40px;
-        margin: 15px 0 30px 0;
-    }
 
-    .formLoginItem > p {
-        font-size: 8pt;
-        color: darkgray;
-        text-align: center;
-    }
+.formLoginItem > form {
+    display: flex;
+    border: solid 2px red;
+    position: relative;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 50px 0 40px;
+    margin: 15px 0 30px 0;
+}
+
+.formLoginItem > p {
+    font-size: 8pt;
+    color: darkgray;
+    text-align: center;
+}
 
 .formTitle {
     position: absolute;
@@ -1361,26 +1388,31 @@ form > p {
         margin: 0 20px 20px;
         color: #848484;
     }
+
 @media only screen and (max-device-width: 720px) {
 
     .formLoginRow {
         max-width: 340px;
     }
-    .socRow{
+
+    .socRow {
         margin: 0;
     }
+
     .formWrapper {
         padding: 10px;
     }
-    .formWrapper>form {
-        max-width: 300px;
-        padding: 20px 10px;
-        margin: 25px 0;
-    }
-    .formWrapper>form>p {
-        font-size: 10pt;
-        display: none;
-    }
+
+        .formWrapper > form {
+            max-width: 300px;
+            padding: 20px 10px;
+            margin: 25px 0;
+        }
+
+            .formWrapper > form > p {
+                font-size: 10pt;
+                display: none;
+            }
 }
 /*PopUp Windows Common END*/
 /*Near Details*/
@@ -1432,9 +1464,9 @@ form > p {
     cursor: pointer;
 }
 
-    .patyItemDetails:hover .title{
-        color: red;
-    }
+.patyItemDetails:hover .title {
+    color: red;
+}
 
 .npImgWrapper > h3 {
     position: absolute;
@@ -1453,15 +1485,17 @@ form > p {
     display: block;
     margin: 105px 130px;
 }
+
 @media only screen and (max-device-width: 720px) {
     .patyItemDetails {
         max-width: 300px;
         width: 100%;
     }
-    .patyItemDetails:hover a {
-    display: block;
-    margin: 55px 75px;
-}
+
+        .patyItemDetails:hover a {
+            display: block;
+            margin: 55px 75px;
+        }
 }
 /*Near Details END*/
 /*PAty details*/
@@ -2058,6 +2092,7 @@ nav > ul {
     font-weight: bolder;
     letter-spacing: 2px;
 }
+
 @media only screen and (max-device-width: 720px) {
     .rootItem {
         max-width: 300px;
@@ -2185,32 +2220,36 @@ h3 > span {
         text-align: center;
         padding-top: 15px;
     }
+
     .contacts li {
         padding: 10px 20px;
         display: flex;
         align-items: center;
         position: relative;
     }
-    .contacts li i {
-        color: red;
-        background-color: whitesmoke;
-        font-size: 16pt;
-        width: 50px;
-        height: 50px;
-        position: relative;
-        text-align: center;
-        padding-top: 15px;        
-    }
-    .contacts li img {
-        height: 300px;
-        position: absolute;
-        top: 0;
-    }
-    .contacts li:last-child {
-        height: 300px;
-        width: 100%;
-        overflow: hidden;
-    }
+
+        .contacts li i {
+            color: red;
+            background-color: whitesmoke;
+            font-size: 16pt;
+            width: 50px;
+            height: 50px;
+            position: relative;
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .contacts li img {
+            height: 300px;
+            position: absolute;
+            top: 0;
+        }
+
+        .contacts li:last-child {
+            height: 300px;
+            width: 100%;
+            overflow: hidden;
+        }
 
 @media only screen and (max-device-width: 720px) {
     .contacts tr:last-child {
@@ -2226,7 +2265,7 @@ h3 > span {
 }
 /*Contacts END*/
 /*Blog*/
-.blogList li a{
+.blogList li a {
     margin: 30px 0 0 0;
     display: flex;
     flex-flow: row wrap;
@@ -2234,6 +2273,7 @@ h3 > span {
     align-items: center;
     border-bottom: solid 2px gray;
 }
+
 .blogPvImageWr {
     float: right;
     position: relative;
@@ -2241,6 +2281,7 @@ h3 > span {
     overflow: hidden;
     max-width: 400px;
 }
+
 .blogText {
     max-width: 500px;
     max-height: 280px;
@@ -2250,6 +2291,7 @@ h3 > span {
     flex-flow: column;
     position: relative;
 }
+
 .bottomFade {
     position: absolute;
     background: linear-gradient(0deg, white,transparent);
@@ -2260,53 +2302,64 @@ h3 > span {
 }
 
 .blogText p {
-    text-align: justify
+    text-align: justify;
 }
-.blogText p:first-letter {
-    margin-left: 30px;
-}
+
+    .blogText p:first-letter {
+        margin-left: 30px;
+    }
+
 .blogText h3 {
     color: red;
     font-size: 16pt;
 }
+
 .tdImage img {
     width: 100%;
 }
+
 .myBlogDetails {
     display: block;
     width: 100%;
 }
-.myBlogDetails h2 {
-    display: block;
-    background-color: whitesmoke;
-    text-align: center;
-    text-transform: uppercase;
-    margin: 0 0 30px 0;
-    padding: 5px;
-}
-.myBlogDetails img {
-    float: right;
-    margin: 0 0 0 20px;
-}
-.myBlogDetails p {
-    text-align: justify;
-    padding: 0 0 10px 0;
-}
-.myBlogDetails p:first-letter {
-    padding: 0 0 0 20px;
-}
+
+    .myBlogDetails h2 {
+        display: block;
+        background-color: whitesmoke;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 0 0 30px 0;
+        padding: 5px;
+    }
+
+    .myBlogDetails img {
+        float: right;
+        margin: 0 0 0 20px;
+    }
+
+    .myBlogDetails p {
+        text-align: justify;
+        padding: 0 0 10px 0;
+    }
+
+        .myBlogDetails p:first-letter {
+            padding: 0 0 0 20px;
+        }
+
 @media only screen and (max-device-width: 720px) {
     .blogText {
         order: 1;
         padding: 20px;
     }
+
     .blogPvImageWr {
-    flex: 0 0 auto;
+        flex: 0 0 auto;
         order: 0;
         max-width: 300px;
         width: 100%;
         margin: 0 20px 20px;
     }
+
     .myBlogDetails {
         padding: 0 20px;
     }

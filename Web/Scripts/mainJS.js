@@ -3,19 +3,23 @@
         $(".ddMenu").slideToggle();
     });
 
-    $("#topSlider").owlCarousel({
+    var topSlider = $("#topSlider");
+
+    topSlider.owlCarousel({
         items: 1,
         autoplay: true,
         autoplayTimeout: 10000,
         autoplayHoverPause: true,
         nav: false,
-        dots: false,
+        dots: true,
         loop: true,
         autoplaySpeed: 3000,
-        dotsContainer: ".dotsLayer",
+        dotsContainer: "#topDot",
         autoHeight: false
     });
-
+    topSlider.on("changed.owl.carousel", function (e) {
+        console.log(e.item.index);
+    });
     var paty = $("#paty");
 
     paty.owlCarousel({
@@ -26,7 +30,6 @@
         nav: false,
         dots: false,
         autoplaySpeed: 3000,
-        dotsContainer: '.dotsLayer',
         autoHeight: false,
         margin: 10,
         responsive: {
