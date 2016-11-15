@@ -13,9 +13,13 @@ namespace Web.Domen.Abstract
         Task<List<PatyImage>> GetImagesAsync(int id);
         Task<PatyCategory> DeleteCategoryAsync(int id);
         void DeleteImagesAsync(List<PatyImage> images);
-        Task<PatyActionResult> AddPatyAsync(int c, int a, Paty model, PatyImage image);
-        Task<PatyActionResult> GetPatyByIdAsync(int id);
+        Task<PatyActionResult> AddPatyAsync(int a, Paty model, PatyImage image);
+        //Task<PatyActionResult> GetPatyByIdAsync(int id);
         Task<PatyActionResult> DeletePatyAsync(int id);
+        PatyCategory GetCategoryById(int id);
+        PatyCategory GetCategoryByRoute(string routeUrl);
+        PatyCategory SavePatyCategory(int parent,PatyCategory model, PatyImage image);
+        Task<Paty> GetPatyByIdAsync(int id);
 
     }
 }

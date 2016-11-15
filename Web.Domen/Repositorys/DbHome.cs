@@ -124,5 +124,10 @@ namespace Web.Domen.Repositorys
         {
             return _context.Alboms.Find(id);
         }
+
+        public Paty GetPatyByRouteUrl(string route)
+        {
+            return _context.Paties.FirstOrDefault(paty => paty.RouteTitle.Contains(route));
+        }
     }
 }

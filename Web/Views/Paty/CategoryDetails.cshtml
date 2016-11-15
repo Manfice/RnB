@@ -1,0 +1,44 @@
+﻿@model Web.Domen.Models.PatyCategory
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+<div class="myColumn">
+    <h1>@Model.Title</h1>
+    <div class="ds"><span> </span><span> </span><span> </span></div>
+    <div class="column970">
+        <p style="text-align: center;">@Model.Description</p>
+    </div>
+    <div class="row960w">
+        @foreach (var item in Model.Paties.OrderBy(paty => paty.PatyDate))
+        {
+            <div class="patyItemDetails">
+                <div class="npImgWrapper">
+                    <h3>@item.PatyDate.ToString("M")</h3>
+                    @if (item.Avatar != null)
+                    {
+                        <img alt="" src="@item.Avatar.Path" />
+                    }
+                    else
+                    {
+                        <img alt="" src="/Content/img/pList/454x312.jpg" />
+                    }
+                    <div class="title">
+                        <a href="/sobitie/@item.RouteTitle" class="redButton">Подробнее</a>
+                        <h3>@item.Title</h3>
+                    </div>
+                </div>
+                <div class="itmDescr">
+                    @if (item.Descr.Length >= 100)
+                    {
+                        <p>@item.Descr.Substring(0, 100) ...</p>
+                    }
+                    else
+                    {
+                        <p>@item.Descr</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

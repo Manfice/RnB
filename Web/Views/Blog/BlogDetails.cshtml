@@ -1,0 +1,21 @@
+﻿@model Web.Domen.Models.Blog
+
+@{
+    ViewBag.Title = "BlogDetails";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="myColumn">
+    <div class="column970">
+        <div class="myBlogDetails">
+            <h2 class="blogTitle">@Model.Title</h2>
+            <div class="blogPvImageWr tdImage">
+                <img alt="" src="@(Model.Avatar ?? "/Content/img/Blog.jpg")" />
+                <div class="pvBorder">
+                </div>
+            </div>
+            @Html.Raw(Model.BlogBody)
+        </div>
+    </div>
+    <a class="redLink" href="@Url.Action("Index")"><<< Назад</a>
+</div>

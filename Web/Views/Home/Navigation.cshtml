@@ -1,0 +1,48 @@
+﻿<nav>
+    <div class="topMenuWrapper">
+        <div class="topMenu">
+            <div class="hidden-sm hidden-xs menuList">
+                <ul class="leftMenu">
+                    <li><a href="@Url.Action("Index", "Home")">Главная</a> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        <ul class="SubPaty">
+                            <li><a href="@Url.Action("Company","Home")">О клубе</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Услуги</a> <i class="fa fa-angle-down" aria-hidden="true"></i></li>
+                    <li>
+                        <a href="@Url.Action("Paty", "Paty")">Мероприятия</a> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        @Html.Action("PatyMeny", "Paty")
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="middleLogoTopMenu">
+            <a href="/">
+                <img src="/Content/img/logo.png" alt="" width="50" />
+            </a>
+        </div>
+        <div class="topMenu">
+            <div class="menuList">
+                <ul class="hidden-sm hidden-xs rightMenu">
+                    <li><a href="@Url.Action("Galary", "Home")">галерея</a></li>
+                    <li><a href="#">отзывы</a></li>
+                    <li><a href="@Url.Action("Index","Blog")">блог</a></li>
+                    <li><a href="@Url.Action("Contacts")">контакты</a></li>
+                </ul>
+                <ul class="visible-sm visible-xs rightMenu">
+                    <li><button id="topMenu"><i class="fa fa-bars"></i></button>
+                        <ul class="ddMenu">
+                            <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                            <li><a href="#">Услуги</a></li>
+                            <li><a href="@Url.Action("Paty", "Paty")">Мероприятия</a></li>
+                            <li><a href="@Url.Action("Galary", "Home")">галерея</a></li>
+                            <li><a href="#">отзывы</a></li>
+                            <li><a href="@Url.Action("Index","Blog")">блог</a></li>
+                            <li><a href="@Url.Action("Contacts")">контакты</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

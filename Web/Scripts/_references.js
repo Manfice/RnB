@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="adminjs/imagegalary.js" />
 /// <reference path="adminjs/paty.js" />
+/// <reference path="bootstrap.min.js" />
 /// <reference path="flipclock.min.js" />
 /// <reference path="jquery.datetimepicker.js" />
 /// <reference path="jquery.validate.min.js" />

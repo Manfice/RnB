@@ -1,9 +1,42 @@
 ﻿@model IEnumerable<Web.Domen.Models.PatyCategory>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Мероприятия";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var i = 0;
 }
-<div id="patySection">
+
+<div class="albomIndex">
+    <div class="controlsBlock">
+        <a>Категории</a>
+        <a>Мероприятия</a>
+    </div>
+    <div class="categorysTable">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Наименование</th>
+                <th>Состав группы</th>
+                <th>Мероприятий</th>
+                <th><a href="@Url.Action("AddCategory")" class="greenBtn">Добавить</a></th>
+            </tr>
+            @foreach (var item in Model.Where(category => category.ParentCategory == null))
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Title</td>
+                    <td>@Model.Count(category => category.ParentCategory!=null && category.ParentCategory.Id==item.Id)</td>
+                    <td>@Model.Where(category => category.ParentCategory != null && category.ParentCategory.Id == item.Id).Sum(category => category.Paties.Count)</td>
+                    <td>
+                        <a href="@Url.Action("PatyInner", new {id=item.Id})" class="greenBtn">Изменить</a>
+                        <a href="@Url.Action("DeleteCategory", new {id=item.Id, returnUrl=Request.Url?.PathAndQuery})" class="redBtn">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@*<div id="patySection">
     <div>
         <div class="formPopUp" style="display: none" data-bind="visible:Paty.viewmodel.editPaty().mode()==='EDIT'">
             <div class="formWrapper">
@@ -71,9 +104,9 @@
     <div class="patys" style="display: none" data-bind="visible:Paty.viewmodel.currView()==='PATYS'">
         @Html.Partial("placeholders/_Patys")
     </div>
-</div>
+</div>*@
 
 @section scripts
 {
-<script src="~/Scripts/AdminJs/paty.js"></script>
+@*<script src="~/Scripts/AdminJs/paty.js"></script>*@
 }

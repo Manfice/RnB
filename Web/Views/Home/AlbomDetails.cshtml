@@ -3,10 +3,7 @@
     ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_MainRnB.cshtml";
 }
-@section links
-{
-<link href="~/Content/lightbox.min.css" rel="stylesheet" />
-}
+
 <div class="myColumn" id="pt">
     <div class="albomHead">
         <h1 class="albomTitle"><span>@Model.AlbomDate.ToShortDateString()</span><span>@Model.Title</span></h1>
@@ -45,13 +42,3 @@
 
 </div>
 <a href="@ViewBag.returnUrl">Назад к коллекции</a>
-@section scripts
-{
-    <script src="~/Scripts/lightbox.min.js"></script>
-    <script>
-        lightbox.option({
-            "disableScrolling": true,
-            "albumLabel":"@Model.Title"
-        });
-    </script>
-}

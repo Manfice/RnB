@@ -10,8 +10,22 @@
         @foreach (var item in Model)
         {
             <div class="pvImageWr">
-                <div class="pvBorder"></div>
-                <img alt="" src="@item.Path" />
+                <a href="@item.Path" data-lightbox="image-title" data-title="@item.Region.Description">
+                    <img class="example-image" alt="" src="@item.Path" />
+                    <div class="pvBorder"></div>
+                </a>
+                <div class="actions albomStat">
+                    <i class="fa fa-eye"></i>
+                    <p>125</p>
+                    <a href="">
+                        <i class="fa fa-heart"></i>
+                        <p>0</p>
+                    </a>
+                    <a href="@Url.Content(item.Path)" target="_blanck">
+                        <i class="fa fa-download"></i>
+                    </a>
+                    <i class="fa fa-share-alt"></i>
+                </div>
             </div>
         }
     </div>
@@ -41,5 +55,5 @@
             <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
         </div>*@
     </div>
-    <a class="redLink" href="@Url.Action("PhotoGalary")">Смотреть еще</a>
+    <a class="redLink" href="@Url.Action("Galary")">Смотреть еще</a>
 </div>

@@ -19,7 +19,7 @@ namespace Web.Domen.Repositorys
         public async Task<PatyCategory> AddCategoryAsync(int p, int a,PatyCategory model, PatyImage image)
         {
             PatyCategory parent = null;
-            PatyCategory current = null;
+            PatyCategory current;
 
             if (p > 0)
             {
@@ -64,11 +64,11 @@ namespace Web.Domen.Repositorys
             return current;
         }
 
-        public async Task<PatyActionResult> AddPatyAsync(int c, int a, Paty model, PatyImage image)
+        public async Task<PatyActionResult> AddPatyAsync(int a, Paty model, PatyImage image)
         {
             Paty result = null;
             var action = new PatyActionResult();
-            var dbCat = await _context.PatyCategories.FindAsync(c);
+            var dbCat = await _context.PatyCategories.FindAsync(model.Category.Id);
             if (dbCat==null)
             {
                 action.Success = false;
@@ -174,6 +174,11 @@ namespace Web.Domen.Repositorys
             };
         }
 
+        public PatyCategory GetCategoryById(int id)
+        {
+            return _context.PatyCategories.Include(category => category.Paties).Include(category => category.Avatar).Include(category => category.ParentCategory).FirstOrDefault(category => category.Id == id);
+        }
+
         public async Task<List<PatyImage>> GetImagesAsync(int id)
         {
             var imgList = new List<PatyImage>();
@@ -187,25 +192,25 @@ namespace Web.Domen.Repositorys
             return imgList;
         }
 
-        public async Task<PatyActionResult> GetPatyByIdAsync(int id)
-        {
-            var dbPaty = await _context.Paties.FindAsync(id);
+        //public async Task<PatyActionResult> GetPatyByIdAsync(int id)
+        //{
+        //    var dbPaty = await _context.Paties.FindAsync(id);
 
-            return dbPaty == null
-                ? new PatyActionResult
-                {
-                    Success = false,
-                    Paty = null,
-                    Errors = new[] {"Такого мероприятия не существует! Обновите страницу"}
-                }
-                : new PatyActionResult
-                {
-                    Paty = dbPaty,
-                    Success = true,
-                    Errors = null
-                };
+        //    return dbPaty == null
+        //        ? new PatyActionResult
+        //        {
+        //            Success = false,
+        //            Paty = null,
+        //            Errors = new[] {"Такого мероприятия не существует! Обновите страницу"}
+        //        }
+        //        : new PatyActionResult
+        //        {
+        //            Paty = dbPaty,
+        //            Success = true,
+        //            Errors = null
+        //        };
 
-        }
+        //}
 
         public async Task<PatyImage> ImgToDeleteAsync(int id)
         {
@@ -214,7 +219,44 @@ namespace Web.Domen.Repositorys
             return result;
         }
 
-        private string MakeSeats(int maxGuests)
+        public PatyCategory SavePatyCategory(int parent, PatyCategory model, PatyImage image)
+        {
+            PatyCategory _parent = null;
+            PatyCategory _current;
+            var img = 0;
+            if (parent>0)
+            {
+                _parent = GetCategoryById(parent);
+            }
+
+            if (model.Id > 0)
+            {
+                _current = GetCategoryById(model.Id);
+                _current.Title = model.Title;
+                _current.Description = model.Description;
+                img = _current.Avatar.Id;
+            }
+            else
+            {
+                _current = model;
+                _current.ParentCategory = _parent;
+                _context.PatyCategories.Add(_current);
+            }
+            if (image != null)
+            {
+                _context.PatyImages.Add(image);
+            }
+            _current.Avatar = image;
+            if (img>0)
+            {
+                var dbAva = _context.PatyImages.Find(img);
+                _context.PatyImages.Remove(dbAva);
+            }
+            _context.SaveChanges();
+            return _current;
+        }
+
+        private static string MakeSeats(int maxGuests)
         {
             if (maxGuests<=0)
             {
@@ -227,6 +269,16 @@ namespace Web.Domen.Repositorys
             }
             seets.Append(maxGuests);
             return seets.ToString();
+        }
+
+        public async Task<Paty> GetPatyByIdAsync(int id)
+        {
+            return await _context.Paties.FindAsync(id);
+        }
+
+        public PatyCategory GetCategoryByRoute(string routeUrl)
+        {
+            return _context.PatyCategories.FirstOrDefault(category => category.RouteTitle.Contains(routeUrl));
         }
     }
 }

@@ -35,6 +35,7 @@ namespace Web.Infrastructure
             _kernel.Bind<IAuth>().To<DbAuth>().InRequestScope();
             _kernel.Bind<IPhoto>().To<DbPhoto>().InRequestScope();
             _kernel.Bind<ICustomer>().To<DbCustomer>().InRequestScope();
+            _kernel.Bind<ICmc>().To<DbCmc>().InRequestScope();
         }
     }
 }

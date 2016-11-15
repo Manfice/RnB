@@ -1,0 +1,31 @@
+﻿@model Web.Domen.Viewmodels.CategoryViewModel
+@{
+    ViewBag.Title = @Model.Category.Title;
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="myColumn">
+    <h1>@Model.Category.Title</h1>
+    <div class="ds"><span> </span><span> </span><span> </span></div>
+    <p>@Model.Category.Description</p>
+    <div class="row960w">
+        @foreach (var item in Model.Categories)
+        {
+            <div class="rootItem">
+                <a href="/spisok-meropriatiy/@item.RouteTitle">
+                    <div class="rootItemWrapper">
+                        <div class="rootTitle">
+                            <p href="/spisok-meropriatiy/@item.RouteTitle">@item.Title</p>
+                        </div>
+                        @if (item.Avatar != null)
+                        {
+                            <img alt="" src="@item.Avatar.Path"/>
+                        }
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+</div>
+

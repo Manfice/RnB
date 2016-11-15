@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Web.Domen.Models.Blog>
+@{
+    ViewBag.Title = "Блог";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var i = 0;
+}
+
+<h2>Блог</h2>
+<a href="@Url.Action("AddBlog")" class="greenBtn">Добавить</a>
+<div class="columnBlock">
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Дата</th>
+            <th>Наименование</th>
+            <th>Фото</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var data in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@data.BlogData.ToString("g")</td>
+                <td>@data.Title</td>
+                <td><img alt="" src="@(data.Avatar??"/Content/img/Blog.jpg")" width="200"/></td>
+                <td>
+                    <a class="greenBtn" href="@Url.Action("AddBlog","Blog", new {id=data.Id})">Редактировать</a> |
+                    <a class="redBtn" href="@Url.Action("DeleteBlog","Blog",new {id=data.Id})">Удалить</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+

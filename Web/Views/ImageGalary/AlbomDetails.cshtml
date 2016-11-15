@@ -31,12 +31,11 @@
 
         <div class="albomRegion">
             <div class="addPhotoForm">
+                <h3 title="@region.Description">@region.Title</h3>
+                <a href="@Url.Action("EditRegion", new {id= region.Id})" title="Редактировать раздел">Изменить</a>
+                <a href="@Url.Action("DeleteRegion", new {id=region.Id})" title="Удалить раздел с фотографиями">Удалить</a>
                 @using (Html.BeginForm("BulkAddPhotos", "ImageGalary", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <h3 title="@region.Description">@region.Title</h3>
-                    <a href="@Url.Action("EditRegion", new {id= region.Id})" title="Редактировать раздел">Изменить</a> 
-                    <a href="@Url.Action("DeleteRegion", new {id=region.Id})" title="Удалить раздел с фотографиями">Удалить</a>
-
                     @Html.Hidden("regId", region.Id)
                     @Html.Hidden("Albom.Id", Model.Id)
                     @Html.ValidationSummary()

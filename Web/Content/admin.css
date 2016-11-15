@@ -4,27 +4,86 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: "Arial"
 }
 a,h1,h2,h3,h4,h5,h6 {
     color: inherit;
     margin: 0;
     padding: 0;
+    text-decoration: none;
 }
 .validation-summary-errors {
     color: red;
     padding: 10px;
 }
-
+.inputRow {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 10px 0;
+}
+.inputBloc {
+    flex: 0 0 30%;
+    display: flex;
+    flex-flow: column;
+}
+input[type=number] {
+    max-width: 70px;
+}
+input {
+    margin: 10px 0;
+    align-self: center;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    border: solid 1px gray;
+    font-size: 12pt;
+    padding: 5px;
+    max-width: 300px;
+    width: 100%;
+}
+textarea {
+    margin: 5px;
+}
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+.redBtn {
+    border: solid 1px;
+    padding: 10px 15px;
+    background-color: red;
+    color: white;
+    font-family: "Arial";
+}
+.greenBtn {
+    background-color: green;
+    border: solid 1px;
+    padding: 10px 15px;
+    color: white;
+}
+.columnCenter {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 .rowFlex {
     flex: 0 0 auto;
     display: flex;
     flex-flow: row;
     justify-content: flex-start;
+    align-items: flex-start;
+}
+.addPatyFormItem {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: column;
+    max-width: 400px;
+    width: 100%;
+    border: solid 1px green;
+    padding: 20px;
 }
 header {
     flex: 0 0 auto;
@@ -158,6 +217,15 @@ form {
     display: flex;
     flex-flow: column;
     margin: 20px;
+    max-width: 880px;
+    width: 100%;
+}
+.formPaty {
+    display: block;
+    width: 100%;
+}
+.formPaty img {
+    align-self: center;
 }
 .photoPlaceholder {
     border: solid 1px gray;
@@ -195,7 +263,7 @@ form {
     display: flex;
     flex-flow: column;
 }
-.fright input {
+.fright>input {
     margin: 10px 10px 5px 10px;
     -ms-border-radius: 5px;
     border-radius: 5px;
@@ -204,7 +272,7 @@ form {
     width: 300px;
 }
 
-.fright textarea {
+.fright>textarea {
     -ms-border-radius: 5px;
     border-radius: 5px;
     border: solid 1px gray;
@@ -265,11 +333,11 @@ label>input[type=file] {
     flex: 0 0 auto;
     width: 400px;
 }
-.formAlbom form {
+.formAlbom>form {
     justify-content: flex-start;
     align-items: flex-start;
 }
-form input[type=text] {
+.formAlbom>form>input[type=text] {
     margin: 10px 0;
     align-self: center;
     -ms-border-radius: 5px;
@@ -280,7 +348,7 @@ form input[type=text] {
     width: 300px;
 }
 
-form textarea {
+.formAlbom>form>textarea {
     margin: 10px 0;
     align-self: center;
     -ms-border-radius: 5px;
@@ -298,28 +366,29 @@ form textarea {
 .addPhotoForm {
     display: block;
 }
-.addPhotoForm form {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-around;
+.addPhotoForm>form {
+    display: block;
+    margin: 0;
+    padding: 0;
+
 }
 .addRegionForm {
     display: block;
 }
-.addRegionForm form {
+.addRegionForm>form {
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
     align-items: flex-start;
     width: 310px;
 }
-.addRegionForm form input {
+.addRegionForm>form>input {
     align-self: flex-start;
 }
-.addRegionForm form textarea {
+.addRegionForm>form>textarea {
     align-self: flex-start;
 }
-.addRegionForm form p {
+.addRegionForm>form>p {
     margin: 0;
     padding: 0;
 }
@@ -349,3 +418,18 @@ form textarea {
     color: whitesmoke;
 }
 /*Image galary END*/
+
+/*PAty Admin*/
+.aboutPaty {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 10px;
+}
+.catImageWrapper {
+    margin: 10px;
+}
+.categorysTable td, .categorysTable th {
+    height: 35px;
+}
+/*Paty End*/

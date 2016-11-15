@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Ошибка";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="columnCenter">
+    <h1>Ошибка!</h1>
+        <p>@ViewBag.error</p>
+
+    <a class="redBtn" href="@ViewBag.returnUrl">Назад</a>
+</div>
+

@@ -14,18 +14,19 @@
     <div class="headTop">
     </div>
     <div class="bodyTop">
-        @Html.ActionLink("Main", "Index", "Home")
-        @Html.ActionLink("Выход", "LogOut", "Auth")
+        @Html.ActionLink("Вернуться на сайт", "Index", "Home", null , new {@class="greenBtn"})
+        @Html.ActionLink("Выход", "LogOut", "Auth", null, new {@class="redBtn"})
     </div>
 </header>
 
 <div class="bodyContent">
     <div class="headTop leftMenu">
-        @Html.ActionLink("Index", "Index", "Cms", null, new { @class = ViewBag.active })
+        @Html.ActionLink("Index", "Index", "Cms", null, new { @class = "" })
         <a class="@ViewBag.active" href="@Url.Action("Roles", "Cms")">Roles</a>
         <hr />
         @Html.ActionLink("Мероприятия", "Index", "Paty")
         @Html.ActionLink("Фото галерея", "Index", "ImageGalary")
+        @Html.ActionLink("Блог", "BlogAdmin", "Blog")
     </div>
     <div class="mainContent">
         @RenderBody()

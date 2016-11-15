@@ -1,0 +1,52 @@
+﻿@model Web.Domen.Viewmodels.CategoryViewModel
+@{
+    ViewBag.Title = Model.Category.Title;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var i = 0;
+}
+
+<div class="albomIndex">
+    <div class="aboutPaty">
+        <div class="catImageWrapper">
+            @if (Model.Category.Avatar != null)
+            {
+                <img alt="" src="@Model.Category.Avatar.Path" width="200"/>
+            }
+        </div>
+        <div class="catDescr">
+            <h1>@Model.Category.Title</h1>
+            <p>@Model.Category.Description</p>
+            <a href="@Url.Action("Index")" class="greenBtn">Назад</a>
+            <a href="@Url.Action("AddCategory", new {id=Model.Category.Id})" class="greenBtn">Редактировать</a>
+            <a href="@Url.Action("DeleteCategory", new {id=Model.Category.Id, returnUrl=Request.Url?.PathAndQuery})" class="redBtn">Удалить</a>
+        </div>
+    </div>
+    <div class="categorysTable">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Наименование</th>
+                <th>Мероприятий</th>
+                <th>Фотоальбомы</th>
+                <th><a href="@Url.Action("AddCategory", new {parent=Model.Category.Id})">Добавить</a></th>
+            </tr>
+            @foreach (var item in Model.Categories)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Title</td>
+                    <td>@item.Paties.Count</td>
+                    <td>@item.PhotoAlboms.Count</td>
+                    <td>
+                        <a href="@Url.Action("CategoryPatys", new {id=item.Id})" class="greenBtn">События</a>
+                        <a class="greenBtn">Фотоальбомы</a>
+                        <a href="@Url.Action("AddCategory", new {id = item.Id, parent = item.ParentCategory.Id})" class="greenBtn">Изменить</a>
+                        <a href="@Url.Action("DeleteCategory", new {id = item.Id})" class="redBtn" onclick="return confirm('Удалить?')">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

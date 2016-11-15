@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Web.Domen.Models.Blog>
+@{
+    ViewBag.Title = "Блог";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="myColumn">
+    <h1>Блог</h1>
+    <div class="ds"><span> </span><span> </span><span> </span></div>
+    <div class="column970">
+        @if (Model.Any())
+        {
+            <ul class="blogList">
+                @foreach (var post in Model)
+                {
+                    <li>
+                        <a href="@Url.Action("BlogDetails", "Blog", new {id=post.Id})">
+                            <div class="blogText">
+                                <h3>@post.Title</h3>
+                                <p>@post.BlogData.ToString("f")</p>
+                                @Html.Raw(post.BlogBody)
+                                <div class="bottomFade"></div>
+                            </div>
+                            <div class="blogPvImageWr tdImage">
+                                <img alt="" src="@(post.Avatar ?? "/Content/img/Blog.jpg")"/>
+                                <div class="pvBorder">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>    
+        }
+        else
+        {
+            <h2>Извините, раздел не содержит ни одной записи.</h2>
+            <p></p>
+        }
+    </div>
+</div>

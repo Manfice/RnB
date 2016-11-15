@@ -50,7 +50,7 @@ namespace Web.Controllers
             {
                 var ident = await UserMeneger.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
                 AuthManager.SignOut();
-                AuthManager.SignIn(new AuthenticationProperties {IsPersistent = false, ExpiresUtc = DateTimeOffset.MaxValue},ident);
+                AuthManager.SignIn(new AuthenticationProperties {IsPersistent = true},ident);
                 if (string.IsNullOrEmpty(returnUrl))
                 {
                     return RedirectToAction("Index","Home");

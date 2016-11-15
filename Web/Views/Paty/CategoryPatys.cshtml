@@ -1,0 +1,55 @@
+﻿@model Web.Domen.Models.PatyCategory
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var i = 0;
+}
+
+<div class="albomIndex">
+    <div class="aboutPaty">
+        <div class="catImageWrapper">
+            @if (Model.Avatar != null)
+            {
+                <img alt="" src="@Model.Avatar.Path" width="200" />
+            }
+        </div>
+        <div class="catDescr">
+            <h1>@Model.ParentCategory.Title > @Model.Title</h1>
+            <p>@Model.Description</p>
+            <a href="@Url.Action("AddCategory", new {id=Model.Id})">Редактировать</a>
+            <a href="@Url.Action("DeleteCategory", new {id=Model.Id, returnUrl=Request.Url?.PathAndQuery})">Удалить</a>
+            <a href="@Url.Action("Index")" class="redBtn">Назад</a>
+        </div>
+    </div>
+    <div class="categorysTable">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Наименование</th>
+                <th>Дата</th>
+                <th>Цена</th>
+                <th>Места</th>
+                <th>Заказы</th>
+                <th><a href="@Url.Action("AddPaty", new {cat=Model.Id})" class="greenBtn">Добавить</a></th>
+            </tr>
+            @foreach (var item in Model.Paties)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Title</td>
+                    <td>@item.PatyDate</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>@item.Orders.Sum(order => order.Place) / @item.MaxGuests</td>
+                    <td>@item.Orders.Count</td>
+                    <td>
+                        <a href="@Url.Action("PatyDetails", new {id = item.Id})" class="greenBtn">Подробнее</a>/
+                        <a href="@Url.Action("CreateAlbom","ImageGalary", new {id=item.Id})" class="greenBtn">Фотоальбом</a>/
+                        <a href="@Url.Action("AddPaty", new {id=item.Id, cat=item.Category.Id})" class="greenBtn">Изменить</a>/
+                        <a href="@Url.Action("DeletePaty", new {id=item.Id})" class="redBtn" onclick="return confirm('Удалить мероприятие?')">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

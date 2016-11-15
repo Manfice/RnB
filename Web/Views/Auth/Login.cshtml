@@ -6,47 +6,50 @@
 
 @model Web.Domen.Viewmodels.LogivVm
 
-<div class="popUpWrapper">
-    <div class="formWrapper flexRow">
-        <div class="formClose">
-            <p data-bind="click:popUp.loginMe">x</p>
+<div class="myColumn">
+    <div class="formLoginRow">
+
+        <div class="formLoginItem">
+            @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="formTitle">
+                    <h2>
+                        Войти в личный <br />кабинет
+                    </h2>
+                </div>
+                    <div class="inpItem">
+                        @Html.TextBoxFor(vm => vm.Email, new { placeholder = "E-mail" })
+                    </div>
+                    <div class="inpItem">
+                        @Html.PasswordFor(vm => vm.Password, new { placeholder = "Пароль" })
+                    </div>
+                    <div class="formFooter">
+                        <button type="submit" class="redButton">Войти</button>
+                    </div>
+            }
         </div>
-        @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <div class="formTitle">
-                <h2>
-                    Войти в личный <br/>кабинет
-                </h2>
-            </div>
-            <div class="inpItem">
-                @Html.TextBoxFor(vm => vm.Email, new {placeholder = "E-mail"})
-                @*<input type="text" name="login" value="" placeholder="Имя" />*@
-            </div>
-            <div class="inpItem">
-                @Html.PasswordFor(vm => vm.Password, new {placeholder = "Пароль"})
-                @*<input type="password" name="passdata" value="" placeholder="Пароль" />*@
-            </div>
-            <div class="formFooter">
-                <button type="submit" class="redButton">Войти</button>
-            </div>
-        }
-        <div class="socLogin flexCol">
-            <div class="formTitle">
-                <h2>
-                    Войти в личный <br/>кабинет
-                </h2>
-            </div>
-            <p>Вы можете зарегистрироваться или войти в Личный Кабинет через социальную сеть:</p>
-            <div class="socLinks">
-                <a><img alt="" src="/Content/img/soc/f.png" width="23"/></a>
-                <a><img alt="" src="/Content/img/soc/i.png" width="23"/></a>
-                <a><img alt="" src="/Content/img/soc/b.png" width="23"/></a>
-                <a><img alt="" src="/Content/img/soc/o.png" width="23"/></a>
-                <a><img alt="" src="/Content/img/soc/t.png" width="23"/></a>
+        <div class="formLoginItem">
+            <div class="socLogin flexCol">
+                <div class="formTitle">
+                    <h2>
+                        Войти в личный <br />кабинет
+                    </h2>
+                </div>
+                <p>Вы можете зарегистрироваться или войти в Личный Кабинет через социальную сеть:</p>
+                <div class="socLinks">
+                    <a><img alt="" src="/Content/img/soc/f.png" width="23" /></a>
+                    <a><img alt="" src="/Content/img/soc/i.png" width="23" /></a>
+                    <a><img alt="" src="/Content/img/soc/b.png" width="23" /></a>
+                    <a><img alt="" src="/Content/img/soc/o.png" width="23" /></a>
+                    <a><img alt="" src="/Content/img/soc/t.png" width="23" /></a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 

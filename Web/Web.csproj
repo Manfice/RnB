@@ -182,6 +182,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CmsController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,12 +209,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flipclock.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\1.jpg" />
     <Content Include="Content\img\4fon.jpg" />
+    <Content Include="Content\img\500x350.jpg" />
     <Content Include="Content\img\7fon.jpg" />
     <Content Include="Content\img\8fon.jpg" />
+    <Content Include="Content\img\about\1.png" />
+    <Content Include="Content\img\about\11.jpg" />
+    <Content Include="Content\img\about\12.jpg" />
+    <Content Include="Content\img\about\13.jpg" />
+    <Content Include="Content\img\about\14.jpg" />
+    <Content Include="Content\img\about\15.jpg" />
+    <Content Include="Content\img\about\16.jpg" />
+    <Content Include="Content\img\about\17.jpg" />
+    <Content Include="Content\img\about\2.png" />
+    <Content Include="Content\img\about\3.png" />
+    <Content Include="Content\img\about\4.png" />
+    <Content Include="Content\img\about\about.jpg" />
+    <Content Include="Content\img\carta.jpg" />
     <Content Include="Content\img\letter.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logoWA.png" />
@@ -256,6 +273,7 @@
     <Content Include="Content\lightbox.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\owl.carousel.css" />
+    <Content Include="Content\small-device.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -322,6 +340,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Scripts\AdminJs\imageGalary.js" />
     <Content Include="Scripts\AdminJs\paty.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\flipclock.min.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
@@ -408,13 +427,34 @@
     <Content Include="Views\ImageGalary\AlbomDetails.cshtml" />
     <Content Include="Views\ImageGalary\PhotoDetails.cshtml" />
     <Content Include="Views\ImageGalary\EditRegion.cshtml" />
-    <Content Include="Views\Home\PhotoGalary.cshtml" />
+    <Content Include="Views\Home\Galary.cshtml" />
     <Content Include="Views\Home\AlbomDetails.cshtml" />
     <Content Include="Scripts\lightbox.min.map" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Paty\Paty.cshtml" />
+    <Content Include="Views\Paty\PatyMeny.cshtml" />
+    <Content Include="Views\Home\Navigation.cshtml" />
+    <Content Include="Views\Paty\PatyMenuDetails.cshtml" />
+    <Content Include="Views\Paty\CategoryDetails.cshtml" />
+    <Content Include="Views\Paty\PatyInner.cshtml" />
+    <Content Include="Views\Paty\AddCategory.cshtml" />
+    <Content Include="Views\Paty\PatyError.cshtml" />
+    <Content Include="Views\Paty\AddPaty.cshtml" />
+    <Content Include="Views\Paty\CategoryPatys.cshtml" />
+    <Content Include="Views\Paty\PatyDetails.cshtml" />
+    <Content Include="Views\Paty\PrintOrders.cshtml" />
+    <Content Include="Views\Home\Header.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
+    <Content Include="Views\Home\Company.cshtml" />
+    <Content Include="Views\Home\Contacts.cshtml" />
+    <Content Include="Views\Blog\BlogAdmin.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\AddBlog.cshtml" />
+    <Content Include="Views\Blog\BlogDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\Blog\" />
     <Folder Include="Uploads\ImageGalary\" />
   </ItemGroup>
   <ItemGroup>

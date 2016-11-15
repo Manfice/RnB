@@ -27,6 +27,26 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult Company()
+        {
+            return View();
+        }
+        public ActionResult Contacts()
+        {
+            return View();
+        }
+        public ActionResult Navigation()
+        {
+            return PartialView();
+        }
+        public ActionResult Header()
+        {
+            return PartialView();
+        }
+        public ActionResult Footer()
+        {
+            return PartialView();
+        }
         public ActionResult TopSlider()
         {
             return PartialView();
@@ -63,7 +83,7 @@ namespace Web.Controllers
             return PartialView(model);
         }
 
-        public ActionResult PhotoGalary(int page=1)
+        public ActionResult Galary(int page=1)
         {
             const int itemsPerPage = 9;
             var model = new AlbomsViewmodel
@@ -110,7 +130,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> PatyDetails(int id)
+        public async Task<ActionResult> PatyDetails(string paty)
         {
             var model = new OrderViewmodel();
             if (User.Identity.IsAuthenticated)
@@ -118,7 +138,7 @@ namespace Web.Controllers
                 var user = await UserMeneger.FindByNameAsync(User.Identity.Name);
                 model.Customer = await _home.GetCustomerByEmailAsync(user.Email);
             }
-            model.Paty = _home.GetPaty(id);
+            model.Paty = _home.GetPatyByRouteUrl(paty);
 
             return View(model);
         }

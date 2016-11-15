@@ -1,4 +1,8 @@
-﻿$(document).ready(function() {
+﻿$(document).ready(function () {
+    $(".topMenu").click(function () {
+        $(".ddMenu").slideToggle();
+    });
+
     $("#topSlider").owlCarousel({
         items: 1,
         autoplay: true,
@@ -47,16 +51,15 @@
         nav: false,
         dots: false,
         autoplaySpeed: 5000,
-        dotsContainer: '.dotsLayer',
         autoHeight: false,
         loop: true,
         margin: 10,
         responsive: {
             0: {
-                items: 3
+                items: 1
             },
             650: {
-                items: 4
+                items: 2
             },
             960: {
                 items: 5
@@ -78,7 +81,10 @@
     $("#nextPar").click(function () {
         partner.trigger("next.owl.carousel", [500]);
     });
-
+    lightbox.option({
+        "disableScrolling": true,
+        "albumLabel": "@Model.Title"
+    });
     function previewUpdImg(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

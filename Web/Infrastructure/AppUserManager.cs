@@ -32,7 +32,8 @@ namespace Web.Infrastructure
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider!=null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<AppUser>(dataProtectionProvider.Create("Red&Black Club")) {TokenLifespan = TimeSpan.FromDays(1d)};
+                manager.UserTokenProvider = new DataProtectorTokenProvider<AppUser>(dataProtectionProvider.Create("Red&Black Club"))
+                { TokenLifespan = TimeSpan.FromDays(10)};
                 
             }
 

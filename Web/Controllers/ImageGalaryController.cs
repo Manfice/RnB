@@ -84,6 +84,10 @@ namespace Web.Controllers
         public ActionResult EditAlbom(int id)
         {
             var model = _photo.GetAlbomById(id);
+            if (model.Category==null)
+            {
+                model.Category = new PatyCategory(); 
+            }
             return View("CreateAlbom", model);
         }
 

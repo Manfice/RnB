@@ -9,6 +9,7 @@ namespace Web.Domen.Abstract
         IEnumerable<Paty> GetPatys { get; }  
         IEnumerable<PatyCategory> GetCategorys { get; }
         Paty GetPaty(int id);
+        Paty GetPatyByRouteUrl(string route);
         Task<Customer> GetCustomerAsync(OrderViewmodel model);
         Task<Order> RegOnPatyAsync(int id,int places,decimal descount,Customer customer);
         Task<Customer> GetCustomerByEmailAsync(string email);

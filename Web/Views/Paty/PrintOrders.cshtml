@@ -1,0 +1,85 @@
+﻿@model Web.Domen.Models.Paty
+@{
+    ViewBag.Title = Model.Title;
+    Layout = null;
+    var i = 0;
+}
+<style>
+     table {
+         text-align: center;
+         font-size: 10pt;
+     }
+     tr {
+         
+     }
+    td {
+        border: solid 1px;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        margin: 0;
+    }
+</style>
+<h2>@Model.Title</h2>
+<p>@Model.PatyDate</p>
+<div class="categorysTable">
+    <p>Отчет от @DateTime.Now.ToString("F")</p>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Номер №</th>
+            <th>Дата</th>
+            <th>Имя Фамилия</th>
+            <th>Телефон</th>
+            <th>E-mail</th>
+            <th>Оплата</th>
+            <th>Мест</th>
+            <th>Билеты</th>
+        </tr>
+        @if (Model.Price > 0)
+        {
+            foreach (var item in Model.Orders.Where(order => order.Aviso != null))
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Id</td>
+                    <td>@item.OrderDate.ToLongDateString()</td>
+                    <td>@item.Customer.Fio</td>
+                    <td>@item.Customer.Phone</td>
+                    <td>@item.Customer.Email</td>
+                    <td>@item.TotalCost.ToString("C")</td>
+                    <td>@item.Place</td>
+                    <td>@item.PlaceNumbers</td>
+                </tr>
+            }
+        }
+        else
+        {
+            foreach (var item in Model.Orders)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Id</td>
+                    <td>@item.OrderDate.ToLongDateString()</td>
+                    <td>@item.Customer.Fio</td>
+                    <td>@item.Customer.Phone</td>
+                    <td>@item.Customer.Email</td>
+                    <td>Бесплатно</td>
+                    <td>@item.Place</td>
+                    <td>@item.PlaceNumbers</td>
+
+
+                    <td>
+                        @*<a href="@Url.Action("PatyDetails", new {id = item.Id})">Подробнее</a>
+                            <a href="@Url.Action("CreateAlbom","ImageGalary", new {id=item.Id})">Фотоальбом</a>
+                            <a href="@Url.Action("AddPaty", new {id=item.Id, cat=item.Category.Id})">Изменить</a>
+                            <a href="@Url.Action("DeletePaty", new {id=item.Id})">Удалить</a>*@
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>
+</div>
+

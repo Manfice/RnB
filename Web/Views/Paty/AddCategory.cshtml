@@ -1,0 +1,70 @@
+﻿@model Web.Domen.Models.PatyCategory
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="columnCenter">
+    @if (Model.ParentCategory.Id > 0)
+    {
+        <p>Главная категория:</p>
+        <h3>@Model.ParentCategory.Title</h3>
+    }
+    else
+    {
+        <h2>Новая категория</h2>
+    }
+    <div class="formRed">
+        @using (Html.BeginForm("AddCategory","Paty", FormMethod.Post, new {enctype="multipart/form-data"}))
+        {
+            @Html.ValidationSummary(false)
+            @Html.HiddenFor(category => category.Id)
+            @Html.HiddenFor(category => category.ParentCategory.Id)
+            @Html.HiddenFor(category => category.Avatar.Id)
+            @Html.Hidden("parent", Model.ParentCategory.Id)
+
+            if (Model.Avatar != null)
+            {
+                <img alt="" src="@Model.Avatar.Path" width="250" id="avatarView"/>
+            }
+            else
+            {
+                <img alt="" src="" id="avatarView"/>
+            }
+            <input type="file" name="avatar" id="catAvatar"/>
+            <label>Название категории:</label>
+            @Html.TextBoxFor(category => category.Title)
+            <label>CEO URL:</label>
+            @Html.TextBoxFor(category => category.RouteTitle)
+            <label>Meta "Description" CEO:</label>
+            @Html.TextBoxFor(category => category.MetaDescription)
+            <label>Описание категории:</label>
+            @Html.TextAreaFor(category => category.Description, new {rows = 5})
+            <input type="submit" value="Сохранить"/>
+        }
+        <a class="cancelLink  redBtn" href="@Url.Action("Index")">Отмена</a>
+    </div>
+
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            function previewUpdImg(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var i = $("#avatarView");
+                        i.attr("src", e.target.result);
+                        i.attr("width",310);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            };
+            $("#catAvatar").change(function () {
+                previewUpdImg(this);
+            });
+
+        });
+    </script>
+}

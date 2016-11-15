@@ -1,0 +1,61 @@
+﻿<header id="head">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @Html.Action("RegisterPopUp", "Home")
+        @Html.Action("LoginPopUp", "Home")
+    }
+    @Html.Action("ThankYou", "Home")
+
+    <div class="headerRow hBlock">
+        <div class="hLeft">
+            <div class="hLeftWrapper">
+                <a class="redButton">Задать вопрос</a>
+                <p>Подписывайтесь на нас!</p>
+                <div class="socLinks">
+                    <a><img alt="" src="/Content/img/soc/t.png" width="23"/></a>
+                    <a><img alt="" src="/Content/img/soc/f.png" width="23"/></a>
+                    <a><img alt="" src="/Content/img/soc/b.png" width="23"/></a>
+                    <a><img alt="" src="/Content/img/soc/o.png" width="23"/></a>
+                    <a><img alt="" src="/Content/img/soc/y.png" width="23"/></a>
+                    <a><img alt="" src="/Content/img/soc/i.png" width="23"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="hMidle">
+            <h1 class="grayColor">
+                КЛУБ <span class="redColor">KRASNOE </span><span>&amp; ЧЕРНОЕ</span> - СООБЩЕСТВО АКТИВНЫХ,<br/>ИНТЕРЕСНЫХ И ПРЕДПРИИМЧИВЫХ ЛЮДЕЙ
+            </h1>
+        </div>
+        <div class="hRight">
+            <div class="hRightWrapper">
+                <p>
+                    <img alt="" src="/Content/img/pt.png"/>+7(962)459-98-51
+                </p>
+                <p>
+                    <img alt="" src="/Content/img/pt.png"/>+7(918)741-88-03
+                </p>
+                <a href="mailto:info@redblackclub.ru"><img alt="" src="/Content/img/letter.png"/>info@redblackclub.ru</a>
+                <div class="regBlock">
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Index", "Paty")" class="redLink">ADMIN</a>
+                        <span>|</span>
+                        <a href="@Url.Action("LogOut", "Auth")" class="redLink">Выйти</a>
+                    }
+                    else
+                    {
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("Index", "Customer")" class="redLink">@User.Identity.Name</a><span>|</span><a href="@Url.Action("LogOut", "Auth")" class="redLink">Выйти</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="redLink" data-bind="click:popUp.registerMe">Регистрация</a><span>|</span><a href="#" class="redLink" data-bind="click:popUp.loginMe">Войти</a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Action("Navigation", "Home")
+</header>

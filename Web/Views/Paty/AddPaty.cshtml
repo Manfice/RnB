@@ -1,0 +1,90 @@
+﻿@model Web.Domen.Models.Paty
+@{
+    ViewBag.Title = "Мероприятие";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="columnCenter">
+    <div class="formRed formPaty">
+        @using (Html.BeginForm("AddPaty","Paty", FormMethod.Post, new {enctype="multipart/form-data"}))
+        {
+            @Html.ValidationSummary(false)
+            @Html.HiddenFor(paty => paty.Id)
+            @Html.HiddenFor(paty => paty.Category.Id)
+
+            if (Model.Avatar != null)
+            {
+                <img alt="" src="@Model.Avatar.Path" width="250" id="avatarView" />
+            }
+            else
+            {
+                <img alt="" src="" id="avatarView" />
+            }
+            <input type="file" name="avatar" id="catAvatar"/>
+            <hr/>
+            <div class="rowFlex">
+                <div class="addPatyFormItem">
+                    <label>Дата и время события:</label>
+                    @Html.TextBoxFor(paty => paty.PatyDate, new {id = "ad"})
+                    <label>Название:</label>
+                    @Html.TextBoxFor(paty => paty.Title)
+                    <label>Описание:</label>
+                    @Html.TextAreaFor(paty => paty.Descr, new {rows = 5})
+                    <div class="inputRow">
+                        <div class="inputBloc">
+                            <label>Мест:</label>
+                            @Html.TextBoxFor(paty => paty.MaxGuests, new {min = 1, @type = "number"})
+                        </div>
+                        <div class="inputBloc">
+                            <label>Рейтинг:</label>
+                            @Html.TextBoxFor(paty => paty.AddRate, new {min = 1, @type = "number"})
+                        </div>
+                        <div class="inputBloc">
+                            <label>Цена:</label>
+                            @Html.TextBoxFor(paty => paty.Price, new {min = 0})
+                        </div>
+                    </div>
+                    <label>На мероприятии вы сможете:</label>
+                    @Html.TextAreaFor(paty => paty.PatyInterest, new {rows = 5})
+                </div>
+                <div class="addPatyFormItem">
+                    <label>Место проведения</label>
+                    @Html.TextAreaFor(paty => paty.Place, new { rows = 3 })
+                    <label>Дресс-код</label>
+                    @Html.TextBoxFor(paty => paty.Dres, new { rows = 3 })
+                    <label>CEO URL</label>
+                    @Html.TextBoxFor(paty => paty.RouteTitle, new { rows = 3 })
+                    <label>CEO meta Description</label>
+                    @Html.TextBoxFor(paty => paty.MetaDescription, new { rows = 3 })
+                </div>
+            </div>
+            <button class="greenBtn" type="submit" style="display: inline; align-self: flex-start">Сохранить</button>
+        }
+        <a class="redBtn" href="@Url.Action("CategoryPatys", new {id=Model.Category.Id})">Назад</a>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            function previewUpdImg(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var i = $("#avatarView");
+                        i.attr("src", e.target.result);
+                        i.attr("width", 310);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            };
+            $("#catAvatar").change(function () {
+                previewUpdImg(this);
+            });
+            $("#ad").datetimepicker({
+                lang: "ru",
+                format:"d.m.Y H:i"
+            });
+        });
+    </script>
+}

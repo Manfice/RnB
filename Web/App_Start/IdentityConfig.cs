@@ -1,10 +1,12 @@
 ﻿using System;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Owin;
 using Web.Infrastructure;
+using Web.Models;
 
 namespace Web
 {
@@ -20,8 +22,7 @@ namespace Web
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Auth/Login"),
-                SlidingExpiration = true,
-                ExpireTimeSpan = TimeSpan.MaxValue
+                ExpireTimeSpan = TimeSpan.FromDays(10)
             });
         }
     }
