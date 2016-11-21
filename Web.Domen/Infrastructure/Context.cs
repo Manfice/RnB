@@ -15,6 +15,7 @@ namespace Web.Domen.Infrastructure
         public DbSet<PatyImage> PatyImages { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustImage> CustImages { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<PaymentAviso> Avisos { get; set; }
         public DbSet<ImageData> Photos { get; set; }

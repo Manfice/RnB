@@ -45,7 +45,7 @@
     @if (Model.PagingInfo.TotalPages > 1)
     {
         <div class="pageLinks">
-            @Html.PageLinks(Model.PagingInfo, x=>Url.Action("PhotoGalary", new {page=x}))
+            @Html.PageLinks(Model.PagingInfo, x=>Url.Action("Galary", new {page=x}))
         </div>
     }
 </div>

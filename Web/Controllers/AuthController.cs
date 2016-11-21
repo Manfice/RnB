@@ -48,6 +48,15 @@ namespace Web.Controllers
             }
             else
             {
+                if (!_auth.CheckCustomerExist(user.Id))
+                {
+                    var cst = new CustomerViewModel
+                    {
+                        UserId = user.Id,
+                        Email = user.UserName
+                    };
+                    await _auth.RegCustomer(cst);
+                }
                 var ident = await UserMeneger.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
                 AuthManager.SignOut();
                 AuthManager.SignIn(new AuthenticationProperties {IsPersistent = true},ident);

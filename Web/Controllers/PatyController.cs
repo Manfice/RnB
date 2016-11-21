@@ -93,9 +93,9 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult AddCategory(PatyCategory model, HttpPostedFileBase avatar, int parent = 0)
         {
-            if (model.RouteTitle == string.Empty)
+            if (model.RouteTitle == string.Empty || _repository.CheckPatyCategoryUrlTitle(model.RouteTitle))
             {
-                ModelState.AddModelError("","Не указан URL для события.");
+                ModelState.AddModelError(model.RouteTitle,"Не указан URL для события, или такой URL уже существует");
                 return View(model);
             }
             var cat = model;
@@ -109,15 +109,6 @@ namespace Web.Controllers
             }
             var guid = Guid.NewGuid();
             PatyImage image = null;
-
-            //if (!ModelState.IsValid)
-            //{
-            //    if (model.ParentCategory == null)
-            //    {
-            //        model.ParentCategory = new PatyCategory();
-            //    }
-            //    return View(model);
-            //}
             if (avatar!=null)
             {
                 if (model.Avatar!=null)
@@ -183,9 +174,9 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<ActionResult> AddPaty(Paty paty, HttpPostedFileBase avatar)
         {
-            if (paty.RouteTitle==string.Empty)
+            if (paty.RouteTitle==string.Empty || _repository.CheckPatyUrlTitle(paty.RouteTitle))
             {
-                ModelState.AddModelError("","Не указан URL для события.");
+                ModelState.AddModelError(paty.RouteTitle, "Не указан URL для события, или такой URL уже существует");
                 return View(paty);
             }
             var guid = Guid.NewGuid();

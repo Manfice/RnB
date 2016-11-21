@@ -74,6 +74,7 @@
     <Compile Include="Repositorys\DbHome.cs" />
     <Compile Include="Repositorys\DbPaty.cs" />
     <Compile Include="Repositorys\DbPhoto.cs" />
+    <Compile Include="Viewmodels\CustomerViewModel.cs" />
     <Compile Include="Viewmodels\PatyCat.cs" />
     <Compile Include="Viewmodels\PhotoGalaryViews.cs" />
     <Compile Include="Viewmodels\UserView.cs" />

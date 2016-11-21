@@ -280,5 +280,16 @@ namespace Web.Domen.Repositorys
         {
             return _context.PatyCategories.FirstOrDefault(category => category.RouteTitle.Contains(routeUrl));
         }
+
+        public bool CheckPatyUrlTitle(string url)
+        {
+            return _context.Paties.Any(paty => paty.RouteTitle.Equals(url, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        public bool CheckPatyCategoryUrlTitle(string url)
+        {
+            return _context.PatyCategories.Any(paty => paty.RouteTitle.Equals(url, StringComparison.CurrentCultureIgnoreCase));
+
+        }
     }
 }

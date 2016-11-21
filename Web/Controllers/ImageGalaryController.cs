@@ -43,6 +43,7 @@ namespace Web.Controllers
         public ActionResult CreateRegion(ImageGalary region)
         {
             var albom = _photo.GetAlbomById(region.Albom.Id);
+            region.Albom = albom;
             _photo.SaveRegion(region);
             return RedirectToAction("AlbomDetails", new {id = albom.Id});
         }
@@ -56,7 +57,7 @@ namespace Web.Controllers
                 ModelState.AddModelError("date","Дата не должна быть меньше 01 января 2010г.");
                 return View(albom);
             }
-            if (!ModelState.IsValid) return View(albom);
+            //if (!ModelState.IsValid) return View(albom);
             if (avatar!=null)
             {
                 if (avatar.FileName.EndsWith("jpg",StringComparison.OrdinalIgnoreCase) || avatar.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase) || avatar.FileName.EndsWith("jpeg", StringComparison.OrdinalIgnoreCase))
@@ -174,6 +175,21 @@ namespace Web.Controllers
             return RedirectToAction("AlbomDetails", new {id= region.Albom.Id});
         }
 
+        [HttpPost]
+        public ActionResult AddVideo(int id, string videoLink)
+        {
+            videoLink = videoLink.Remove(0, 17);
+            var video = new ImageData
+            {
+                Width = 500,
+                Height = 400,
+                VideoLink = "https://www.youtube.com/embed/"+videoLink
+            };
+            var region = _photo.GetVideoRegion(id);
+            video.Region = region;
+            _photo.AddVideoToAlbom(video);
+            return RedirectToAction("AlbomDetails", new {id=id});
+        }
         public ActionResult EditRegion(int id)
         {
             return View(_photo.GetGalaryById(id));

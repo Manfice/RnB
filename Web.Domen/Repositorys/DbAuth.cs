@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Web.Domen.Abstract;
 using Web.Domen.Infrastructure;
@@ -10,6 +12,13 @@ namespace Web.Domen.Repositorys
     public class DbAuth : IAuth
     {
         private readonly Context _context = new Context();
+
+        public bool CheckCustomerExist(string id)
+        {
+            var c = _context.Customers.FirstOrDefault(customer => customer.User == id);
+            return c != null;
+        }
+
         public async Task<Customer> RegCustomer(CustomerViewModel model)
         {
             DateTime bD;
@@ -21,7 +30,11 @@ namespace Web.Domen.Repositorys
                 Rate = 0,
                 City = model.City,
                 Work = model.Workplace,
-                User = model.UserId
+                User = model.UserId,
+                ShowData = "00000000000N",
+                EmailNotice = true,
+                SmsNotice = true,
+                PhoneNotice = true
             };
             if (DateTime.TryParse(model.Birthday, out bD))
             {

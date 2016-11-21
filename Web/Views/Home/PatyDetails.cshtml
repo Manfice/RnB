@@ -37,7 +37,7 @@
         <p>На мероприятии вы сможете:</p>
         @foreach (var s in Model.Paty.PatyInterest.Split('\n'))
         {
-            <p> - @s.Trim(new[] {' ', '-', ';'}) ;</p>
+            <p> - @s.Trim(' ', '-', ';') </p>
         }
     </div>
     <div class="bordered">
@@ -157,15 +157,15 @@
             {
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="text" name="Fio" disabled="" value="@Model.Customer.Fio" placeholder="ФИО(полностью)"/>
+                    <input type="text" name="Fio" disabled value="@Model.Customer.Fio" placeholder="ФИО(полностью)" required/>
                 </div>
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="tel" name="Phone" value="@Model.Customer.Phone" placeholder="Телефон"/>
+                    <input type="tel" name="Phone" value="@Model.Customer.Phone" placeholder="Телефон" required/>
                 </div>
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="email" name="Email" value="@Model.Customer.Email" placeholder="E-mail"/>
+                    <input type="email" name="Email" value="@Model.Customer.Email" placeholder="E-mail" required/>
                 </div>
                 <div class="inpItem">
                     <input type="text" name="Workplace" value="@Model.Customer.WorkPlace" placeholder="Место работы, должность"/>
@@ -175,15 +175,15 @@
             {
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="text" name="Fio" value="" placeholder="ФИО(полностью)"/>
+                    <input type="text" name="Fio" value="" placeholder="ФИО(полностью)" required/>
                 </div>
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="tel" name="Phone" value="" placeholder="Телефон"/>
+                    <input type="tel" name="Phone" value="" placeholder="Телефон" required/>
                 </div>
                 <div class="inpItem">
                     <p>*</p>
-                    <input type="email" name="Email" value="" placeholder="E-mail"/>
+                    <input type="email" name="Email" value="" placeholder="E-mail" required/>
                 </div>
                 <div class="inpItem">
                     <input type="text" name="Workplace" value="" placeholder="Место работы, должность"/>
@@ -212,7 +212,7 @@
             else
             {
                 <div style="bottom: -8%" class="buttonBorder">
-                    <button type="submit" class="redButton" href="#">Получить приглашение</button>
+                    <button type="submit" class="redButton">Получить приглашение</button>
                 </div>
             }
 
@@ -237,16 +237,26 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var model = @Html.Raw(JsonConvert.SerializeObject(Model.Paty.PatyDate.ToUniversalTime()));
-            var clock = $("#flipCd").FlipClock({
-                clockFace: "DailyCounter",
-                autoStart: true,
-                language:"ru-ru"
-            });
-            clock.setCountdown(true);
+           // clock.setCountdown(true);
             
             var dt = (new Date(model) - Date.now())/1000;
-            clock.setTime(dt);
-            clock.start();
+            console.log(dt);
+            if (dt > 0) {
+                var clock = $("#flipCd").FlipClock(dt,{
+                    clockFace: "DailyCounter",
+                    autoStart: true,
+                    language:"ru-ru",
+                    countdown:true,
+                    callbacks: {
+                        stop: function() {
+                            $("#flipCd").html("Время регистрации вышло.").css("zoom",0);
+                        }
+                    }
+                });
+
+                //clock.setTime(dt);
+                clock.start();
+            }
         });
     </script>
 }

@@ -84,6 +84,7 @@ namespace Web.Domen.Repositorys
         public ImageGalary SaveRegion(ImageGalary model)
         {
             var albom = GetAlbomById(model.Albom.Id);
+            if (string.IsNullOrEmpty(model.Title)) model.Title = "";
             if (albom == null)
             {
                 return null;
@@ -134,6 +135,31 @@ namespace Web.Domen.Repositorys
         {
             var dbregion = _context.Galaries.Find(id);
             return dbregion.Photos.Select(data => data.FullPath).ToList();
+        }
+
+        public ImageGalary GetVideoRegion(int id)
+        {
+            var albom = _context.Alboms.Find(id);
+            var region =
+                albom.Regions.FirstOrDefault(galary => galary.Title.Equals("video", StringComparison.CurrentCultureIgnoreCase));
+            if (region==null)
+            {
+                region = new ImageGalary
+                {
+                    Albom = albom,
+                    Description = "Видео с мероприятия",
+                    Title = "video"
+                };
+                _context.Galaries.Add(region);
+                _context.SaveChanges();
+            }
+            return region;
+        }
+
+        public void AddVideoToAlbom(ImageData model)
+        {
+            _context.Photos.Add(model);
+            _context.SaveChanges();
         }
     }
 }

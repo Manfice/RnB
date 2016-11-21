@@ -312,12 +312,12 @@ label>input[type=file] {
     flex-flow: row wrap;
 
 }
-.albomItem {
+.albomItem, .videoItem {
     margin: 10px;
     text-align: center;
     border: solid 2px transparent;
     display: block;
-    max-width: 210px;
+    max-width: 210px; 
 }
 .albomItem:hover {
     border: solid 2px gray;

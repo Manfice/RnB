@@ -216,7 +216,6 @@
     <Content Include="Content\img\1.jpg" />
     <Content Include="Content\img\4fon.jpg" />
     <Content Include="Content\img\500x350.jpg" />
-    <Content Include="Content\img\7fon.jpg" />
     <Content Include="Content\img\8fon.jpg" />
     <Content Include="Content\img\about\1.png" />
     <Content Include="Content\img\about\11.jpg" />
@@ -231,6 +230,10 @@
     <Content Include="Content\img\about\4.png" />
     <Content Include="Content\img\about\about.jpg" />
     <Content Include="Content\img\carta.jpg" />
+    <Content Include="Content\img\distr.jpg" />
+    <Content Include="Content\img\distr1.jpg" />
+    <Content Include="Content\img\distr1mob.jpg" />
+    <Content Include="Content\img\distrMob.jpg" />
     <Content Include="Content\img\letter.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logoWA.png" />
@@ -254,9 +257,16 @@
     <Content Include="Content\img\pList\942x434.jpg" />
     <Content Include="Content\img\prevBtn.png" />
     <Content Include="Content\img\prive\1.jpg" />
+    <Content Include="Content\img\prive\личностное развитие.jpg" />
+    <Content Include="Content\img\prive\обмен опытом.jpg" />
+    <Content Include="Content\img\prive\общение с интересными людьми.jpg" />
+    <Content Include="Content\img\prive\отдых на выысшем уровне.jpg" />
+    <Content Include="Content\img\prive\связи и контакты.jpg" />
+    <Content Include="Content\img\prive\физическое развтитие.jpg" />
     <Content Include="Content\img\pt.jpg" />
     <Content Include="Content\img\pt.png" />
     <Content Include="Content\img\redZone.png" />
+    <Content Include="Content\img\redZoneMob.png" />
     <Content Include="Content\img\soc\b.png" />
     <Content Include="Content\img\soc\f.png" />
     <Content Include="Content\img\soc\i.png" />
@@ -273,7 +283,7 @@
     <Content Include="Content\lightbox.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\owl.carousel.css" />
-    <Content Include="Content\small-device.css" />
+    <Content Include="Content\customer.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -371,6 +381,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\Partners\bb17fb19-a404-4d9e-8c00-26f228c0a6a7_me.png" />
     <Content Include="Uploads\patyAvatar\02803ee8-1239-4b89-b4d9-95dc2e31a278_sep_2.jpg" />
     <Content Include="Uploads\patyCategorys\63980e2e-eb49-483f-b068-3f30b2fbbd4a_sep_1.jpg" />
     <Content Include="Views\Shared\register.html" />
@@ -451,6 +462,11 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\AddBlog.cshtml" />
     <Content Include="Views\Blog\BlogDetails.cshtml" />
+    <Content Include="Views\Customer\MyVisitedPatyes.cshtml" />
+    <Content Include="Views\Customer\SuggestedPatyes.cshtml" />
+    <Content Include="Views\Customer\PersonalDetails.cshtml" />
+    <Content Include="Views\Customer\Company.cshtml" />
+    <Content Include="Views\Customer\MyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

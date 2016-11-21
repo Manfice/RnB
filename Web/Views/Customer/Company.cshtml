@@ -1,39 +1,43 @@
 ﻿@model Web.Domen.Models.Customer
+
 @{
-    ViewBag.Title = "Личный кабинет "+Model.NickName;
+    ViewBag.Title = Model.Company.Title;
     Layout = "~/Views/Shared/_MainRnB.cshtml";
+    var company = Model.Company;
 }
+
 @section links
 {
-<link href="~/Content/customer.css" rel="stylesheet" />
+    <link href="~/Content/customer.css" rel="stylesheet" />
 }
 <div class="customerColumn">
     <div class="customerRow">
         <div class="rowLeft">
             <div class="customerAvatar" id="CustomerAvatar">
-                <h2>@Model.Fio</h2>
+                <h2>@company.Title</h2>
                 <div class="customerImageWrapper">
-                    @if (Model.Avatar.Path == null)
+                    @if (company.Image?.Path == null)
                     {
                         <div class="emptyAvatar" style="border: dotted 1px gray">
-                            <h3>ФОТО</h3>
+                            <h3>Логотип</h3>
                             <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
                         </div>
                     }
                     else
                     {
                         <div class="emptyAvatar">
-                            <img alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
+                            <img alt="" src="@(company.Image != null ? company.Image.Path : "")" />
                         </div>
                     }
 
-                    <img id="avaImage" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
+                    <img id="avaImage" alt="" src="@(company.Image != null ? company.Image.Path : "")" />
                     <div class="avaControls">
                         <label>
                             <span>Сменить / загрузить фото</span>
-                            @using (Html.BeginForm("SaveAvatar", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("SaveCompanyAvatar", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 @Html.AntiForgeryToken()
+                                @Html.Hidden("id", company.Id)
                                 <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva" />
                                 <button type="submit">СОХРАНИТЬ</button>
                             }
@@ -47,18 +51,27 @@
         <div class="rowRight">
             <nav>
                 <ul>
-                    <li><a href="@Url.Action("Index")" class="redButton">Профиль</a></li>
+                    <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
                     <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
-                    <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
+                    <li><a href="@Url.Action("Company")" class="redButton">Компания</a></li>
                     <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
                 </ul>
             </nav>
             <div class="myPaties">
-                @Html.Action("MyVisitedPatyes")
+                <p class="myRoute">Ссылка на мой профиль: <span>@("http://redblackclub.ru/members/"+@Model.Id)</span></p>
+                @using (Html.BeginForm("SaveMyCompany","Customer", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    @Html.Hidden("Id",company.Id)
+                    <div class="customerFormBlock">
+                        @Html.TextBox("Title",Model.Company.Title, new {placeholder="Название компании"})
+                        <h3>О компании</h3>
+                        @Html.TextArea("Descr", Model.Company.Descr, new {placeholder="Описание компании", rows="10"})
+                        <button type="submit" class="redButton">Сохранить</button>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
-@Html.Action("SuggestedPatyes")
-
-

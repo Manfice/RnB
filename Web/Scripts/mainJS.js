@@ -4,6 +4,13 @@
     });
 
     var topSlider = $("#topSlider");
+    var currentSliderTitle;
+    topSlider.on("initialized.owl.carousel", function () {
+        currentSliderTitle = $("#slide1");
+        currentSliderTitle.addClass("active");
+        var p = currentSliderTitle.children("p:first").outerWidth();
+        currentSliderTitle.children("p:first").css("left", "-" + (p + 20) + "px");
+    });
 
     topSlider.owlCarousel({
         items: 1,
@@ -17,8 +24,21 @@
         dotsContainer: "#topDot",
         autoHeight: false
     });
-    topSlider.on("changed.owl.carousel", function (e) {
-        console.log(e.item.index);
+
+    topSlider.on("translate.owl.carousel", function (e) {
+        var itm = e.item.index - 1;
+        var itmCount = e.item.count;
+        if ((e.item.index-1)>itmCount) {
+            itm = 1;
+        }
+        currentSliderTitle.fadeOut(1000, function() {
+            currentSliderTitle.removeClass("active");
+            currentSliderTitle = $("#slide" + itm);
+            currentSliderTitle.fadeIn(1000).addClass("active");
+            var p = currentSliderTitle.children("p:first").outerWidth();
+            currentSliderTitle.children("p:first").css("left","-"+(p+20)+"px");
+            console.log(p);
+        });
     });
     var paty = $("#paty");
 
@@ -84,29 +104,50 @@
     $("#nextPar").click(function () {
         partner.trigger("next.owl.carousel", [500]);
     });
+
+    var suggestedPaty = $("#suggestedPatyCarousel");
+
+    suggestedPaty.owlCarousel({
+        items: 3,
+        nav: false,
+        dots: false,
+        margin: 10,
+        autoHeight:true
+    });
+    $(".prevSuggestedItem").click(function () {
+        suggestedPaty.trigger("prev.owl.carousel", [500]);
+    });
+
+    $(".nextSuggestedItem").click(function () {
+        suggestedPaty.trigger("next.owl.carousel", [500]);
+    });
+
     lightbox.option({
-        "disableScrolling": true,
-        "albumLabel": "@Model.Title"
+        "disableScrolling": true
     });
     function previewUpdImg(input) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var i = $("#avaImage");
-                var f = $(".emptyAvatar");
-                $(".avaControls label").css("display", "none");
-                $(".avaControls input").css("display", "block");
-                f.css("display","none");
-                i.attr("src", e.target.result);
-                i.css("display","block");
+            if (input.files[0].size <= 524288) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var i = $("#avaImage");
+                    var f = $(".emptyAvatar");
+                    $(".avaControls label span").css("display", "none");
+                    $(".avaControls input").css("display", "none");
+                    $(".avaControls label button").css("display", "block");
+                    f.css("display", "none");
+                    i.attr("src", e.target.result);
+                    i.css("display", "block");
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $("#serviceMessage").css("color", "red");
             }
-            reader.readAsDataURL(input.files[0]);
         }
     };
     $("#castAva").change(function () {
         previewUpdImg(this);
     });
-
     
 });
 

@@ -20,6 +20,7 @@ namespace Web.Domen.Abstract
         PatyCategory GetCategoryByRoute(string routeUrl);
         PatyCategory SavePatyCategory(int parent,PatyCategory model, PatyImage image);
         Task<Paty> GetPatyByIdAsync(int id);
-
+        bool CheckPatyUrlTitle(string url);
+        bool CheckPatyCategoryUrlTitle(string url);
     }
 }

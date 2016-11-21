@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Web.Domen.Models.Paty>
+
+<h2 style="text-align: center;">Пройденные мероприятия:</h2>
+@if (!Model.Any())
+{
+    <h3>У вас еще нет ни одного мероприятия.</h3>
+}
+else
+{
+    <div class="visitedPaty">
+        @foreach (var item in Model.OrderByDescending(paty => paty.PatyDate))
+        {
+            <a href="@(item.Category.PhotoAlboms.Any()? @Url.Action("Galary","Home"):"")" style="background-color: rgb(232, 232, 232); padding: 5px; margin: 5px 0">
+                <div class="patyWrapper">
+                    <div class="patyData">
+
+                        <div class="patyDataImageWraper">
+                            @if (item.Avatar != null)
+                            {
+                                <img alt="" src="@item.Avatar.Path" />
+                            }
+                            else
+                            {
+                                <img alt="" src="/Content/img/pList/454x312.jpg" />
+                            }
+                        </div>
+                        <div class="redline"></div>
+                        <p>@item.PatyDate.ToShortDateString()</p>
+                        <h3 title="@item.Title">@(item.Title.Length >= 29 ? item.Title.Substring(0, 26) + "..." : item.Title)</h3>
+
+                        <p class="pD">@((item.Descr != null && item.Descr.Length >= 125) ? item.Descr.Substring(0, 121) + "..." : item.Descr)</p>
+                        @if (item.Category.PhotoAlboms.Any())
+                        {
+                            <p style="text-align: right; position: absolute; bottom: 20px; right: 20px"><span class="redLink">Смотреть фото</span></p>
+                        }
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}

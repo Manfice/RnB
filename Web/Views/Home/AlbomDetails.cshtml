@@ -16,7 +16,7 @@
             <p class="regionDescr">@video.Description</p>
         </div>
         <div class="row960w">
-            @foreach (var item in video.Photos)
+            @foreach (var item in video.Photos.Where(data => data.Path!=null))
             {
                 <div class="pvImageWr">
                     <a href="@item.Path" data-lightbox="@item.Region.Title" data-title="@item.Region.Description">

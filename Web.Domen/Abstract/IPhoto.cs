@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using Web.Domen.Models;
 
 namespace Web.Domen.Abstract
@@ -19,5 +20,7 @@ namespace Web.Domen.Abstract
         ImageGalary GetGalaryById(int id);
         void DeleteRegion(int id);
         IEnumerable<string> GetPhotoPath(int id);
+        ImageGalary GetVideoRegion(int id);
+        void AddVideoToAlbom(ImageData model);
     }
 }

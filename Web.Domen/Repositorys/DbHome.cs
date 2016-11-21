@@ -29,6 +29,7 @@ namespace Web.Domen.Repositorys
                 _context.Avisos.Add(aviso);
             }
             order.Aviso = aviso;
+            order.Customer.Rate += order.Paty.AddRate;
             _context.SaveChanges();
         }
 
@@ -51,7 +52,11 @@ namespace Web.Domen.Repositorys
                 Email = model.Email,
                 Fio = model.Fio,
                 Phone = model.Phone,
-                Work = model.Workplace
+                Work = model.Workplace,
+                ShowData = "00000000000N",
+                EmailNotice = true,
+                PhoneNotice = true,
+                SmsNotice = true
             };
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
@@ -85,11 +90,11 @@ namespace Web.Domen.Repositorys
         {
             var paty = await _context.Paties.FindAsync(id);
             var pls = GetTickets(places, paty.Seets);
-            customer.Rate += paty.AddRate; 
+            var cmr = _context.Customers.Find(customer.Id);
             paty.Seets = pls[1];
             var order = new Order
             {
-                Customer = customer,
+                Customer = cmr,
                 Paty = paty,
                 Place = places,
                 PlaceNumbers = pls[0],
@@ -103,7 +108,6 @@ namespace Web.Domen.Repositorys
             return order;
 
         }
-
         public void SeeCheck(string s)
         {
             var ord = _context.Orders.Find(35);

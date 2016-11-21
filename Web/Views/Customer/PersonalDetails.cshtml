@@ -1,0 +1,200 @@
+﻿@model Web.Domen.Viewmodels.CustomerVmLk
+@{
+    ViewBag.Title = "Личный кабинет " + Model.Customer.NickName;
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+@section links
+{
+    <link href="~/Content/customer.css" rel="stylesheet" />
+}
+<div class="customerColumn">
+    <div class="customerRow">
+        <div class="rowLeft">
+            <div class="customerAvatar" id="CustomerAvatar">
+                <h2>@Model.Customer.Fio</h2>
+                <div class="customerImageWrapper">
+                    @if (Model.Customer.Avatar == null)
+                    {
+                        <div class="emptyAvatar">
+                            <h3>ФОТО</h3>
+                            <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="emptyAvatar">
+                            <img alt="" src="@(Model.Customer.Avatar != null ? Model.Customer.Avatar.Path : "")" />
+                        </div>
+                    }
+
+                    <img id="avaImage" alt="" src="@(Model.Customer.Avatar != null ? Model.Customer.Avatar.Path : "")"/>
+                    <div class="avaControls">
+                        <label>
+                            <span>Сменить / загрузить фото</span>
+                            @using (Html.BeginForm("SaveAvatar", "Customer", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva"/>
+                                <button type="submit">СОХРАНИТЬ</button>
+                            }
+                        </label>
+                    </div>
+                </div>
+                <p>Рейтинг: <span>@Model.Customer.Rate</span></p>
+                <p>Скидка на мероприятия: <span>5%</span></p>
+            </div>
+            <div class="oLicnosti">
+                <div class="oLicnostiWrapper">
+                    <h3>О личности</h3>
+                    <textarea id="aboutMeTextarea" onchange="aboutMe()">@Model.Customer.AboutMe</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="rowRight">
+            <nav>
+                <ul>
+                    <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
+                    <li><a href="@Url.Action("PersonalDetails")" class="redButton">Личная страница</a></li>
+                    <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
+                    <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
+                </ul>
+            </nav>
+            <div class="myPaties">
+                <p class="myRoute">Ссылка на мой профиль: <span>@("http://redblackclub.ru/members/" + @Model.Customer.Id)</span></p>
+                @using (Html.BeginForm("PersonalDetails","Customer",FormMethod.Post ,new {@class="customerFormUpdate"}))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    @Html.HiddenFor(lk => lk.Customer.Id)
+                    @Html.HiddenFor(lk => lk.Customer.AboutMe, new {id="aboutMeFolder"})
+                    <div class="customerFormBlock">
+                        <h3>Общая информация:</h3>
+                        <div class="CustomerSex">
+                            <p style="display: inline">Пол:</p>
+                            <label>Мужской</label>
+                            @Html.RadioButtonFor(lk => lk.Sex, "M")
+                            <label>Женский</label>
+                            @Html.RadioButtonFor(lk => lk.Sex, "F")
+                        </div>
+                        <p>Отметьте галочкой поле, если вы хотите скрыть его на вашей странице</p>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Fio, new { placeholder = "Имя, фамилия" })
+                            @Html.CheckBoxFor(lk => lk.Fio)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Phone, new { placeholder = "Телефон" })
+                            @Html.CheckBoxFor(lk => lk.Phone)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Email, new { placeholder = "E-mail" })
+                            @Html.CheckBoxFor(lk => lk.Mail)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.City, new { placeholder = "Город" })
+                            @Html.CheckBoxFor(lk => lk.City)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Birthday, new { placeholder = "Дата рождения" })
+                            @Html.CheckBoxFor(lk => lk.Birthday)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.WorkPlace, new { placeholder = "Место работы, должность" })
+                            @Html.CheckBoxFor(lk => lk.WorkPlace)
+                        </div>
+                    </div>
+                    <div class="customerFormBlock">
+                        <h3>Ссылки на профили:</h3>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Facebook, new {placeholder="Facebook"})
+                            @Html.CheckBoxFor(lk => lk.F)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Insta, new { placeholder = "Instagram" })
+                            @Html.CheckBoxFor(lk => lk.I)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Vk, new { placeholder = "Вконтакте" })
+                            @Html.CheckBoxFor(lk => lk.V)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Od, new { placeholder = "Одноклассники" })
+                            @Html.CheckBoxFor(lk => lk.O)
+                        </div>
+                        <div class="CustomerInput">
+                            @Html.TextBoxFor(lk => lk.Customer.Twit, new { placeholder = "Twitter" })
+                            @Html.CheckBoxFor(lk => lk.T)
+                        </div>
+                    </div>
+                    <div class="customerFormBlock">
+                        <h3>Смена пароля:</h3>
+                        <p>Если вы не помните текущий пароль, воспользуйтесь процедурой</p>
+                        <a class="redLink">восстановления пароля</a>
+                        <div class="CustomerInput">
+                            @Html.PasswordFor(lk => lk.OldPass)
+                        </div>
+                        @Html.ValidationMessageFor(lk => lk.OldPass)
+                        <div class="CustomerInput">
+                            @Html.PasswordFor(lk => lk.NewPass, new {id = "newPass"})
+                        </div>
+                        @Html.ValidationMessageFor(lk => lk.NewPass)
+                        <p id="passCompare">Пароли не совпадают!</p>
+                        <div class="CustomerInput">
+                            @Html.PasswordFor(lk => lk.Confirm, new {id = "confirmNewPass"})
+                        </div>
+                    </div>
+                    <h3>Настройка уведомлений:</h3>
+                    <div class="myNotify">
+                        @Html.CheckBoxFor(lk => lk.Customer.SmsNotice)
+                        <label>
+                            Я хочу получать SMS сообщения рекламного, информационного характера от Krasnoe&Черное
+                        </label>
+                    </div>
+                    <div class="myNotify">
+                        @Html.CheckBoxFor(lk => lk.Customer.EmailNotice)
+                        <label>
+                            Я хочу получать E-mail сообщения рекламного, информационного характера от Krasnoe&Черное
+                        </label>
+                    </div>
+                    <div class="myNotify">
+                        @Html.CheckBoxFor(lk => lk.Customer.PhoneNotice)
+                        <label>
+                            Я хочу получать звонки рекламного, информационного характера от Krasnoe&Черное
+                        </label>
+                    </div>
+                    <button class="redButton" type="submit" onclick="return Validate()">Сохранить</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        function aboutMe() {
+            $("#aboutMeFolder").val($("#aboutMeTextarea").val());
+        }
+
+        function Validate() {
+            var password = $("#newPass");
+            var mess = $("#passCompare");
+            if (password.val() !== "") {
+                console.log("123");
+                var confirmPassword = $("#confirmNewPass");
+                if (password.val() !== confirmPassword.val()) {
+                    password.css("border-color", "red");
+                    confirmPassword.css("border-color", "red");
+                    mess.css({ "display": "block", "color": "red" });
+                    return false;
+                } else {
+                    password.css("border-color", "green");
+                    confirmPassword.css("border-color", "green");
+                    mess.css({ "display": "none"});
+                    return true;
+                }
+            }
+            console.log("232");
+            return true;
+        }
+    </script>
+}

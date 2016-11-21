@@ -5,43 +5,48 @@
     <div class="row960w" style="margin: 30px 0;">
         @foreach (var root in Model.Where(category => category.ParentCategory == null))
         {
-            <div class="pListItem">
-                <div class="plImageWrapper">
-                    @if (root.Avatar != null)
-                    {
-                        <img alt="" src="@root.Avatar.Path"/>
-                    }
-                    else
-                    {
-                        <img alt="" src="/Content/img/pList/1.jpg"/>
-                    }
+            if (Model.Any(category => category.ParentCategory != null && category.Paties.Any() && category.ParentCategory.Id == root.Id))
+            {
 
-                    @if (Model.Any(category => category.ParentCategory != null && category.ParentCategory.Id == root.Id))
-                    {
-                        <div class="bTitle">
-                            <ul>
-                                @foreach (var item in Model.Where(category => category.ParentCategory != null && category.ParentCategory.Id == root.Id))
-                                {
-                                    <li><a href="/spisok-meropriatiy/@item.RouteTitle">@item.Title</a></li>
-                                }
-                            </ul>
-                            <a href="/meropriatiya/@root.RouteTitle" class="pListTitel">@root.Title</a>
-                        </div>
 
-                    }
-                    else
-                    {
-                        <div class="comingSoon">
-                            <p>СКОРО</p>
-                        </div>
-                        <div class="bTitle">
-                            <a href="" class="pListTitel">@root.Title</a>
-                        </div>
-                    }
+
+                <div class="pListItem">
+                    <div class="plImageWrapper">
+                        @if (root.Avatar != null)
+                        {
+                            <img alt="" src="@root.Avatar.Path"/>
+                        }
+                        else
+                        {
+                            <img alt="" src="/Content/img/pList/1.jpg"/>
+                        }
+
+                        @if (Model.Any(category => category.ParentCategory != null && category.ParentCategory.Id == root.Id))
+                        {
+                            <div class="bTitle">
+                                <ul>
+                                    @foreach (var item in Model.Where(category => category.ParentCategory != null && category.ParentCategory.Id == root.Id))
+                                    {
+                                        <li><a href="/spisok-meropriatiy/@item.RouteTitle">@item.Title</a></li>
+                                    }
+                                </ul>
+                                <a href="/meropriatiya/@root.RouteTitle" class="pListTitel">@root.Title</a>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="comingSoon">
+                                <p>СКОРО</p>
+                            </div>
+                            <div class="bTitle">
+                                <a href="" class="pListTitel">@root.Title</a>
+                            </div>
+                        }
+                    </div>
+
                 </div>
-
-            </div>
-
+            }
         }
     </div>
 </div>

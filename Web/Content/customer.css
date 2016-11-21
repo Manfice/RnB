@@ -1,0 +1,411 @@
+﻿/*Customer*/
+#passCompare {
+    display: none;
+}
+
+.customerColumn {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 60px 0 20px 0;
+}
+
+.customerRow {
+    flex: 1 0 auto;
+    max-width: 970px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.rowLeft {
+    flex: 0 0 28%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 10px 0 0;
+}
+
+.customerAvatar {
+    flex: 1 0 auto;
+    display: block;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+    .customerAvatar h2 {
+        padding: 10px;
+    }
+
+    .customerAvatar p {
+        display: block;
+        margin: 10px 0;
+    }
+
+        .customerAvatar p span {
+            color: red;
+            font-weight: bolder;
+        }
+
+.customerImageWrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+    .customerImageWrapper:hover .avaControls {
+        bottom: 0;
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        -ms-transition: 1s;
+        -o-transition: 1s;
+        transition: 1s;
+    }
+
+#avaImage {
+    display: none;
+    width: 100%;
+}
+
+.emptyAvatar {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+    .emptyAvatar p {
+        width: 80%;
+        text-align: center;
+    }
+
+    .emptyAvatar img {
+        width: 100%;
+    }
+
+.avaControls {
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.7);
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    cursor: pointer;
+}
+
+    .avaControls input, .avaControls button {
+        background-color: transparent;
+        border: none;
+        text-align: center;
+        display: none;
+        padding: 5px;
+        cursor: pointer;
+        font-family: "rNormal";
+        color: red;
+        width: 100%;
+        font-size: 12pt;
+    }
+
+    .avaControls label {
+        display: block;
+    }
+
+        .avaControls label span {
+            text-align: center;
+            display: block;
+            padding: 5px;
+            cursor: pointer;
+            font-family: "rNormal";
+            color: red;
+            font-size: 12pt;
+        }
+
+.rowRight {
+    flex: 0 0 70%;
+}
+
+    .rowRight nav {
+        display: block;
+        background-color: whitesmoke;
+        border-bottom: solid 3px #e8e8e8;
+    }
+
+.paymentCustomer {
+    max-width: 970px;
+    width: 100%;
+    align-self: center;
+    margin-top: 10px;
+}
+
+    .paymentCustomer > nav {
+        border: none;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .paymentCustomer>nav>ul>li {
+        margin-left: 5px;
+    }
+
+nav > ul {
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.myPaties {
+    flex: 0 0 auto;
+    display: block;
+}
+
+.visitedPaty {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-top: 40px;
+}
+
+.prevSuggestedItem, .nextSuggestedItem {
+    flex: 0 0 auto;
+    margin-top: 20px;
+    width: 20px;
+    height: 70px;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+}
+
+    .prevSuggestedItem img, .nextSuggestedItem img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .prevSuggestedItem:hover, .nextSuggestedItem:hover {
+        height: 100px;
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        -ms-transition: 1s;
+        -o-transition: 1s;
+        transition: 1s;
+    }
+
+.carouselBlock {
+    max-width: 910px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#suggestedPatyCarousel {
+    display: block;
+}
+
+.myRoute {
+    margin: 10px 0;
+}
+
+.customerFormUpdate {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.customerFormBlock {
+    flex: 1 0 auto;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: rgb(232, 232, 232);
+    margin-top: 20px;
+    padding: 0 40px 20px;
+}
+
+    .customerFormBlock:first-child {
+        padding: 0;
+    }
+
+    .customerFormBlock h3 {
+        display: block;
+        margin: 10px;
+        font-size: 16pt;
+    }
+
+    .customerFormBlock p, .customerFormBlock a {
+        align-self: flex-start;
+        font-size: 12pt;
+        padding: 0;
+        margin: 0;
+    }
+
+    .customerFormBlock > input {
+        width: 100%;
+        margin: 20px 0;
+        padding: 5px 10px;
+        -ms-border-radius: 5px;
+        border-radius: 5px;
+        border: solid 1px lightgray;
+    }
+
+    .customerFormBlock > textarea {
+        width: 100%;
+        padding: 5px 10px;
+        -ms-border-radius: 5px;
+        border-radius: 5px;
+        border: solid 1px lightgray;
+        -moz-resize: none;
+        -ms-resize: none;
+        -o-resize: none;
+        resize: none;
+        margin-bottom: 20px;
+    }
+
+    .customerFormBlock > button {
+        align-self: flex-start;
+    }
+
+.CustomerSex {
+    align-self: flex-start;
+}
+
+.CustomerInput {
+    flex: 1 0 auto;
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .CustomerInput input[type=text], .CustomerInput input[type=password] {
+        width: 90%;
+        padding: 5px 10px;
+        -ms-border-radius: 5px;
+        border-radius: 5px;
+        border: solid 1px lightgray;
+    }
+
+    .CustomerInput input[type=checkbox] {
+        margin: 0 15px;
+        height: 20px;
+        width: 20px;
+    }
+
+.CustomerSex p, .CustomerSex label {
+    font-weight: bolder;
+    font-size: 12pt;
+}
+
+.myRoute {
+    font-weight: bolder;
+    font-size: 12pt;
+}
+
+    .myRoute span {
+        color: red;
+    }
+
+.oLicnosti {
+    background-color: whitesmoke;
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+}
+
+.oLicnostiWrapper h3 {
+    display: block;
+    margin: 5px;
+    text-align: center;
+}
+
+.oLicnostiWrapper {
+    width: 100%;
+    padding: 10px;
+}
+
+    .oLicnostiWrapper textarea {
+        overflow-y: scroll;
+        width: 100%;
+        border: solid 1px lightgray;
+        -ms-border-radius: 5px;
+        border-radius: 5px;
+        height: 500px;
+        -moz-resize: none;
+        -ms-resize: none;
+        -o-resize: none;
+        resize: none;
+    }
+
+.myNotify {
+    max-width: 600px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+    .myNotify input[type=checkbox] {
+        margin: 0 15px;
+        height: 20px;
+        width: 20px;
+    }
+
+    .myNotify label {
+        font-size: 12pt;
+    }
+
+.myPaties > form > h3 {
+    display: block;
+    margin: 20px 0 10px;
+    font-size: 16pt;
+}
+.summaryTitle {
+    background-color: rgb(232, 232, 232);
+    display: block;
+    padding: 10px;
+}
+.summaryTitle h3 {
+    display: block;
+    font-size: 16pt;
+}
+table {
+    width: 100%;
+}
+table thead tr {
+    border-bottom: solid 3px rgb(232,232,232);
+}
+table thead tr th {
+    font-size: 14pt;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 15px 0;
+}
+    table thead tr th span {
+        display: block;
+        color: gray;
+    }
+/*Customer END*/
