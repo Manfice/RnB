@@ -85,6 +85,7 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
     .emptyAvatar p {
@@ -92,7 +93,7 @@
         text-align: center;
     }
 
-    .emptyAvatar img {
+    .customerImageWrapper img {
         width: 100%;
     }
 
@@ -408,4 +409,67 @@ table thead tr th {
         display: block;
         color: gray;
     }
+@media only screen and (max-device-width: 720px) {
+    .redButton, .grayButton {
+        font-size: 12pt;
+        width: 100%;
+        padding: 7px 0;
+    }
+    .mobileColumn {
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        margin: 15px 0 0 0;
+        padding: 0 15px;
+    }
+    .mobileCustomerMenu {
+        display: block;
+        padding: 10px;
+        border-bottom: solid 5px whitesmoke;
+        width: 100%;
+        align-self: flex-start;
+    }
+    .mobileCustomerMenu ul {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .mobileCustomerMenu ul li {
+        flex: 1 0 40%;
+        margin: 3px 5px;
+    }
+    .customerFormBlock {
+        padding: 10px;
+    }
+    .customerFormBlock h3 {
+        font-size: 13pt;
+    }
+    .customerFormBlock p {
+        font-size: 12pt;
+    }
+    .CustomerSex p, .CustomerSex label {
+        font-size: 10pt;
+    }
+    .CustomerInput input[type=text], .CustomerInput input[type=password] {
+        width: 80%;
+    }
+    .myNotify input[type=checkbox] {
+        width: 70px;
+    }
+    #aboutMeTextarea {
+        height: 300px;
+    }
+    #paydedPaty table thead tr th{
+        font-size: 7pt;
+        vertical-align: top;
+    }
+    #freePaty table thead tr th {
+        font-size: 7pt;
+        vertical-align: top;
+    }
+    .avaControls {
+        bottom: 0;
+    }
+}
 /*Customer END*/

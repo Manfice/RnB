@@ -1,14 +1,33 @@
-﻿@model Web.Domen.Models.PhotoAlbom
+﻿@using Web.Helpers
+@model Web.Domen.Viewmodels.PhotosViewModel
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = Model.Albom.Title;
     Layout = "~/Views/Shared/_MainRnB.cshtml";
 }
 
 <div class="myColumn" id="pt">
     <div class="albomHead">
-        <h1 class="albomTitle"><span>@Model.AlbomDate.ToShortDateString()</span><span>@Model.Title</span></h1>
+        <h1 class="albomTitle"><span>@Model.Albom.AlbomDate.ToShortDateString()</span><span>@Model.Albom.Title</span></h1>
     </div>
-    @foreach (var video in Model.Regions)
+    @if (Model.Albom.Regions.Any(galary => galary.Title.Equals("video", StringComparison.CurrentCultureIgnoreCase)))
+    {
+        var videoBlock = Model.Albom.Regions.FirstOrDefault(galary => galary.Title.Equals("video", StringComparison.CurrentCultureIgnoreCase));
+        if (videoBlock != null && videoBlock.Photos.Any())
+        {
+            <div class="regionTitle">
+                <p><span>Видео с мероприятия</span></p>
+            </div>
+            <div class="row960w">
+                @foreach (var item in videoBlock.Photos.Where(data => data.VideoLink != null))
+                {
+                    <div class="pvVideoWr">
+                        <iframe width="430" height="220" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
+                    </div>
+                }
+            </div>
+        }
+    }
+    @foreach (var video in Model.Photos.Select(data => data.Region).Distinct())
     {
 
         <div class="regionTitle">
@@ -16,10 +35,10 @@
             <p class="regionDescr">@video.Description</p>
         </div>
         <div class="row960w">
-            @foreach (var item in video.Photos.Where(data => data.Path!=null))
+            @foreach (var item in Model.Photos.Where(data => data.Path!=null && data.Region.Id==video.Id))
             {
                 <div class="pvImageWr">
-                    <a href="@item.Path" data-lightbox="@item.Region.Title" data-title="@item.Region.Description">
+                    <a href="@item.Path" data-lightbox="@item.Region.Id" data-title="@item.Region.Description">
                         <img class="example-image" alt="" src="@item.Path" />
                         <div class="pvBorder"></div>
                     </a>
@@ -37,8 +56,11 @@
                     </div>
                 </div>
             }
+
         </div>
     }
-
+    <div class="pageLinks">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("AlbomDetails", new { id = Model.Albom.Id, page = x }))
+    </div>
 </div>
 <a href="@ViewBag.returnUrl">Назад к коллекции</a>

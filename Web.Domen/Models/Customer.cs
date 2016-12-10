@@ -66,4 +66,12 @@ namespace Web.Domen.Models
         public string Workplace { get; set; }
         public string UserId { get; set; }
     }
+
+    public class Otziv
+    {
+        public int Id { get; set; }
+        public string WhoSay { get; set; }
+        public string Work { get; set; }
+        public string VideoLink { get; set; }
+    }
 }

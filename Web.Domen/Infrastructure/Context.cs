@@ -22,6 +22,7 @@ namespace Web.Domen.Infrastructure
         public DbSet<PhotoAlbom> Alboms { get; set; }
         public DbSet<ImageGalary> Galaries { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Otziv> Otzivs { get; set; }
     }
 
     public class RnBDbInitiliser : CreateDatabaseIfNotExists<Context>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Web.Domen.Models;
 
 namespace Web.Domen.Abstract
@@ -14,5 +15,6 @@ namespace Web.Domen.Abstract
         void SetCompanyAvatar(int id, CustImage ava);
         void UpdateMyCompany(Company model);
         IEnumerable<Order> GetMyOrders(string id);
+        Task<Customer> GetCustomerByUser(string userId);
     }
 }

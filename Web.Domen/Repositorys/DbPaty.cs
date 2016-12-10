@@ -91,6 +91,8 @@ namespace Web.Domen.Repositorys
                     result.AddRate = model.AddRate; //8
                     result.Dres = model.Dres; //9
                     result.Place = model.Place; //11
+                    result.RouteTitle = model.RouteTitle; //11
+                    result.MetaDescription = model.MetaDescription; //11
                     result.Seets = MakeSeats(model.MaxGuests); //10
                 }
                 else
@@ -102,6 +104,11 @@ namespace Web.Domen.Repositorys
             }
             else
             {
+                if (string.IsNullOrEmpty(model.RouteTitle))
+                {
+                    model.RouteTitle = dbCat.RouteTitle + "-" + model.PatyDate.Day + "-" + model.PatyDate.Month + "-" +
+                                       model.PatyDate.Year;
+                }
                 result = model;
                 result.Seets = MakeSeats(model.MaxGuests); //10
                 result.Category = dbCat;
@@ -222,7 +229,7 @@ namespace Web.Domen.Repositorys
         public PatyCategory SavePatyCategory(int parent, PatyCategory model, PatyImage image)
         {
             PatyCategory _parent = null;
-            PatyCategory _current;
+            PatyCategory _current = null;
             var img = 0;
             if (parent>0)
             {
@@ -234,7 +241,12 @@ namespace Web.Domen.Repositorys
                 _current = GetCategoryById(model.Id);
                 _current.Title = model.Title;
                 _current.Description = model.Description;
-                img = _current.Avatar.Id;
+                _current.RouteTitle = model.RouteTitle;
+                _current.MetaDescription = model.MetaDescription;
+                if (_current.Avatar!=null)
+                {
+                    img = _current.Avatar.Id;
+                }
             }
             else
             {
@@ -281,14 +293,14 @@ namespace Web.Domen.Repositorys
             return _context.PatyCategories.FirstOrDefault(category => category.RouteTitle.Contains(routeUrl));
         }
 
-        public bool CheckPatyUrlTitle(string url)
+        public bool CheckPatyUrlTitle(string url, int id = 0)
         {
-            return _context.Paties.Any(paty => paty.RouteTitle.Equals(url, StringComparison.CurrentCultureIgnoreCase));
+            return _context.Paties.Any(paty => paty.RouteTitle.Equals(url, StringComparison.CurrentCultureIgnoreCase) && paty.Id != id);
         }
 
-        public bool CheckPatyCategoryUrlTitle(string url)
+        public bool CheckPatyCategoryUrlTitle(string url, int id=0)
         {
-            return _context.PatyCategories.Any(paty => paty.RouteTitle.Equals(url, StringComparison.CurrentCultureIgnoreCase));
+            return _context.PatyCategories.Any(paty => paty.RouteTitle.Equals(url, StringComparison.CurrentCultureIgnoreCase) && paty.Id!=id);
 
         }
     }

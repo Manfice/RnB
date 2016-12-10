@@ -13,6 +13,7 @@ namespace Web.Domen.Abstract
         Task<Customer> GetCustomerAsync(OrderViewmodel model);
         Task<Order> RegOnPatyAsync(int id,int places,decimal descount,Customer customer);
         Task<Customer> GetCustomerByEmailAsync(string email);
+        Customer GetCustomerByEmail(string email);
         Order GetOrderBuId(int id);
         Task<Order> OrderExistAsync(int patyId, string email);
         void SeeCheck(string s);
@@ -21,5 +22,7 @@ namespace Web.Domen.Abstract
         IEnumerable<ImageData> GetPhotos { get; } 
         IEnumerable<PhotoAlbom> GetAlboms { get; }
         PhotoAlbom GetAlbomById(int id);
+        void AddAlbomView(int id);
+        void AddPhotoView(int id);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
@@ -22,7 +21,7 @@ namespace Web.Helpers
                 Credentials = new NetworkCredential(fromAddress.Address, "^*J_ewv@"),//^*J_ewv@
                 
             };
-            System.Net.ServicePointManager.ServerCertificateValidationCallback =
+            ServicePointManager.ServerCertificateValidationCallback =
                 (sender, certificate, chain, errors) => true;
             using (var message = new MailMessage(fromAddress, new MailAddress(to))
             {
@@ -48,7 +47,7 @@ namespace Web.Helpers
                 Credentials = new NetworkCredential(fromAddress.Address, "^*J_ewv@"),//^*J_ewv@
 
             };
-            System.Net.ServicePointManager.ServerCertificateValidationCallback =
+            ServicePointManager.ServerCertificateValidationCallback =
                 (sender, certificate, chain, errors) => true;
             using (var message = new MailMessage(fromAddress, new MailAddress(to))
             {

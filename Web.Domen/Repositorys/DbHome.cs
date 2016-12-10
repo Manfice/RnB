@@ -18,7 +18,7 @@ namespace Web.Domen.Repositorys
 
         public IEnumerable<Paty> GetPatys => _context.Paties.ToList();
 
-        public IEnumerable<ImageData> GetPhotos => _context.Photos.ToList();
+        public IEnumerable<ImageData> GetPhotos => _context.Photos.Include(data => data.Region.Albom.Category);
         public IEnumerable<PhotoAlbom> GetAlboms => _context.Alboms.ToList();
 
 
@@ -114,7 +114,7 @@ namespace Web.Domen.Repositorys
             ord.AvisoLog = s;
             _context.SaveChangesAsync();
         }
-        private string[] GetTickets(int quantity, string pls)
+        private static string[] GetTickets(int quantity, string pls)
         {
             var places = pls.Split(',');
             var result = new[] {"",""};
@@ -132,6 +132,31 @@ namespace Web.Domen.Repositorys
         public Paty GetPatyByRouteUrl(string route)
         {
             return _context.Paties.FirstOrDefault(paty => paty.RouteTitle.Contains(route));
+        }
+
+        public Customer GetCustomerByEmail(string email)
+        {
+            return _context.Customers.FirstOrDefault(customer => customer.Email.Equals(email,StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        public void AddAlbomView(int id)
+        {
+            var alb = _context.Alboms.Find(id);
+            if (alb!=null)
+            {
+                alb.Viewed ++;
+                _context.SaveChanges();
+            }
+        }
+
+        public void AddPhotoView(int id)
+        {
+            var photo = _context.Photos.Find(id);
+            if (photo != null)
+            {
+                photo.Viewed++;
+                _context.SaveChanges();
+            }
         }
     }
 }

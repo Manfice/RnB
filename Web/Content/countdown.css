@@ -1,0 +1,35 @@
+﻿.countdownContainer {
+    position: relative;
+    flex: 1 0 auto;
+}
+.countdownContainer table {
+    margin: 0 50px;
+}
+.countdownContainer h3 {
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-bottom: 5px;
+}
+.counterDigits {
+    font-size: 25pt;
+    font-family: "rBold"
+}
+
+#days,#hours,#minutes,#seconds {
+    padding: 0 15px;
+    background: linear-gradient(0deg, #2d2c2c, #646464, #2d2c2c);
+    border-radius: 5px;
+    color: rgb(221, 221, 221);
+    box-shadow: -0px 5px 10px  gray
+}
+@media only screen and (max-device-width: 720px) {
+    .countdownContainer {
+        background-color: lightgray;
+        padding: 10px 0;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

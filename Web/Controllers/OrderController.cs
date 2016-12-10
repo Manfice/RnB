@@ -33,7 +33,7 @@ namespace Web.Controllers
                 OrderNumber = order.Id.ToString(),
                 ShopArticleId = order.Paty.Id,
                 ShopSuccessUrl = "www.redblackclub.ru/home/orderdetails/"+order.Id,
-                Scid = "543778",
+                Scid = "79053",
                 ShopId = "80812",
                 Order = order
             };
@@ -41,7 +41,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public string CheckTest(DateTime requestDatetime,string action,string orderSumAmount,string orderSumCurrencyPaycash,string orderSumBankPaycash,string shopId,string invoiceId,string customerNumber,string orderNumber,string md5)
+        public string Check(DateTime requestDatetime,string action,string orderSumAmount,string orderSumCurrencyPaycash,string orderSumBankPaycash,string shopId,string invoiceId,string customerNumber,string orderNumber,string md5)
         {
             const string shopPassword = "Kjhk&*lk%$h211KU6";
             var order = _home.GetOrderBuId(int.Parse(orderNumber));
@@ -49,7 +49,8 @@ namespace Web.Controllers
             var customer = order.Customer.Id + ":" + order.Customer.Email;
             var toHash = string.Join(";", action, price, orderSumCurrencyPaycash, orderSumBankPaycash, shopId, invoiceId, customer, shopPassword);
             var myMd5 = PassAuth.EncodeMd5(toHash);
-
+            var body = "To Hash Check: " + toHash + ">>>>>" + md5+"URL: "+Request.Url;
+            PassAuth.SendMyMail(body,"c592@yandex.ru","CheckMethod"+orderNumber);
             var code = 0;
 
             if (!string.Equals(myMd5, md5, StringComparison.CurrentCultureIgnoreCase))
@@ -65,7 +66,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public string AvisoTest(DateTime requestDatetime, string action, string orderSumAmount, string orderSumCurrencyPaycash, string orderSumBankPaycash, string shopId, string invoiceId, string customerNumber, string orderNumber, string paymentPayerCode, string shopSumAmount, string md5)
+        public string Aviso(DateTime requestDatetime, string action, string orderSumAmount, string orderSumCurrencyPaycash, string orderSumBankPaycash, string shopId, string invoiceId, string customerNumber, string orderNumber, string paymentPayerCode, string shopSumAmount, string md5)
         {
             const string shopPassword = "Kjhk&*lk%$h211KU6";
             var order = _home.GetOrderBuId(int.Parse(orderNumber));
@@ -103,13 +104,13 @@ namespace Web.Controllers
             return resp;
         }
 
-        public ActionResult SuccessTest(string orderNumber)
+        public ActionResult Success(string orderNumber)
         {
             var order = _home.GetOrderBuId(int.Parse(orderNumber));
             return View(order);
         }
 
-        public ActionResult FailTest(string orderNumber)
+        public ActionResult Fail(string orderNumber)
         {
             var model = string.IsNullOrEmpty(orderNumber) ? new Order() : _home.GetOrderBuId(int.Parse(orderNumber));
             return View(model);

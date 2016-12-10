@@ -68,14 +68,15 @@
                  <h3 title="@region.Description">@(string.IsNullOrEmpty(region.Title)?"Нет названия":region.Title)</h3>
                  <a href="@Url.Action("EditRegion", new {id = region.Id})" title="Редактировать раздел">Изменить</a>
                  <a href="@Url.Action("DeleteRegion", new {id = region.Id})" title="Удалить раздел с фотографиями">Удалить</a>
-                 @using (Html.BeginForm("BulkAddPhotos", "ImageGalary", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                 <a href="@Url.Action("UploadsPhotos", new {regionId = region.Id, albomId = Model.Id})" title="Добавить фото в раздел">Добавить фото</a>
+                 @*@using (Html.BeginForm("BulkAddPhotos", "ImageGalary", FormMethod.Post, new {enctype = "multipart/form-data"}))
                  {
                      @Html.Hidden("regId", region.Id)
                      @Html.Hidden("Albom.Id", Model.Id)
                      @Html.ValidationSummary()
                      <input type="file" name="photos" multiple="multiple"/>
                      <button type="submit">Добавить</button>
-                 }
+                 }*@
              </div>
          </div>
          <div class="alboms">

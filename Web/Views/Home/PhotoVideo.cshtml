@@ -7,11 +7,12 @@
         <a href="#" class="" data-bind="click:photoView.bind($data, 'VIDEO'), css:{redButton:photoView()!=='PHOTO',grayButton:photoView()==='PHOTO' }">Видео</a>
     </div>
     <div class="row960w" style="display: none;" data-bind="visible:photoView()==='PHOTO'">
-        @foreach (var item in Model)
+
+        @foreach (var item in Model.Where(data => string.IsNullOrEmpty(data.VideoLink)))
         {
             <div class="pvImageWr">
                 <a href="@item.Path" data-lightbox="image-title" data-title="@item.Region.Description">
-                    <img class="example-image" alt="" src="@item.Path" />
+                    <img class="example-image" alt="" src="@item.Path"/>
                     <div class="pvBorder"></div>
                 </a>
                 <div class="actions albomStat">
@@ -25,16 +26,24 @@
                         <i class="fa fa-download"></i>
                     </a>
                     <i class="fa fa-share-alt"></i>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a class="alStatDelet" href="@Url.Action("DeletePhoto","ImageGalary", new {id =item.Id, returnUrl=Request.Url?.PathAndQuery})" target="_blanck">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    }
                 </div>
             </div>
         }
     </div>
     <div class="row960w" style="display: none;" data-bind="visible:photoView()==='VIDEO'">
-      @*<div class="pvImageWr">
-            <div class="pvBorder"></div>
-            <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
-        </div>
-        <div class="pvImageWr">
+        @foreach (var video in Model.Where(data => !string.IsNullOrEmpty(data.VideoLink)))
+        {
+            <div class="pvVideoWr">
+                <iframe width="430" height="220" src="@video.VideoLink" allowfullscreen frameborder="0"></iframe>
+            </div>
+        }
+        @*<div class="pvImageWr">
             <div class="pvBorder"></div>
             <iframe width="250" height="179" src="https://www.youtube.com/embed/iUWtNrfLD10" allowfullscreen></iframe>
         </div>

@@ -1,0 +1,41 @@
+﻿@using Newtonsoft.Json
+@{
+    Layout = "/Views/Shared/_MainRnB.cshtml";
+}
+<div class="countdownContainer">
+    <h3>До события осталось:</h3>
+    <table>
+        <tr class="counterDigits">
+            <td id="days">01</td>
+            <td>:</td>
+            <td id="hours">12</td>
+            <td>:</td>
+            <td id="minutes">55</td>
+            <td>:</td>
+            <td id="seconds">15</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="titles">
+            <td colspan="2">дней</td>
+            <td colspan="2">часов</td>
+            <td colspan="2">минут</td>
+            <td>секунд</td>
+        </tr>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        Countdown(@Html.Raw(JsonConvert.SerializeObject(ViewBag.TargetDate)),['days','hours','minutes','seconds'], function() {
+            alert("Finish");
+        });
+    </script>
+}

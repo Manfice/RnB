@@ -15,6 +15,13 @@ namespace Web.Domen.Viewmodels
         public PagingInfo PagingInfo { get; set; }
     }
 
+    public class PhotosViewModel
+    {
+        public IEnumerable<ImageData> Photos { get; set; }
+        public PhotoAlbom Albom { get; set; }
+        public PagingInfo PagingInfo { get; set; }
+    }
+
     public class PagingInfo
     {
         public int TotalItems { get; set; }

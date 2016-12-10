@@ -34,7 +34,7 @@
             <input type="file" name="avatar" id="catAvatar"/>
             <label>Название категории:</label>
             @Html.TextBoxFor(category => category.Title)
-            <label>CEO URL:</label>
+            <label>CEO URL:<span style="color:red">ОБЯЗАТЕЛЬНО</span></label>
             @Html.TextBoxFor(category => category.RouteTitle)
             <label>Meta "Description" CEO:</label>
             @Html.TextBoxFor(category => category.MetaDescription)

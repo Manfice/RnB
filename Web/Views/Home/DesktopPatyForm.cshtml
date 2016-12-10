@@ -1,0 +1,192 @@
+﻿@model Web.Domen.Models.Paty
+@{
+    var currUrl = $"https://redblackclub.ru/sobitie/{Model.RouteTitle}";
+    var imgUrl = $"https://redblackclub.ru{Model.Avatar.Path}";
+    var vkUrl = $"https://vk.com/share.php?url={currUrl}&title={Model.Title}&description={Model.Descr}&image={imgUrl}&noparse=true";
+}
+<div class="orderFormInnerBlock l">
+    <div class="grayDate">
+        <div class="itm itm-title">
+            <p>@Model.Title</p>
+        </div>
+        <div class="itm itm-day">
+            <p>@Model.PatyDate.Day</p>
+        </div>
+        <div class="itm itm-month-year">
+            <p>@Model.PatyDate.ToString("dd MMMM yyyy").Remove(0, 2)</p>
+            <p>В @Model.PatyDate.ToShortTimeString()</p>
+        </div>
+    </div>
+
+    <h2>@Model.Descr</h2>
+
+    <div class="interest bordered">
+        <p>На мероприятии вы сможете:</p>
+        @foreach (var s in Model.PatyInterest.Split('\n').Where(s => s.Length>1))
+        {
+            <p> - @s </p>
+        }
+    </div>
+
+    <div class="bordered">
+        @if (Model.Price > 0)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                <p>Стоимость: <span>@((Model.Price*(decimal) 0.95).ToString("N")) руб.</span> <span>(рассчитывается с учетом скидки и кол-ва мест)</span></p>
+            }
+            else
+            {
+                <p>Стоимость: <span>@Model.Price руб.</span> <span>(рассчитывается с учетом скидки и кол-ва мест)</span></p>
+            }
+        }
+        else
+        {
+            <p><strong>Стоимость: </strong><span>БЕСПЛАТНО</span></p>
+        }
+    </div>
+    <div class="terms bordered">
+        <p>
+            <strong>Условия участия:</strong>
+        </p>
+        @if (Model.Price == 0)
+        {
+            <p> 1) вступите в одну из наших групп в соц сетях:</p>
+            <p style="padding-left: 20px">
+                если уже вступил ранее, то вы очень большой молодец!
+                <a href="#" class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
+                @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20"/></a>*@
+                <a href="@vkUrl" id="vk_"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
+                @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20"/></a>*@
+                @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20"/></a>*@
+            </p>
+            <p>2) сделайте репост этой записи в одной из социальных сетей:</p>
+            <p>
+                <a class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
+                @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20"/></a>*@
+                <a href="@vkUrl"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
+                @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20"/></a>*@
+                @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20"/></a>*@
+            </p>
+            <p>3) получите приглашение по почте, заполнив форму заявки</p>
+        }
+        else
+        {
+            <p>1) заполните форму заявки</p>
+            <p>2) оплатите орг. взнос на странице оплаты</p>
+            <p>3) получите приглашение на эл. почту</p>
+        }
+    </div>
+    @if (Model.Price > 0)
+    {
+        <div class="discount bordered">
+            <p>
+                <strong>Скидки: до 10% </strong>
+            </p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p>Для членов клуба скидка <span>5%</span></p>
+            }
+            else
+            {
+                <p>
+                    - 5% для членов клуба <a style="margin: 0 20px" href="@Url.Action("Login", "Auth", new {returnUrl = HttpContext.Current.Request.Url.PathAndQuery})" class="redLink">Авторизация</a><a href="@Url.Action("Register", "Auth", new {returnUrl = HttpContext.Current.Request.Url.PathAndQuery})" class="redLink">Регистрация</a>
+                </p>
+            }
+            <p>- до 5% при репосте в соцсетях</p>
+            <p>
+                Сделать репост этого мероприятия:
+                <a class ="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="25" /></a>
+                @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="25" /></a>*@
+                <a href="#" id="vk_share_button"><img alt="vk" src="/Content/img/soc/b.png" width="25" /></a>
+                @*<span id="vk_like"></span>*@
+                @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="25" /></a>*@
+                @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="25" /></a>*@
+            </p>
+        </div>
+    }
+    <div class="counter bordered">
+        <p>
+            <strong>Вход строго по приглашениям.</strong>
+        </p>
+        <p><strong>Дресс-код: </strong>@Model.Dres</p>
+        <div class="grayDate">
+            <div class="reg">
+                <h4>До конца<br/> регистрации<br/> осталось:</h4>
+            </div>
+            @if ((Model.MaxGuests - @Model.Orders.Where(order => order.Aviso != null).Sum(o => o.Place)) <= 0)
+            {
+                <h3>Извините, но все билеты распроданы.</h3>
+            }
+            else
+            {
+                <div id="countdownBlock" class="countdownContainer">
+                    <h3></h3>
+                    <table>
+                        <tr class="counterDigits">
+                            <td id="days">00</td>
+                            <td>:</td>
+                            <td id="hours">00</td>
+                            <td>:</td>
+                            <td id="minutes">00</td>
+                            <td>:</td>
+                            <td id="seconds">00</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="titles">
+                            <td colspan="2">
+                                <p>дней</p></td>
+                            <td colspan="2">
+                                <p>часов</p></td>
+                            <td colspan="2">
+                                <p>минут</p></td>
+                            <td>
+                                <p>секунд</p></td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="orderFormInnerBlock r">
+    <div class="info">
+        <p>Более подробная информация о месте проведения будет выслана лицам, подавшим заявку</p>
+        <hr/>
+    </div>
+    <div class="freepalce">
+        @if (Model.Orders != null)
+        {
+            <p>Осталось мест:</p>
+            <span style="color: red">@(Model.MaxGuests - @Model.Orders.Where(order => order.Aviso != null).Sum(o => o.Place))</span>
+            <span>/</span>
+            <span>@Model.MaxGuests</span>
+        }
+        else
+        {
+            <p>Осталось мест:</p>
+            <span style="color: red">@Model.MaxGuests</span><span>/</span><span>@Model.MaxGuests</span>
+
+        }
+    </div>
+    @if (Model.PatyDate > DateTime.Now)
+    {
+        @Html.Action("PatyForm", "Home", new { patyId = Model.Id })
+            <p class="formReq">Поля отмеченные звездочкой (*) обязательны для заполнения</p>
+       
+    }
+    <div class="rate">
+        <p>
+            <span>+@Model.AddRate к рейтингу </span>
+        </p>
+    </div>
+</div>
+

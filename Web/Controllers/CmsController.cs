@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Web.Domen.Abstract;
+using Web.Domen.Models;
 using Web.Domen.Viewmodels;
 using Web.Infrastructure;
 using Web.Models;
@@ -16,6 +18,7 @@ namespace Web.Controllers
     [Authorize(Roles = "Admin, Moderator")]
     public class CmsController : Controller
     {
+        private readonly ICmc _repoCmc;
         private void AddErrorsFormResult(IdentityResult result)
         {
             foreach (var item in result.Errors)
@@ -26,6 +29,10 @@ namespace Web.Controllers
         private AppUserManager UserMeneger => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
         private AppRoleManager RoleMeneger => HttpContext.GetOwinContext().GetUserManager<AppRoleManager>();
 
+        public CmsController(ICmc repoCmc)
+        {
+            _repoCmc = repoCmc;
+        }
         // GET: Cms
         public ActionResult Index()
         {
@@ -175,5 +182,30 @@ namespace Web.Controllers
             return View(model);
         }
 
+        public ActionResult Otzivi()
+        {
+            return View(_repoCmc.GetOtzivs);
+        }
+
+        [HttpPost]
+        public ActionResult AddVideo(string name,string company, string video)
+        {
+            var videoLink = video.Remove(0, 17);
+            var videoData = new Otziv
+            {
+                VideoLink = "https://www.youtube.com/embed/" + videoLink,
+                WhoSay = name,
+                Work = company
+            };
+            _repoCmc.AddOtziv(videoData);
+            return RedirectToAction("Otzivi");
+        }
+
+        public ActionResult DeleteOtziv(int id)
+        {
+            _repoCmc.DeleteOtziv(id);
+
+            return RedirectToAction("Otzivi");
+        }
     }
 }

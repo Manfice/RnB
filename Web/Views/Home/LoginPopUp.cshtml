@@ -19,8 +19,9 @@
                         @Html.TextBoxFor(vm => vm.Email, new { placeholder = "E-mail" })
                     </div>
                     <div class="inpItem">
-                        @Html.PasswordFor(vm => vm.Password, new { placeholder = "Пароль" })
+                        @Html.PasswordFor(vm => vm.Password, new {placeholder = "Пароль"})
                     </div>
+                    @Html.ActionLink("Забыли пароль?","RemmemberPassword","Auth", null ,new {@class="redLink"});
                     <div class="formFooter">
                         <button type="submit" class="redButton">Войти</button>
                     </div>
@@ -35,11 +36,11 @@
                     </div>
                     <p>Вы можете зарегистрироваться или войти в Личный Кабинет через социальную сеть:</p>
                     <div class="socLinks">
-                        <a><img alt="" src="/Content/img/soc/f.png" width="23" /></a>
-                        <a><img alt="" src="/Content/img/soc/i.png" width="23" /></a>
-                        <a><img alt="" src="/Content/img/soc/b.png" width="23" /></a>
-                        <a><img alt="" src="/Content/img/soc/o.png" width="23" /></a>
-                        <a><img alt="" src="/Content/img/soc/t.png" width="23" /></a>
+                        <a href="@Url.Action("ExternalLogin", "Auth", new {provider = "Facebook"})"><img alt="" src="/Content/img/soc/f.png" width="23" /></a>
+                        @*<a><img alt="" src="/Content/img/soc/i.png" width="23" /></a>*@
+                        <a href="@Url.Action("VkAuth", "Auth")"><img alt="" src="/Content/img/soc/b.png" width="23" /></a>
+                        @*<a><img alt="" src="/Content/img/soc/o.png" width="23" /></a>*@
+                        @*<a><img alt="" src="/Content/img/soc/t.png" width="23" /></a>*@
                     </div>
                 </div>
             </div>

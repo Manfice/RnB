@@ -1,0 +1,50 @@
+﻿@using Web.Helpers
+@model IEnumerable<Web.Domen.Models.Otziv>
+@{
+    ViewBag.Title = "Otzivi";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="myColumn" id="pt">
+    <h1>ОТЗЫВЫ ПАРТНЕРОВ И ЧЛЕНОВ КЛУБА</h1>
+    <div class="ds"><span> </span><span> </span><span> </span></div>
+@if (HttpContext.Current.Request.IsMobileBrowser())
+{
+    <div class="otzivi">
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="otziv">
+                    <div class="otzivTitle">
+                        <h2>@item.WhoSay</h2>
+                        <h3>@item.Work</h3>
+                    </div>
+                    <iframe width="300" height="170" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
+                </div>
+            }
+        }
+    </div>
+
+}
+else
+{
+    <div class="row960">
+        <div class="otzivi">
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <div class="otziv">
+                        <div class="otzivTitle">
+                            <h2>@item.WhoSay</h2>
+                            <h3>@item.Work</h3>
+                        </div>
+                        <iframe width="430" height="220" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}
+</div>

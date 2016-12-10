@@ -1,10 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Web;
-using Microsoft.Ajax.Utilities;
 
 namespace Web.Helpers
 {
@@ -79,6 +76,65 @@ namespace Web.Helpers
             grPhoto.Dispose();
 
             return bmPhoto;
+        }
+
+        public static Image ImageScale(HttpPostedFileBase image, int? persent, int? pixelWidth, int? pixelHeight)
+        {
+            var img = Image.FromStream(image.InputStream, false, false);
+            int sourceWidth = img.Width;
+            int sourceHeight = img.Height;
+            int sourceX = 0;
+            int sourceY = 0;
+            int destWidth = 0;
+            int destHeight = 0;
+            int destX = 0;
+            int destY = 0;
+
+            if (persent != null)
+            {
+                if (persent == 100)
+                {
+                    return img;
+                }
+                double nPersent = ((double) persent/100);
+                destWidth = (int) (sourceWidth*nPersent);
+                destHeight = (int) (sourceHeight*nPersent);
+            }
+            else if (pixelWidth != null)
+            {
+                if (sourceWidth == (int) pixelWidth)
+                {
+                    return img;
+                }
+                destWidth = (int) (pixelWidth);
+                destHeight = (int) ((destWidth*sourceHeight)/sourceWidth);
+                
+            }
+            else
+            {
+                if (sourceHeight==(int) (pixelHeight))
+                {
+                    return img;
+                }
+                destHeight = (int) pixelHeight;
+                destWidth = (int)((destHeight*sourceWidth)/sourceHeight);
+            }
+
+            var bmImg = new Bitmap(destWidth, destHeight, PixelFormat.Format24bppRgb);
+            bmImg.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+
+            var graphics = Graphics.FromImage(bmImg);
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+            graphics.DrawImage(img, new Rectangle(destX, destY, destWidth, destHeight),
+                new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),GraphicsUnit.Pixel );
+
+            graphics.Dispose();
+
+            return bmImg;
         }
     }
 }

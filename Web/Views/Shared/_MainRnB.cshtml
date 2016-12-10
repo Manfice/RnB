@@ -1,46 +1,97 @@
 ﻿<!DOCTYPE html>
 <html style="height: 100%">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Red & Black</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-    @*<link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 568px)" href="/Content/small-device.css" />*@
-    <link href="~/Content/main.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/owl.carousel.css" rel="stylesheet"/>
-    <link href="~/Content/lightbox.min.css" rel="stylesheet" />
-    @RenderSection("links",false)
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - Red & Black</title>
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+	<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+	@*<link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 568px)" href="/Content/small-device.css" />*@
+	<link href="~/Content/main.css" rel="stylesheet" />
+	<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+	<link href="~/Content/owl.carousel.css" rel="stylesheet"/>
+	<link href="~/Content/lightbox.min.css" rel="stylesheet" />
+	@RenderSection("links",false)
 
-    @Scripts.Render("~/bundles/modernizr")
-    <!--[if lt IE 9]>
-        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-    <![endif]-->
+	<script type="text/javascript" src="https://vk.com/js/api/share.js?94" charset="windows-1251"></script>
+    <script src="https://vk.com/js/api/openapi.js?136" type="text/javascript"></script>
+    <script>
+						VK.init({
+						    apiId: 5749182,
+						    onlyWidgets: true
+						});
 
-    <script type="text/javascript">
-        var appInsights=window.appInsights||function(config){
-            function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace","Ajax"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
-        }({
-            instrumentationKey:"42959d51-35cd-43ba-a2e5-0c0ee9f0f11b"
-        });
+						VK.Observer.subscribe('widgets.like.liked', function() {
+						    console.log("like");
+						});
+                                                     
+						VK.Observer.subscribe('widgets.like.unliked', function () {
+						    console.log("unlike");
+						});
 
-        window.appInsights=appInsights;
-        appInsights.trackPageView();
+						VK.Observer.subscribe('widgets.like.shared', function () {
+						    console.log("shared");
+						});
+						VK.Observer.subscribe('widgets.like.unshared', function () {
+						    console.log("unshared");
+						});
+
     </script>
+	<script>
+				window.fbAsyncInitPredefined = window.fbAsyncInit;
+				window.fbAsyncInit = function() {
+					window.FB.init({
+					    appId: 321205768264510,
+						status: true,
+						cookie: true,
+						xfbml: true,
+						version: 'v2.8'
+					});
+					window.FB.init = function() {
+					};
+					window.fbAsyncInitPredefined && window.fbAsyncInitPredefined();
+				};
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if( d.getElementById(id) ) {
+						return;
+					}
+					js = d.createElement(s);
+					js.id = id;
+					js.src = "//connect.facebook.net/ru_RU/sdk.js?";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	@Scripts.Render("~/bundles/modernizr")
+	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+	<script type="text/javascript">
+		var appInsights=window.appInsights||function(config){
+			function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace","Ajax"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+		}({
+			instrumentationKey:"42959d51-35cd-43ba-a2e5-0c0ee9f0f11b"
+		});
+
+		window.appInsights=appInsights;
+		appInsights.trackPageView();
+	</script>
 </head>
 <body>
-    @Html.Action("Header","Home")
+	@Html.Action("Header","Home")
 <div class="mainContent">
-    @RenderBody()
+	@RenderBody()
 </div>
 @Html.Action("Footer","Home")
-    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/owl.carousel.min.js"></script>
-    <script src="~/Scripts/lightbox.min.js"></script>
-    @RenderSection("scripts", false)
-    <script src="~/Scripts/mainJS.js"></script>
+	<script src="~/Scripts/jquery-2.2.4.min.js"></script>
+	<script src="~/Scripts/knockout-3.4.0.js"></script>
+	<script src="~/Scripts/jquery.validate.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script src="~/Scripts/owl.carousel.min.js"></script>
+	<script src="~/Scripts/lightbox.min.js"></script>
+	@RenderSection("scripts", false)
+	<script src="~/Scripts/mainJS.js"></script>
 </body>
 </html>

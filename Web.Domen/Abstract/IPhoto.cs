@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
+using System.Threading.Tasks;
 using Web.Domen.Models;
 
 namespace Web.Domen.Abstract
@@ -22,5 +23,6 @@ namespace Web.Domen.Abstract
         IEnumerable<string> GetPhotoPath(int id);
         ImageGalary GetVideoRegion(int id);
         void AddVideoToAlbom(ImageData model);
+        Task<string> SavePhotoToRegionAsync(ImageData photo);
     }
 }

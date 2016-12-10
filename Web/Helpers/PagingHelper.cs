@@ -13,9 +13,9 @@ namespace Web.Helpers
             for (var i = 0; i < pagingInfo.TotalPages; i++)
             {
                 var tag = new TagBuilder("a");
-                tag.MergeAttribute("href", pageUrl(i));
-                tag.InnerHtml = i.ToString();
-                if (i == pagingInfo.CurrentPage)
+                tag.MergeAttribute("href", pageUrl(i+1));
+                tag.InnerHtml = (i+1).ToString();
+                if (i == pagingInfo.CurrentPage-1)
                 {
                     tag.AddCssClass("currentPage");
                 }

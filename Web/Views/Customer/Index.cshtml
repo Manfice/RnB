@@ -1,64 +1,115 @@
-﻿@model Web.Domen.Models.Customer
+﻿@using Web.Helpers
+@model Web.Domen.Models.Customer
 @{
-    ViewBag.Title = "Личный кабинет "+Model.NickName;
+    ViewBag.Title = "Личный кабинет " + Model.NickName;
     Layout = "~/Views/Shared/_MainRnB.cshtml";
 }
 @section links
 {
-<link href="~/Content/customer.css" rel="stylesheet" />
+    <link href="~/Content/customer.css" rel="stylesheet" />
 }
-<div class="customerColumn">
-    <div class="customerRow">
-        <div class="rowLeft">
-            <div class="customerAvatar" id="CustomerAvatar">
-                <h2>@Model.Fio</h2>
-                <div class="customerImageWrapper">
-                    @if (Model.Avatar.Path == null)
-                    {
-                        <div class="emptyAvatar" style="border: dotted 1px gray">
-                            <h3>ФОТО</h3>
-                            <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="emptyAvatar">
-                            <img alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
-                        </div>
-                    }
 
-                    <img id="avaImage" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
-                    <div class="avaControls">
-                        <label>
-                            <span>Сменить / загрузить фото</span>
-                            @using (Html.BeginForm("SaveAvatar", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva" />
-                                <button type="submit">СОХРАНИТЬ</button>
-                            }
-                        </label>
+@if (!HttpContext.Current.Request.IsMobileBrowser())
+{
+    <div class="customerColumn">
+        <div class="customerRow">
+            <div class="rowLeft">
+                <div class="customerAvatar" id="CustomerAvatar">
+                    <h2>@Model.Fio</h2>
+                    <div class="customerImageWrapper">
+                        @if (Model.Avatar.Path == null)
+                        {
+                            <div class="emptyAvatar" style="border: dotted 1px gray">
+                                <h3>ФОТО</h3>
+                                <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <img id="currAvatar" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
+                        }
+
+                        <img id="avaImage" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
+                        <div class="avaControls">
+                            <label>
+                                <span>Сменить / загрузить фото</span>
+                                @using (Html.BeginForm("SaveAvatar", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva" />
+                                        <button type="submit">СОХРАНИТЬ</button>
+                                }
+                            </label>
+                        </div>
                     </div>
+                    <p>Рейтинг: <span>@Model.Rate</span></p>
+                    <p>Скидка на мероприятия: <span>5%</span></p>
                 </div>
-                <p>Рейтинг: <span>@Model.Rate</span></p>
-                <p>Скидка на мероприятия: <span>5%</span></p>
             </div>
-        </div>
-        <div class="rowRight">
-            <nav>
-                <ul>
-                    <li><a href="@Url.Action("Index")" class="redButton">Профиль</a></li>
-                    <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
-                    <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
-                    <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
-                </ul>
-            </nav>
-            <div class="myPaties">
-                @Html.Action("MyVisitedPatyes")
+            <div class="rowRight">
+                <nav>
+                    <ul>
+                        <li><a href="@Url.Action("Index")" class="redButton">Профиль</a></li>
+                        <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
+                        <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
+                        <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
+                    </ul>
+                </nav>
+                <div class="myPaties">
+                    @Html.Action("MyVisitedPatyes")
+                </div>
             </div>
         </div>
     </div>
-</div>
-@Html.Action("SuggestedPatyes")
+    @Html.Action("SuggestedPatyes")
+}
+else
+{
+    <div class="mobileColumn">
+        <div class="mobileCustomerMenu">
+            <ul>
+                <li><a href="@Url.Action("Index")" class="redButton">Профиль</a></li>
+                <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
+                <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
+                <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
+            </ul>
+        </div>
+        <div class="customerAvatar" id="CustomerAvatar">
+            <h2>@Model.Fio</h2>
+            <div class="customerImageWrapper">
+                @if (Model.Avatar.Path == null)
+                {
+                    <div class="emptyAvatar" style="border: dotted 1px gray">
+                        <h3>ФОТО</h3>
+                        <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
+                    </div>
+                }
+                else
+                {
+                    <img id="currAvatar" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")"/>
+                }
+
+                <img id="avaImage" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")"/>
+                <div class="avaControls">
+                    <label>
+                        <span>Сменить / загрузить фото</span>
+                        @using (Html.BeginForm("SaveAvatar", "Customer", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva"/>
+                            <button type="submit">СОХРАНИТЬ</button>
+                        }
+                    </label>
+                </div>
+            </div>
+            <p>Рейтинг: <span>@Model.Rate</span></p>
+            <p>Скидка на мероприятия: <span>5%</span></p>
+        </div>
+        <div class="myPaties">
+            @Html.Action("MyVisitedPatyes")
+        </div>
+    </div>
+}
+
 
 

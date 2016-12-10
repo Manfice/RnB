@@ -433,3 +433,24 @@ label>input[type=file] {
     height: 35px;
 }
 /*Paty End*/
+/*File Uploads*/
+.uploadForm form {
+    flex: 0 0 auto;
+    width: 350px;
+    border: none;
+}
+.bar {
+    width: 600px;
+    padding: 5px 10px;
+}
+progress {
+    width: 100%;
+}
+
+#status ul {
+    margin: 10px;
+}
+#status ul li {
+    margin: 3px 0;
+}
+/*File Uploads End*/

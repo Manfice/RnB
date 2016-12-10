@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Web.Domen.Abstract;
 using Web.Domen.Infrastructure;
 using Web.Domen.Models;
@@ -160,6 +161,13 @@ namespace Web.Domen.Repositorys
         {
             _context.Photos.Add(model);
             _context.SaveChanges();
+        }
+
+        public async Task<string> SavePhotoToRegionAsync(ImageData photo)
+        {
+            _context.Photos.Add(photo);
+            await _context.SaveChangesAsync();
+            return "";
         }
     }
 }

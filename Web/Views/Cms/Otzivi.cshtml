@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Web.Domen.Models.Otziv>
+@{
+    ViewBag.Title = "Otzivi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Отзывы</h2>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Имя человека</th>
+        <th>Компания</th>
+        <th>Ссылка на видео</th>
+        <th>Кнопка</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        @using (Html.BeginForm("AddVideo","Cms", FormMethod.Post))
+        {
+            <td>новый</td>
+            <td>@Html.TextBox("name")</td>
+            <td>@Html.TextBox("company")</td>
+            <td>@Html.TextBox("video")</td>
+            <td><button type="submit">Добавить</button></td>
+        }
+    </tr>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.WhoSay</td>
+                    <td>@item.Work</td>
+                    <td>@item.VideoLink</td>
+                    <td>@Html.ActionLink("Удалить","DeleteOtziv","Cms",new {id=item.Id},null)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

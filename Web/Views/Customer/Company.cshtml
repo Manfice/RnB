@@ -1,4 +1,5 @@
-﻿@model Web.Domen.Models.Customer
+﻿@using Web.Helpers
+@model Web.Domen.Models.Customer
 
 @{
     ViewBag.Title = Model.Company.Title;
@@ -10,68 +11,133 @@
 {
     <link href="~/Content/customer.css" rel="stylesheet" />
 }
-<div class="customerColumn">
-    <div class="customerRow">
-        <div class="rowLeft">
-            <div class="customerAvatar" id="CustomerAvatar">
-                <h2>@company.Title</h2>
-                <div class="customerImageWrapper">
-                    @if (company.Image?.Path == null)
-                    {
-                        <div class="emptyAvatar" style="border: dotted 1px gray">
-                            <h3>Логотип</h3>
-                            <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="emptyAvatar">
-                            <img alt="" src="@(company.Image != null ? company.Image.Path : "")" />
-                        </div>
-                    }
+@if (!HttpContext.Current.Request.IsMobileBrowser())
+{
+    <div class="customerColumn">
+        <div class="customerRow">
+            <div class="rowLeft">
+                <div class="customerAvatar" id="CustomerAvatar">
+                    <h2>@company.Title</h2>
+                    <div class="customerImageWrapper">
+                        @if (company.Image?.Path == null)
+                        {
+                            <div class="emptyAvatar" style="border: dotted 1px gray">
+                                <h3>Логотип</h3>
+                                <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="emptyAvatar">
+                                <img alt="" src="@(company.Image != null ? company.Image.Path : "")"/>
+                            </div>
+                        }
 
-                    <img id="avaImage" alt="" src="@(company.Image != null ? company.Image.Path : "")" />
-                    <div class="avaControls">
-                        <label>
-                            <span>Сменить / загрузить фото</span>
-                            @using (Html.BeginForm("SaveCompanyAvatar", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.Hidden("id", company.Id)
-                                <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva" />
-                                <button type="submit">СОХРАНИТЬ</button>
-                            }
-                        </label>
+                        <img id="avaImage" alt="" src="@(company.Image != null ? company.Image.Path : "")"/>
+                        <div class="avaControls">
+                            <label>
+                                <span>Сменить / загрузить фото</span>
+                                @using (Html.BeginForm("SaveCompanyAvatar", "Customer", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("id", company.Id)
+                                    <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva"/>
+                                    <button type="submit">СОХРАНИТЬ</button>
+                                }
+                            </label>
+                        </div>
                     </div>
+                    <p>Рейтинг: <span>@Model.Rate</span></p>
+                    <p>Скидка на мероприятия: <span>5%</span></p>
                 </div>
-                <p>Рейтинг: <span>@Model.Rate</span></p>
-                <p>Скидка на мероприятия: <span>5%</span></p>
             </div>
-        </div>
-        <div class="rowRight">
-            <nav>
-                <ul>
-                    <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
-                    <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
-                    <li><a href="@Url.Action("Company")" class="redButton">Компания</a></li>
-                    <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
-                </ul>
-            </nav>
-            <div class="myPaties">
-                <p class="myRoute">Ссылка на мой профиль: <span>@("http://redblackclub.ru/members/"+@Model.Id)</span></p>
-                @using (Html.BeginForm("SaveMyCompany","Customer", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(false)
-                    @Html.Hidden("Id",company.Id)
-                    <div class="customerFormBlock">
-                        @Html.TextBox("Title",Model.Company.Title, new {placeholder="Название компании"})
-                        <h3>О компании</h3>
-                        @Html.TextArea("Descr", Model.Company.Descr, new {placeholder="Описание компании", rows="10"})
-                        <button type="submit" class="redButton">Сохранить</button>
-                    </div>
-                }
+            <div class="rowRight">
+                <nav>
+                    <ul>
+                        <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
+                        <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
+                        <li><a href="@Url.Action("Company")" class="redButton">Компания</a></li>
+                        <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
+                    </ul>
+                </nav>
+                <div class="myPaties">
+                    <p class="myRoute">Ссылка на мой профиль: <span>@("http://redblackclub.ru/members/" + @Model.Id)</span></p>
+                    @using (Html.BeginForm("SaveMyCompany", "Customer", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(false)
+                        @Html.Hidden("Id", company.Id)
+                        <div class="customerFormBlock">
+                            @Html.TextBox("Title", Model.Company.Title, new {placeholder = "Название компании"})
+                            <h3>О компании</h3>
+                            @Html.TextArea("Descr", Model.Company.Descr, new {placeholder = "Описание компании", rows = "10"})
+                            <button type="submit" class="redButton">Сохранить</button>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <div class="mobileColumn">
+        <div class="mobileCustomerMenu">
+            <ul>
+                <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
+                <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
+                <li><a href="@Url.Action("Company")" class="redButton">Компания</a></li>
+                <li><a href="@Url.Action("MyOrders")" class="grayButton">Оплаты и заявки</a></li>
+            </ul>
+        </div>
+        <div class="customerAvatar" id="CustomerAvatar">
+            <h2>@company.Title</h2>
+            <div class="customerImageWrapper">
+                @if (company.Image?.Path == null)
+                {
+                    <div class="emptyAvatar" style="border: dotted 1px gray">
+                        <h3>Логотип</h3>
+                        <p id="serviceMessage">К загрузке принимаются файлы объемом не более 512кб. Формат jpeg/png</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="emptyAvatar">
+                        <img alt="" src="@(company.Image != null ? company.Image.Path : "")" />
+                    </div>
+                }
+
+                <img id="avaImage" alt="" src="@(company.Image != null ? company.Image.Path : "")" />
+                <div class="avaControls">
+                    <label>
+                        <span>Сменить / загрузить фото</span>
+                        @using (Html.BeginForm("SaveCompanyAvatar", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("id", company.Id)
+                            <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva" />
+                                    <button type="submit">СОХРАНИТЬ</button>
+                        }
+                    </label>
+                </div>
+            </div>
+            <p>Рейтинг: <span>@Model.Rate</span></p>
+            <p>Скидка на мероприятия: <span>5%</span></p>
+        </div>
+        <div class="myPaties">
+            <p class="myRoute">Ссылка на мой профиль: <span>@("http://redblackclub.ru/members/" + @Model.Id)</span></p>
+            @using (Html.BeginForm("SaveMyCompany", "Customer", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false)
+                @Html.Hidden("Id", company.Id)
+                <div class="customerFormBlock">
+                    @Html.TextBox("Title", Model.Company.Title, new { placeholder = "Название компании" })
+                    <h3>О компании</h3>
+                    @Html.TextArea("Descr", Model.Company.Descr, new { placeholder = "Описание компании", rows = "10" })
+                    <button type="submit" class="redButton">Сохранить</button>
+                </div>
+            }
+        </div>
+    </div>
+}

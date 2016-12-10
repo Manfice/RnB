@@ -93,7 +93,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult AddCategory(PatyCategory model, HttpPostedFileBase avatar, int parent = 0)
         {
-            if (model.RouteTitle == string.Empty || _repository.CheckPatyCategoryUrlTitle(model.RouteTitle))
+            if (model.RouteTitle == string.Empty || _repository.CheckPatyCategoryUrlTitle(model.RouteTitle, model.Id))
             {
                 ModelState.AddModelError(model.RouteTitle,"Не указан URL для события, или такой URL уже существует");
                 return View(model);
@@ -174,7 +174,7 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<ActionResult> AddPaty(Paty paty, HttpPostedFileBase avatar)
         {
-            if (paty.RouteTitle==string.Empty || _repository.CheckPatyUrlTitle(paty.RouteTitle))
+            if (!string.IsNullOrEmpty(paty.RouteTitle) && _repository.CheckPatyUrlTitle(paty.RouteTitle, paty.Id))
             {
                 ModelState.AddModelError(paty.RouteTitle, "Не указан URL для события, или такой URL уже существует");
                 return View(paty);
@@ -196,6 +196,8 @@ namespace Web.Controllers
                 model.Place = paty.Place;
                 model.Price = paty.Price;
                 model.Title = paty.Title;
+                model.RouteTitle = paty.RouteTitle;
+                model.MetaDescription = paty.MetaDescription;
             }
             if (model.Orders!=null && model.Orders.Any())
             {
@@ -470,14 +472,14 @@ namespace Web.Controllers
         public ActionResult PatyMenuDetails(string patycat, int id = 0)
         {
             var askCategory = _repository.GetCategorys.FirstOrDefault(category => category.RouteTitle.Contains(patycat));
-            if (askCategory==null)
+            if (askCategory == null)
             {
-                RedirectToAction("Paty");
+                return RedirectToAction("Paty");
             }
             var model = new CategoryViewModel
             {
                 Category = askCategory,
-                Categories = _repository.GetCategorys.Where(category => category.ParentCategory!=null && category.ParentCategory.Id==askCategory.Id)
+                Categories = _repository.GetCategorys.Where(category => category.ParentCategory != null && category.ParentCategory.Id == askCategory.Id).ToList()
             };
             return View(model);
         }

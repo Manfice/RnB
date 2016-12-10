@@ -22,7 +22,10 @@
 .validation-summary-errors {
     color: red;
 }
-
+.input-validation-error {
+    border-color: red !important;
+    
+}
 .redColor {
     color: #fe0000;
 }
@@ -96,6 +99,8 @@ nav {
     border-top: solid 1px #e9e9e9;
     border-bottom: solid 1px #e9e9e9;
     justify-content: center;
+    position: relative;
+    z-index: 5;
 }
 
 .topMenuWrapper {
@@ -169,6 +174,7 @@ nav {
         top: -20%;
         left: -25px;
         position: absolute;
+        z-index: 3;
     }
 }
 
@@ -180,11 +186,28 @@ nav {
     text-align: right;
 }
 
-    .rightMenu li button {
-        border: none;
+    #topMenu {
         position: absolute;
-        top: 9px;
+        top: 7px;
         right: 10px;
+        border: solid 1px gray;
+        border-radius: 3px;
+        height: 36px;
+        width: 36px;
+    }
+    #topMenu p {
+        font-size: 7pt;
+        display: block;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: -13px;
+        left: 6px;
+    }
+    #topMenu i {
+        position: absolute;
+        bottom: 2px;
+        left: 9px;
     }
 
 .SubPaty {
@@ -331,6 +354,7 @@ header, footer {
     height: 100%;
 }
 
+
 .redButton {
     display: inline-block;
     margin: 0;
@@ -373,14 +397,23 @@ header, footer {
     background-color: #dfdfdf;
 }
 
-.socLinks {
+.socLinksBlock {
     flex: 1 0 auto;
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
-    .socLinks a {
-        margin: 3px 3px;
+    .socLinksBlock a {
+        margin: 3px 5px;
+        display: block;
+        width: 50px;
+        height: 50px;
     }
 
+    .socLinksBlock a img {
+        width: 100%;
+    }
 .hLeft p {
     flex: 1 0 auto;
     font-family: "rNormal";
@@ -432,29 +465,65 @@ header, footer {
         padding: 0 5px;
         font-size: 14pt;
     }
+    .socLinksHead {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+    }
+    .socLinksHead>a {
+        height: 25px;
+        width: 25px;
+        -ms-background-size: 100%;
+        background-size: 100%;
+    }
 
 @media only screen and (max-device-width: 720px) {
     .hMidle {
         order: 1;
         margin: 0 0 15px 0;
+        flex: 1 0 100%;
     }
 
         .hMidle h1 {
-            font-size: 12pt !important;
+            font-size: 10pt !important;
         }
 
             .hMidle h1 span {
-                font-size: 13pt;
+                font-size: 10pt;
             }
 
     .hLeft {
         order: 2;
+        max-width: 45%;
+    }
+    .hLeftWrapper p {
+        font-size: 8pt;
     }
 
+    .socLinksHead a {
+        width: 18px;
+        height: 18px;
+        display: block;
+        background-size: 100%;
+    }
+    
+    .socLinksBlock {
+        justify-content: center;
+    }
+    .socLinksBlock a {
+        width: 50px;
+        margin: 5px 10px;
+    }
+    .socLinksBlock a img {
+        width: 100%;
+
+    }
     .hRight {
         order: 3;
+        max-width: 45%;
     }
-
     .redButton {
         padding: 5px 20px 7px;
         font-size: 12pt;
@@ -465,11 +534,17 @@ header, footer {
     }
 
     .hRight p {
-        font-size: 14pt;
+        font-size: 12pt;
     }
 
     .hRightWrapper > a {
-        font-size: 13pt;
+        font-size: 11pt;
+    }
+    .offerBlock > .formWrapper > form > .titleBorder {
+        top: -40px;
+    }
+    .offerBlock>.formWrapper>form>.buttonBorder {
+        bottom: -40px;
     }
 }
 /****************************************************/
@@ -504,7 +579,65 @@ footer {
     .fWe p {
         margin: 0 10px 20px 0;
     }
-
+    .socLinks {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .socLinks a {
+        margin: 0 10px;
+    }
+    .fWe>.socLinks>a {
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+        background-size: 100%;
+    }
+    .facebook {
+        background: url("/Content/img/soc/2-1.jpg") no-repeat center center;
+    }
+    .facebook:hover {
+        background: url("/Content/img/soc/2-2.jpg") no-repeat center center;
+        background-size: 100%;
+    }
+    .vk {
+        background: url("/Content/img/soc/3-1.jpg") no-repeat center center;
+    }
+    .vk:hover {
+        background: url("/Content/img/soc/3-2.jpg") no-repeat center center;
+        background-size: 100%;
+    }
+    .od {
+        background: url("/Content/img/soc/4-1.jpg") no-repeat center center;
+    }
+    .od:hover {
+        background: url("/Content/img/soc/4-2.jpg") no-repeat center center;
+        background-size: 100%;
+    }
+    .inst {
+        background: url("/Content/img/soc/6-1.jpg") no-repeat center center;
+    }
+    .inst:hover {
+        background: url("/Content/img/soc/6-2.jpg") no-repeat center center;
+        background-size: 100%;
+    }
+    .you {
+        background: url("/Content/img/soc/5-1.jpg") no-repeat center center;
+    }
+    .you:hover {
+        background: url("/Content/img/soc/5-2.jpg") no-repeat center center;
+        background-size: 100%;
+    }
+    .tw {
+        background: url("/Content/img/soc/1-1.jpg") no-repeat center center;
+    }
+    .tw:hover {
+        background: url("/Content/img/soc/1-2.jpg") no-repeat center center;
+        background-size: 100%;
+    }
 .lList ul {
     flex: 1 0 auto;
     display: flex;
@@ -564,8 +697,11 @@ footer {
         order: 1;
     }
 
+    .fContact h3 {
+        font-size: 12pt;
+    }
         .fContact h3 a {
-            font-size: 13pt;
+            font-size: 12pt;
         }
 
     .fLogo {
@@ -576,13 +712,22 @@ footer {
         flex: 0 0 100%;
         order: 3;
     }
-
+    .fWe>.socLinks>a>img {
+        width: 30px;
+    }
+    .fLogo p {
+        font-size: 10pt;
+    }
+    .fLogo p:last-child {
+        display: block;
+        text-align: center;
+    }
     .fLogo > a {
         font-size: 12pt;
     }
 
     .fLogo img {
-        width: 150px;
+        width: 90%;
     }
 }
 
@@ -655,26 +800,44 @@ footer {
     display: block;
     width: 100%;
     height: 560px;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    transition: 1s;
+}
+.slItem:hover {
+    filter: none;
+    transition: 1s;
 }
 @media only screen and (max-device-width: 720px) {
     .dotsLayer {
-        left: 42%;
+        left: 20%;
     }
     .dotsLayer>div {
         width: 10px;
         height: 10px;
         margin: 0 2px;
     }
+    .redBlockArea {
+        width: 40%;
+    }
     .redBlockArea > img {
-    z-index: 2;
+    z-index: 1;
     height: 100%;
-    width: 110%
+    width: 130%
 }
     .slideTitle {
-        font-size: 13pt;
+        font-size: 10pt;
     }
     .slItem {
-        height: 300px;
+        height: 305px;
+        -ms-background-size: auto 100% !important;
+        background-size: auto 100% !important;
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
     }
 }
 /*Top Slider End*/
@@ -849,12 +1012,19 @@ footer {
 }
 
 .buttonBorder {
-    border-left: solid 5px white;
-    border-right: solid 5px white;
-    position: absolute;
-    bottom: -23px;
+    position: relative;
+    bottom: -24px;
+    padding: 0 20px;
+    background-color: white;
 }
-
+.buttonBorder.absolute {
+    position: absolute;
+    bottom: -30px;
+}
+.absolute button {
+    font-size: 14pt;
+    font-weight: bold;
+}
 form > p {
     text-align: center;
     display: block;
@@ -862,11 +1032,10 @@ form > p {
 }
 
 .titleBorder {
-    border-left: solid 5px white;
-    border-right: solid 5px white;
-    position: absolute;
-    top: -18px;
+    position: relative;
+    top: -17px;
     background-color: white;
+    padding: 0 20px;
 }
 
 .inputRow {
@@ -1097,7 +1266,7 @@ form > p {
 /*Paty List END*/
 /*Prevelegii */
 .privelegii {
-    background: url('/Content/img/distr.jpg') repeat top center; 
+    background: url('/Content/img/prive/55551920.jpg') repeat top center; 
     position: relative;
 }
 .prevelegiiItem {
@@ -1108,9 +1277,9 @@ form > p {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    margin: 10px;
+    margin: 20px;
     z-index: 3;
-    max-width: 300px;
+    max-width: 260px;
     width: 100%;
 }
 
@@ -1132,8 +1301,12 @@ form > p {
     align-self: flex-start;
     /* ReSharper disable once CssNotResolved */
     transition: 1s;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
     filter: grayscale(100%);
 }
+
 .pImgWrapper:hover {
     filter: none;
     transition: 1s;
@@ -1173,8 +1346,19 @@ form > p {
 }
 @media only screen and (max-device-width: 720px) {
     .privelegii {
-        background: url("/Content/img/distr1.jpg") repeat top center;
+        background: url("/Content/img/prive/5555320.jpg") repeat-y top center;
+        background-size: 100% 100%;
     }
+    .prevelegiiItem {
+        margin: 0;
+    }
+    .prevelegiiItem h3 {
+        display: block;
+        margin: 10px 0 0 0;
+        font-size: 12pt;
+        font-family: "rBold"
+    }
+
 }
 /*Prevelegii END*/
 /*PhotoGalary */
@@ -1203,12 +1387,12 @@ form > p {
     flex: 0 0 auto;
     max-width: 280px;
     position: relative;
-    margin: 20px;
+    margin: 0 20px;
     overflow: hidden;
 }
 
 .actions {
-    position: absolute;
+    position: relative;
     background-color: whitesmoke;
     left: 0;
     right: 0;
@@ -1243,14 +1427,17 @@ form > p {
 .pvBorder {
     position: absolute;
     top: 0;
-    bottom: 0px;
+    bottom: 40px;
     left: 0;
     right: 0;
     border: solid 10px #ffffff;
     border: solid 10px rgba(255, 255, 255, 0.7);
     z-index: 2;
 }
-
+.pvVideoWr {
+    flex: 0 0 auto;
+    padding: 20px 0 0 0;
+}
 .pvImageWr img {
     width: 100%;
 }
@@ -1337,6 +1524,7 @@ form > p {
     color: white;
     font-weight: bolder;
     font-size: 14pt;
+    cursor: pointer;
 }
 
     .formClose p {
@@ -1367,7 +1555,6 @@ form > p {
         flex-flow: column nowrap;
         justify-content: flex-start;
         align-items: center;
-        padding: 50px 0 40px;
         margin: 15px 0 30px 0;
     }
 
@@ -1378,7 +1565,6 @@ form > p {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
-    padding: 50px 0 40px;
     margin: 15px 0 30px 0;
 }
 
@@ -1389,17 +1575,17 @@ form > p {
 }
 
 .formTitle {
-    position: absolute;
+    position: relative;
     text-align: center;
-    top: -16px;
+    top: -15px;
     background-color: white;
     padding: 0 20px;
     font-size: 10pt;
 }
 
 .formFooter {
-    position: absolute;
-    bottom: -20px;
+    position: relative;
+    bottom: -25px;
     padding: 0 20px;
     background-color: white;
 }
@@ -1425,8 +1611,8 @@ form > p {
     border: solid 2px darkgray;
     position: relative;
     align-items: center;
-    padding: 50px 20px 30px;
-    margin: 15px 0 0 0px;
+    padding: 0 20px 35px;
+    margin: 15px 0 0 0;
 }
 
     .socLogin p {
@@ -1489,10 +1675,9 @@ form > p {
     }
 
 .itmDescr {
-    height: 70px;
     overflow: hidden;
     padding: 0 5px;
-    font-size: 18pt;
+    font-size: 12pt;
     background-color: rgb(232, 232, 232);
 }
 
@@ -1574,16 +1759,27 @@ form > p {
     height: 434px;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
-
-    .topPicture h1 {
+.topPicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.topPicture h1 {
         display: block;
         margin: 20px 0 0 0;
         font-family: "rBold";
         font-size: 28pt;
         color: white;
+        z-index: 3;
+        position: relative;
     }
-
+.gRg {
+    position: relative;
+    z-index: 3;
+}
 .gRg > span {
     width: 100px;
     border-bottom: solid 2px red;
@@ -1598,88 +1794,99 @@ form > p {
 
 .order {
     border: solid 1px gray;
-    padding: 10px;
-    margin: 10px 0;
+    width: 960px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px;
+    margin-top: 10px;
+    position: relative;
 }
-
+.orderMobile {
+    border: solid 1px gray;
+    width: 960px;
+    padding: 10px;
+    margin-top: 10px;
+    position: relative;
+    max-width: 320px;
+}
+.orderFormInnerBlock {
+    display: inline-block;
+}
+/**/
 .l {
-    flex: 1 0 60%;
+    width: 550px;
     text-align: left;
+    margin-right: 10px;
 }
-
     .l h2 {
-        margin: 10px 20px;
+        margin: 10px;
+        font-size: 12pt;
+        text-align: justify;
     }
-
     .l .bordered {
         border-top: dotted 1px;
         width: 100%;
         padding: 10px 0 0 0;
-        margin: 5px;
     }
 
 .bordered p {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
-.r, .l {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-}
-
-.r {
-    flex: 1 0 40%;
-}
 
 .grayDate {
     background-color: rgb(209, 209, 209);
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 5px;
 }
 
     .grayDate .itm {
-        flex: 0 0 auto;
+        display: inline-block;
+        height: 50px;
+    }
+    .itm p {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+    .itm-title {
+        flex: 1 1 auto;
+        margin: 0 7px 0 0;
+        width: 220px;
+    }
+    .itm-day {
+        width: 100px;
         position: relative;
-        padding: 5px;
     }
-
-    .grayDate .reg {
-        flex: 0 0 auto;
-        padding: 5px;
+    
+    .itm-day p{
+        font-size: 50pt;
+        position: absolute;
+        top: -25px;
+        right: 10px;
+        font-weight: bolder;
     }
-
-.itm:first-child {
-    flex: 0 0 35%;
-}
-
-.itm h4 {
-    display: block;
-    margin: 0;
-    padding: 0;
-    font-size: 90pt;
-    position: absolute;
-    top: -28px;
-}
-
-.itm h5 {
-    font-size: 24pt;
-    text-transform: uppercase;
-    display: block;
-    padding: 0;
-    margin: 0;
-}
-
-.itm h3 {
-    font-size: 23pt;
-    text-transform: uppercase;
-    color: rgb(254, 0, 0);
-    text-align: left;
-}
+    .itm-title p {
+        color: red;
+        font-size: 12pt;
+    }
+    .itm-month-year {
+        flex: 1 1 auto;
+    }
+    .itm-month-year p {
+        display: block;
+        font-size: 14pt;
+        text-transform: uppercase;
+        font-weight: bolder;
+    }
+    .reg {
+        width: 150px;
+    }
 
 .interest {
     text-align: left;
@@ -1696,25 +1903,31 @@ form > p {
 
 .flip-clock-wrapper {
     zoom: 0.7;
+    -moz-transform: scale(0.7)
 }
 
 .r > div {
-    flex: 0 0 auto;
-    margin: 20px;
+    margin: 20px 0;
 }
-
+.r>div:last-child {
+    right: 0;
+    margin: 0;
+    position: relative;
+    bottom: -6px;
+    right: -10px;
+}
 .freepalce {
     border: solid 3px red;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
     .freepalce p {
         font-family: "rBold";
         font-size: 15pt;
-        margin: 0 20px 0 0;
+        margin: 0 10px 0 0;
     }
 
     .freepalce span {
@@ -1734,33 +1947,122 @@ form > p {
         flex-flow: column nowrap;
         justify-content: flex-start;
         align-items: center;
-        padding: 30px 0 30px 0;
+        padding-bottom: 40px;
     }
 
 .inpItem input[type=number] {
-    width: 30px;
-    height: 25px;
+    width: 50px;
+    height: 30px;
 }
 
 .inpItem label {
-    line-height: 35px;
+    line-height: 30px;
     margin-right: 20px;
     font-family: "rNormal";
 }
 
 .rate {
-    position: absolute;
-    bottom: 11px;
-    right: 1px;
-    background-color: red;
     color: white;
-    padding: 5px;
+    text-align: right;
+    position: relative;
 }
-
+.rate span {
+    background-color: red;
+    padding: 5px;
+    position: relative;
+}
 .formReq {
     font-size: 8pt;
     text-align: center;
     padding: 10px 0;
+}
+.mobilePaty {
+    width: 100%;
+    padding: 5px 10px;   
+}
+.mobileOffer {
+    border: solid 1px gray;
+    padding: 10px 10px 20px;
+    position: relative;
+}
+@media only screen and (max-device-width: 720px) {
+    .order {
+        width: 100%;
+    }
+    .orderMobile h2 {
+        font-size: 12pt;
+    }
+    .order h2 {
+        font-size: 12pt;
+    }
+    .column {
+        margin: 0;
+        padding: 0;
+    }
+    .topPicture {
+        height: 220px;
+    }
+    .topPicture h1 {
+        font-size: 16pt;
+    }
+    .grayDate {
+        max-height: 80px;
+        padding: 10px;
+    }
+
+    .itm-title {
+        width: 150px;
+        height: 100%;
+    }
+    .itm-title p {
+
+        font-size: 11pt;
+    }
+    .itm-day p {
+        font-size: 44pt;
+        top: -19px;
+    }
+    .itm-month-year p {
+        flex: 0 0 auto;
+        font-size: 12pt;
+        width: 100px;
+    }
+    .bordered {
+        border-top: dotted 2px gray;
+    }
+    .bordered p {
+        margin: 0;
+    }
+    .discount p {
+        display: block;
+    }
+    .discount a img {
+        margin: 5px 10px;
+        cursor: pointer;
+    }
+    .freepalce {
+        padding: 0;
+        margin: 5px 0;
+        border: solid 5px gray;
+    }
+    .regFormWrapper {
+        padding: 30px 0;
+    }
+    .regFormWrapper .absolute {
+        bottom: 5px;
+    }
+    .regFormWrapper .redButton {
+        font-size: 10pt;
+    }
+    .rate {
+        bottom: 0;
+        background-color: whitesmoke;
+        color: black;
+        font-weight: bold;
+    }
+    .rate span {
+        color: red;
+    }
 }
 /*PAty details END*/
 /*PhotoGalary*/
@@ -1801,7 +2103,6 @@ form > p {
 .pGimgWrapper {
     width: 100%;
     position: relative;
-    height: 240px;
     overflow: hidden;
 }
 
@@ -1809,6 +2110,10 @@ form > p {
         width: 100%;
     }
 
+.alItem a {
+    display: block;
+    padding: 0;
+}
 .watchAlbom {
     position: absolute;
     right: 0;
@@ -1817,19 +2122,23 @@ form > p {
     background-color: #000000;
     background-color: rgba(0, 0, 0, 0.8);
     color: red;
-    max-height: 240px;
 }
 
     .watchAlbom:hover {
         top: 0;
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        -ms-transition: 1s;
+        -o-transition: 1s;
+        transition: 1s;
     }
 
-        .watchAlbom:hover i {
+.watchAlbom:hover i {
             display: block;
         }
 
     .watchAlbom i {
-        margin: 25%;
+        margin: 22%;
         display: none;
     }
 
@@ -1838,7 +2147,7 @@ form > p {
     }
 
         .watchAlbom p span {
-            font-size: 18pt;
+            font-size: 12pt;
         }
 
 .pageLinks {
@@ -1862,6 +2171,11 @@ form > p {
             -o-transition: 0.5s;
             transition: 0.5s;
         }
+        .currentPage {
+            background-color: red !important;
+            color: white;
+            font-weight: bolder;
+        }
 
 .albomStat {
     flex: 1 0 auto;
@@ -1878,6 +2192,7 @@ form > p {
 
     .albomStat i:last-child {
         flex: 1 0 auto;
+        padding: 
     }
 
     .albomStat a {
@@ -2265,3 +2580,34 @@ h3 > span {
     }
 }
 /*Blog END*/
+/*Otzivi*/
+.otzivi {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+.otziv {
+    margin: 20px 0;
+    max-width: 430px;
+}
+.otzivTitle {
+    background-color: lightgray;
+    padding: 5px;
+}
+.otzivTitle h3 {
+    font-size: 12pt;
+    font-family: "rNormal";
+    font-weight: 100;
+}
+@media only screen and (max-device-width: 720px) {
+    .myColumn h1 {
+        text-align: center;
+    }
+    .otzivi {
+        flex-flow: column;
+        justify-content: center;
+    }
+}
+/*Otzivi END*/

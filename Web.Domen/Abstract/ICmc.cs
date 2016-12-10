@@ -9,5 +9,8 @@ namespace Web.Domen.Abstract
         Blog GetBlogById(int id);
         Blog SaveBlog(Blog model);
         void DeleteBlog(int id);
+        IEnumerable<Otziv> GetOtzivs { get; }
+        void AddOtziv(Otziv model);
+        void DeleteOtziv(int id);
     }
 }

@@ -1,266 +1,91 @@
 ﻿@using Newtonsoft.Json
-@model Web.Domen.Models.OrderViewmodel
+@using Web.Helpers
+@model Web.Domen.Models.Paty
 @{
-    ViewBag.Title = Model.Paty.Title;
-    Layout = "~/Views/Shared/_MainRnB.cshtml";
-    var t1 = Model.Paty.Category.Title.Split(' ')[0];
-    var t2 = Model.Paty.Category.Title.Remove(0, t1.Length);
-    var d1 = Model.Paty.PatyDate.ToLongDateString().Split(' ');
-    
+	ViewBag.Title = Model.Title;
+	Layout = "~/Views/Shared/_MainRnB.cshtml";
 }
 
 <div class="column">
-<div class="topPicture" style="background: url('@(Model.Paty.Avatar.Path ?? "/Content/img/pList/942x434.jpg")') no-repeat top center; background-size: 100%">
-    <div class="shadow"></div>
-    <h1>@Model.Paty.Category.ParentCategory.Title</h1>
-    <div class="gRg"><span> </span><span> </span><span> </span></div>
+<div class="topPicture">
+	<img alt="" src="@(Model.Avatar.Path ?? "/Content/img/pList/942x434.jpg")"/>
+	<div class="shadow"></div>
+	<h1>@Model.Title</h1>
+	<div class="gRg"><span> </span><span> </span><span> </span></div>
 </div>
 
-<div class="formBlock">
-<div class="order">
-<div class="l">
-    <div class="grayDate">
-        <div class="itm">
-            <h3>@t1</h3>
-            <h3>@t2.Trim()</h3>
-        </div>
-        <div class="itm" style="width: 120px; align-self: flex-start">
-            <h4>@Model.Paty.PatyDate.Day</h4>
-        </div>
-        <div class="itm" style="text-align: left">
-            <h5>@d1[1] @d1[2]</h5>
-            <h5 style="margin-top: 13px;">в @Model.Paty.PatyDate.ToShortTimeString()</h5>
-        </div>
-    </div>
-    <h2 style="text-align: left">@Model.Paty.Title</h2>
-    <div class="interest bordered">
-        <p>На мероприятии вы сможете:</p>
-        @foreach (var s in Model.Paty.PatyInterest.Split('\n'))
-        {
-            <p> - @s.Trim(' ', '-', ';') </p>
-        }
-    </div>
-    <div class="bordered">
-        @if (Model.Paty.Price > 0)
-        {
-            <p>Стоимость: <span>@Model.Paty.Price руб.</span> <span>(рассчитывается с учетом скидки и кол-ва мест)</span></p>
-        }
-        else
-        {
-            <p><strong>Стоимость: </strong><span>БЕСПЛАТНО</span></p>
-        }
-    </div>
-    <div class="terms bordered">
-        <p><strong>Условия участия:</strong>
-        </p>
-        @if (Model.Paty.Price == 0)
-        {
-            <p> 1) вступите в одну из наших групп в соц сетях:</p>
-            <p style="padding-left: 20px"> если уже вступил ранее, то вы очень большой молодец!
-                <a href="#"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
-                <a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20"/></a>
-                <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
-                <a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20"/></a>
-                <a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20"/></a>
-            </p>
-            <p>2) сделайте репост этой записи в одной из социальных сетей:</p>
-            <p>
-                <a href="#"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
-                <a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20"/></a>
-                <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
-                <a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20"/></a>
-                <a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20"/></a>
-            </p>
-            <p>3) получите приглашение по почте, заполнив форму заявки</p>
-        }
-        else
-        {
-            <p>1) заполните форму заявки</p>
-            <p>2) оплатите орг. взнос на странице оплаты</p>
-            <p>3) получите приглашение на эл. почту</p>
-        }
-    </div>
-    @if (Model.Paty.Price > 0)
-    {
-        <div class="discount bordered">
-            <p><strong>Скидки: до 10% </strong>
-            </p>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <p>Для членов клуба скидка <span>5%</span></p>
-            }
-            else
-            {
-                <p>
-                    - 5% для членов клуба <a style="margin: 0 20px" href="@Url.Action("Login", "Auth", new {returnUrl = HttpContext.Current.Request.Url.PathAndQuery})" class="redLink">Авторизация</a><a href="@Url.Action("Register", "Auth", new {returnUrl = HttpContext.Current.Request.Url.PathAndQuery})" class="redLink">Регистрация</a>
-                </p>
-            }
-            <p>- до 5% при репосте в соцсетях (по 1% за каждую соцсеть)</p>
-            <p>Сделать репост этого мероприятия:
-                <a href="#"><img alt="f" src="/Content/img/soc/f.png" width="25"/></a>
-                <a href="#"><img alt="i" src="/Content/img/soc/i.png" width="25"/></a>
-                <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="25"/></a>
-                <a href="#"><img alt="od" src="/Content/img/soc/o.png" width="25"/></a>
-                <a href="#"><img alt="t" src="/Content/img/soc/t.png" width="25"/></a>
-            </p>
-        </div>
-    }
-    <div class="counter bordered">
-        <p><strong>Вход строго по приглашениям.</strong>
-        </p>
-        <p><strong>Дресс-код: </strong>@Model.Paty.Dres</p>
-        <div class="grayDate" style="margin: 20px 0 0 0">
-            <div class="reg">
-                <h4>До конца<br/> регистрации<br/> осталось:</h4>
-            </div>
-            <div class="reg count">
-                <div id="flipCd"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="r">
-    <div class="info">
-        <p>Более подробная информация о месте проведения будет выслана лицам, подавшим заявку</p>
-        <hr/>
-        <p>@Model.Paty.Descr</p>
-    </div>
-    <div class="freepalce">
-        @if (Model.Paty.Orders != null)
-        {
-            <p>Осталось мест:</p>
-            <span style="color: red">@(Model.Paty.MaxGuests - @Model.Paty.Orders.Sum(o => o.Place))</span>
-            <span>/</span>
-            <span>@Model.Paty.MaxGuests</span>
-        }
-        else
-        {
-            <p>Осталось мест:</p>
-            <span style="color: red">@Model.Paty.MaxGuests</span><span>/</span><span>@Model.Paty.MaxGuests</span>
+	@if (HttpContext.Current.Request.IsMobileBrowser())
+	{
+		<div class="orderMobile">
+			@Html.Action("MobilePatyForm", "Home", new { patyId = Model.Id })
+		</div>
+	}
+	else
+	{
+		<div class="order">
+			@Html.Action("DesktopPatyForm", "Home", new {patyId = Model.Id})
+		</div>
+	}
 
-        }
-    </div>
-    <div class="regFormWrapper">
-        @using (Html.BeginForm("Order", "Home", FormMethod.Post, new {@class = "regToPaty"}))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary()
-            @Html.Hidden("PatyId", @Model.Paty.Id)
-
-            <div class="titleBorder">
-                <h3 style="text-align: center; padding: 0 20px;">
-                    Заполните заявку<br/> на участие
-                </h3>
-            </div>
-
-            if (Model.Customer != null)
-            {
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="text" name="Fio" disabled value="@Model.Customer.Fio" placeholder="ФИО(полностью)" required/>
-                </div>
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="tel" name="Phone" value="@Model.Customer.Phone" placeholder="Телефон" required/>
-                </div>
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="email" name="Email" value="@Model.Customer.Email" placeholder="E-mail" required/>
-                </div>
-                <div class="inpItem">
-                    <input type="text" name="Workplace" value="@Model.Customer.WorkPlace" placeholder="Место работы, должность"/>
-                </div>
-            }
-            else
-            {
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="text" name="Fio" value="" placeholder="ФИО(полностью)" required/>
-                </div>
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="tel" name="Phone" value="" placeholder="Телефон" required/>
-                </div>
-                <div class="inpItem">
-                    <p>*</p>
-                    <input type="email" name="Email" value="" placeholder="E-mail" required/>
-                </div>
-                <div class="inpItem">
-                    <input type="text" name="Workplace" value="" placeholder="Место работы, должность"/>
-                </div>
-            }
-
-            if (Model.Paty.Price > 0)
-            {
-                <div class="inpItem">
-                    <label for="place">Количество мест (билетов)</label>
-                    <input type="number" id="place" min="1" value="1" name="Place"/>
-                </div>
-            }
-            else
-            {
-                <input type="hidden" id="place" min="1" value="1" name="Place"/>
-            }
-
-            if (Model.Paty.Price > 0)
-            {
-
-                <div style="bottom: -15%" class="buttonBorder">
-                    <button type="submit" class="redButton" href="#">Перейти на страницу<br/>оплаты</button>
-                </div>
-            }
-            else
-            {
-                <div style="bottom: -8%" class="buttonBorder">
-                    <button type="submit" class="redButton">Получить приглашение</button>
-                </div>
-            }
-
-        }
-
-    </div>
-    <div>
-        <p class="formReq">Поля отмеченные звездочкой (*) обязательны для заполнения</p>
-    </div>
-</div>
-</div>
-<div class="rate">
-    <p>+@Model.Paty.AddRate к рейтингу</p>
-</div>
-</div>
-
-
+	@Html.Action("PatyPhotos","Home", new {id=Model.Category.Id})
 </div>
 @section scripts
 {
-    <script src="~/Scripts/flipclock.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var model = @Html.Raw(JsonConvert.SerializeObject(Model.Paty.PatyDate.ToUniversalTime()));
-           // clock.setCountdown(true);
-            
-            var dt = (new Date(model) - Date.now())/1000;
-            console.log(dt);
-            if (dt > 0) {
-                var clock = $("#flipCd").FlipClock(dt,{
-                    clockFace: "DailyCounter",
-                    autoStart: true,
-                    language:"ru-ru",
-                    countdown:true,
-                    callbacks: {
-                        stop: function() {
-                            $("#flipCd").html("Время регистрации вышло.").css("zoom",0);
-                        }
-                    }
-                });
+	<script src="~/Scripts/jquery.vkAction.js"></script>
+<script src="~/Scripts/AdminJs/Countdown.js"></script>
+	@*<script>
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/ru_RU/all.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>*@
 
-                //clock.setTime(dt);
-                clock.start();
-            }
-        });
-    </script>
+<script type="text/javascript">VK.Widgets.Like("vk_like", {type: "button"});</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			Countdown(@Html.Raw(JsonConvert.SerializeObject(Model.PatyDate.ToUniversalTime())),['days','hours','minutes','seconds'], function() {
+
+			});
+
+			$("#vk_share_button").tweetAction({
+				title: '@(Model.Title)',
+				url: '@("https://redblackclub.ru" + Request.Url.PathAndQuery)',
+				description: '@Html.Raw(Model.Descr.Replace("\r\n", string.Empty))',
+				image: '@("https://redblackclub.ru" + Model.Avatar.Path)',
+				noparse: true,
+				no_vk_links: 1
+			}, function() {
+
+			});
+
+		    setTimeout('VK.Observer.publish("widgets.like.shared",8)', 4000);
+
+			$(".fb_share").click(function() {
+					FB.ui({
+							method: 'share',
+							name: 'Facebook Dialogs',
+							href: '@("https://redblackclub.ru" + Request.Url.PathAndQuery)',
+							picture: '@("https://redblackclub.ru" + Model.Avatar.Path)',
+							caption: '@(Model.Title)',
+							description: '@Html.Raw(Model.Descr.Replace("\r\n", string.Empty))',
+							message: 'Приглашаем всех!'
+						},
+						function(response) {
+							if (response) {
+								$(".fb_share").hide();
+							}
+						}
+					);
+				}
+			);
+		});
+	</script>
 }
 @section links
 {
-<link href="~/Content/flipclock.css" rel="stylesheet" />
+<link href="~/Content/countdown.css" rel="stylesheet" />
 }

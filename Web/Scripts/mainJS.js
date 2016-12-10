@@ -4,7 +4,9 @@
     });
 
     var topSlider = $("#topSlider");
+
     var currentSliderTitle;
+
     topSlider.on("initialized.owl.carousel", function () {
         currentSliderTitle = $("#slide1");
         currentSliderTitle.addClass("active");
@@ -25,21 +27,22 @@
         autoHeight: false
     });
 
-    topSlider.on("translate.owl.carousel", function (e) {
+    topSlider.on("changed.owl.carousel", function (e) {
         var itm = e.item.index - 1;
         var itmCount = e.item.count;
         if ((e.item.index-1)>itmCount) {
             itm = 1;
         }
-        currentSliderTitle.fadeOut(1000, function() {
+        currentSliderTitle.fadeOut(100, function() {
             currentSliderTitle.removeClass("active");
             currentSliderTitle = $("#slide" + itm);
             currentSliderTitle.fadeIn(1000).addClass("active");
             var p = currentSliderTitle.children("p:first").outerWidth();
             currentSliderTitle.children("p:first").css("left","-"+(p+20)+"px");
-            console.log(p);
+            console.log(itm);
         });
     });
+
     var paty = $("#paty");
 
     paty.owlCarousel({
@@ -132,6 +135,10 @@
                 reader.onload = function(e) {
                     var i = $("#avaImage");
                     var f = $(".emptyAvatar");
+                    var pA = $("#currAvatar");
+                    if (pA) {
+                        pA.css("display", "none");
+                    }
                     $(".avaControls label span").css("display", "none");
                     $(".avaControls input").css("display", "none");
                     $(".avaControls label button").css("display", "block");

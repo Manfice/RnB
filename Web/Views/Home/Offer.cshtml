@@ -1,4 +1,6 @@
-﻿<div class="offerBlock">
+﻿@using Microsoft.Owin.Security
+@{ var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes(); }
+<div class="offerBlock">
     <div class="formWrapper">
         @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
         {
@@ -37,23 +39,16 @@
                     <input type="text" name="Workplace" value="" placeholder="Место работы, должность"/>
                 </div>
             </div>
-
-            <p>
-                Укажите ваши профили в социальных сетях (это дает возможность своевременного оповещения о ближайших <br/>мероприятиях клуба, скидки на посещение платных мероприятий и отображение групп на вашей странице)
-            </p>
-
-            <div class="socRow">
-                <button type="button">Facebook</button>
-                <button type="button">Вконтакте</button>
-                <button type="button">Instagram</button>
-                <button type="button">Одноклассники</button>
+            <p>так же вы можете использовать свой аккаунт в соц. сетях</p>
+            <div class="socLinksBlock">
+                <a href="@Url.Action("ExternalLogin", "Auth", new {provider = "Facebook"})"><img alt="" src="/Content/img/soc/2-1.jpg"/></a>
+                <a href="@Url.Action("VkAuth", "Auth")"><img alt="" src="/Content/img/soc/3-1.jpg"/></a>
             </div>
-
             <div class="buttonBorder">
                 <button type="submit" class="redButton" href="#">Стать членом клуба</button>
             </div>
-
         }
+
     </div>
     <p>* Поля, отмеченные звездочкой "*" - обязательны к заполнению</p>
     <p>** Ваши данные ни при каких условиях не будут переданы третьим лицам</p>

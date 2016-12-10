@@ -1,0 +1,42 @@
+﻿@using Web.Domen.Models
+@model IEnumerable<Web.Domen.Models.ImageData>
+
+
+@if (Model.Any(data => !string.IsNullOrEmpty(data.VideoLink)))
+    {
+        var video = Model.LastOrDefault(data => !string.IsNullOrEmpty(data.VideoLink));
+        if (video != null)
+        {
+            <div class="visible-lg visible-md">
+                <iframe width="400" height="224" src="@video.VideoLink"></iframe>
+            </div>
+            <div class="visible-sm visible-xs">
+                <iframe width="300" height="163" src="@video.VideoLink"></iframe>
+            </div>
+        }
+    }
+<div class="myColumn" id="pt">
+        <div class="row960w">
+            @foreach (var item in Model.Where(data => data.Path != null))
+            {
+                <div class="pvImageWr">
+                    <a href="@item.Path" data-lightbox="@item.Region.Title" data-title="@item.Region.Description">
+                        <img class="example-image" alt="" src="@item.Path" />
+                        <div class="pvBorder"></div>
+                    </a>
+                    <div class="actions albomStat">
+                        <i class="fa fa-eye"></i>
+                        <p>125</p>
+                        <a href="">
+                            <i class="fa fa-heart"></i>
+                            <p>0</p>
+                        </a>
+                        <a href="@Url.Content(item.Path)" target="_blanck">
+                            <i class="fa fa-download"></i>
+                        </a>
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                </div>
+            }
+        </div>
+</div>

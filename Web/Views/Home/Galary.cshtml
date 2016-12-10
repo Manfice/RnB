@@ -30,13 +30,13 @@
                 </a>
                 <div class="albomStat">
                     <i class="fa fa-eye"></i>
-                    <p>125</p>
+                    <p>@item.Viewed</p>
                     <i class="fa fa-heart"></i>
-                    <p>227</p>
+                    <p>@item.Likes</p>
                     <i class="fa fa-photo"></i>
-                    <p>125</p>
+                    <p>@item.Regions.Sum(galary => galary.Photos.Count)</p>
                     <i class="fa fa-film"></i>
-                    <p>125</p>
+                    <p>@item.Regions.Sum(galary => galary.Photos.Count(data => data.VideoLink!=null))</p>
                     <i class="fa fa-share-alt"></i>
                 </div>
             </div>

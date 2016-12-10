@@ -10,7 +10,7 @@
         <p style="text-align: center;">@Model.Description</p>
     </div>
     <div class="row960w">
-        @foreach (var item in Model.Paties.OrderBy(paty => paty.PatyDate))
+        @foreach (var item in Model.Paties.OrderByDescending(paty => paty.PatyDate))
         {
             <div class="patyItemDetails">
                 <div class="npImgWrapper">
@@ -29,13 +29,13 @@
                     </div>
                 </div>
                 <div class="itmDescr">
-                    @if (item.Descr.Length >= 100)
+                    @if (!string.IsNullOrEmpty(item.Descr) && item.Descr.Length >= 100)
                     {
-                        <p>@item.Descr.Substring(0, 100) ...</p>
+                        <p>@item.Descr</p>
                     }
                     else
                     {
-                        <p>@item.Descr</p>
+                        <p>@(item.Descr ?? "")</p>
                     }
                 </div>
             </div>

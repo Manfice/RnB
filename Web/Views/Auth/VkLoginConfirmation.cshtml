@@ -1,0 +1,41 @@
+﻿@model Web.Models.Viewmodels.VkUserInfo
+@{
+    ViewBag.Title = "VkLoginConfirmation";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="myColumn">
+    <div class="formLoginItem">
+        @using (Html.BeginForm("VkLoginConfirmation", "Auth", FormMethod.Post, new { returnUrl = ViewBag.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(info => info.photo_200_orig)
+            @Html.HiddenFor(info => info.bdate)
+            @Html.HiddenFor(info => info.nickname)
+            @Html.HiddenFor(info => info.sex)
+            @Html.HiddenFor(info => info.domain)
+            <div class="formTitle">
+                <h2>
+                    Завершить<br />регистрацию
+                </h2>
+            </div>
+            @Html.ValidationSummary()
+            <div class="inpItem">
+                @Html.TextBoxFor(vm => vm.email, new { placeholder = "E-mail" })
+            </div>
+            <div class="inpItem">
+                @Html.TextBoxFor(vm => vm.first_name, new { placeholder = "Имя" })
+            </div>
+            <div class="inpItem">
+                @Html.TextBoxFor(vm => vm.last_name, new { placeholder = "Фамилия" })
+            </div>
+            <div class="inpItem">
+                @Html.TextBoxFor(vm => vm.city.title, new { placeholder = "Город" })
+            </div>
+
+            <div class="formFooter">
+                <button type="submit" class="redButton">Войти</button>
+            </div>
+        }
+    </div>
+</div>

@@ -18,10 +18,29 @@ namespace Web.Domen.Repositorys
 
         public IEnumerable<Blog> GetBlogs => _context.Blogs.ToList();
 
+        public IEnumerable<Otziv> GetOtzivs => _context.Otzivs.ToList();
+
+        public void AddOtziv(Otziv model)
+        {
+            _context.Otzivs.Add(model);
+            _context.SaveChanges();
+        }
+
         public void DeleteBlog(int id)
         {
             var dbBlog = _context.Blogs.Find(id);
             _context.Blogs.Remove(dbBlog);
+            _context.SaveChanges();
+        }
+
+        public void DeleteOtziv(int id)
+        {
+            var db = _context.Otzivs.Find(id);
+            if (db==null)
+            {
+                return;
+            }
+            _context.Otzivs.Remove(db);
             _context.SaveChanges();
         }
 
@@ -48,5 +67,6 @@ namespace Web.Domen.Repositorys
                 return model;
             }
         }
+
     }
 }

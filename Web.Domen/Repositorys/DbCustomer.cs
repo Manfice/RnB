@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Web.Domen.Abstract;
 using Web.Domen.Infrastructure;
 using Web.Domen.Models;
@@ -42,7 +44,7 @@ namespace Web.Domen.Repositorys
 
         public Customer UpdateCustomer(Customer model)
         {
-            var customer = _context.Customers.Find(model.Id);
+            var customer = _context.Customers.Find(model.Id) ?? new Customer();
             customer.ShowData = model.ShowData;
             customer.Fio = model.Fio;
             customer.Phone = model.Phone;
@@ -59,6 +61,9 @@ namespace Web.Domen.Repositorys
             customer.EmailNotice = model.EmailNotice;
             customer.SmsNotice = model.SmsNotice;
             customer.PhoneNotice = model.PhoneNotice;
+            if (model.Avatar != null) customer.Avatar = model.Avatar;
+            if (customer.Id == 0) customer.User = model.User;
+            if (customer.Id == 0) _context.Customers.Add(customer);
             _context.SaveChanges();
             return customer;
         }
@@ -118,6 +123,12 @@ namespace Web.Domen.Repositorys
         {
             var customer = _context.Customers.FirstOrDefault(customer1 => customer1.User == id)?.Id;
             return _context.Orders.Where(order => order.Customer.Id == customer).ToList();
+        }
+
+        public async Task<Customer> GetCustomerByUser(string userId)
+        {
+            var result = await _context.Customers.FirstOrDefaultAsync(c => c.User.Equals(userId));
+            return result;
         }
     }
 }

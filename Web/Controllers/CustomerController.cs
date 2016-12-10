@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Web.Domen.Abstract;
 using Web.Domen.Models;
 using Web.Domen.Viewmodels;
+using Web.Helpers;
 using Web.Infrastructure;
 using Web.Models;
 
@@ -128,7 +131,8 @@ namespace Web.Controllers
                 {
                     if (!string.IsNullOrEmpty(model.NewPass) && !string.IsNullOrEmpty(model.Confirm))
                     {
-                        user.PasswordHash = UserManager.PasswordHasher.HashPassword(model.NewPass);
+                        var result = UserManager.ChangePassword(_user, model.OldPass, model.NewPass);
+                        if(!result.Succeeded) ModelState.AddModelError(model.NewPass, "Ошибка смены пароля");
                     }
                     else
                     {
@@ -155,8 +159,9 @@ namespace Web.Controllers
         {
             var customer = _customer.GetCustomerByUserId(_user);
             if (avatar == null || avatar.ContentLength <= 0) return RedirectToAction("Index");
+            var img = ImageCrop.ImageScale(avatar, null, 300, 600);
             var filePath = Server.MapPath("/Uploads/Partners/" + _user + "_" + avatar.FileName);
-            avatar.SaveAs(filePath);
+            SaveImageJpeg(filePath, img, 90L);
             if (customer.Avatar!=null)
             {
                 if (System.IO.File.Exists(customer.Avatar.FullPath))
@@ -179,8 +184,9 @@ namespace Web.Controllers
         {
             var customer = _customer.GetCustomerByUserId(_user);
             if (avatar == null || avatar.ContentLength <= 0) return RedirectToAction("Company");
+            var img = ImageCrop.ImageScale(avatar, null, 300, 600);
             var filePath = Server.MapPath("/Uploads/Partners/" + _user + "_comp_" + avatar.FileName);
-            avatar.SaveAs(filePath);
+            SaveImageJpeg(filePath,img,90L);
             if (customer.Company.Image != null)
             {
                 if (System.IO.File.Exists(customer.Company.Image.FullPath))
@@ -234,6 +240,23 @@ namespace Web.Controllers
                 Sex = customer.ShowData[11].ToString()
             };
             return result;
+        }
+        private void SaveImageJpeg(string path, Image image, long quality)
+        {
+            var qualityParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+            var jpegCodecInfo = GetCodecInfo("image/jpeg");
+            if (jpegCodecInfo == null)
+            {
+                return;
+            }
+            var paramses = new EncoderParameters(1) { Param = { [0] = qualityParam } };
+            image.Save(path, jpegCodecInfo, paramses);
+        }
+
+        private static ImageCodecInfo GetCodecInfo(string mimeType)
+        {
+            var codecs = ImageCodecInfo.GetImageEncoders();
+            return codecs.FirstOrDefault(t => t.MimeType == mimeType);
         }
     }
 }

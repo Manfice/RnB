@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "UploadsPhotos";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int r = ViewBag.r;
+    int a = ViewBag.a;
+}
+
+<div class="uploadForm">
+    @using (Html.BeginForm())
+    {
+        @Html.Hidden("regId", r)
+        @Html.Hidden("Albom.Id", a)
+        @Html.ValidationSummary()
+        <input id="mySuperPhotoUploader" type="file" name="photos" multiple="multiple"/>
+        <button id="123" type="submit">Добавить</button>
+    }
+    <div class="bar">
+        <progress class="totalFiles" max="100" value="0"></progress>
+    </div>
+    <div class="bar">
+        <progress class="progress" max="100" value="0"></progress>
+    </div>
+    <div id="status">
+        <ul></ul>
+    </div>
+    @Html.ActionLink("Вернуться к альбому", "AlbomDetails","ImageGalary", new {id=a},null)
+</div>
+
+@section scripts
+{
+<script src="~/Scripts/AdminJs/jqForm.js"></script>
+    <script>
+        (function (a,r) {
+            var progress = $(".progress");
+            var total = $(".totalFiles");
+            var index = 0;
+            var files;
+            var fc;
+            function uploadToServer(photo, callback) {
+                $.ajax({
+                    type: "POST",
+                    url: "/ImageGalary/UploadPhotoToGalary?albom="+a+"&region="+r,
+                    contentType: false,
+                    processData: false,
+                    data: photo,
+                    beforeSend: function() {
+                        progress.val(0);
+                    },
+                    xhr: function() {
+                        var xhr = $.ajaxSettings.xhr();
+                        xhr.upload.addEventListener('progress', function(event) {
+                            if (event.lengthComputable) {
+                                var percentComplite = Math.ceil(event.loaded / event.total * 100);
+                                progress.val(percentComplite);
+                            }
+                        },false);
+                        return xhr;
+                    },
+                    success: function(result) {
+                        index++;
+                        $("#status ul").append("<li>"+index+" :"+result+"</li>");
+                        var pers = Math.ceil(index / fc * 100);
+                        total.val(pers);
+                    },
+                    error: function (hr, status, p3, p4) {
+                        var err = "Error " + " " + status + " " + p3 + " " + p4;
+                        if (xhr.responseText && xhr.responseText[0] === "{")
+                            err = JSON.parse(xhr.responseText).Message;
+                        console.log(err);
+                    }
+                    
+                });
+            };
+
+            $("form").submit(function (event) {
+                event.preventDefault();
+                var i = $("#mySuperPhotoUploader");
+                if (i && i[0].files.length > 0) {
+                    fc = i[0].files.length;
+                    files = i[0].files;
+                    var data;
+                    for (var file = 0; file < fc; file++) {
+                        data = new FormData(); 
+                        data.append("photo", files[file]);
+                        uploadToServer(data);
+
+                    }
+                }
+            });
+        })(@ViewBag.a, @ViewBag.r);
+    </script>
+}

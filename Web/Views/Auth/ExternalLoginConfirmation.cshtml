@@ -1,0 +1,31 @@
+﻿@model Web.Models.Viewmodels.ExternalLoginConfirmationViewmodel
+@{
+    ViewBag.Title = "Завершение регистрации";
+    Layout = "~/Views/Shared/_MainRnB.cshtml";
+}
+
+<div class="myColumn">
+    <div class="formLoginItem">
+        @using (Html.BeginForm("ExternalLoginConfirmation", "Auth", FormMethod.Post, new {returnUrl=ViewBag.ReturnUrl}))
+        {
+            <div class="formTitle">
+                <h2>
+                    Завершить<br/>регистрацию
+                </h2>
+            </div>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <div class="inpItem">
+                @Html.TextBoxFor(vm => vm.Email, new {placeholder = "E-mail"})
+            </div>
+            <div class="inpItem">
+                @Html.TextBoxFor(vm => vm.Fio, new {placeholder = "Имя, фамилия"})
+            </div>
+
+            <div class="formFooter">
+                <button type="submit" class="redButton">Войти</button>
+            </div>
+        }
+    </div>
+</div>

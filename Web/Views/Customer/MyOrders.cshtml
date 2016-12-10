@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Web.Domen.Models.Order>
+﻿@using Web.Helpers
+@model IEnumerable<Web.Domen.Models.Order>
 @{
     ViewBag.Title = "Мои заявки";
     Layout = "~/Views/Shared/_MainRnB.cshtml";
@@ -7,51 +8,155 @@
 {
     <link href="~/Content/customer.css" rel="stylesheet" />
 }
-<div class="myColumn">
-    <div class="paymentCustomer">
-        <nav class="">
-            <ul>
-                <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
-                <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
-                <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
-                <li><a href="@Url.Action("MyOrders")" class="redButton">Оплаты и заявки</a></li>
-            </ul>
-        </nav>
-        <div id="paydedPaty">
-            <div class="summaryTitle">
-                <h3>Платные мероприятия</h3>
-            </div>
-            <table>
-                <thead>
+@if (!HttpContext.Current.Request.IsMobileBrowser())
+{
+    <div class="myColumn">
+        <div class="paymentCustomer">
+            <nav class="">
+                <ul>
+                    <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
+                    <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
+                    <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
+                    <li><a href="@Url.Action("MyOrders")" class="redButton">Оплаты и заявки</a></li>
+                </ul>
+            </nav>
+            <div id="paydedPaty">
+                <div class="summaryTitle">
+                    <h3>Платные мероприятия</h3>
+                </div>
+                <table>
+                    <thead>
                     <tr>
                         <th>мероприятие</th>
                         <th>дата заявки</th>
                         <th>платежи <span>(сумма, дата)</span></th>
                         <th>статус</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @if (Model.Any(order => order.TotalCost > 0))
-            {
-                foreach (var item in Model.Where(order => order.TotalCost>0))
-                {
+                    {
+                        foreach (var item in Model.Where(order => order.TotalCost > 0))
+                        {
+                            <tr>
+                                <td>@item.Paty.Title</td>
+                                <td>@item.OrderDate.ToString("dd MMMM yyyy")</td>
+                                <td>@(item.Aviso != null ? item.TotalCost + " " + item.Aviso.PayDate : "нет")</td>
+                                @if (item.Paty.PatyDate > DateTime.Now)
+                                {
+                                    <td class="@(item.Aviso != null ? "payd" : "notPayd")">@(item.Aviso != null ? "Оплачено" : "Не оплачено")</td>
+                                }
+                                else
+                                {
+                                    <td>Прошедшее</td>
+                                }
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div id="freePaty">
+                <div class="summaryTitle">
+                    <h3>Бесплатные мероприятия</h3>
+                </div>
+                <table>
+                    <thead>
                     <tr>
-                        <td>@item.Paty.Title</td>
-                        <td>@item.OrderDate.ToString("dd MMMM yyyy")</td>
-                        <td>@(item.Aviso!=null? item.TotalCost+" "+item.Aviso.PayDate:"нет")</td>
-                        @if (item.Paty.PatyDate > DateTime.Now)
-                        {
-                            <td class="@(item.Aviso!=null?"payd":"notPayd")">@(item.Aviso!=null? "Оплачено":"Не оплачено")</td>
-                        }
-                        else
-                        {
-                            <td>Прошедшее</td>
-                        }
+                        <th>мероприятие</th>
+                        <th>дата заявки</th>
                     </tr>
-                }
-            }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @if (Model.Any(order => order.TotalCost == 0))
+                    {
+                        foreach (var item in Model.Where(order => order.TotalCost == 0))
+                        {
+                            <tr>
+                                <td>@item.Paty.Title</td>
+                                <td>@item.OrderDate.ToString("dd MMMM yyyy")</td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
-</div>
+}
+else
+{
+    <div class="mobileColumn">
+        <div class="mobileCustomerMenu">
+            <ul>
+                <li><a href="@Url.Action("Index")" class="grayButton">Профиль</a></li>
+                <li><a href="@Url.Action("PersonalDetails")" class="grayButton">Личная страница</a></li>
+                <li><a href="@Url.Action("Company")" class="grayButton">Компания</a></li>
+                <li><a href="@Url.Action("MyOrders")" class="redButton">Оплаты и заявки</a></li>
+            </ul>
+        </div>
+            <div id="paydedPaty">
+                <div class="summaryTitle">
+                    <h3>Платные мероприятия</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>мероприятие</th>
+                            <th>дата заявки</th>
+                            <th>платежи <span>(сумма, дата)</span></th>
+                            <th>статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any(order => order.TotalCost > 0))
+                {
+                    foreach (var item in Model.Where(order => order.TotalCost > 0))
+                    {
+                                <tr>
+                                    <td>@item.Paty.Title</td>
+                                    <td>@item.OrderDate.ToString("dd MMMM yyyy")</td>
+                                    <td>@(item.Aviso != null ? item.TotalCost + " " + item.Aviso.PayDate : "нет")</td>
+                                    @if (item.Paty.PatyDate > DateTime.Now)
+                                    {
+                                        <td class="@(item.Aviso != null ? "payd" : "notPayd")">@(item.Aviso != null ? "Оплачено" : "Не оплачено")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Прошедшее</td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div id="freePaty">
+                <div class="summaryTitle">
+                    <h3>Бесплатные мероприятия</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>мероприятие</th>
+                            <th>дата заявки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any(order => order.TotalCost == 0))
+                        {
+                            foreach (var item in Model.Where(order => order.TotalCost == 0))
+                            {
+                                <tr>
+                                    <td>@item.Paty.Title</td>
+                                    <td>@item.OrderDate.ToString("dd MMMM yyyy")</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+}

@@ -39,7 +39,7 @@ namespace Web.Infrastructure
 
             manager.UserValidator = new UserValidator<AppUser>(manager)
             {
-                RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true
+                RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = false
             };
             return manager;
         }

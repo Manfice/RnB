@@ -1,0 +1,78 @@
+﻿@model Web.Domen.Models.OrderViewmodel
+<div class="regFormWrapper">
+    @using (Html.BeginForm("Order", "Home", FormMethod.Post, new { @class = "regToPaty" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        @Html.Hidden("PatyId", @Model.Paty.Id)
+
+        <div class="titleBorder">
+            <h3 style="text-align: center; padding: 0 20px;">
+                Заполните заявку<br /> на участие
+            </h3>
+        </div>
+
+        if (Model.Customer != null)
+        {
+            <div class="inpItem">
+                <p>*</p>
+                <input type="text" name="Fio" disabled value="@Model.Customer.Fio" placeholder="ФИО(полностью)" required />
+            </div>
+                <div class="inpItem">
+                    <p>*</p>
+                    <input type="tel" name="Phone" value="@Model.Customer.Phone" placeholder="Телефон" required />
+                </div>
+                <div class="inpItem">
+                    <p>*</p>
+                    <input type="email" name="Email" value="@Model.Customer.Email" placeholder="E-mail" required />
+                </div>
+                <div class="inpItem">
+                    <input type="text" name="Workplace" value="@Model.Customer.WorkPlace" placeholder="Место работы, должность" />
+                </div>
+        }
+        else
+        {
+            <div class="inpItem">
+                <p>*</p>
+                <input type="text" name="Fio" value="" placeholder="ФИО(полностью)" required />
+            </div>
+                <div class="inpItem">
+                    <p>*</p>
+                    <input type="tel" name="Phone" value="" placeholder="Телефон" required />
+                </div>
+                <div class="inpItem">
+                    <p>*</p>
+                    <input type="email" name="Email" value="" placeholder="E-mail" required />
+                </div>
+                <div class="inpItem">
+                    <input type="text" name="Workplace" value="" placeholder="Место работы, должность" />
+                </div>
+        }
+
+        if (Model.Paty.Price > 0)
+        {
+            <div class="inpItem">
+                <label for="place">Количество мест (билетов)</label>
+                <input type="number" id="place" min="1" max="@(Model.Paty.MaxGuests - @Model.Paty.Orders?.Where(order => order.Aviso!=null).Sum(o => o.Place))" value="1" name="Place" />
+            </div>
+        }
+        else
+        {
+            <input type="hidden" id="place" min="1" value="1" name="Place" />
+        }
+
+        if (Model.Paty.Price > 0)
+        {
+            <div class="buttonBorder absolute">
+                <button type="submit" class="redButton" href="#">Перейти на страницу<br />оплаты</button>
+            </div>
+        }
+        else
+        {
+            <div class="buttonBorder">
+                <button type="submit" class="redButton">Получить приглашение</button>
+            </div>
+        }
+    }
+
+</div>
