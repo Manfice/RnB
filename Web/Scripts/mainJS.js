@@ -182,6 +182,7 @@ var popUp = function () {
     var modelPopUp = {
         register: ko.observable(false),
         login: ko.observable(false),
+        askme: ko.observable(false),
         thankYou: ko.observable(false)
     };
     var registerMe = function () {
@@ -196,6 +197,10 @@ var popUp = function () {
         var now = modelPopUp.thankYou();
         modelPopUp.thankYou(!now);
     };
+    var askmenow = function () {
+        var now = modelPopUp.askme();
+        modelPopUp.askme(!now);
+    };
     var clReg = function () {
         registerMe();
         thanks();
@@ -205,6 +210,6 @@ var popUp = function () {
     };
     $(init);
     return {
-        registerMe: registerMe, loginMe: loginMe, thanks: thanks, clReg: clReg
+        registerMe: registerMe, loginMe: loginMe, thanks: thanks, clReg: clReg, askmenow: askmenow
     };
 }();

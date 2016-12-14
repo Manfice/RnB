@@ -39,10 +39,10 @@
                     <input type="text" name="Workplace" value="" placeholder="Место работы, должность"/>
                 </div>
             </div>
-            <p>так же вы можете использовать свой аккаунт в соц. сетях</p>
+            <p>или зарегистрируйтесь с помощью одной из соцсетей:</p>
             <div class="socLinksBlock">
-                <a href="@Url.Action("ExternalLogin", "Auth", new {provider = "Facebook"})"><img alt="" src="/Content/img/soc/2-1.jpg"/></a>
-                <a href="@Url.Action("VkAuth", "Auth")"><img alt="" src="/Content/img/soc/3-1.jpg"/></a>
+                <a href="@Url.Action("ExternalLogin", "Auth", new {provider = "Facebook"})" class="face">@*<img alt="" src="/Content/img/soc/2-1.jpg"/>*@</a>
+                <a href="@Url.Action("VkAuth", "Auth")" class="vkont">@*<img alt="" src="/Content/img/soc/3-1.jpg"/>*@</a>
             </div>
             <div class="buttonBorder">
                 <button type="submit" class="redButton" href="#">Стать членом клуба</button>

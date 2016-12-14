@@ -39,25 +39,65 @@
     }
     else
     {
-        <div class="hidden-sm hidden-xs row960">
-            <div class="prevItem" id="prev">
-                <img alt="" src="/Content/img/prevBtn.png" />
+        if (Model.Count() > 3)
+        {
+            <div class="hidden-sm hidden-xs row960">
+                <div class="prevItem" id="prev">
+                    <img alt="" src="/Content/img/prevBtn.png"/>
+                </div>
+                <div class="patyCarousel" id="paty">
+                    @foreach (var item in Model)
+                    {
+                        <div class="carItem">
+                            <a href="/sobitie/@item.RouteTitle">
+                                <div class="topString"></div>
+                                <div class="whiteBg">
+                                    @if (item.Avatar != null)
+                                    {
+                                        <img alt="" src="@item.Avatar.Path" height="168"/>
+                                    }
+                                    else
+                                    {
+                                        <img alt="" src="/Content/img/pList/454x312.jpg" height="168"/>
+                                    }
+                                    <div class="redline"></div>
+                                    <p>@item.PatyDate.ToShortDateString()</p>
+                                    <h3 title="@item.Title">@(item.Title.Length >= 29 ? item.Title.Substring(0, 26) + "..." : item.Title)</h3>
+
+                                    <p class="pD">@((item.Descr != null && item.Descr.Length >= 125) ? item.Descr.Substring(0, 121) + "..." : item.Descr)</p>
+                                    <p style="padding-bottom: 20px;"><span class="redLink">Подробнее ></span></p>
+
+                                </div>
+                            </a>
+                        </div>
+
+                    }
+                </div>
+                <div class="nextItem" id="next">
+                    <img alt="" src="/Content/img/nextBtn.png"/>
+                </div>
             </div>
-            <div class="patyCarousel" id="paty">
-                @foreach (var item in Model)
+        }
+        else
+        {
+            <div class="patyBlockDesctop">
+                @foreach (var item in Model.Take(3))
                 {
-                    <div class="carItem">
-                        <a href="/sobitie/@item.RouteTitle">
-                            <div class="topString"></div>
-                            <div class="whiteBg">
-                                @if (item.Avatar != null)
-                                {
-                                    <img alt="" src="@item.Avatar.Path" height="168" />
-                                }
-                                else
-                                {
-                                    <img alt="" src="/Content/img/pList/454x312.jpg" height="168" />
-                                }
+                    <a href="/sobitie/@item.RouteTitle">
+                        <div class="patyWrapper">
+                            <div class="patyData">
+
+                                <div class="patyDataImageWraper">
+                                    @if (item.Avatar != null)
+                                    {
+                                        <img alt="" src="@item.Avatar.Path" />
+                                    }
+                                    else
+                                    {
+                                        <img alt="" src="/Content/img/pList/454x312.jpg" />
+                                    }
+                                    @*<img alt="" src="/Content/img/500x350.jpg" />*@
+                                </div>
                                 <div class="redline"></div>
                                 <p>@item.PatyDate.ToShortDateString()</p>
                                 <h3 title="@item.Title">@(item.Title.Length >= 29 ? item.Title.Substring(0, 26) + "..." : item.Title)</h3>
@@ -66,15 +106,13 @@
                                 <p style="padding-bottom: 20px;"><span class="redLink">Подробнее ></span></p>
 
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
 
                 }
+
             </div>
-            <div class="nextItem" id="next">
-                <img alt="" src="/Content/img/nextBtn.png" />
-            </div>
-        </div>
+        }
     }
 
     <a href="@Url.Action("NearDetails")" class="redButton">Смотреть расписание на ближайший месяц</a>

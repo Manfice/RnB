@@ -5,11 +5,12 @@
         @Html.Action("LoginPopUp", "Home")
     }
     @Html.Action("ThankYou", "Home")
+    @Html.Action("AskMePopUp", "Home")
 
     <div class="headerRow hBlock">
         <div class="hLeft">
             <div class="hLeftWrapper">
-                <a class="redButton">Задать вопрос</a>
+                <a class="redButton" data-bind="click:popUp.askmenow">Задать вопрос</a>
                 <p>Подписывайтесь на нас!</p>
                 <div class="socLinksHead">
                     <a href="https://twitter.com/_Redblackclub" target="_blank" class="tw"></a>

@@ -255,5 +255,19 @@ namespace Web.Controllers
         {
             return View(_cmc.GetOtzivs);
         }
-     }
+        public ActionResult AskMePopUp()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<string> AskMePopUp(string fio, string phone, string email, string message)
+        {
+            var body = "";
+
+            await PassAuth.SendMyMailAsync(body, "info@redblackclub.ru", "Форма отбратной связи");
+
+            return "Ok";
+        }
+    }
 }

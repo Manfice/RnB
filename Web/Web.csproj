@@ -329,10 +329,16 @@
     <Content Include="Content\img\soc\6-2.jpg" />
     <Content Include="Content\img\soc\b.png" />
     <Content Include="Content\img\soc\f.png" />
+    <Content Include="Content\img\soc\face2.jpg" />
     <Content Include="Content\img\soc\i.png" />
+    <Content Include="Content\img\soc\inst2.jpg" />
     <Content Include="Content\img\soc\o.png" />
+    <Content Include="Content\img\soc\od2.jpg" />
     <Content Include="Content\img\soc\t.png" />
+    <Content Include="Content\img\soc\tw2.jpg" />
+    <Content Include="Content\img\soc\vk2.jpg" />
     <Content Include="Content\img\soc\y.png" />
+    <Content Include="Content\img\soc\you2.jpg" />
     <Content Include="Content\img\topSlider\1.jpg" />
     <Content Include="Content\img\topSlider\2.jpg" />
     <Content Include="Content\img\topSlider\22222222.jpg" />
@@ -555,6 +561,7 @@
     <Content Include="Views\Cms\Otzivi.cshtml" />
     <Content Include="Views\Home\Otzivi.cshtml" />
     <Content Include="Views\ImageGalary\UploadsPhotos.cshtml" />
+    <Content Include="Views\Home\AskMePopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

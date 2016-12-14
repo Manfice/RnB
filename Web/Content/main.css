@@ -306,7 +306,16 @@ header, footer {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: center; 
+    align-items: center;
+}
+.row960wsb {
+    flex: 1 0 auto;
+    max-width: 960px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around; 
     align-items: center;
 }
 /*header*/
@@ -325,6 +334,7 @@ header, footer {
 .hMidle {
     flex: 1 0 auto;
     align-self: flex-start;
+    padding: 0 20px;
 }
 
     .hMidle h1 {
@@ -349,17 +359,25 @@ header, footer {
 .hLeftWrapper {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
 }
-
-
+.redButton, .grayButton {
+    cursor: pointer;
+}
+.messageBox {
+    width: 90%;
+    border-radius: 5px;
+    resize: none;
+    margin-top: 10px;
+    padding: 5px;
+}
 .redButton {
     display: inline-block;
     margin: 0;
     padding: 5px 30px 7px;
-    font-family: "rLight";
+    font-family: "rBold";
     color: #fff;
     font-size: 15pt;
     font-weight: 100;
@@ -371,7 +389,19 @@ header, footer {
     border-bottom: solid 3px #cc0b00;
     background-color: red;
 }
-
+.redButton:hover {
+    animation: keypressed .3s ease-in-out;
+    transform: translateY(5px);
+    background-color: rgb(255, 76, 76);
+}
+@keyframes keypressed {
+    from{ transform: translateY(0);
+        background-color: red;
+    }
+    to{ transform: translateY(5px);
+        background-color: rgb(255, 76, 76);
+    }
+}
 .redLink {
     font-family: "rNormal";
     text-decoration: none;
@@ -410,14 +440,31 @@ header, footer {
         width: 50px;
         height: 50px;
     }
+    .socLinksBlock a.face {
+        background: url("/Content/img/soc/face2.jpg") no-repeat 0 0;
+        background-size: 100%;
+    }
+        .socLinksBlock a.face:hover {
+        background: url("/Content/img/soc/face2.jpg") no-repeat 0 -50px;
+        background-size: 100%;
+    }
+    .socLinksBlock a.vkont {
+        background: url("/Content/img/soc/vk2.jpg") no-repeat 0 0;
+        background-size: 100%;
+    }
+        .socLinksBlock a.vkont:hover {
+        background: url("/Content/img/soc/vk2.jpg") no-repeat 0 -50px;
+        background-size: 100%;
+    }
 
     .socLinksBlock a img {
         width: 100%;
     }
 .hLeft p {
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     font-family: "rNormal";
     margin: 7px;
+    display: block;
 }
 
 .hRight {
@@ -473,10 +520,11 @@ header, footer {
         width: 100%;
     }
     .socLinksHead>a {
-        height: 25px;
-        width: 25px;
+        height: 30px;
+        width: 30px;
         -ms-background-size: 100%;
         background-size: 100%;
+        transform: scale(.8);
     }
 
 @media only screen and (max-device-width: 720px) {
@@ -597,45 +645,45 @@ footer {
         background-size: 100%;
     }
     .facebook {
-        background: url("/Content/img/soc/2-1.jpg") no-repeat center center;
+        background: url("/Content/img/soc/face2.jpg") no-repeat 0 0;
     }
     .facebook:hover {
-        background: url("/Content/img/soc/2-2.jpg") no-repeat center center;
+        background: url("/Content/img/soc/face2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
     .vk {
-        background: url("/Content/img/soc/3-1.jpg") no-repeat center center;
+        background: url("/Content/img/soc/vk2.jpg") no-repeat 0 0;
     }
     .vk:hover {
-        background: url("/Content/img/soc/3-2.jpg") no-repeat center center;
+        background: url("/Content/img/soc/vk2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
     .od {
-        background: url("/Content/img/soc/4-1.jpg") no-repeat center center;
+        background: url("/Content/img/soc/od2.jpg") no-repeat 0 0;
     }
     .od:hover {
-        background: url("/Content/img/soc/4-2.jpg") no-repeat center center;
+        background: url("/Content/img/soc/od2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
     .inst {
-        background: url("/Content/img/soc/6-1.jpg") no-repeat center center;
+        background: url("/Content/img/soc/inst2.jpg") no-repeat 0 0;
     }
     .inst:hover {
-        background: url("/Content/img/soc/6-2.jpg") no-repeat center center;
+        background: url("/Content/img/soc/inst2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
     .you {
-        background: url("/Content/img/soc/5-1.jpg") no-repeat center center;
+        background: url("/Content/img/soc/you2.jpg") no-repeat 0 0;
     }
     .you:hover {
-        background: url("/Content/img/soc/5-2.jpg") no-repeat center center;
+        background: url("/Content/img/soc/you2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
     .tw {
-        background: url("/Content/img/soc/1-1.jpg") no-repeat center center;
+        background: url("/Content/img/soc/tw2.jpg") no-repeat 0 0;
     }
     .tw:hover {
-        background: url("/Content/img/soc/1-2.jpg") no-repeat center center;
+        background: url("/Content/img/soc/tw2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
 .lList ul {
@@ -919,7 +967,27 @@ footer {
     padding: 0 10px;
     cursor: pointer;
 }
-
+.patyBlockDesctop {
+    position: relative;
+    width: 100%;
+    padding: 40px 15px 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 970px;
+    width: 100%;
+}
+.patyBlockDesctop a {
+    margin: 0 20px 40px;
+}
+.redline {
+    border-bottom: solid 3px red;
+    width: 100px;
+    position: relative;
+    top: -6px;
+    left: 20px;
+}
 .patyBlock {
     flex: 0 0 auto;
     position: relative;
@@ -961,10 +1029,14 @@ footer {
     height: 350px;
     margin: 40px 0 0 0;
 }
-
+.patyData p:last-child {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+}
 .patyDataImageWraper {
     width: 100%;
-    height: 140px;
+    height: 110px;
     padding: 0 20px;
 }
 
