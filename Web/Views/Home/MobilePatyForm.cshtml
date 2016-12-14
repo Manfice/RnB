@@ -46,7 +46,7 @@
     <div class="bordered">
         @if (Model.Price > 0)
         {
-            <p>Стоимость: <span>@Model.Price руб.</span> <span>(рассчитывается с учетом скидки и кол-ва мест)</span></p>
+            <p>Стоимость: <span class="priceValue">@Model.Price руб.</span> <span>(рассчитывается с учетом скидки и кол-ва мест)</span></p>
         }
         else
         {
@@ -59,24 +59,8 @@
         </p>
         @if (Model.Price == 0)
         {
-            <p> 1) вступите в одну из наших групп в соц сетях:</p>
-            <p style="padding-left: 20px">
-                если уже вступил ранее, то вы очень большой молодец!
-                <a href="#" class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="20" /></a>
-                @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20" /></a>*@
-                <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20" /></a>
-                @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20" /></a>*@
-                @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20" /></a>*@
-            </p>
-            <p>2) сделайте репост этой записи в одной из социальных сетей:</p>
-            <p>
-                <a href="#" class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="20" /></a>
-                @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20" /></a>*@
-                <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20" /></a>
-                @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20" /></a>*@
-                @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20" /></a>*@
-            </p>
-            <p>3) получите приглашение по почте, заполнив форму заявки</p>
+            <p>1) заполните форму заявки</p>
+            <p>2) получите приглашение на эл. почту</p>
         }
         else
         {
@@ -89,7 +73,7 @@
     {
         <div class="discount bordered">
             <p>
-                <strong>Скидки: до 10% </strong>
+                <strong>Скидки: 5% </strong>
             </p>
             @if (User.Identity.IsAuthenticated)
             {
@@ -101,15 +85,6 @@
                     - 5% для членов клуба <a style="margin: 0 20px" href="@Url.Action("Login", "Auth", new {returnUrl = HttpContext.Current.Request.Url.PathAndQuery})" class="redLink">Авторизация</a><a href="@Url.Action("Register", "Auth", new {returnUrl = HttpContext.Current.Request.Url.PathAndQuery})" class="redLink">Регистрация</a>
                 </p>
             }
-            <p>- 5% при репосте в соцсетях</p>
-            <p>
-                Сделать репост этого мероприятия:
-            </p>
-            <a href="#" class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="25" /></a>
-            @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="25" /></a>*@
-            <a href="@vkUrl"><img alt="vk" src="/Content/img/soc/b.png" width="25" /></a>
-            @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="25" /></a>*@
-            @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="25" /></a>*@
         </div>
     }
 <div class="counter bordered">
@@ -153,3 +128,32 @@
     @Html.Action("PatyForm", "Home", new { patyId = Model.Id })
 }
 
+<!--
+<p> 1) вступите в одну из наших групп в соц сетях:</p>
+<p style="padding-left: 20px">
+    если уже вступил ранее, то вы очень большой молодец!
+    <a href="#" class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
+    @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20" /></a>*@
+    <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
+    @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20" /></a>*@
+    @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20" /></a>*@
+</p>
+<p>2) сделайте репост этой записи в одной из социальных сетей:</p>
+<p>
+    <a href="#" class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="20"/></a>
+    @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="20" /></a>*@
+    <a href="#"><img alt="vk" src="/Content/img/soc/b.png" width="20"/></a>
+    @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="20" /></a>*@
+    @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="20" /></a>*@
+</p>
+<p>3) получите приглашение по почте, заполнив форму заявки</p>
+                <p>- 5% при репосте в соцсетях</p>
+            <p>
+                Сделать репост этого мероприятия:
+            </p>
+            <a href="#" class="fb_share"><img alt="f" src="/Content/img/soc/f.png" width="25" /></a>
+            @*<a href="#"><img alt="i" src="/Content/img/soc/i.png" width="25" /></a>*@
+            <a href="@vkUrl"><img alt="vk" src="/Content/img/soc/b.png" width="25" /></a>
+            @*<a href="#"><img alt="od" src="/Content/img/soc/o.png" width="25" /></a>*@
+            @*<a href="#"><img alt="t" src="/Content/img/soc/t.png" width="25" /></a>*@
+-->

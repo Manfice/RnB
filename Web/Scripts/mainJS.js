@@ -128,9 +128,10 @@
     lightbox.option({
         "disableScrolling": true
     });
+
     function previewUpdImg(input) {
         if (input.files && input.files[0]) {
-            if (input.files[0].size <= 524288) {
+            if (input.files[0].size > 0) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     var i = $("#avaImage");
@@ -152,6 +153,7 @@
             }
         }
     };
+
     $("#castAva").change(function () {
         previewUpdImg(this);
     });

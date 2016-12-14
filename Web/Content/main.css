@@ -925,6 +925,10 @@ footer {
     position: relative;
     width: 100%;
     padding: 40px 15px 0px;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
     .patyBlock a {
@@ -939,6 +943,7 @@ footer {
 }
 
 .topStripe {
+    background-color: #000000;
     background-color: rgba(0,0,0,0.7);
     position: relative;
     top: 50px;
@@ -1834,7 +1839,11 @@ form > p {
 .bordered p {
     margin-left: 10px;
 }
+.priceValue {
+    color: red;
+    font-weight: bold;
 
+}
 
 .grayDate {
     background-color: rgb(209, 209, 209);
@@ -2532,7 +2541,9 @@ h3 > span {
 .tdImage img {
     width: 100%;
 }
-
+.tdImage>.pvBorder {
+    bottom: 0; 
+}
 .myBlogDetails {
     display: block;
     width: 100%;
@@ -2607,7 +2618,11 @@ h3 > span {
     }
     .otzivi {
         flex-flow: column;
-        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .otziv {
+        max-width: 300px;
     }
 }
 /*Otzivi END*/

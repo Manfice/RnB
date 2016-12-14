@@ -6,13 +6,13 @@
     <h3>До события осталось:</h3>
     <table>
         <tr class="counterDigits">
-            <td id="days">01</td>
+            <td id="days">00</td>
             <td>:</td>
-            <td id="hours">12</td>
+            <td id="hours">00</td>
             <td>:</td>
-            <td id="minutes">55</td>
+            <td id="minutes">00</td>
             <td>:</td>
-            <td id="seconds">15</td>
+            <td id="seconds">00</td>
         </tr>
         <tr>
             <td></td>
@@ -31,8 +31,15 @@
         </tr>
     </table>
 </div>
+<p>@ViewBag.l</p>
+@using (Html.BeginForm("Countdown", "Home", FormMethod.Get))
+{
+    <input name="text"/>
+    <button type="submit">To Latin</button>
+}
 @section scripts
 {
+<script src="~/Scripts/AdminJs/Countdown.js"></script>
     <script type="text/javascript">
         Countdown(@Html.Raw(JsonConvert.SerializeObject(ViewBag.TargetDate)),['days','hours','minutes','seconds'], function() {
             alert("Finish");

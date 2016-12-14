@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using NickBuhro.Translit;
 using Web.Domen.Abstract;
 using Web.Domen.Models;
 using Web.Domen.Viewmodels;
@@ -241,9 +242,13 @@ namespace Web.Controllers
         {
             return View();
         }
-        public ActionResult Countdown(DateTime? targetDate)
+        public ActionResult Countdown(DateTime? targetDate, string text = "")
         {
-            return PartialView(ViewBag.TargetDate = DateTime.Now.AddSeconds(10));
+            if (!string.IsNullOrEmpty(text))
+            {
+                ViewBag.l = Transliteration.CyrillicToLatin(text, Language.Russian);
+            }
+            return PartialView(ViewBag.TargetDate = DateTime.Now.AddSeconds(600));
         }
 
         public ActionResult Otzivi()

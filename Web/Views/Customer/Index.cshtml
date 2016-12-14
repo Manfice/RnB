@@ -29,15 +29,15 @@
                             <img id="currAvatar" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
                         }
 
-                        <img id="avaImage" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")" />
+                        <img id="avaImage" alt="" src="@(Model.Avatar != null ? Model.Avatar.Path : "")"/>
                         <div class="avaControls">
                             <label>
                                 <span>Сменить / загрузить фото</span>
                                 @using (Html.BeginForm("SaveAvatar", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva" />
-                                        <button type="submit">СОХРАНИТЬ</button>
+                                    <input type="file" name="avatar" accept="image/x-png,image/jpeg,image/jpg" id="castAva"/>
+                                    <button type="submit">СОХРАНИТЬ</button>
                                 }
                             </label>
                         </div>

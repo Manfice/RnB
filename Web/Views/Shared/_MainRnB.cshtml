@@ -1,8 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using Web.Helpers
+<!DOCTYPE html>
 <html style="height: 100%">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    @if (HttpContext.Current.Request.IsMobileBrowser())
+    {
+        <meta name="viewport" content="width=450">
+    }
+    else
+    {
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    }
 	<title>@ViewBag.Title - Red & Black</title>
 	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 	<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
