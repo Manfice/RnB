@@ -39,7 +39,6 @@
             currentSliderTitle.fadeIn(1000).addClass("active");
             var p = currentSliderTitle.children("p:first").outerWidth();
             currentSliderTitle.children("p:first").css("left","-"+(p+20)+"px");
-            console.log(itm);
         });
     });
 
@@ -183,7 +182,14 @@ var popUp = function () {
         register: ko.observable(false),
         login: ko.observable(false),
         askme: ko.observable(false),
-        thankYou: ko.observable(false)
+        thankYou: ko.observable(false),
+        thankYouMessage: ko.observable(),
+        feedback: {
+            fio: ko.observable(""),
+            phone: ko.observable(""),
+            email: ko.observable(""),
+            message:ko.observable("")
+        }
     };
     var registerMe = function () {
         var now = modelPopUp.register();
@@ -205,11 +211,33 @@ var popUp = function () {
         registerMe();
         thanks();
     };
+
+    function sendFeedback() {
+        $.ajax({
+            url: "/Home/AskMePopUp",
+            data: modelPopUp.feedback,
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+                if (data !== "Ok") {
+                    $(".validation-summary-errors").append(data);
+                } else {
+                    modelPopUp.thankYouMessage("Спасибо, ваше сообщение отправленно.");
+                    askmenow();
+                    thanks();
+                }
+            }
+        });
+    };
+    var feedbackSubmit = function () {
+        sendFeedback();
+    };
     var init = function () {
         ko.applyBindings(modelPopUp, document.getElementById("head"));
     };
     $(init);
     return {
-        registerMe: registerMe, loginMe: loginMe, thanks: thanks, clReg: clReg, askmenow: askmenow
+        registerMe: registerMe, loginMe: loginMe, thanks: thanks, clReg: clReg, askmenow: askmenow,
+        feedbackSubmit: feedbackSubmit
     };
 }();

@@ -13,6 +13,8 @@ namespace Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
                 name: "Paty",
                 url: "sobitie/{paty}",

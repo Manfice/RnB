@@ -21,7 +21,7 @@
                 @foreach (var item in videoBlock.Photos.Where(data => data.VideoLink != null))
                 {
                     <div class="pvVideoWr">
-                        <iframe width="430" height="220" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
+                        <iframe width="630" height="330" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
                     </div>
                 }
             </div>
@@ -34,20 +34,20 @@
             <p><span>@video.Title</span></p>
             <p class="regionDescr">@video.Description</p>
         </div>
-        <div class="row960w">
+        <div class="rowFullw">
             @foreach (var item in Model.Photos.Where(data => data.Path!=null && data.Region.Id==video.Id))
             {
-                <div class="pvImageWr">
+                <div class="pvImageWr" data-photoId ="@item.Id">
                     <a href="@item.Path" data-lightbox="@item.Region.Id" data-title="@item.Region.Description">
                         <img class="example-image" alt="" src="@item.Path" />
                         <div class="pvBorder"></div>
                     </a>
                     <div class="actions albomStat">
                             <i class="fa fa-eye"></i>
-                            <p>125</p>
-                        <a href="">
+                            <p>@item.Viewed</p>
+                        <a id="@item.Id" class="like">
                             <i class="fa fa-heart"></i>
-                            <p>0</p>
+                            <p>@item.Likes</p>
                         </a>
                         <a href="@Url.Content(item.Path)" target="_blanck">
                             <i class="fa fa-download"></i>
@@ -60,7 +60,34 @@
         </div>
     }
     <div class="pageLinks">
-        @Html.PageLinks(Model.PagingInfo, x => Url.Action("AlbomDetails", new { id = Model.Albom.Id, page = x }))
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("AlbomDetails", new {id = Model.Albom.Id, page = x}))
     </div>
+    <a href="/Galary" class="redButton" style="margin-top: 20px;">Назад к коллекции</a>
+
 </div>
-<a href="@ViewBag.returnUrl">Назад к коллекции</a>
+@section scripts
+{
+    <script>
+        $(".like").on('click', function(event) {
+            var count = parseInt($(this).children("p").text());
+            $.ajax({
+                url: "/Home/LikePhoto/" + this.id,
+                type: "POST",
+                success: function() {
+                }
+            });
+            $(this).children("p").text(count + 1);
+
+            console.log(this.id);
+        });
+        $(".pvImageWr").on('click', function(event) {
+            var id = $(this).attr("data-photoId");
+            $.ajax({
+                url: "/Home/ViewedPhoto/" + id,
+                type: "POST",
+                success: function () {
+                }
+            });
+        });
+    </script>
+}

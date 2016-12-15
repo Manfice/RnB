@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -30,10 +31,12 @@ namespace Web.Controllers
         {
             return View();
         }
+        [Route("Company")]
         public ActionResult Company()
         {
             return View();
         }
+        [Route("Contacts")]
         public ActionResult Contacts()
         {
             return View();
@@ -84,6 +87,7 @@ namespace Web.Controllers
             model.AddRange(video);
             return PartialView(model);
         }
+        [Route("Galary")]
         public ActionResult Galary(int page=1)
         {
             const int itemsPerPage = 9;
@@ -99,6 +103,7 @@ namespace Web.Controllers
             };
             return View(model);
         }
+        [Route("Photo-Albom/{id}")]
         public ActionResult AlbomDetails(int id, int page=1, string returnUrl="")
         {
             const int itemPerPage = 30;
@@ -115,6 +120,7 @@ namespace Web.Controllers
                 Albom = albom
             };
             ViewBag.returnUrl = returnUrl;
+            _home.AddAlbomView(id);
             return View(model);
         }
         public ActionResult Partners()
@@ -137,11 +143,13 @@ namespace Web.Controllers
         {
             return PartialView();
         }
+        [Route("Blizhaishie-meropriatia")]
         public ActionResult NearDetails()
         {
             var model = _home.GetPatys.Where(paty => paty.PatyDate >= DateTime.Today).ToList();
             return View(model);
         }
+        [Route("sobitie/{paty}")]
         public ActionResult PatyDetails(string paty)
         {
             return View(_home.GetPatyByRouteUrl(paty));
@@ -250,7 +258,7 @@ namespace Web.Controllers
             }
             return PartialView(ViewBag.TargetDate = DateTime.Now.AddSeconds(600));
         }
-
+        [Route("O-nas-govoriat")]
         public ActionResult Otzivi()
         {
             return View(_cmc.GetOtzivs);
@@ -260,14 +268,36 @@ namespace Web.Controllers
             return PartialView();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<string> AskMePopUp(string fio, string phone, string email, string message)
         {
-            var body = "";
+            var errors = new StringBuilder();
+            if(string.IsNullOrEmpty(fio)) errors.Append($"<li>Имя это обязательное поле!</li>");
+            if(string.IsNullOrEmpty(phone)) errors.Append($"<li>Телефон это обязательное поле!</li>");
+            if (errors.Length>0)
+            {
+                return errors.ToString();
+            }
+            var body = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/feedback.html"));
+            body = body.Replace("{0}", fio);
+            body = body.Replace("{1}", phone);
+            body = body.Replace("{2}", email);
+            body = body.Replace("{3}", message);
 
             await PassAuth.SendMyMailAsync(body, "info@redblackclub.ru", "Форма отбратной связи");
+            await PassAuth.SendMyMailAsync(body, "c592@yandex.ru", "Форма отбратной связи");
 
             return "Ok";
+        }
+        [HttpPost]
+        public async Task LikePhoto(int id)
+        {
+            await _home.LikePhotoInGalary(id);
+        }
+
+        [HttpPost]
+        public void ViewedPhoto(int id)
+        {
+            _home.AddPhotoView(id);
         }
     }
 }

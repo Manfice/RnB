@@ -19,6 +19,7 @@ namespace Web.Controllers
             _cmc = cmc;
         }
         // GET: Blog
+        [Route("Blog")]
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -76,6 +77,7 @@ namespace Web.Controllers
         }
 
         [AllowAnonymous]
+        [Route("BlogPost/{id}")]
         public ActionResult BlogDetails(int id)
         {
             return View(_cmc.GetBlogById(id));

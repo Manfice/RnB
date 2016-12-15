@@ -24,5 +24,6 @@ namespace Web.Domen.Abstract
         PhotoAlbom GetAlbomById(int id);
         void AddAlbomView(int id);
         void AddPhotoView(int id);
+        Task LikePhotoInGalary(int id);
     }
 }

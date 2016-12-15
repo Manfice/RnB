@@ -462,6 +462,7 @@
     <Content Include="Uploads\Partners\bb17fb19-a404-4d9e-8c00-26f228c0a6a7_me.png" />
     <Content Include="Uploads\patyAvatar\02803ee8-1239-4b89-b4d9-95dc2e31a278_sep_2.jpg" />
     <Content Include="Uploads\patyCategorys\63980e2e-eb49-483f-b068-3f30b2fbbd4a_sep_1.jpg" />
+    <Content Include="Views\Shared\feedback.html" />
     <Content Include="Views\Shared\register.html" />
     <Content Include="Views\Shared\ResetPass.html" />
     <Content Include="Views\Shared\ticket.html" />

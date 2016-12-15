@@ -158,5 +158,16 @@ namespace Web.Domen.Repositorys
                 _context.SaveChanges();
             }
         }
+
+        public async Task LikePhotoInGalary(int id)
+        {
+            var dbPhoto = await _context.Photos.FindAsync(id);
+            if (dbPhoto==null)
+            {
+                return;
+            }
+            dbPhoto.Likes += 1;
+            await _context.SaveChangesAsync();
+        }
     }
 }

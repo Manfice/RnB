@@ -459,6 +459,7 @@ namespace Web.Controllers
         //}
 
         [AllowAnonymous]
+        [Route("Meropriyatia-Nashego-kluba")]
         public ActionResult Paty()
         {
             return View(_repository.GetCategorys);
@@ -469,6 +470,7 @@ namespace Web.Controllers
             return PartialView(_repository.GetCategorys);
         }
         [AllowAnonymous]
+        [Route("meropriatiya/{patycat}")]
         public ActionResult PatyMenuDetails(string patycat, int id = 0)
         {
             var askCategory = _repository.GetCategorys.FirstOrDefault(category => category.RouteTitle.Contains(patycat));
@@ -485,6 +487,7 @@ namespace Web.Controllers
         }
 
         [AllowAnonymous]
+        [Route("spisok-meropriatiy/{patyinner}")]
         public ActionResult CategoryDetails(string patyinner)
         {
             var model = _repository.GetCategoryByRoute(patyinner);

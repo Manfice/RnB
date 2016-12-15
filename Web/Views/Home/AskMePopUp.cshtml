@@ -4,28 +4,29 @@
             <div class="formClose">
                 <p data-bind="click:popUp.askmenow">x</p>
             </div>
-            @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+            @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 <div class="titleBorder">
                     <h2>Форма обратной связи</h2>
                 </div>
+                <ul class="validation-summary-errors"></ul>
                 <div class="inputRow">
                     <div class="inpItem">
                         <p>*</p>
-                        <input type="text" name="Title" value="" placeholder="Имя, фамилия"/>
+                        <input type="text" name="Title" data-bind="value:feedback.fio" placeholder="Имя, фамилия"/>
                     </div>
                     <div class="inpItem">
                         <p>*</p>
-                        <input type="tel" name="Phone" value="" placeholder="Телефон"/>
+                        <input type="tel" name="Phone" data-bind="value:feedback.phone" placeholder="Телефон"/>
                     </div>
                     <div class="inpItem">
-                        <input type="email" name="Email" value="" placeholder="E-mail"/>
+                        <input type="email" name="Email" data-bind="value:feedback.email" placeholder="E-mail"/>
                     </div>
                 </div>
-                <textarea class="messageBox" name="message" placeholder="Сообщение" rows="5"></textarea>
+                <textarea class="messageBox" name="message" placeholder="Сообщение" data-bind="textInput:feedback.message" rows="5"></textarea>
                 <div class="buttonBorder">
-                    <button type="submit" class="redButton" href="#">Отправить</button>
+                    <button type="button" data-bind="click:popUp.feedbackSubmit" class="redButton" href="#">Отправить</button>
                 </div>
             }
 

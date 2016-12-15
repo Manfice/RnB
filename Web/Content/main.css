@@ -309,6 +309,14 @@ header, footer {
     justify-content: center; 
     align-items: center;
 }
+.rowFullw {
+    flex: 1 0 auto;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center; 
+    align-items: center;
+}
 .row960wsb {
     flex: 1 0 auto;
     max-width: 960px;
@@ -1742,6 +1750,7 @@ form > p {
 .npImgWrapper {
     width: 100%;
     position: relative;
+    overflow: hidden;
 }
 
     .npImgWrapper img {
@@ -1751,18 +1760,40 @@ form > p {
         max-height: 297px;
     }
 
+.flyingButton {
+    width: 100%;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 217px;
+    top: -217px;
+
+} 
+.patyItemDetails:hover .flyingButton {
+    top: 0;
+    transition: 1s;
+}
 .itmDescr {
     overflow: hidden;
     padding: 0 5px;
     font-size: 12pt;
+    height: 100px;
     background-color: rgb(232, 232, 232);
-}
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+} 
 
     .itmDescr p {
         margin: 0;
         padding: 0;
     }
-
+      
 .npImgWrapper .title {
     position: absolute;
     bottom: 0;
@@ -1786,15 +1817,6 @@ form > p {
     color: white;
     padding: 5px 20px;
     font-size: 16pt;
-}
-
-.title a {
-    display: none;
-}
-
-.patyItemDetails:hover a {
-    display: block;
-    margin: 105px 130px;
 }
 
 @media only screen and (max-device-width: 720px) {
@@ -2197,40 +2219,29 @@ form > p {
 }
 .watchAlbom {
     position: absolute;
-    right: 0;
+    width: 100%;
     bottom: 0;
     left: 0;
     background-color: #000000;
     background-color: rgba(0, 0, 0, 0.8);
     color: red;
+    padding: 3px 0 7px;
 }
-
-    .watchAlbom:hover {
-        top: 0;
-        -webkit-transition: 1s;
-        -moz-transition: 1s;
-        -ms-transition: 1s;
-        -o-transition: 1s;
-        transition: 1s;
-    }
-
-.watchAlbom:hover i {
-            display: block;
-        }
-
-    .watchAlbom i {
-        margin: 22%;
-        display: none;
-    }
-
-    .watchAlbom p {
-        padding: 10px;
-    }
-
-        .watchAlbom p span {
-            font-size: 12pt;
-        }
-
+.albomButton {
+    position: absolute;
+    top: -174px;
+    width: 100%;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: red;
+    height: 174px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alItem:hover .albomButton {
+    top: 0;
+}
 .pageLinks {
     margin: 20px 0 0 0;
 }
@@ -2335,8 +2346,12 @@ form > p {
 .rootItemWrapper {
     margin: 10px;
     position: relative;
+    overflow: hidden;
 }
-
+.rootItemWrapper:hover .subBlock {
+    bottom: 0;
+    transition: 1s;
+}
     .rootItemWrapper img {
         width: 100%;
     }
@@ -2350,15 +2365,39 @@ form > p {
     color: white;
     text-align: center;
 }
+.subBlock {
+    position: absolute;
+    bottom: -206px;
+    width: 100%;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 206px;
+}
+.subBlock ul {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.subBlock ul li {
+    display: block;
+    margin: 5px 0;
+    font-size: 14pt;
+}
+    .subBlock ul li:hover {
+       color: red;
+    }
 
     .rootTitle p {
         font-size: 16pt;
         display: block;
         padding: 15px;
-    }
-
-    .rootTitle:hover ul {
-        display: block;
     }
 
     .rootTitle:hover > p {
@@ -2369,7 +2408,7 @@ form > p {
         display: none;
     }
 
-    .rootTitle > ul > li > p {
+    .subBlock > ul > li > p {
         display: block;
         margin: 0;
         padding: 0 0 10px 0;
@@ -2670,10 +2709,11 @@ h3 > span {
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
+    padding: 30px;
 }
 .otziv {
     margin: 20px 0;
-    max-width: 430px;
+    width: 555px;
 }
 .otzivTitle {
     background-color: lightgray;

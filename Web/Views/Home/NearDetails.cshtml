@@ -11,31 +11,37 @@
         @foreach (var item in Model.OrderBy(paty => paty.PatyDate))
         {
             <div class="patyItemDetails">
-                <div class="npImgWrapper">
-                    <h3>@item.PatyDate.ToString("M")</h3>
-                    @if (item.Avatar != null)
-                    {
-                        <img alt="" src="@item.Avatar.Path"/>
-                    }
-                    else
-                    {
-                        <img alt="" src="/Content/img/pList/454x312.jpg"/>
-                    }
-                    <div class="title">
-                        <a href="@Url.Action("PatyDetails","Home", new {id=item.Id})" class="redButton">Подробнее</a>
-                        <h3>@item.Title</h3>
+                <a href="/sobitie/@item.RouteTitle">
+                    <div class="npImgWrapper">
+                        <h3>@item.PatyDate.ToString("M")</h3>
+                        @if (item.Avatar != null)
+                        {
+                            <img alt="" src="@item.Avatar.Path" />
+                        }
+                        else
+                        {
+                            <img alt="" src="/Content/img/pList/454x312.jpg" />
+                        }
+                        @*<img alt="" src="/Content/img/pList/454x312.jpg"/>*@
+                        <div class="flyingButton">
+                            <p class="redButton">Подробнее</p>
+                        </div>
+                        <div class="title">
+                            @*<a href="/sobitie/@item.RouteTitle" class="redButton">Подробнее</a>*@
+                            <h3>@item.Title</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="itmDescr">
-                    @if (item.Descr.Length >= 100)
-                    {
-                        <p>@item.Descr.Substring(0, 100) ...</p>
-                    }
-                    else
-                    {
-                        <p>@item.Descr</p>
-                    }
-                </div>
+                    <div class="itmDescr">
+                        @if (!string.IsNullOrEmpty(item.Descr) && item.Descr.Length >= 100)
+                        {
+                            <p>@item.Descr</p>
+                        }
+                        else
+                        {
+                            <p>@(item.Descr ?? "")</p>
+                        }
+                    </div>
+                </a>
             </div>
         }
     </div>
