@@ -33,14 +33,24 @@
                     </div>
                 </a>
                 <div class="albomStat">
-                    <i class="fa fa-eye"></i>
-                    <p>@item.Viewed</p>
-                    <i class="fa fa-heart"></i>
-                    <p>@item.Likes</p>
-                    <i class="fa fa-photo"></i>
-                    <p>@item.Regions.Sum(galary => galary.Photos.Count)</p>
-                    <i class="fa fa-film"></i>
-                    <p>@item.Regions.Sum(galary => galary.Photos.Count(data => data.VideoLink!=null))</p>
+                    <div class="statLeftSide">
+                        <div class="statItem">
+                            <i class="fa fa-eye"></i>
+                            <p>@item.Viewed</p>
+                        </div>
+                        <div class="statItem">
+                            <i class="fa fa-heart"></i>
+                            <p>@item.Likes</p>
+                        </div>
+                        <div class="statItem">
+                            <i class="fa fa-photo"></i>
+                            <p>@item.Regions.Sum(galary => galary.Photos.Count)</p>
+                        </div>
+                        <div class="statItem">
+                            <i class="fa fa-film"></i>
+                            <p>@item.Regions.Sum(galary => galary.Photos.Count(data => data.VideoLink != null))</p>
+                        </div>
+                    </div>
                     <i class="fa fa-share-alt"></i>
                 </div>
             </div>
@@ -49,7 +59,8 @@
     @if (Model.PagingInfo.TotalPages > 1)
     {
         <div class="pageLinks">
-            @Html.PageLinks(Model.PagingInfo, x=>Url.Action("Galary", new {page=x}))
+            
+            @Html.PageLinks(Model.PagingInfo, x => Url.Action("Galary", new {page = x}))
         </div>
     }
 </div>

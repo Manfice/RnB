@@ -204,9 +204,14 @@ namespace Web.Controllers
         {
             var customer = await _home.GetCustomerAsync(model);
             var order = await _home.OrderExistAsync(model.PatyId, model.Email);
-            if (order!=null && order.Paty.Price<=0)
+
+            if ((order!=null && order.Paty.Price<=0) || User.Identity.Name.Equals("info@id-racks.ru",StringComparison.CurrentCultureIgnoreCase))
             {
-                var ebody = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticket.html"));
+                if (User.Identity.Name.Equals("info@id-racks.ru", StringComparison.CurrentCultureIgnoreCase))
+                {
+                      order = await _home.RegOnPatyAsync(model.PatyId,model.Place,1,customer);
+                }
+                var ebody = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticketMobile.html"));
                 var emessageBody = MakeOrderBody(ebody, order);
                 await PassAuth.SendMyMailAsync(emessageBody, model.Email, "Копия приглашение на мероприятие с сайта redblackclub.ru");
                 return RedirectToAction("OrderDetails", order);
@@ -222,7 +227,7 @@ namespace Web.Controllers
                 var pay = _home.GetOrderBuId(order.Id);
                 return RedirectToAction("Payment", "Order", pay);
             }
-            var body = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticket.html"));
+            var body = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticketMobile.html"));
             var messageBody = MakeOrderBody(body, order);
             await PassAuth.SendMyMailAsync(messageBody, model.Email, "Приглашение на мероприятие с сайта redblackclub.ru");
             return RedirectToAction("OrderDetails",order);
@@ -243,6 +248,7 @@ namespace Web.Controllers
             result = result.Replace("{8}", oDate[0]+" "+oDate[1]);
             result = result.Replace("{9}", order.OrderDate.ToShortTimeString());
             result = result.Replace("{10}", order.Id.ToString());
+            result = result.Replace("{11}", order.Id.ToString());
             return result;
         }
         [Authorize(Roles = "Admin, Moderator")]
@@ -298,6 +304,12 @@ namespace Web.Controllers
         public void ViewedPhoto(int id)
         {
             _home.AddPhotoView(id);
+        }
+        [Route("PrintTicket")]
+        [HttpPost]
+        public ActionResult OrderEmail(int id)
+        {
+            return View(_home.GetOrderBuId(id));
         }
     }
 }

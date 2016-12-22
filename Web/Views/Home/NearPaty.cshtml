@@ -6,7 +6,7 @@
     @if (HttpContext.Current.Request.IsMobileBrowser())
     {
         <div class="patyBlock">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Take(3))
             {
                 <a href="/sobitie/@item.RouteTitle">
                     <div class="patyWrapper">
@@ -21,6 +21,7 @@
                                 {
                                     <img alt="" src="/Content/img/pList/454x312.jpg" />
                                 }
+                                @*<img alt="" src="/Content/img/500x350.jpg" />*@
                             </div>
                             <div class="redline"></div>
                             <p>@item.PatyDate.ToShortDateString()</p>
@@ -32,7 +33,6 @@
                         </div>
                     </div>
                 </a>
-
             }
 
         </div>

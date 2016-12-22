@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Web.Domen.Models.PatyCategory>
+<ul class="">
+    @foreach (var paty in Model.Where(category => category.ParentCategory == null))
+    {
+        if (Model.Any(category => category.ParentCategory != null && category.Paties.Any() && category.ParentCategory.Id == paty.Id))
+        {
+            <li>
+                <a href="/meropriatiya/@paty.RouteTitle">@paty.Title</a>
+                <ul class="">
+                    @foreach (var item in Model.Where(category => category.ParentCategory != null && category.Paties.Any() && category.ParentCategory.Id == paty.Id))
+                    {
+                        <li><a href="/spisok-meropriatiy/@item.RouteTitle">@item.Title</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        @*else
+            {
+                <li><a>@paty.Title</a></li>
+            }*@
+    }
+</ul>
+

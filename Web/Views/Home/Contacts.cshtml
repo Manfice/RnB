@@ -1,55 +1,150 @@
-﻿
+﻿@using Web.Helpers
+
 @{
     ViewBag.Title = "Контакты";
     Layout = "~/Views/Shared/_MainRnB.cshtml";
 }
-
-<div class="myColumn">
-    <h2>контакты</h2>
-    <div class="ds"><span> </span><span> </span><span> </span></div>
-    <table class="hidden-sm hidden-xs contacts">
-        <tr>
-            <td><i class="fa fa-map-marker"></i></td>
-            <td>
-                <p>355037, <br/> г. Ставрополь, ул. Пирогова 42/1 офис 25
-
+@section links
+{
+    <style>
+        #map {
+            height: 275px;
+            width: 506px;
+        }
+            #map1 {
+            height: 140px;
+            width: 253px;
+        }
+        .myColumn1 {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0;
+    font-family: "rNormal";
+}
+    </style>
+}
+@if (HttpContext.Current.Request.IsMobileBrowser())
+{
+    <div class="myColumn1">
+        <ul class="contacts visible-sm visible-xs">
+            <li>
+                <i class="fa fa-map-marker"></i>
+                <p>
+                    355037, <br/> г. Ставрополь, ул. Пирогова 42/1 офис 25
                 </p>
-            </td>
-            <td><i class="fa fa-phone"></i></td>
-            <td>
-                <p>+7(962)459-98-51 <br/> +7(918)741-88-03
+            </li>
+            <li>
+                <i class="fa fa-phone"></i>
+                <p>
+                    +7(962)459-98-51 <br/> +7(918)741-88-03
                 </p>
-            </td>
-            <td><i class="fa fa-envelope"></i></td>
-            <td>
-                <p>E-mail:<a href="mailto:info@redblackclub.ru">info@redblackclub.ru</a>
-                </p></td>
-        </tr>
-        <tr>
-            <td colspan="6"><img alt="" src="/Content/img/carta.jpg"/></td>
-        </tr>
-    </table>
-    <ul class="contacts visible-sm visible-xs">
-        <li>
-            <i class="fa fa-map-marker"></i>
-            <p>
-                355037, <br /> г. Ставрополь, ул. Пирогова 42/1 офис 25
-            </p>
-        </li>
-        <li>
-            <i class="fa fa-phone"></i>
-            <p>
-                +7(962)459-98-51 <br/> +7(918)741-88-03
-            </p>
-        </li>
-        <li>
-            <i class="fa fa-envelope"></i>
-            <p>
-                E-mail:<a href="mailto:info@redblackclub.ru">info@redblackclub.ru</a>
-            </p>
-        </li>
-        <li>
-            <img alt="" src="/Content/img/carta.jpg" />
-        </li>
-    </ul>
-</div>
+            </li>
+            <li>
+                <i class="fa fa-envelope"></i>
+                <p>
+                    E-mail:<a href="mailto:info@redblackclub.ru">info@redblackclub.ru</a>
+                </p>
+            </li>
+            <li>
+                <img alt="" src="/Content/img/carta.jpg"/>
+                <div id="map1"></div>
+            </li>
+        </ul>
+    </div>
+@section scripts{
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script>
+        ymaps.ready(init);
+        var myMap,
+            myPlacemark;
+
+        function init() {
+            myMap = new ymaps.Map("map1", {
+                center: [45.008314, 41.913367],
+                zoom: 17
+            });
+
+            myPlacemark = new ymaps.Placemark([45.008314, 41.913367], { hintContent: 'Red&Black', balloonContent: 'Клуб Red & Black' });
+            myMap.geoObjects.add(myPlacemark);
+        }
+    </script>
+    @*<script async defer src="https://maps.googleapis.com/maps/api/js?region=ru&language=ru-RU&key=AIzaSyBqWCtMtHxdIV93qkfuAbri5hAlx56KQr8&callback=initMap">
+
+    </script*@>
+}
+}
+else
+{
+    <div class="myColumn1">
+        <h2>контакты</h2>
+        <div class="ds"><span> </span><span> </span><span> </span></div>
+        <table class="hidden-sm hidden-xs contacts">
+            <tr>
+                <td><i class="fa fa-map-marker"></i></td>
+                <td>
+                    <p>
+                        355037, <br /> г. Ставрополь, ул. Пирогова 42/1 офис 25
+
+                    </p>
+                </td>
+                <td><i class="fa fa-phone"></i></td>
+                <td>
+                    <p>
+                        +7(962)459-98-51 <br /> +7(918)741-88-03
+                    </p>
+                </td>
+                <td><i class="fa fa-envelope"></i></td>
+                <td>
+                    <p>
+                        E-mail:<a href="mailto:info@redblackclub.ru">info@redblackclub.ru</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <img alt="" src="/Content/img/carta.jpg" />
+                    <div id="map"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    @section scripts
+    {
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script>
+        ymaps.ready(init);
+        var myMap,
+            myPlacemark;
+
+        function init() {
+            myMap = new ymaps.Map("map", {
+                center: [45.008314, 41.913367],
+                zoom: 17
+            });
+
+            myPlacemark = new ymaps.Placemark([45.008314, 41.913367], { hintContent: 'Red&Black', balloonContent: 'Клуб Red & Black' });
+            myMap.geoObjects.add(myPlacemark);
+        }
+</script>
+        @*<script>
+            function initMap() {
+                var uluru = { lat: 45.0089561, lng: 41.9135155 };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 17,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
+        </script>*@
+    @*<script async defer src="https://maps.googleapis.com/maps/api/js?region=ru&language=ru-RU&key=AIzaSyBqWCtMtHxdIV93qkfuAbri5hAlx56KQr8&callback=initMap">
+
+    </script>*@
+
+    }
+}

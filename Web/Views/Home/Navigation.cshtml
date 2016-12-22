@@ -31,15 +31,20 @@
                 </ul>
                 <ul class="visible-sm visible-xs rightMenu">
                     <li><a id="topMenu">
-                           <p>МЕНЮ</p> 
-                            <i class="fa fa-bars"></i>
+                           @*<img alt="" src="/Content/img/MenuIco.png"/>*@
                         </a>
                         <ul class="ddMenu">
-                            <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                            <li><a href="@Url.Action("Index", "Home")">Главная</a>
+                                <ul>
+                                    <li><a href="@Url.Action("Company","Home")">О клубе</a></li>
+                                </ul>
+                            </li>
                             @*<li><a href="#">Услуги</a></li>*@
-                            <li><a href="@Url.Action("Paty", "Paty")">Мероприятия</a></li>
+                            <li><a href="@Url.Action("Paty", "Paty")">Мероприятия</a>
+                                @Html.Action("PatyMenyMobile", "Paty")
+                            </li>
                             <li><a href="@Url.Action("Galary", "Home")">галерея</a></li>
-                            <li><a href="@Url.Action("Otzivi","Home")">отзывы</a></li>
+                            <li><a href="@Url.Action("Otzivi","Home")">Отзывы</a></li>
                             <li><a href="@Url.Action("Index","Blog")">блог</a></li>
                             <li><a href="@Url.Action("Contacts")">контакты</a></li>
                         </ul>

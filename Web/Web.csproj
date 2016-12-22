@@ -355,6 +355,7 @@
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\lightbox.min.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\img\MenuIco.png" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\customer.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -466,6 +467,7 @@
     <Content Include="Views\Shared\register.html" />
     <Content Include="Views\Shared\ResetPass.html" />
     <Content Include="Views\Shared\ticket.html" />
+    <Content Include="Views\Shared\ticketMobile.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -563,6 +565,8 @@
     <Content Include="Views\Home\Otzivi.cshtml" />
     <Content Include="Views\ImageGalary\UploadsPhotos.cshtml" />
     <Content Include="Views\Home\AskMePopUp.cshtml" />
+    <Content Include="Views\Paty\PatyMenyMobile.cshtml" />
+    <Content Include="Views\Home\OrderEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

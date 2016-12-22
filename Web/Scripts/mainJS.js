@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $(".topMenu").click(function () {
-        $(".ddMenu").slideToggle();
+        $(".ddMenu").slideToggle('slow');
     });
 
     var topSlider = $("#topSlider");
@@ -30,7 +30,7 @@
     topSlider.on("changed.owl.carousel", function (e) {
         var itm = e.item.index - 1;
         var itmCount = e.item.count;
-        if ((e.item.index-1)>itmCount) {
+        if (e.item.index-1>itmCount) {
             itm = 1;
         }
         currentSliderTitle.fadeOut(100, function() {
@@ -145,13 +145,13 @@
                     f.css("display", "none");
                     i.attr("src", e.target.result);
                     i.css("display", "block");
-                }
+                };
                 reader.readAsDataURL(input.files[0]);
             } else {
                 $("#serviceMessage").css("color", "red");
             }
         }
-    };
+    }
 
     $("#castAva").change(function () {
         previewUpdImg(this);
@@ -228,7 +228,7 @@ var popUp = function () {
                 }
             }
         });
-    };
+    }
     var feedbackSubmit = function () {
         sendFeedback();
     };

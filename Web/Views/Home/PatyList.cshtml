@@ -7,9 +7,6 @@
         {
             if (Model.Any(category => category.ParentCategory != null && category.Paties.Any() && category.ParentCategory.Id == root.Id))
             {
-
-
-
                 <div class="pListItem">
                     <div class="plImageWrapper">
                         @if (root.Avatar != null)

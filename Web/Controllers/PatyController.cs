@@ -470,6 +470,11 @@ namespace Web.Controllers
             return PartialView(_repository.GetCategorys);
         }
         [AllowAnonymous]
+        public ActionResult PatyMenyMobile()
+        {
+            return PartialView(_repository.GetCategorys);
+        }
+        [AllowAnonymous]
         [Route("meropriatiya/{patycat}")]
         public ActionResult PatyMenuDetails(string patycat, int id = 0)
         {

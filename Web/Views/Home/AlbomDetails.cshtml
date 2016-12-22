@@ -21,7 +21,15 @@
                 @foreach (var item in videoBlock.Photos.Where(data => data.VideoLink != null))
                 {
                     <div class="pvVideoWr">
-                        <iframe width="630" height="330" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
+                        @if (HttpContext.Current.Request.IsMobileBrowser())
+                        {
+                            <iframe width="400" height="230" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
+
+                        }
+                        else
+                        {
+                            <iframe width="630" height="330" src="@item.VideoLink" allowfullscreen frameborder="0"></iframe>
+                        }
                     </div>
                 }
             </div>
@@ -39,7 +47,8 @@
             {
                 <div class="pvImageWr" data-photoId ="@item.Id">
                     <a href="@item.Path" data-lightbox="@item.Region.Id" data-title="@item.Region.Description">
-                        <img class="example-image" alt="" src="@item.Path" />
+                        @*<img alt="" src="/Content/img/500x350.jpg"/>*@
+                        <img class="example-image" alt="" src="@($"https://redblackclub.ru{item.Path}")" />
                         <div class="pvBorder"></div>
                     </a>
                     <div class="actions albomStat">

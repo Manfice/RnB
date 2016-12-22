@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Web.Domen.Models.ImageData>
 <div class="myColumn" id="photoBlock">
     <h2>Посмотрите фото и видео с наших мероприятий</h2>
-    <div><span> </span><span> </span><span> </span></div>
+    <div class="gRg"><span> </span><span> </span><span> </span></div>
     <div class="btnBlock">
         <a href="#" class="" data-bind="click:photoView.bind($data, 'PHOTO'), css:{redButton:photoView()==='PHOTO',grayButton:photoView()!=='PHOTO' }">Фото</a>
         <a href="#" class="" data-bind="click:photoView.bind($data, 'VIDEO'), css:{redButton:photoView()!=='PHOTO',grayButton:photoView()==='PHOTO' }">Видео</a>
@@ -12,15 +12,16 @@
         {
             <div class="pvImageWr">
                 <a href="@item.Path" data-lightbox="image-title" data-title="@item.Region.Description">
-                    <img class="example-image" alt="" src="@item.Path"/>
+                    <img class="example-image" alt="" src="@($"http://redblackclub.ru/{item.Path}")"/>
+                    @*<img alt="" src="/Content/img/500x350.jpg"/>*@
                     <div class="pvBorder"></div>
                 </a>
                 <div class="actions albomStat">
                     <i class="fa fa-eye"></i>
-                    <p>125</p>
-                    <a href="">
+                    <p>@item.Viewed</p>
+                    <a>
                         <i class="fa fa-heart"></i>
-                        <p>0</p>
+                        <p>@item.Likes</p>
                     </a>
                     <a href="@Url.Content(item.Path)" target="_blanck">
                         <i class="fa fa-download"></i>

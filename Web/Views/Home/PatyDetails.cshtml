@@ -27,12 +27,20 @@
 		</div>
 	}
 
-	@Html.Action("PatyPhotos","Home", new {id=Model.Category.Id})
+    @if (Model.PatyDate < DateTime.Now)
+    {
+        <h3 style="display: block; margin: 5px;">Регистрация на событие закрыта.</h3>
+        <h4 style="text-align: center; display: block; margin: 5px;">Возможно, на событие уже зарегистрировалось слишком много человек, либо истек срок регистрации.</h4>
+        <h3 style="display: block; margin: 5px 5px 20px 5px;">Запишитесь на следующее мероприятие заранее!</h3>
+        <a class="redButton" href="@Url.Action("NearDetails","Home")">Смотреть ближайшие мероприятия</a>
+    }
+
+    @Html.Action("PatyPhotos","Home", new {id=Model.Category.Id})
 </div>
 @section scripts
 {
 	<script src="~/Scripts/jquery.vkAction.js"></script>
-<script src="~/Scripts/AdminJs/Countdown.js"></script>
+    <script src="~/Scripts/AdminJs/Countdown.js"></script>
 	@*<script>
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];

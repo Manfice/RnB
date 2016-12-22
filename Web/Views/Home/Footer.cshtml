@@ -27,22 +27,31 @@
         <div class="fBlock lList">
             <ul>
                 <li><a href="@Url.Action("Company","Home")">О клубе</a></li>
-                <li><a href="#">Привилегии</a></li>
-                <li><a href="#">Члены клуба</a></li>
+                <li><a href="@Url.Action("Galary")">Галерея</a></li>
+                <li><a href="@Url.Action("Index","Blog")">Блог</a></li>
+                @*<li><a href="#">Привилегии</a></li>*@
+                @*<li><a href="#">Члены клуба</a></li>*@
+                @*<li><a href="#">Бизнес ужины</a></li>*@
+                <li><a href="@Url.Action("Otzivi","Home")">Отзывы</a></li>
+                <li><a href="@Url.Action("Contacts")">Контакты</a></li>
                 <li><a href="@Url.Action("Paty","Paty")">Мероприятия</a></li>
-                <li><a href="#">Бизнес ужины</a></li>
-                <li><a href="#">Политика <br /> конфиденциальности</a></li>
+                @*<li><a href="#">Политика <br /> конфиденциальности</a></li>*@
             </ul>
         </div>
         <div class="fBlock lList">
             <ul>
-                <li><a href="#">Сотрудничество</a></li>
-                <li><a href="#">Лидогенерация</a></li>
-                <li><a href="#">PR-сопровождение</a></li>
-                <li><a href="#">Сопровождение <br/> мероприятий</a></li>
-                <li><a href="#">Поддержка мероприятий</a></li>
-                <li><a href="@Url.Action("Galary")">Галерея</a></li>
-                <li><a href="#">Оферта</a></li>
+                <li><a href="/meropriatiya/business-vstrechi">Бизнес встречи</a></li>
+                <li><a href="/meropriatiya/razvlekatelniy-format">Развлекательный формат</a></li>
+                <li><a href="/meropriatiya/igrovie">Игровые мероприятия</a></li>
+                <li><a href="/meropriatiya/sportivnie">Спортивные мероприятия</a></li>
+                <li><a href="/meropriatiya/aktivniy-otdih">Активный отдых</a></li>
+                <li><a href="/meropriatiya/razvitie-navikov">Развитие навыков</a></li>
+                @*<li><a href="#">Сотрудничество</a></li>*@
+                @*<li><a href="#">Лидогенерация</a></li>*@
+                @*<li><a href="#">PR-сопровождение</a></li>*@
+                @*<li><a href="#">Сопровождение <br/> мероприятий</a></li>*@
+                @*<li><a href="#">Поддержка мероприятий</a></li>*@
+                @*<li><a href="#">Оферта</a></li>*@
             </ul>
         </div>
         <div class="fBlock fContact">
@@ -60,7 +69,9 @@
             <p>ИНН 263406917904</p>
             <p>ОГРН 307262809300040</p>
             <p>Разработка сайта:</p>
-            <img alt="developer" src="/Content/img/logoWA.png" />
+            <a href="http://webagregator.ru/">
+                <img alt="developer" src="http://webagregator.ru/images/logo.svg" />
+            </a>
         </div>
     </div>
 </footer>

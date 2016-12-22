@@ -22,10 +22,11 @@
 .validation-summary-errors {
     color: red;
 }
+
 .input-validation-error {
     border-color: red !important;
-    
 }
+
 .redColor {
     color: #fe0000;
 }
@@ -52,7 +53,6 @@ ul {
 .flexRow {
     display: flex;
     flex-flow: row;
-
 }
 
 .flexCol {
@@ -176,6 +176,10 @@ nav {
         position: absolute;
         z-index: 3;
     }
+
+    .menuList > ul > li > a:hover {
+        border-bottom: solid 3px transparent;
+    }
 }
 
 .leftMenu {
@@ -186,29 +190,15 @@ nav {
     text-align: right;
 }
 
-    #topMenu {
-        position: absolute;
-        top: 7px;
-        right: 10px;
-        border: solid 1px gray;
-        border-radius: 3px;
-        height: 36px;
-        width: 36px;
-    }
-    #topMenu p {
-        font-size: 7pt;
-        display: block;
-        padding: 0;
-        margin: 0;
-        position: absolute;
-        top: -13px;
-        left: 6px;
-    }
-    #topMenu i {
-        position: absolute;
-        bottom: 2px;
-        left: 9px;
-    }
+#topMenu {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    height: 36px;
+    width: 36px;
+    background: url("/Content/img/MenuIco.png") no-repeat top center;
+    background-size: 100%;
+}
 
 .SubPaty {
     position: absolute;
@@ -268,6 +258,19 @@ nav {
     .ddMenu > li {
         margin: 5px 15px;
     }
+
+@media only screen and (max-device-width: 450px) {
+    .ddMenu {
+        width: 400px;
+        right: 20px;
+        border: solid 1px;
+    }
+
+        .ddMenu li ul {
+            padding: 5px 20px;
+            font-size: 12pt;
+        }
+}
 /*TopMenu END*/
 header, nav, footer {
     flex: 0 0 auto;
@@ -306,24 +309,26 @@ header, footer {
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
+
 .rowFullw {
     flex: 1 0 auto;
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
+
 .row960wsb {
     flex: 1 0 auto;
     max-width: 960px;
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around; 
+    justify-content: space-around;
     align-items: center;
 }
 /*header*/
@@ -371,9 +376,11 @@ header, footer {
     align-items: center;
     height: 100%;
 }
+
 .redButton, .grayButton {
     cursor: pointer;
 }
+
 .messageBox {
     width: 90%;
     border-radius: 5px;
@@ -381,6 +388,7 @@ header, footer {
     margin-top: 10px;
     padding: 5px;
 }
+
 .redButton {
     display: inline-block;
     margin: 0;
@@ -397,19 +405,25 @@ header, footer {
     border-bottom: solid 3px #cc0b00;
     background-color: red;
 }
-.redButton:hover {
-    animation: keypressed .3s ease-in-out;
-    transform: translateY(5px);
-    background-color: rgb(255, 76, 76);
-}
+
+    .redButton:hover {
+        animation: keypressed .3s ease-in-out;
+        transform: translateY(5px);
+        background-color: rgb(255, 76, 76);
+    }
+
 @keyframes keypressed {
-    from{ transform: translateY(0);
+    from {
+        transform: translateY(0);
         background-color: red;
     }
-    to{ transform: translateY(5px);
+
+    to {
+        transform: translateY(5px);
         background-color: rgb(255, 76, 76);
     }
 }
+
 .redLink {
     font-family: "rNormal";
     text-decoration: none;
@@ -448,26 +462,31 @@ header, footer {
         width: 50px;
         height: 50px;
     }
-    .socLinksBlock a.face {
-        background: url("/Content/img/soc/face2.jpg") no-repeat 0 0;
-        background-size: 100%;
-    }
-        .socLinksBlock a.face:hover {
-        background: url("/Content/img/soc/face2.jpg") no-repeat 0 -50px;
-        background-size: 100%;
-    }
-    .socLinksBlock a.vkont {
-        background: url("/Content/img/soc/vk2.jpg") no-repeat 0 0;
-        background-size: 100%;
-    }
-        .socLinksBlock a.vkont:hover {
-        background: url("/Content/img/soc/vk2.jpg") no-repeat 0 -50px;
-        background-size: 100%;
-    }
 
-    .socLinksBlock a img {
-        width: 100%;
-    }
+        .socLinksBlock a.face {
+            background: url("/Content/img/soc/face2.jpg") no-repeat 0 0;
+            background-size: 100%;
+        }
+
+            .socLinksBlock a.face:hover {
+                background: url("/Content/img/soc/face2.jpg") no-repeat 0 -50px;
+                background-size: 100%;
+            }
+
+        .socLinksBlock a.vkont {
+            background: url("/Content/img/soc/vk2.jpg") no-repeat 0 0;
+            background-size: 100%;
+        }
+
+            .socLinksBlock a.vkont:hover {
+                background: url("/Content/img/soc/vk2.jpg") no-repeat 0 -50px;
+                background-size: 100%;
+            }
+
+        .socLinksBlock a img {
+            width: 100%;
+        }
+
 .hLeft p {
     flex: 0 0 auto;
     font-family: "rNormal";
@@ -520,14 +539,16 @@ header, footer {
         padding: 0 5px;
         font-size: 14pt;
     }
-    .socLinksHead {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-    }
-    .socLinksHead>a {
+
+.socLinksHead {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+    .socLinksHead > a {
         height: 30px;
         width: 30px;
         -ms-background-size: 100%;
@@ -535,7 +556,7 @@ header, footer {
         transform: scale(.8);
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 450px) {
     .hMidle {
         order: 1;
         margin: 0 0 15px 0;
@@ -543,63 +564,69 @@ header, footer {
     }
 
         .hMidle h1 {
-            font-size: 10pt !important;
+            font-size: 12pt !important;
         }
 
             .hMidle h1 span {
-                font-size: 10pt;
+                font-size: 12pt;
             }
 
     .hLeft {
         order: 2;
         max-width: 45%;
     }
+
     .hLeftWrapper p {
-        font-size: 8pt;
+        font-size: 12pt;
     }
 
     .socLinksHead a {
-        width: 18px;
-        height: 18px;
+        width: 30px;
+        height: 30px;
         display: block;
         background-size: 100%;
     }
-    
+
     .socLinksBlock {
         justify-content: center;
     }
-    .socLinksBlock a {
-        width: 50px;
-        margin: 5px 10px;
-    }
-    .socLinksBlock a img {
-        width: 100%;
 
-    }
+        .socLinksBlock a {
+            width: 50px;
+            margin: 5px 10px;
+        }
+
+            .socLinksBlock a img {
+                width: 100%;
+            }
+
     .hRight {
         order: 3;
         max-width: 45%;
     }
+
     .redButton {
-        padding: 5px 20px 7px;
-        font-size: 12pt;
+        padding: 5px 30px 7px;
+        font-size: 14pt;
     }
 
     .redLink {
-        font-size: 12pt;
+        font-size: 18pt;
     }
 
     .hRight p {
-        font-size: 12pt;
+        font-size: 14pt;
     }
 
     .hRightWrapper > a {
-        font-size: 11pt;
+        font-size: 13pt;
     }
+
     .offerBlock > .formWrapper > form > .titleBorder {
         top: -40px;
     }
-    .offerBlock>.formWrapper>form>.buttonBorder {
+
+    .offerBlock > .formWrapper > form > .buttonBorder {
         bottom: -40px;
     }
 }
@@ -635,65 +662,81 @@ footer {
     .fWe p {
         margin: 0 10px 20px 0;
     }
-    .socLinks {
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
+
+.socLinks {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
     .socLinks a {
         margin: 0 10px;
     }
-    .fWe>.socLinks>a {
-        display: block;
-        width: 30px;
-        height: 30px;
-        margin: 5px;
-        background-size: 100%;
-    }
-    .facebook {
-        background: url("/Content/img/soc/face2.jpg") no-repeat 0 0;
-    }
+
+.fWe > .socLinks > a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background-size: 100%;
+}
+
+.facebook {
+    background: url("/Content/img/soc/face2.jpg") no-repeat 0 0;
+}
+
     .facebook:hover {
         background: url("/Content/img/soc/face2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
-    .vk {
-        background: url("/Content/img/soc/vk2.jpg") no-repeat 0 0;
-    }
+
+.vk {
+    background: url("/Content/img/soc/vk2.jpg") no-repeat 0 0;
+}
+
     .vk:hover {
         background: url("/Content/img/soc/vk2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
-    .od {
-        background: url("/Content/img/soc/od2.jpg") no-repeat 0 0;
-    }
+
+.od {
+    background: url("/Content/img/soc/od2.jpg") no-repeat 0 0;
+}
+
     .od:hover {
         background: url("/Content/img/soc/od2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
-    .inst {
-        background: url("/Content/img/soc/inst2.jpg") no-repeat 0 0;
-    }
+
+.inst {
+    background: url("/Content/img/soc/inst2.jpg") no-repeat 0 0;
+}
+
     .inst:hover {
         background: url("/Content/img/soc/inst2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
-    .you {
-        background: url("/Content/img/soc/you2.jpg") no-repeat 0 0;
-    }
+
+.you {
+    background: url("/Content/img/soc/you2.jpg") no-repeat 0 0;
+}
+
     .you:hover {
         background: url("/Content/img/soc/you2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
-    .tw {
-        background: url("/Content/img/soc/tw2.jpg") no-repeat 0 0;
-    }
+
+.tw {
+    background: url("/Content/img/soc/tw2.jpg") no-repeat 0 0;
+}
+
     .tw:hover {
         background: url("/Content/img/soc/tw2.jpg") no-repeat 0 -30px;
         background-size: 100%;
     }
+
 .lList ul {
     flex: 1 0 auto;
     display: flex;
@@ -737,6 +780,14 @@ footer {
 .fLogo a {
     font-size: 12pt;
 }
+.fLogo a:last-child {
+    width: 100%;
+    -webkit-filter: grayscale(100);
+    -moz-filter: grayscale(100);
+    -o-filter: grayscale(100);
+    filter: grayscale(100);
+    padding: 5px 0;
+}
 
 @media only screen and (max-device-width: 720px) {
     .fBlock {
@@ -753,12 +804,13 @@ footer {
         order: 1;
     }
 
-    .fContact h3 {
-        font-size: 12pt;
-    }
-        .fContact h3 a {
+        .fContact h3 {
             font-size: 12pt;
         }
+
+            .fContact h3 a {
+                font-size: 12pt;
+            }
 
     .fLogo {
         order: 2;
@@ -768,22 +820,33 @@ footer {
         flex: 0 0 100%;
         order: 3;
     }
-    .fWe>.socLinks>a>img {
-        width: 30px;
-    }
+
+        .fWe > .socLinks > a > img {
+            width: 30px;
+        }
+
     .fLogo p {
         font-size: 10pt;
     }
-    .fLogo p:last-child {
-        display: block;
-        text-align: center;
-    }
+
+        .fLogo p:last-child {
+            display: block;
+            text-align: center;
+        }
+
     .fLogo > a {
         font-size: 12pt;
     }
 
+    .fLogo a:last-child {
+        display: block;
+        width: 80%;
+        padding: 3px;
+    }
+
     .fLogo img {
-        width: 90%;
+        width: 100%;
+        filter: grayscale(100);
     }
 }
 
@@ -797,6 +860,7 @@ footer {
     flex: 0 0 auto;
     position: relative;
 }
+
 .slideTitle {
     position: absolute;
     color: white;
@@ -808,19 +872,24 @@ footer {
     display: none;
     text-transform: uppercase;
 }
-.slideTitle p {
-    display: inline;
-    position: absolute;
-}
-.slideTitle p:first-child {
-    left: -150px;
-}
-.slideTitle p:last-child {
-    left: 10px;
-}
-.slideTitle.active {
-    display: block;
-}
+
+    .slideTitle p {
+        display: inline;
+        position: absolute;
+    }
+
+        .slideTitle p:first-child {
+            left: -150px;
+        }
+
+        .slideTitle p:last-child {
+            left: 10px;
+        }
+
+    .slideTitle.active {
+        display: block;
+    }
+
 .dotsLayer {
     position: absolute;
     z-index: 2;
@@ -842,15 +911,17 @@ footer {
         .dotsLayer > div.active {
             background-color: red;
         }
+
 .redBlockArea {
     width: 38%;
-    z-index: 2
-}
-.redBlockArea > img {
     z-index: 2;
-    height: 100%;
-    width: 110%
 }
+
+    .redBlockArea > img {
+        z-index: 2;
+        height: 100%;
+        width: 110%;
+    }
 
 .slItem {
     display: block;
@@ -862,30 +933,41 @@ footer {
     filter: grayscale(100%);
     transition: 1s;
 }
-.slItem:hover {
-    filter: none;
-    transition: 1s;
-}
+
+    .slItem:hover {
+        filter: none;
+        transition: 1s;
+    }
+
 @media only screen and (max-device-width: 720px) {
     .dotsLayer {
-        left: 20%;
+        left: 40%;
     }
-    .dotsLayer>div {
+
+    .slideTitle p:last-child {
+        left: -5px;
+    }
+
+    .dotsLayer > div {
         width: 10px;
         height: 10px;
         margin: 0 2px;
     }
+
     .redBlockArea {
         width: 40%;
     }
-    .redBlockArea > img {
-    z-index: 1;
-    height: 100%;
-    width: 130%
-}
+
+        .redBlockArea > img {
+            z-index: 1;
+            height: 100%;
+            width: 130%;
+        }
+
     .slideTitle {
-        font-size: 10pt;
+        font-size: 14pt;
     }
+
     .slItem {
         height: 305px;
         -ms-background-size: auto 100% !important;
@@ -975,6 +1057,7 @@ footer {
     padding: 0 10px;
     cursor: pointer;
 }
+
 .patyBlockDesctop {
     position: relative;
     width: 100%;
@@ -986,9 +1069,11 @@ footer {
     max-width: 970px;
     width: 100%;
 }
-.patyBlockDesctop a {
-    margin: 0 20px 40px;
-}
+
+    .patyBlockDesctop a {
+        margin: 0 20px 40px;
+    }
+
 .redline {
     border-bottom: solid 3px red;
     width: 100px;
@@ -996,6 +1081,7 @@ footer {
     top: -6px;
     left: 20px;
 }
+
 .patyBlock {
     flex: 0 0 auto;
     position: relative;
@@ -1015,7 +1101,7 @@ footer {
 .patyWrapper {
     width: 100%;
     position: relative;
-    max-width: 300px;
+    max-width: 450px;
 }
 
 .topStripe {
@@ -1034,17 +1120,19 @@ footer {
     background-color: white;
     position: relative;
     padding: 20px;
-    height: 350px;
+    height: 400px;
     margin: 40px 0 0 0;
 }
-.patyData p:last-child {
-    position: absolute;
-    bottom: 0;
-    right: 20px;
-}
+
+    .patyData p:last-child {
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+    }
+
 .patyDataImageWraper {
     width: 100%;
-    height: 110px;
+    height: 198px;
     padding: 0 20px;
 }
 
@@ -1102,14 +1190,17 @@ footer {
     padding: 0 20px;
     background-color: white;
 }
-.buttonBorder.absolute {
-    position: absolute;
-    bottom: -30px;
-}
+
+    .buttonBorder.absolute {
+        position: absolute;
+        bottom: -30px;
+    }
+
 .absolute button {
     font-size: 14pt;
     font-weight: bold;
 }
+
 form > p {
     text-align: center;
     display: block;
@@ -1202,6 +1293,13 @@ form > p {
     .popUpWrapper > p {
         text-align: center;
         font-size: 10pt;
+    }
+    .inpItem {
+        width: 70%;
+    }
+    .inpItem input {
+        max-width: 400px;
+        width: 100%;
     }
 }
 /*Offer END*/
@@ -1327,6 +1425,23 @@ form > p {
     transition: all 1s;
 }
 
+@media only screen and (max-device-width: 720px) {
+    .plImageWrapper {
+        max-width: 390px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .bTitle {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        background-color: #000000;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px 0 20px 0;
+        font-size: 12pt;
+    }
+}
 /*.bTitle a {
     display: none;
     color: white;
@@ -1351,9 +1466,10 @@ form > p {
 /*Paty List END*/
 /*Prevelegii */
 .privelegii {
-    background: url('/Content/img/prive/55551920.jpg') repeat top center; 
+    background: url('/Content/img/prive/55551920.jpg') repeat top center;
     position: relative;
 }
+
 .prevelegiiItem {
     flex: 0 0 auto;
     align-self: flex-start;
@@ -1378,6 +1494,7 @@ form > p {
     margin: 20px;
     max-width: 200px;
     width: 100%;
+    height: 250px;
 }
 
 .pImgWrapper {
@@ -1392,10 +1509,11 @@ form > p {
     filter: grayscale(100%);
 }
 
-.pImgWrapper:hover {
-    filter: none;
-    transition: 1s;
-}
+    .pImgWrapper:hover {
+        filter: none;
+        transition: 1s;
+    }
+
     .pImgWrapper img {
         width: 100%;
         border-top: solid 15px #808080;
@@ -1429,21 +1547,63 @@ form > p {
     font-size: 12pt;
     margin: 15px 0;
 }
+
 @media only screen and (max-device-width: 720px) {
     .privelegii {
         background: url("/Content/img/prive/5555320.jpg") repeat-y top center;
         background-size: 100% 100%;
     }
+
     .prevelegiiItem {
         margin: 0;
-    }
-    .prevelegiiItem h3 {
-        display: block;
-        margin: 10px 0 0 0;
-        font-size: 12pt;
-        font-family: "rBold"
+        max-width: 190px;
     }
 
+        .prevelegiiItem h3 {
+            display: block;
+            margin: 10px 0 0 0;
+            font-size: 12pt;
+            font-family: "rBold";
+        }
+
+    .pImgWrapper {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+        .pImgWrapper img {
+            width: 90%;
+            border-top: solid 5px #808080;
+            border-top: solid 5px rgba(128, 128, 128, 0.8);
+            border-left: solid 5px #808080;
+            border-left: solid 5px rgba(128, 128, 128, 0.8);
+            -webkit-box-shadow: 5px 5px black;
+            -ms-box-shadow: 5px 5px black;
+            box-shadow: 5px 5px black;
+            margin: 10px 0 20px;
+        }
+
+    .prevelegiiItemAbout {
+        max-width: 400px;
+        height: auto;
+    }
+
+        .prevelegiiItemAbout p {
+            font-size: 16pt;
+        }
+
+    .pImgWrapperAbout {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .about1 table {
+        max-width: 430px;
+        text-align: justify;
+    }
 }
 /*Prevelegii END*/
 /*PhotoGalary */
@@ -1475,7 +1635,11 @@ form > p {
     margin: 0 20px;
     overflow: hidden;
 }
-
+.pvImageWr a {
+    max-height: 188px;
+    overflow: hidden;
+    position: relative;
+}
 .actions {
     position: relative;
     background-color: whitesmoke;
@@ -1498,6 +1662,11 @@ form > p {
         font-size: 14pt;
         text-align: center;
     }
+    .pvImageWr a {
+    max-height: 135px;
+    position: relative;
+    overflow: hidden;
+    }
 }
 
 .pvImageWr:hover .actions {
@@ -1512,17 +1681,19 @@ form > p {
 .pvBorder {
     position: absolute;
     top: 0;
-    bottom: 40px;
+    bottom: -1px;
     left: 0;
     right: 0;
     border: solid 10px #ffffff;
     border: solid 10px rgba(255, 255, 255, 0.7);
     z-index: 2;
 }
+
 .pvVideoWr {
     flex: 0 0 auto;
     padding: 20px 0 0 0;
 }
+
 .pvImageWr img {
     width: 100%;
 }
@@ -1535,6 +1706,27 @@ form > p {
     .btnBlock a {
         margin: 20px 10px;
     }
+
+@media only screen and (max-device-width: 720px) {
+    .pvImageWr {
+        max-width: 200px;
+        margin: 5px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    a.pvBorder {
+        bottom: 4px;
+        border: solid 5px #ffffff;
+        border: solid 5px rgba(255, 255, 255, 0.7);
+    }
+
+    .btnBlock a {
+        margin: 20px 10px;
+        font-size: 25pt;
+        padding: 5px 45px;
+    }
+}
 /*PhotoGalary END*/
 
 /*Partners*/
@@ -1675,23 +1867,6 @@ form > p {
     background-color: white;
 }
 
-/*.formClose {
-    width: 20px;
-    height: 20px;
-    color: white;
-    background-color: red;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-    position: absolute;
-    padding: 0 3px 5px 3px;
-    text-align: center;
-    font-weight: 100;
-    border: solid 2px white;
-    top: -35px;
-    right: -35px;
-    cursor: pointer;
-}*/
-
 .socLogin {
     border: solid 2px darkgray;
     position: relative;
@@ -1712,7 +1887,7 @@ form > p {
 @media only screen and (max-device-width: 720px) {
 
     .formLoginRow {
-        max-width: 340px;
+        max-width: 440px;
     }
 
     .socRow {
@@ -1724,15 +1899,29 @@ form > p {
     }
 
         .formWrapper > form {
-            max-width: 300px;
+            max-width: 450px;
             padding: 20px 10px;
             margin: 25px 0;
         }
 
             .formWrapper > form > p {
                 font-size: 10pt;
-                display: none;
+                display: block;
             }
+
+    .titleBorderMobile {
+        position: absolute;
+        top: -20px;
+        background-color: white;
+        padding: 0 20px;
+    }
+
+        .titleBorderMobile h2 {
+            font-size: 18pt;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
 }
 /*PopUp Windows Common END*/
 /*Near Details*/
@@ -1757,7 +1946,7 @@ form > p {
         width: 100%;
         margin: 0;
         padding: 0;
-        max-height: 297px;
+        height: 280px;
     }
 
 .flyingButton {
@@ -1771,12 +1960,13 @@ form > p {
     position: absolute;
     height: 217px;
     top: -217px;
+}
 
-} 
 .patyItemDetails:hover .flyingButton {
     top: 0;
     transition: 1s;
 }
+
 .itmDescr {
     overflow: hidden;
     padding: 0 5px;
@@ -1787,13 +1977,15 @@ form > p {
     flex-flow: column;
     justify-content: center;
     align-items: center;
-} 
+    position: relative;
+}
 
     .itmDescr p {
         margin: 0;
-        padding: 0;
+        padding: 5px;
+        display: block;
     }
-      
+
 .npImgWrapper .title {
     position: absolute;
     bottom: 0;
@@ -1821,13 +2013,13 @@ form > p {
 
 @media only screen and (max-device-width: 720px) {
     .patyItemDetails {
-        max-width: 300px;
+        max-width: 400px;
         width: 100%;
+        height: 380px;
     }
 
         .patyItemDetails:hover a {
             display: block;
-            margin: 55px 75px;
         }
 }
 /*Near Details END*/
@@ -1860,13 +2052,15 @@ form > p {
     position: relative;
     overflow: hidden;
 }
-.topPicture img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-.topPicture h1 {
+
+    .topPicture img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .topPicture h1 {
         display: block;
         margin: 20px 0 0 0;
         font-family: "rBold";
@@ -1875,21 +2069,23 @@ form > p {
         z-index: 3;
         position: relative;
     }
+
 .gRg {
     position: relative;
     z-index: 3;
 }
-.gRg > span {
-    width: 100px;
-    border-bottom: solid 2px red;
-    margin: 5px 0;
-    padding: 0 30px;
-}
 
-    .gRg > span:first-child, .gRg > span:last-child {
-        border-bottom: solid 1px #c7c7c7;
-        padding: 0 43px;
+    .gRg > span {
+        width: 100px;
+        border-bottom: solid 2px red;
+        margin: 5px 0;
+        padding: 0 30px;
     }
+
+        .gRg > span:first-child, .gRg > span:last-child {
+            border-bottom: solid 1px #c7c7c7;
+            padding: 0 43px;
+        }
 
 .order {
     border: solid 1px gray;
@@ -1902,14 +2098,15 @@ form > p {
     margin-top: 10px;
     position: relative;
 }
+
 .orderMobile {
     border: solid 1px gray;
-    width: 960px;
     padding: 10px;
     margin-top: 10px;
     position: relative;
-    max-width: 320px;
+    max-width: 420px;
 }
+
 .orderFormInnerBlock {
     display: inline-block;
 }
@@ -1919,11 +2116,13 @@ form > p {
     text-align: left;
     margin-right: 10px;
 }
+
     .l h2 {
         margin: 10px;
         font-size: 12pt;
         text-align: justify;
     }
+
     .l .bordered {
         border-top: dotted 1px;
         width: 100%;
@@ -1933,10 +2132,10 @@ form > p {
 .bordered p {
     margin-left: 10px;
 }
+
 .priceValue {
     color: red;
     font-weight: bold;
-
 }
 
 .grayDate {
@@ -1952,44 +2151,51 @@ form > p {
         display: inline-block;
         height: 50px;
     }
-    .itm p {
-        display: block;
-        margin: 0;
-        padding: 0;
-    }
-    .itm-title {
-        flex: 1 1 auto;
-        margin: 0 7px 0 0;
-        width: 220px;
-    }
-    .itm-day {
-        width: 100px;
-        position: relative;
-    }
-    
-    .itm-day p{
+
+.itm p {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.itm-title {
+    flex: 1 1 auto;
+    margin: 0 7px 0 0;
+    width: 220px;
+}
+
+.itm-day {
+    width: 100px;
+    position: relative;
+}
+
+    .itm-day p {
         font-size: 50pt;
         position: absolute;
         top: -25px;
         right: 10px;
         font-weight: bolder;
     }
-    .itm-title p {
-        color: red;
-        font-size: 12pt;
-    }
-    .itm-month-year {
-        flex: 1 1 auto;
-    }
+
+.itm-title p {
+    color: red;
+    font-size: 12pt;
+}
+
+.itm-month-year {
+    flex: 1 1 auto;
+}
+
     .itm-month-year p {
         display: block;
         font-size: 14pt;
         text-transform: uppercase;
         font-weight: bolder;
     }
-    .reg {
-        width: 150px;
-    }
+
+.reg {
+    width: 150px;
+}
 
 .interest {
     text-align: left;
@@ -2006,19 +2212,21 @@ form > p {
 
 .flip-clock-wrapper {
     zoom: 0.7;
-    -moz-transform: scale(0.7)
+    -moz-transform: scale(0.7);
 }
 
 .r > div {
     margin: 20px 0;
 }
-.r>div:last-child {
-    right: 0;
-    margin: 0;
-    position: relative;
-    bottom: -6px;
-    right: -10px;
-}
+
+    .r > div:last-child {
+        right: 0;
+        margin: 0;
+        position: relative;
+        bottom: -6px;
+        right: -10px;
+    }
+
 .freepalce {
     border: solid 3px red;
     display: flex;
@@ -2069,45 +2277,56 @@ form > p {
     text-align: right;
     position: relative;
 }
-.rate span {
-    background-color: red;
-    padding: 5px;
-    position: relative;
-}
+
+    .rate span {
+        background-color: red;
+        padding: 5px;
+        position: relative;
+    }
+
 .formReq {
     font-size: 8pt;
     text-align: center;
     padding: 10px 0;
 }
+
 .mobilePaty {
     width: 100%;
-    padding: 5px 10px;   
+    padding: 5px 10px;
 }
+
 .mobileOffer {
     border: solid 1px gray;
     padding: 10px 10px 20px;
     position: relative;
 }
+
 @media only screen and (max-device-width: 720px) {
     .order {
         width: 100%;
     }
+
     .orderMobile h2 {
         font-size: 12pt;
     }
+
     .order h2 {
         font-size: 12pt;
     }
+
     .column {
         margin: 0;
         padding: 0;
     }
+
     .topPicture {
         height: 220px;
     }
-    .topPicture h1 {
-        font-size: 16pt;
-    }
+
+        .topPicture h1 {
+            font-size: 16pt;
+        }
+
     .grayDate {
         max-height: 80px;
         padding: 10px;
@@ -2117,55 +2336,72 @@ form > p {
         width: 150px;
         height: 100%;
     }
-    .itm-title p {
 
-        font-size: 11pt;
-    }
+        .itm-title p {
+            font-size: 11pt;
+        }
+
     .itm-day p {
         font-size: 44pt;
         top: -19px;
     }
+
     .itm-month-year p {
         flex: 0 0 auto;
         font-size: 12pt;
         width: 100px;
     }
+
     .bordered {
         border-top: dotted 2px gray;
     }
-    .bordered p {
-        margin: 0;
+
+        .bordered p {
+            margin: 0;
+        }
+
+    .discount {
+        height: 60px;
     }
     .discount p {
         display: block;
+    }
+    .discount p a {
+        font-size: 14pt;
     }
     .discount a img {
         margin: 5px 10px;
         cursor: pointer;
     }
+
     .freepalce {
         padding: 0;
         margin: 5px 0;
         border: solid 5px gray;
     }
+
     .regFormWrapper {
         padding: 30px 0;
     }
-    .regFormWrapper .absolute {
-        bottom: 5px;
-    }
-    .regFormWrapper .redButton {
-        font-size: 10pt;
-    }
+
+        .regFormWrapper .absolute {
+            bottom: 5px;
+        }
+
+        .regFormWrapper .redButton {
+            font-size: 10pt;
+        }
+
     .rate {
         bottom: 0;
         background-color: whitesmoke;
         color: black;
         font-weight: bold;
     }
-    .rate span {
-        color: red;
-    }
+
+        .rate span {
+            color: red;
+        }
 }
 /*PAty details END*/
 /*PhotoGalary*/
@@ -2190,7 +2426,7 @@ form > p {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     max-width: 300px;
-    width: 300px;
+    width: 100%;
     margin: 15px 10px;
     text-align: center;
 }
@@ -2217,6 +2453,7 @@ form > p {
     display: block;
     padding: 0;
 }
+
 .watchAlbom {
     position: absolute;
     width: 100%;
@@ -2227,6 +2464,7 @@ form > p {
     color: red;
     padding: 3px 0 7px;
 }
+
 .albomButton {
     position: absolute;
     top: -174px;
@@ -2239,19 +2477,22 @@ form > p {
     align-items: center;
     justify-content: center;
 }
+
 .alItem:hover .albomButton {
     top: 0;
 }
+
 .pageLinks {
-    margin: 20px 0 0 0;
+    margin: 40px 0 0 0;
 }
 
     .pageLinks a {
         margin: 0 2px;
-        border: solid 1px gray;
-        width: 25px;
-        line-height: 25px;
+        width: 40px;
+        line-height: 40px;
+        font-size: 18pt;
         text-align: center;
+        color: gray;
         background-color: lightgray;
     }
 
@@ -2263,17 +2504,18 @@ form > p {
             -o-transition: 0.5s;
             transition: 0.5s;
         }
-        .currentPage {
-            background-color: red !important;
-            color: white;
-            font-weight: bolder;
-        }
+
+.currentPage {
+    background-color: #000000 !important;
+    color: white !important;
+    font-weight: bolder;
+}
 
 .albomStat {
     flex: 1 0 auto;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: baseline;
     padding: 10px;
 }
@@ -2283,8 +2525,7 @@ form > p {
     }
 
     .albomStat i:last-child {
-        flex: 1 0 auto;
-        padding: 
+        flex: 0 0 auto;
     }
 
     .albomStat a {
@@ -2298,7 +2539,8 @@ form > p {
 
 .albomHead {
     background-color: whitesmoke;
-    width: 970px;
+    max-width: 970px;
+    width: 100%;
     display: block;
     text-align: center;
     padding: 0 0 10px;
@@ -2334,6 +2576,72 @@ form > p {
         color: gray;
     }
 
+.statLeftSide {
+    display: flex;
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    font-size: 12pt;
+}
+
+@media only screen and (max-device-width: 720px) {
+    .albomsRow {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .alItem {
+        max-width: 410px;
+        width: 100%;
+        margin: 30px 10px;
+        background-color: whitesmoke;
+    }
+
+        .alItem > p {
+            font-size: 18pt;
+            color: darkgray;
+        }
+
+        .alItem h3 {
+            margin: 0;
+            font-size: 20pt;
+            font-weight: bold;
+        }
+
+    .albomStat {
+        justify-content: space-between;
+    }
+
+    .statLeftSide {
+        flex: 0 0 auto;
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    .statItem {
+        width: 55px;
+        display: flex;
+        font-size: 14pt;
+        align-items: center;
+        margin: 0 20px 0 0;
+        font-weight: bolder;
+    }
+
+    .albomStat i:last-child {
+        flex: 0 0 auto;
+    }
+
+    .albomButton {
+        height: 242px;
+        top: -255px;
+    }
+
+    .watchAlbom {
+        height: 45px;
+    }
+}
 /*PhotoGalary END*/
 /*Paty Index*/
 .rootItem {
@@ -2348,10 +2656,12 @@ form > p {
     position: relative;
     overflow: hidden;
 }
-.rootItemWrapper:hover .subBlock {
-    bottom: 0;
-    transition: 1s;
-}
+
+    .rootItemWrapper:hover .subBlock {
+        bottom: 0;
+        transition: 1s;
+    }
+
     .rootItemWrapper img {
         width: 100%;
     }
@@ -2365,6 +2675,7 @@ form > p {
     color: white;
     text-align: center;
 }
+
 .subBlock {
     position: absolute;
     bottom: -206px;
@@ -2378,41 +2689,44 @@ form > p {
     align-items: center;
     height: 206px;
 }
-.subBlock ul {
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-}
-.subBlock ul li {
+
+    .subBlock ul {
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .subBlock ul li {
+            display: block;
+            margin: 5px 0;
+            font-size: 14pt;
+        }
+
+            .subBlock ul li:hover {
+                color: red;
+            }
+
+.rootTitle p {
+    font-size: 16pt;
     display: block;
-    margin: 5px 0;
-    font-size: 14pt;
+    padding: 15px;
 }
-    .subBlock ul li:hover {
-       color: red;
-    }
 
-    .rootTitle p {
-        font-size: 16pt;
-        display: block;
-        padding: 15px;
-    }
+.rootTitle:hover > p {
+    color: red;
+}
 
-    .rootTitle:hover > p {
-        color: red;
-    }
+.rootTitle ul {
+    display: none;
+}
 
-    .rootTitle ul {
-        display: none;
-    }
-
-    .subBlock > ul > li > p {
-        display: block;
-        margin: 0;
-        padding: 0 0 10px 0;
-    }
+.subBlock > ul > li > p {
+    display: block;
+    margin: 0;
+    padding: 0 0 10px 0;
+}
 
 .comingSoon1 {
     position: absolute;
@@ -2445,19 +2759,23 @@ form > p {
     font-family: "Impact";
 }
 
-.about1 ul li {
-    display: flex;
-    margin: 10px 0;
+.about1 ul {
+    padding: 20px;
 }
 
-    .about1 ul li img {
-        height: 63px;
-        margin: 0 20px 0 0;
+    .about1 ul li {
+        display: flex;
+        margin: 10px 0;
     }
 
-    .about1 ul li p {
-        padding: 0;
-    }
+        .about1 ul li img {
+            height: 63px;
+            margin: 0 20px 0 0;
+        }
+
+        .about1 ul li p {
+            padding: 0;
+        }
 
 .aboutBg {
     background: url("/Content/img/about/about.jpg") no-repeat top left;
@@ -2479,6 +2797,7 @@ form > p {
     display: block;
     font-size: 18pt;
     margin: 20px 0 0 0;
+    text-align: center;
 }
 
 h3 > span {
@@ -2522,6 +2841,12 @@ h3 > span {
                 margin: 0;
                 padding: 0;
             }
+
+@media only screen and (max-device-width: 720px) {
+    .myColumn > h3 {
+        font-size: 16pt;
+    }
+}
 /*About 1 END*/
 /*Contacts*/
 .contacts {
@@ -2540,12 +2865,36 @@ h3 > span {
 
     .contacts tr td img {
         position: absolute;
-        height: 600px;
+        height: 602px;
         z-index: -1;
         top: 0;
     }
 
-    .contacts i {
+#map {
+    position: absolute;
+    top: 79px;
+    left: 68px;
+}
+
+.contacts i {
+    color: red;
+    background-color: whitesmoke;
+    font-size: 16pt;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.contacts li {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+    .contacts li i {
         color: red;
         background-color: whitesmoke;
         font-size: 16pt;
@@ -2556,35 +2905,23 @@ h3 > span {
         padding-top: 15px;
     }
 
-    .contacts li {
-        padding: 10px 20px;
-        display: flex;
-        align-items: center;
-        position: relative;
+    .contacts li img {
+        height: 300px;
+        position: absolute;
+        top: 0;
     }
 
-        .contacts li i {
-            color: red;
-            background-color: whitesmoke;
-            font-size: 16pt;
-            width: 50px;
-            height: 50px;
-            position: relative;
-            text-align: center;
-            padding-top: 15px;
-        }
+    .contacts li #map1 {
+        position: absolute;
+        top: 39px;
+        left: 53px;
+    }
 
-        .contacts li img {
-            height: 300px;
-            position: absolute;
-            top: 0;
-        }
-
-        .contacts li:last-child {
-            height: 300px;
-            width: 100%;
-            overflow: hidden;
-        }
+    .contacts li:last-child {
+        height: 300px;
+        width: 100%;
+        overflow: hidden;
+    }
 
 @media only screen and (max-device-width: 720px) {
     .contacts tr:last-child {
@@ -2652,9 +2989,11 @@ h3 > span {
 .tdImage img {
     width: 100%;
 }
-.tdImage>.pvBorder {
-    bottom: 0; 
+
+.tdImage > .pvBorder {
+    bottom: 0;
 }
+
 .myBlogDetails {
     display: block;
     width: 100%;
@@ -2711,30 +3050,111 @@ h3 > span {
     width: 100%;
     padding: 30px;
 }
+
 .otziv {
     margin: 20px 0;
     width: 555px;
 }
+
 .otzivTitle {
     background-color: lightgray;
     padding: 5px;
 }
-.otzivTitle h3 {
-    font-size: 12pt;
-    font-family: "rNormal";
-    font-weight: 100;
-}
+
+    .otzivTitle h3 {
+        font-size: 12pt;
+        font-family: "rNormal";
+        font-weight: 100;
+    }
+
 @media only screen and (max-device-width: 720px) {
+
     .myColumn h1 {
         text-align: center;
     }
+
+    .myColumn h2 {
+        font-size: 26pt;
+        margin: 0;
+        padding: 0 10px;
+    }
+
+    #photoBlock {
+        padding: 5px 0 !important;
+    }
+
     .otzivi {
         flex-flow: column;
         align-items: center;
         width: 100%;
     }
+
     .otziv {
-        max-width: 300px;
+        max-width: 400px;
+    }
+
+    .otzivTitle {
+        width: 100%;
     }
 }
 /*Otzivi END*/
+/*Ticket*/
+.ticket {
+    border: solid 3px red;
+    padding: 20px;
+    text-align: center;
+} 
+.ticket table { 
+    width: 800px;
+}
+    .ticket table tr:first-child {
+        font-size: 18pt;
+        font-weight: bold;
+    }
+.ticket table tr:last-child {
+    font-size: 12pt;
+    font-weight: bold;
+}
+.ticket table tr td {
+    padding: 10px;
+}
+.ticketCells {
+    border-bottom: dotted 1px gray;
+    border-top: dotted 1px gray;
+}
+.ticketCells td { 
+    vertical-align: top;
+}
+.ticketCells td:last-child {
+    border: none;
+}
+.ticketCells td div {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 18pt;
+    height: 110px;
+}
+    .ticketCells td div {
+        border-right: dotted 1px gray;
+    }
+.ticketCells td div p:first-child {
+    color: gray;
+    display: block;
+    margin-bottom: 10px;
+}
+.patyDataCells td:last-child {
+    border: solid 1px black;
+    font-size: 28pt;
+    font-weight: bold;
+}
+.patyDataCells td:first-child {
+    font-size: 28pt;
+    font-weight: bold;
+}
+.patyDataCells td:first-child p:last-child {
+    border-top: dotted 2px gray;
+
+}
+/*Ticket END*/
