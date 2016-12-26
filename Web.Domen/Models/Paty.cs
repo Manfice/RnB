@@ -40,6 +40,7 @@ namespace Web.Domen.Models
         public string MetaDescription { get; set; }
         public string Description { get; set; }
         public virtual PatyImage Avatar { get; set; }
+        public virtual PatyImage Avatar1920 { get; set; }
         public virtual PatyCategory ParentCategory { get; set; }
         public virtual ICollection<Paty> Paties { get; set; }
         public virtual ICollection<PhotoAlbom> PhotoAlboms { get; set; }

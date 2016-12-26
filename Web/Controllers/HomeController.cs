@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using NickBuhro.Translit;
@@ -27,58 +28,82 @@ namespace Web.Controllers
             _home = home;
             _cmc = cmc;
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Index()
         {
             return View();
         }
+
         [Route("Company")]
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Company()
         {
             return View();
         }
+
         [Route("Contacts")]
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Contacts()
         {
             return View();
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Navigation()
         {
             return PartialView();
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Header()
         {
             return PartialView();
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Footer()
         {
             return PartialView();
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult TopSlider()
         {
             return PartialView();
         }
+
         public ActionResult NearPaty()
         {
             var model = _home.GetPatys.Where(paty => paty.PatyDate>=DateTime.Now && paty.PatyDate<DateTime.Today.AddMonths(1)).OrderBy(paty => paty.PatyDate);
             return PartialView(model);
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Offer()
         {
             return PartialView();
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Sdescr()
         {
             return PartialView();
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult PatyList()
         {
             var model = _home.GetCategorys;
             return PartialView(model);
         }
+
+        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Prevelegii()
         {
             return PartialView();
         }
+
         public ActionResult PhotoVideo()
         {
             var vasia = _home.GetPhotos.ToList();
@@ -123,6 +148,8 @@ namespace Web.Controllers
             _home.AddAlbomView(id);
             return View(model);
         }
+
+        [OutputCache(Duration = 3200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Partners()
         {
             return PartialView();
@@ -198,6 +225,7 @@ namespace Web.Controllers
         {
             return View(_home.GetOrderBuId(id));
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Order(OrderViewmodel model)
@@ -264,7 +292,9 @@ namespace Web.Controllers
             }
             return PartialView(ViewBag.TargetDate = DateTime.Now.AddSeconds(600));
         }
+
         [Route("O-nas-govoriat")]
+        [OutputCache(Duration = 60, Location = OutputCacheLocation.Downstream)]
         public ActionResult Otzivi()
         {
             return View(_cmc.GetOtzivs);

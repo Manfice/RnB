@@ -268,6 +268,17 @@ namespace Web.Domen.Repositorys
             return _current;
         }
 
+        public void Save1920Image(PatyCategory category)
+        {
+            var dbPatyCat = GetCategoryById(category.Id);
+            if (dbPatyCat==null)
+            {
+                return;
+            }
+            dbPatyCat.Avatar1920 = category.Avatar1920;
+            _context.SaveChanges();
+        }
+
         private static string MakeSeats(int maxGuests)
         {
             if (maxGuests<=0)

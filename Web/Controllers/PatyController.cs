@@ -111,28 +111,78 @@ namespace Web.Controllers
             PatyImage image = null;
             if (avatar!=null)
             {
-                if (model.Avatar!=null)
+
+                if (cat.Avatar!=null)
                 {
-                    if (System.IO.File.Exists(model.Avatar.FullPath))
+                    if (System.IO.File.Exists(cat.Avatar.FullPath))
                     {
-                        System.IO.File.Delete(model.Avatar.FullPath);
+                        System.IO.File.Delete(cat.Avatar.FullPath);
                     }
                 }
+                if (cat.Avatar1920 != null)
+                {
+                    if (System.IO.File.Exists(cat.Avatar1920.FullPath))
+                    {
+                        System.IO.File.Delete(cat.Avatar1920.FullPath);
+                    }
+                }
+                var ava1920 = ImageCrop.Crop(avatar, 1920, 600, ImageCrop.AnchorPosition.Top);
+                var filePath = Server.MapPath("/Uploads/patyCategorys/" + guid + "_1920_");
+                ava1920.Save(filePath+avatar.FileName);
+                cat.Avatar1920 = new PatyImage
+                {
+                    ContentLength = avatar.ContentLength,
+                    ContentType = avatar.ContentType,
+                    FullPath = filePath + avatar.FileName,
+                    Path = "/Uploads/patyCategorys/" + guid + "_1920_" + avatar.FileName
+                };
                 var ava = ImageCrop.Crop(avatar, 500, 350, ImageCrop.AnchorPosition.Center);
-                var filePath = Server.MapPath("/Uploads/patyCategorys/" + guid + "_sep_");
+                filePath = Server.MapPath("/Uploads/patyCategorys/" + guid + "_500_");
                 ava.Save(filePath+avatar.FileName);
                 image = new PatyImage
                 {
                     ContentLength = avatar.ContentLength,
                     ContentType = avatar.ContentType,
                     FullPath = filePath+avatar.FileName,
-                    Path = "/Uploads/patyCategorys/" + guid + "_sep_"+avatar.FileName
+                    Path = "/Uploads/patyCategorys/" + guid + "_500_"+avatar.FileName
                 };
             }
             var data = _repository.SavePatyCategory(parent, cat, image);
             return data.ParentCategory==null ? RedirectToAction("Index") : RedirectToAction("PatyInner", new {id=data.ParentCategory.Id});
         }
 
+        [HttpPost]
+        public ActionResult Add1920Fon(int id, HttpPostedFileBase ava)
+        {
+            if (ava==null)
+            {
+                RedirectToAction("PatyInner", new {id});
+            }
+            var cat = _repository.GetCategoryById(id);
+            if (cat.Avatar1920 != null)
+            {
+                if (System.IO.File.Exists(cat.Avatar1920.FullPath))
+                {
+                    System.IO.File.Delete(cat.Avatar1920.FullPath);
+                }
+            }
+            var guid = Guid.NewGuid();
+            var ava1920 = ImageCrop.Crop(ava, 1920, 600, ImageCrop.AnchorPosition.Top);
+            var filePath = Server.MapPath("/Uploads/patyCategorys/" + guid + "_1920_");
+            if (ava != null)
+            {
+                ava1920.Save(filePath + ava.FileName);
+                cat.Avatar1920 = new PatyImage
+                {
+                    ContentLength = ava.ContentLength,
+                    ContentType = ava.ContentType,
+                    FullPath = filePath + ava.FileName,
+                    Path = "/Uploads/patyCategorys/" + guid + "_1920_" + ava.FileName
+                };
+            }
+            _repository.Save1920Image(cat);
+            return RedirectToAction("Index");
+        }
         public ActionResult CategoryPatys(int id)
         {
             var model = _repository.GetCategoryById(id);

@@ -1,49 +1,186 @@
-﻿@model Web.Domen.Models.PatyCategory
+﻿@using Newtonsoft.Json
+@using Web.Helpers
+@model Web.Domen.Models.PatyCategory
 @{
     ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_MainRnB.cshtml";
+    var paty = Model.Paties.FirstOrDefault(p => p.PatyDate > DateTime.Now);
 }
-<div class="myColumn">
+@section links
+{
+    <link href="~/Content/countdown.css" rel="stylesheet" />
+}
+@if (paty == null)
+{
+    <div class="column">
+        <div class="topPicture">
+            @if (HttpContext.Current.Request.IsMobileBrowser())
+            {
+                <img alt="" src="@(Model.Avatar != null ? $"https://redblackclub.ru{Model.Avatar.Path}" : "/Content/img/pList/942x434.jpg")" /> @*$"https://redblackclub.ru{Model.Avatar.Path}"*@
+            }
+            else
+            {
+                <img alt="" src="@(Model.Avatar1920 != null ? $"https://redblackclub.ru{Model.Avatar1920.Path}" : "/Content/img/pList/942x434.jpg")" /> @*$"https://redblackclub.ru{Model.Avatar.Path}"*@
+            }
+            <div class="shadow"></div>
+            <h1>@Model.Title</h1>
+            <div class="gRg"><span> </span><span> </span><span> </span></div>
+            <div class="descrAlingCenter">
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <div class="noActivePaty">
+            <h1>К сожалению, сейчас нет ни одного активного мероприятия.</h1>
+            <h2>Но, вы можете посмотреть как проходили предыдущие наши встречи.</h2>
+            <p>Резервируйте места заранее на наши будущие мероприятия.</p>
+            <a class="redButton" href="@Url.Action("NearDetails","Home")">Смотреть ближайшие</a>
+
+        </div>
+        @Html.Action("GetAlbomsByCategory", "ImageGalary", new { id = Model.Id })
+    </div>
+    return;
+}
+<div class="column">
+    <div class="topPicture">
+        @if (HttpContext.Current.Request.IsMobileBrowser())
+        {
+            <img alt="" src="@(Model.Avatar != null ? $"https://redblackclub.ru{Model.Avatar.Path}" : "/Content/img/pList/942x434.jpg")" /> @*$"https://redblackclub.ru{Model.Avatar.Path}"*@
+        }
+        else
+        {
+            <img alt="" src="@(Model.Avatar1920 != null ? $"https://redblackclub.ru{Model.Avatar1920.Path}" : "/Content/img/pList/942x434.jpg")" /> @*$"https://redblackclub.ru{Model.Avatar.Path}"*@
+        }
+        <div class="shadow"></div>
+        <h1>@Model.Title</h1>
+        <div class="gRg"><span> </span><span> </span><span> </span></div> 
+        <div class="descrAlingCenter">
+            <p>@Model.Description</p>
+        </div>
+    </div>
+
+
+
+    @if (HttpContext.Current.Request.IsMobileBrowser())
+    {
+        <div class="orderMobile">
+            @Html.Action("MobilePatyForm", "Home", new { patyId = paty.Id })
+        </div>
+    }
+    else
+    {
+        <div class="order">
+            @Html.Action("DesktopPatyForm", "Home", new { patyId = paty.Id })
+        </div>
+    }
+
+    @Html.Action("GetAlbomsByCategory","ImageGalary", new {id=Model.Id})
+
+</div>
+
+@*<div class="myColumn">
     <h1>@Model.Title</h1>
     <div class="ds"><span> </span><span> </span><span> </span></div>
     <div class="column970">
         <p style="text-align: center; display: block; margin: 20px 0 0 0; font-size: 14pt;">@Model.Description</p>
     </div>
     <div class="row960w">
-        @foreach (var item in Model.Paties.OrderByDescending(paty => paty.PatyDate))
-        {
-            <div class="patyItemDetails">
-                <a href="/sobitie/@item.RouteTitle">
-                    <div class="npImgWrapper">
-                        <h3>@item.PatyDate.ToString("M")</h3>
-                        @if (item.Avatar != null)
-                        {
-                            <img alt="" src="@($"https://redblackclub.ru{item.Avatar.Path}")" />
-                        }
-                        else
-                        {
-                            <img alt="" src="/Content/img/pList/454x312.jpg" />
-                        }
-                        <div class="flyingButton">
-                            <p class="redButton">Подробнее</p>
-                        </div>
-                        <div class="title">
-                            <h3>@item.Title</h3>
-                        </div>
-                    </div>
-                </a>
-                <div class="itmDescr">
-                    @if (!string.IsNullOrEmpty(item.Descr) && item.Descr.Length >= 100)
+
+
+
+    </div>
+</div>*@
+
+@section scripts
+{
+    @*<script src="~/Scripts/jquery.vkAction.js"></script>*@
+    <script src="~/Scripts/AdminJs/Countdown.js"></script>
+    @*<script>
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/ru_RU/all.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>*@
+
+    <script type="text/javascript">VK.Widgets.Like("vk_like", { type: "button" });</script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Countdown(@Html.Raw(JsonConvert.SerializeObject(paty.PatyDate.ToUniversalTime())), ['days', 'hours', 'minutes', 'seconds'], function() {
+
+            });
+        })
+
+        @*$("#vk_share_button").tweetAction({
+				title: '@(Model.Title)',
+				url: '@("https://redblackclub.ru" + Request.Url.PathAndQuery)',
+				description: '@Html.Raw(paty.Descr.Replace("\r\n", string.Empty))',
+				image: '@("https://redblackclub.ru" + Model.Avatar.Path)',
+				noparse: true,
+				no_vk_links: 1
+			}, function() {
+
+			});
+
+		    setTimeout('VK.Observer.publish("widgets.like.shared",8)', 4000);
+
+			$(".fb_share").click(function() {
+					FB.ui({
+							method: 'share',
+							name: 'Facebook Dialogs',
+							href: '@("https://redblackclub.ru" + Request.Url.PathAndQuery)',
+							picture: '@("https://redblackclub.ru" + Model.Avatar.Path)',
+							caption: '@(Model.Title)',
+							description: '@Html.Raw(paty.Descr.Replace("\r\n", string.Empty))',
+							message: 'Приглашаем всех!'
+						},
+						function(response) {
+							if (response) {
+								$(".fb_share").hide();
+							}
+						}
+					);
+				}
+			);
+		});*@
+    </script>
+}
+
+@*@foreach (var item in Model.Paties.OrderByDescending(paty => paty.PatyDate))
+    {
+        <div class="patyItemDetails">
+            <a href="/sobitie/@item.RouteTitle">
+                <div class="npImgWrapper">
+                    <h3>@item.PatyDate.ToString("M")</h3>
+                    @if (item.Avatar != null)
                     {
-                        <p>@item.Descr</p>
+                        <img alt="" src="@($"https://redblackclub.ru{item.Avatar.Path}")" />
                     }
                     else
                     {
-                        <p>@(item.Descr ?? "")</p>
+                        <img alt="" src="/Content/img/pList/454x312.jpg" />
                     }
+                    <div class="flyingButton">
+                        <p class="redButton">Подробнее</p>
+                    </div>
+                    <div class="title">
+                        <h3>@item.Title</h3>
+                    </div>
                 </div>
-
+            </a>
+            <div class="itmDescr">
+                @if (!string.IsNullOrEmpty(item.Descr) && item.Descr.Length >= 100)
+                {
+                    <p>@item.Descr</p>
+                }
+                else
+                {
+                    <p>@(item.Descr ?? "")</p>
+                }
             </div>
-        }
-    </div>
-</div>
+
+        </div>
+    }*@

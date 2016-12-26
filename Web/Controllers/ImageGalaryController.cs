@@ -6,8 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Web.Domen.Abstract;
 using Web.Domen.Models;
+using Web.Domen.Viewmodels;
 using Web.Helpers;
 
 namespace Web.Controllers
@@ -282,6 +284,14 @@ namespace Web.Controllers
             }
             var paramses = new EncoderParameters(1) {Param = {[0] = qualityParam}};
             image.Save(path, jpegCodecInfo, paramses);
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        [OutputCache(Duration = 120, Location = OutputCacheLocation.Downstream)]
+        public ActionResult GetAlbomsByCategory(int id)
+        {
+            var alboms = _photo.GetAlboms.Where(albom => albom.Category!=null && albom.Category.Id == id).ToList();
+            return PartialView(alboms);
         }
 
         private static ImageCodecInfo GetCodecInfo(string mimeType)

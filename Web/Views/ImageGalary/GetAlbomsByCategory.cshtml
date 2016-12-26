@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Web.Domen.Models.PhotoAlbom>
+
+<div class="albomsRow">
+    @foreach (var item in Model.OrderByDescending(albom => albom.AlbomDate))
+    {
+        <div class="alItem">
+            <p>@item.AlbomDate.ToShortDateString()</p>
+            <h3>@(item.Title.Length >= 35 ? item.Title.Substring(0, 31) + "..." : item.Title)</h3>
+            <a href="@Url.Action("AlbomDetails","Home", new {id = item.Id, returnUrl = Request.Url.PathAndQuery})">
+                <div class="pGimgWrapper">
+                    <img alt="" src="@($"https://redblackclub.ru{item.Avatar}")" />
+                    <div class="albomButton">
+                        <i class="fa fa-search fa-2x"></i>
+                    </div>
+                    <div class="watchAlbom">
+                        <p><span class="redLink">Смотреть все ></span></p>
+                    </div>
+                </div>
+            </a>
+            <div class="albomStat">
+                <div class="statLeftSide">
+                    <div class="statItem">
+                        <i class="fa fa-eye"></i>
+                        <p>@item.Viewed</p>
+                    </div>
+                    <div class="statItem">
+                        <i class="fa fa-heart"></i>
+                        <p>@item.Likes</p>
+                    </div>
+                    <div class="statItem">
+                        <i class="fa fa-photo"></i>
+                        <p>@item.Regions.Sum(galary => galary.Photos.Count)</p>
+                    </div>
+                    <div class="statItem">
+                        <i class="fa fa-film"></i>
+                        <p>@item.Regions.Sum(galary => galary.Photos.Count(data => data.VideoLink != null))</p>
+                    </div>
+                </div>
+                <i class="fa fa-share-alt"></i>
+            </div>
+        </div>
+    }
+</div>

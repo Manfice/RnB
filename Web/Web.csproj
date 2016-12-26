@@ -462,7 +462,12 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Uploads\Partners\bb17fb19-a404-4d9e-8c00-26f228c0a6a7_me.png" />
     <Content Include="Uploads\patyAvatar\02803ee8-1239-4b89-b4d9-95dc2e31a278_sep_2.jpg" />
+    <Content Include="Uploads\patyCategorys\390e5071-df2a-4360-9d19-634738423731_1920_mafia1920.jpg" />
     <Content Include="Uploads\patyCategorys\63980e2e-eb49-483f-b068-3f30b2fbbd4a_sep_1.jpg" />
+    <Content Include="Uploads\patyCategorys\910dd43c-a4cb-4e29-bdc3-b87740d4ff39_1920_b.jpg" />
+    <Content Include="Uploads\patyCategorys\910dd43c-a4cb-4e29-bdc3-b87740d4ff39_500_b.jpg" />
+    <Content Include="Uploads\patyCategorys\ee11557d-e409-452e-aa03-b4dcf755b38b_1920_bil.jpg" />
+    <Content Include="Uploads\patyCategorys\ee11557d-e409-452e-aa03-b4dcf755b38b_500_bil.jpg" />
     <Content Include="Views\Shared\feedback.html" />
     <Content Include="Views\Shared\register.html" />
     <Content Include="Views\Shared\ResetPass.html" />
@@ -567,9 +572,11 @@
     <Content Include="Views\Home\AskMePopUp.cshtml" />
     <Content Include="Views\Paty\PatyMenyMobile.cshtml" />
     <Content Include="Views\Home\OrderEmail.cshtml" />
+    <Content Include="Views\ImageGalary\GetAlbomsByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ActionCss\" />
     <Folder Include="Uploads\Blog\" />
     <Folder Include="Uploads\ImageGalary\" />
   </ItemGroup>

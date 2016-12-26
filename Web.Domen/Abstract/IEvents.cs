@@ -22,5 +22,6 @@ namespace Web.Domen.Abstract
         Task<Paty> GetPatyByIdAsync(int id);
         bool CheckPatyUrlTitle(string url, int id = 0);
         bool CheckPatyCategoryUrlTitle(string url, int id = 0);
+        void Save1920Image(PatyCategory category);
     }
 }

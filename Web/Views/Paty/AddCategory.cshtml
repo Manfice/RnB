@@ -44,7 +44,13 @@
         }
         <a class="cancelLink  redBtn" href="@Url.Action("Index")">Отмена</a>
     </div>
-
+    @using (Html.BeginForm("Add1920Fon","Paty", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(category => category.Id)
+        <img alt="" id="1920prev"/>
+        <input id="1920" type="file" name="ava"/>
+        <input class="redButton" type="submit" value="Добавить аватар 1920"/>
+    }
 </div>
 @section scripts
 {
@@ -64,7 +70,21 @@
             $("#catAvatar").change(function () {
                 previewUpdImg(this);
             });
-
+            function previewUpdImg1920(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var i = $("#1920prev");
+                        i.attr("src", e.target.result);
+                        i.attr("height", 600);
+                        i.css({"width":"100%", "height":"100%"});
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            };
+            $("#1920").change(function () {
+                previewUpdImg1920(this);
+            });
         });
     </script>
 }
