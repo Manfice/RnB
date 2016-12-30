@@ -8,14 +8,14 @@
         <div class="patyBlock">
             @foreach (var item in Model.Take(3))
             {
-                <a href="/sobitie/@item.RouteTitle">
+                <a href="/spisok-meropriatiy/@item.Category.RouteTitle">
                     <div class="patyWrapper">
                         <div class="patyData">
 
                             <div class="patyDataImageWraper">
                                 @if (item.Avatar != null)
                                 {
-                                    <img alt="" src="@item.Avatar.Path" />
+                                    <img alt=""src="@($"https://redblackclub.ru{item.Category.Avatar.Path}")" />
                                 }
                                 else
                                 {
@@ -49,12 +49,12 @@
                     @foreach (var item in Model)
                     {
                         <div class="carItem">
-                            <a href="/sobitie/@item.RouteTitle">
+                            <a href="/spisok-meropriatiy/@item.Category.RouteTitle">
                                 <div class="topString"></div>
                                 <div class="whiteBg">
                                     @if (item.Avatar != null)
                                     {
-                                        <img alt="" src="@item.Avatar.Path" height="168"/>
+                                        <img alt="" src="@($"https://redblackclub.ru{item.Category.Avatar.Path}")"/>
                                     }
                                     else
                                     {
@@ -83,14 +83,14 @@
             <div class="patyBlockDesctop">
                 @foreach (var item in Model.Take(3))
                 {
-                    <a href="/sobitie/@item.RouteTitle">
+                    <a href="/spisok-meropriatiy/@item.Category.RouteTitle">
                         <div class="patyWrapper">
                             <div class="patyData">
 
                                 <div class="patyDataImageWraper">
                                     @if (item.Avatar != null)
                                     {
-                                        <img alt="" src="@($"https://redblackclub.ru{item.Avatar.Path}")"/>
+                                        <img alt="" src="@($"https://redblackclub.ru{item.Category.Avatar.Path}")"/>
                                     }
                                     else
                                     {

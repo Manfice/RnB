@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="adminjs/countdown.js" />
+/// <reference path="adminjs/grayscalejs.js" />
 /// <reference path="adminjs/imagegalary.js" />
 /// <reference path="adminjs/jqform.js" />
 /// <reference path="adminjs/paty.js" />

@@ -348,7 +348,10 @@
     <Content Include="Content\img\topSlider\44441920.jpg" />
     <Content Include="Content\img\topSlider\5.jpg" />
     <Content Include="Content\img\topSlider\6.jpg" />
+    <Content Include="Content\img\topSlider\aktivny_otdyh.jpg" />
+    <Content Include="Content\img\topSlider\razvitie_navikov.jpg" />
     <Content Include="Content\img\topSlider\redMob.png" />
+    <Content Include="Content\img\topSlider\sportivnie_meropriyatiya.jpg" />
     <Content Include="Content\img\topSlider\бизнес встречи.JPG" />
     <Content Include="Content\img\topSlider\игровые1.jpg" />
     <Content Include="Content\img\topSlider\развитие навыков.jpg" />
@@ -423,6 +426,7 @@
     <Content Include="images\prev.png" />
     <Content Include="favicon.ico" />
     <Content Include="Scripts\AdminJs\Countdown.js" />
+    <Content Include="Scripts\AdminJs\grayscaleJS.js" />
     <Content Include="Scripts\AdminJs\imageGalary.js" />
     <Content Include="Scripts\AdminJs\jqForm.js" />
     <Content Include="Scripts\AdminJs\paty.js" />
