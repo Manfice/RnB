@@ -12,7 +12,7 @@
             @Html.HiddenFor(paty => paty.Id)
             @Html.HiddenFor(paty => paty.Category.Id)
 
-            if (Model.Avatar != null)
+            @*if (Model.Avatar != null)
             {
                 <img alt="" src="@Model.Avatar.Path" width="250" id="avatarView" />
             }
@@ -21,7 +21,7 @@
                 <img alt="" src="" id="avatarView" />
             }
             <input type="file" name="avatar" id="catAvatar"/>
-            <hr/>
+            <hr/>*@
             <div class="rowFlex">
                 <div class="addPatyFormItem">
                     <label>Дата и время события:</label>

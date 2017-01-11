@@ -17,7 +17,7 @@
     topSlider.owlCarousel({
         items: 1,
         autoplay: true,
-        autoplayTimeout: 10000,
+        autoplayTimeout: 3000,
         autoplayHoverPause: true,
         nav: false,
         dots: true,

@@ -222,17 +222,17 @@ namespace Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<ActionResult> AddPaty(Paty paty, HttpPostedFileBase avatar)
+        public async Task<ActionResult> AddPaty(Paty paty, HttpPostedFileBase avatar1)
         {
             if (!string.IsNullOrEmpty(paty.RouteTitle) && _repository.CheckPatyUrlTitle(paty.RouteTitle, paty.Id))
             {
                 ModelState.AddModelError(paty.RouteTitle, "Не указан URL для события, или такой URL уже существует");
                 return View(paty);
             }
-            var guid = Guid.NewGuid();
-            var filePath = Server.MapPath("/Uploads/patyAvatar/" +guid+ "_sep_");
+            //var guid = Guid.NewGuid();
+            //var filePath = Server.MapPath("/Uploads/patyAvatar/" +guid+ "_sep_");
             var model = paty;
-            PatyImage image = null;
+            //PatyImage image = null;
             if (paty.Id > 0)
             {
                 model = await _repository.GetPatyByIdAsync(paty.Id);
@@ -249,29 +249,29 @@ namespace Web.Controllers
                 model.RouteTitle = paty.RouteTitle;
                 model.MetaDescription = paty.MetaDescription;
             }
-            if (model.Orders!=null && model.Orders.Any())
-            {
-                ModelState.AddModelError("","У события есть заказы, нельзя изменять событие!");
-                return View(model);
-            }
-            if (avatar!=null)
-            {
-                if (model.Avatar!=null)
-                {
-                    DeteteImage(model.Avatar.FullPath);
-                }
-                var im = ImageCrop.Crop(avatar, 970, 679, ImageCrop.AnchorPosition.Center);
-                im.Save(filePath+avatar.FileName);
-                image = new PatyImage
-                {
-                    ContentLength = avatar.ContentLength,
-                    ContentType = avatar.ContentType,
-                    FullPath = filePath+avatar.FileName,
-                    Path = "/Uploads/patyAvatar/" + guid + "_sep_"+avatar.FileName
-                };
-            }
+            //if (model.Orders!=null && model.Orders.Any())
+            //{
+            //    ModelState.AddModelError("","У события есть заказы, нельзя изменять событие!");
+            //    return View(model);
+            //}
+            //if (avatar!=null)
+            //{
+            //    if (model.Avatar!=null)
+            //    {
+            //        DeteteImage(model.Avatar.FullPath);
+            //    }
+            //    var im = ImageCrop.Crop(avatar, 970, 679, ImageCrop.AnchorPosition.Center);
+            //    im.Save(filePath+avatar.FileName);
+            //    image = new PatyImage
+            //    {
+            //        ContentLength = avatar.ContentLength,
+            //        ContentType = avatar.ContentType,
+            //        FullPath = filePath+avatar.FileName,
+            //        Path = "/Uploads/patyAvatar/" + guid + "_sep_"+avatar.FileName
+            //    };
+            //}
             var c = model.Avatar?.Id ?? 0;
-            var data = await _repository.AddPatyAsync(c, model, image);
+            var data = await _repository.AddPatyAsync(c, model, null);
             if (data.Success)
             {
                 return RedirectToAction("CategoryPatys", new {id = data.Paty.Category.Id});

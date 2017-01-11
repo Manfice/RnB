@@ -48,9 +48,12 @@ ul {
     margin: 0;
     padding: 0;
 }
+.redBtn, .greenBtn {
+    font-size: 12pt; 
+}
 .redBtn {
     border: solid 1px;
-    padding: 10px 15px;
+    padding: 5px 5px;
     background-color: red;
     color: white;
     font-family: "Arial";
@@ -58,8 +61,8 @@ ul {
 .greenBtn {
     background-color: green;
     border: solid 1px;
-    padding: 10px 15px;
-    color: white;
+    padding: 5px 5px;
+    color: white; 
 }
 .columnCenter {
     flex: 1 0 auto;
@@ -427,10 +430,11 @@ label>input[type=file] {
     padding: 10px;
 }
 .catImageWrapper {
-    margin: 10px;
+    margin: 10px; 
 }
 .categorysTable td, .categorysTable th {
-    height: 35px;
+    height: 25px; 
+    font-size: 10pt;  
 }
 /*Paty End*/
 /*File Uploads*/

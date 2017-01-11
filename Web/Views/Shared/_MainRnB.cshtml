@@ -3,19 +3,21 @@
 <html style="height: 100%">
 <head>
     <meta charset="utf-8"/>
-    @if (HttpContext.Current.Request.IsMobileBrowser())
+    @*@if (HttpContext.Current.Request.IsMobileBrowser())
     {
         <meta name="viewport" content="width=450">
     }
     else
     {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    }
-	<title>@ViewBag.Title - Red & Black</title>
+    }*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>@ViewBag.Title</title>
 	<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 	<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-	@*<link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 568px)" href="/Content/small-device.css" />*@
 	<link href="~/Content/main.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 1024px)" href="/Content/media.css" />
 	<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 	<link href="~/Content/owl.carousel.css" rel="stylesheet"/>
 	<link href="~/Content/lightbox.min.css" rel="stylesheet" />
@@ -100,6 +102,35 @@
 	<script src="~/Scripts/owl.carousel.min.js"></script>
 	<script src="~/Scripts/lightbox.min.js"></script>
 	@RenderSection("scripts", false)
-	<script src="~/Scripts/mainJS.js"></script>
+    <script src="~/Scripts/mainJS.js"></script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter41899974 = new Ya.Metrika({
+                    id:41899974,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/41899974" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </body>
 </html>

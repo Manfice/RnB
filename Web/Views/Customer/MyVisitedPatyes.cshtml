@@ -15,9 +15,9 @@ else
                     <div class="patyData">
 
                         <div class="patyDataImageWraper">
-                            @if (item.Avatar != null)
+                            @if (item.Category.Avatar != null)
                             {
-                                <img alt="" src="@item.Avatar.Path" />
+                                <img alt="" src="@($"https://redblackclub.ru/{item.Category.Avatar.Path}")" />
                             }
                             else
                             {

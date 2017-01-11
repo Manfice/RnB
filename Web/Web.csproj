@@ -339,26 +339,11 @@
     <Content Include="Content\img\soc\vk2.jpg" />
     <Content Include="Content\img\soc\y.png" />
     <Content Include="Content\img\soc\you2.jpg" />
-    <Content Include="Content\img\topSlider\1.jpg" />
-    <Content Include="Content\img\topSlider\2.jpg" />
-    <Content Include="Content\img\topSlider\22222222.jpg" />
-    <Content Include="Content\img\topSlider\3.jpg" />
-    <Content Include="Content\img\topSlider\3333333.jpg" />
-    <Content Include="Content\img\topSlider\4.jpg" />
-    <Content Include="Content\img\topSlider\44441920.jpg" />
-    <Content Include="Content\img\topSlider\5.jpg" />
-    <Content Include="Content\img\topSlider\6.jpg" />
-    <Content Include="Content\img\topSlider\aktivny_otdyh.jpg" />
-    <Content Include="Content\img\topSlider\razvitie_navikov.jpg" />
-    <Content Include="Content\img\topSlider\redMob.png" />
-    <Content Include="Content\img\topSlider\sportivnie_meropriyatiya.jpg" />
-    <Content Include="Content\img\topSlider\бизнес встречи.JPG" />
-    <Content Include="Content\img\topSlider\игровые1.jpg" />
-    <Content Include="Content\img\topSlider\развитие навыков.jpg" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\lightbox.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\img\MenuIco.png" />
+    <Content Include="Content\media.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\customer.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -581,6 +566,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ActionCss\" />
+    <Folder Include="Content\img\topSlider\" />
     <Folder Include="Uploads\Blog\" />
     <Folder Include="Uploads\ImageGalary\" />
   </ItemGroup>

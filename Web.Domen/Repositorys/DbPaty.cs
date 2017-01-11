@@ -64,7 +64,7 @@ namespace Web.Domen.Repositorys
             return current;
         }
 
-        public async Task<PatyActionResult> AddPatyAsync(int a, Paty model, PatyImage image)
+        public async Task<PatyActionResult> AddPatyAsync(int a, Paty model, PatyImage image1)
         {
             Paty result = null;
             var action = new PatyActionResult();
@@ -107,7 +107,7 @@ namespace Web.Domen.Repositorys
                 if (string.IsNullOrEmpty(model.RouteTitle))
                 {
                     model.RouteTitle = dbCat.RouteTitle + "-" + model.PatyDate.Day + "-" + model.PatyDate.Month + "-" +
-                                       model.PatyDate.Year;
+                                       model.PatyDate.Year + "-" +model.PatyDate.Hour + "-" +model.PatyDate.Minute + "-" +model.PatyDate.Millisecond;
                 }
                 result = model;
                 result.Seets = MakeSeats(model.MaxGuests); //10
@@ -115,16 +115,16 @@ namespace Web.Domen.Repositorys
                 _context.Paties.Add(result);
             }
 
-            if (image!=null)
-            {
-                _context.PatyImages.Add(image);
-                result.Avatar = image;
-                if (a > 0)
-                {
-                    var dbImage = await _context.PatyImages.FindAsync(a);
-                    _context.PatyImages.Remove(dbImage);
-                }
-            }
+            //if (image!=null)
+            //{
+            //    _context.PatyImages.Add(image);
+            //    result.Avatar = image;
+            //    if (a > 0)
+            //    {
+            //        var dbImage = await _context.PatyImages.FindAsync(a);
+            //        _context.PatyImages.Remove(dbImage);
+            //    }
+            //}
 
             await _context.SaveChangesAsync();
             action.Success = true;

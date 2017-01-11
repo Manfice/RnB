@@ -29,45 +29,44 @@ namespace Web.Controllers
             _cmc = cmc;
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Index()
         {
             return View();
         }
 
         [Route("Company")]
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Company()
         {
             return View();
         }
 
         [Route("Contacts")]
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Contacts()
         {
             return View();
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Navigation()
         {
             return PartialView();
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Header()
         {
             return PartialView();
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Footer()
         {
             return PartialView();
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult TopSlider()
         {
             return PartialView();
@@ -75,30 +74,30 @@ namespace Web.Controllers
 
         public ActionResult NearPaty()
         {
-            var model = _home.GetPatys.Where(paty => paty.PatyDate>=DateTime.Now && paty.PatyDate<DateTime.Today.AddMonths(1)).OrderBy(paty => paty.PatyDate);
+            var model = _home.GetPatys.Where(paty => paty.PatyDate>=DateTime.Now && paty.PatyDate<DateTime.Today.AddMonths(1)).OrderBy(paty => paty.PatyDate).ToList();
             return PartialView(model);
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Offer()
         {
             return PartialView();
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Sdescr()
         {
             return PartialView();
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult PatyList()
         {
             var model = _home.GetCategorys;
             return PartialView(model);
         }
 
-        [OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 1200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Prevelegii()
         {
             return PartialView();
@@ -107,7 +106,7 @@ namespace Web.Controllers
         public ActionResult PhotoVideo()
         {
             var vasia = _home.GetPhotos.ToList();
-            var model = _home.GetPhotos.Where(data => data.TitleView).Take(9).ToList();
+            var model = _home.GetPhotos.OrderBy(r=>Guid.NewGuid()).Take(18).ToList(); //.Where(data => data.TitleView)
             var video = _home.GetPhotos.Where(d => !string.IsNullOrEmpty(d.VideoLink)).ToList();
             model.AddRange(video);
             return PartialView(model);
@@ -115,7 +114,7 @@ namespace Web.Controllers
         [Route("Galary")]
         public ActionResult Galary(int page=1)
         {
-            const int itemsPerPage = 9;
+            const int itemsPerPage = 20;
             var model = new AlbomsViewmodel
             {
                 Alboms = _home.GetAlboms.OrderByDescending(albom => albom.AlbomDate).Skip((page-1)*itemsPerPage).Take(itemsPerPage).ToList(),
@@ -149,7 +148,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [OutputCache(Duration = 3200, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 3200, Location = OutputCacheLocation.Downstream)]
         public ActionResult Partners()
         {
             return PartialView();
@@ -179,7 +178,8 @@ namespace Web.Controllers
         [Route("sobitie/{paty}")]
         public ActionResult PatyDetails(string paty)
         {
-            return View(_home.GetPatyByRouteUrl(paty));
+            var p = _home.GetPatyByRouteUrl(paty);
+            return RedirectToAction("CategoryDetails", "Paty", new { patyinner= p.Category.RouteTitle}); //View(_home.GetPatyByRouteUrl(paty));
         }
         public ActionResult DesktopPatyForm(int patyId)
         {
@@ -294,7 +294,7 @@ namespace Web.Controllers
         }
 
         [Route("O-nas-govoriat")]
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Downstream)]
+        //[OutputCache(Duration = 60, Location = OutputCacheLocation.Downstream)]
         public ActionResult Otzivi()
         {
             return View(_cmc.GetOtzivs);
@@ -304,7 +304,7 @@ namespace Web.Controllers
             return PartialView();
         }
         [HttpPost]
-        public async Task<string> AskMePopUp(string fio, string phone, string email, string message)
+        public string AskMePopUp(string fio, string phone, string email, string message)
         {
             var errors = new StringBuilder();
             if(string.IsNullOrEmpty(fio)) errors.Append($"<li>Имя это обязательное поле!</li>");
@@ -319,8 +319,8 @@ namespace Web.Controllers
             body = body.Replace("{2}", email);
             body = body.Replace("{3}", message);
 
-            await PassAuth.SendMyMailAsync(body, "info@redblackclub.ru", "Форма отбратной связи");
-            await PassAuth.SendMyMailAsync(body, "c592@yandex.ru", "Форма отбратной связи");
+            PassAuth.SendMyMail(body, "info@redblackclub.ru", "Форма отбратной связи");
+            PassAuth.SendMyMail(body, "c592@yandex.ru", "Форма отбратной связи");
 
             return "Ok";
         }

@@ -21,8 +21,7 @@
                 <h3>@(item.Title.Length >= 35 ? item.Title.Substring(0, 31) + "..." : item.Title)</h3>
                 <a href="@Url.Action("AlbomDetails", new {id = item.Id, returnUrl = Request.Url.PathAndQuery})">
                     <div class="pGimgWrapper">
-                        <img alt="" src="@item.Avatar" />
-                        @*<img alt="" src="/Content/img/500x350.jpg"/>*@
+                        <img alt="" src="@($"https://redblackclub.ru{item.Avatar}")" />
                         <div class="albomButton">
                             <i class="fa fa-search fa-2x"></i>
                             

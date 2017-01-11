@@ -5,7 +5,7 @@
         @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-
+            @Html.ValidationSummary()
             <div class="visible-lg visible-md titleBorder">
                 <h2>Оставьте заявку на вступление в сообщество!</h2>
             </div>
@@ -13,7 +13,7 @@
             <div class="hidden-lg hidden-md titleBorderMobile ">
                 <h2>Оставьте заявку</h2>
             </div>
-            <h2>на вступление в сообщество!</h2>
+            <h2 class="hidden-lg hidden-md">на вступление в сообщество!</h2>
             <div class="inputRow">
                 <div class="inpItem">
                     <p>*</p>

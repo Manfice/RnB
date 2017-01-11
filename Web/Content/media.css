@@ -1,0 +1,88 @@
+﻿/*iPad in portrait & landscape*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+
+}
+/*iPad in landscape*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+
+}
+/*iPad in portrait*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) { 
+    .hRight, .hLeft {
+        margin: 0 5px;
+    }
+    .hMidle {
+        max-width: 500px;
+    }
+    .hMidle h1 {
+            font-size: 12pt;
+        }
+    .hMidle h1 span {
+            font-size: 14pt;
+        }
+    .hRightWrapper p {
+        font-size: 12pt;
+    }
+    .hRightWrapper>a {
+        font-size: 11pt;
+    }
+    .redLink {
+        font-size: 12pt;
+    }
+    .leftMenu li, .rightMenu li {
+        font-size: 12pt;
+    }
+    .topMenu {
+        padding: 0 5px;
+    }
+    .fBlock {
+        width: 90px;
+    }
+    .fLogo a {
+        font-size: 8pt;
+    }
+    .fLogo p {
+        font-size: 8pt;
+    }
+    .fLogo img{ width: 120px;}
+    .fContact h3 {
+        font-size: 10pt;
+    }
+    .fBlock>.socLinks>a {
+        height: 12px;        
+    }
+
+}
+/*Retina iPad in portrait & landscape*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 2) { /* STYLES GO HERE */}
+
+/*Retina iPad in landscape*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2) { /* STYLES GO HERE */}
+
+/*Retina iPad in portrait*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 2) { /* STYLES GO HERE */ }
+
+/*iPad 1 & 2 in portrait & landscape*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (-webkit-min-device-pixel-ratio: 1){ /* STYLES GO HERE */}

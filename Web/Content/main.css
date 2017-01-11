@@ -168,7 +168,7 @@ nav {
         position: relative;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .middleLogoTopMenu img {
         width: 70px;
         top: -20%;
@@ -180,6 +180,8 @@ nav {
     .menuList > ul > li > a:hover {
         border-bottom: solid 3px transparent;
     }
+
+
 }
 
 .leftMenu {
@@ -259,10 +261,10 @@ nav {
         margin: 5px 15px;
     }
 
-@media only screen and (max-device-width: 450px) {
+@media only screen and (max-device-width: 360px) {
     .ddMenu {
-        width: 400px;
-        right: 20px;
+        width: 310px;
+        right: 10px;
         border: solid 1px;
     }
 
@@ -556,15 +558,17 @@ header, footer {
         transform: scale(.8);
     }
 
-@media only screen and (max-device-width: 450px) {
+@media only screen and (max-device-width: 360px) {
     .hMidle {
         order: 1;
         margin: 0 0 15px 0;
         flex: 1 0 100%;
+        padding: 0 5px;
     }
 
         .hMidle h1 {
-            font-size: 12pt !important;
+            font-size: 12pt;
+            padding: 0;
         }
 
             .hMidle h1 span {
@@ -577,12 +581,12 @@ header, footer {
     }
 
     .hLeftWrapper p {
-        font-size: 12pt;
+        font-size: 10pt;
     }
 
     .socLinksHead a {
-        width: 30px;
-        height: 30px;
+        width: 21px;
+        height: 21px;
         display: block;
         background-size: 100%;
     }
@@ -606,12 +610,12 @@ header, footer {
     }
 
     .redButton {
-        padding: 5px 30px 7px;
+        padding: 5px 20px 7px;
         font-size: 14pt;
     }
 
     .redLink {
-        font-size: 18pt;
+        font-size: 14pt;
     }
 
     .hRight p {
@@ -786,7 +790,7 @@ footer {
         padding: 5px 0;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .fBlock {
         margin: 10px 0;
         max-width: 100%;
@@ -935,7 +939,7 @@ footer {
         transition: 1s;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .dotsLayer {
         left: 40%;
     }
@@ -1097,7 +1101,7 @@ footer {
 .patyWrapper {
     width: 100%;
     position: relative;
-    max-width: 450px;
+    max-width: 400px;
 }
 
 .topStripe {
@@ -1138,7 +1142,7 @@ footer {
         position: relative;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .nearParty h2 {
         font-size: 15pt;
     }
@@ -1268,7 +1272,7 @@ form > p {
     font-size: 12pt;
 }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .titleBorder h2 {
         font-size: 12pt;
         text-align: center;
@@ -1423,9 +1427,9 @@ form > p {
     transition: all 1s;
 }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .plImageWrapper {
-        max-width: 390px;
+        max-width: 310px;
         overflow: hidden;
         width: 100%;
     }
@@ -1536,7 +1540,7 @@ form > p {
     margin: 15px 0;
 }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .privelegii {
         background: url("/Content/img/prive/5555320.jpg") repeat-y top center;
         background-size: 100% 100%;
@@ -1544,14 +1548,14 @@ form > p {
 
     .prevelegiiItem {
         margin: 0;
-        max-width: 170px;
+        max-width: 155px;
         margin: 0 10px;
     }
 
         .prevelegiiItem h3 {
             display: block;
             margin: 10px 0 0 0;
-            font-size: 10pt;
+            font-size: 8pt;
             font-family: "rBold";
         }
 
@@ -1650,7 +1654,7 @@ form > p {
             color: red;
         }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .myColumn > h2 {
         font-size: 14pt;
         text-align: center;
@@ -1703,7 +1707,7 @@ form > p {
         margin: 20px 10px;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .pvImageWr {
         max-width: 200px;
         margin: 5px;
@@ -1880,7 +1884,7 @@ form > p {
         color: #848484;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
 
     .formLoginRow {
         max-width: 440px;
@@ -2007,7 +2011,7 @@ form > p {
     font-size: 16pt;
 }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .patyItemDetails {
         max-width: 400px;
         width: 100%;
@@ -2325,7 +2329,7 @@ form > p {
     position: relative;
 }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .order {
         width: 100%;
     }
@@ -2455,7 +2459,7 @@ form > p {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-    height: 350px;
+    height: 310px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -2463,14 +2467,15 @@ form > p {
     width: 100%;
     margin: 15px 10px;
     text-align: center;
+    background-color: rgb(244, 244, 244);
 }
 
-    .alItem p {
-        margin: 0;
+    .alItem>p {
+        margin: 10px 0 0 0;
     }
 
     .alItem h3 {
-        margin: 10px 10px;
+        margin: 0px 10px 5px;
     }
 
 .pGimgWrapper {
@@ -2620,7 +2625,7 @@ form > p {
     font-size: 12pt;
 }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .albomsRow {
         align-items: center;
         justify-content: center;
@@ -2777,7 +2782,7 @@ form > p {
     letter-spacing: 2px;
 }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .rootItem {
         max-width: 300px;
         width: 100%;
@@ -2877,7 +2882,7 @@ h3 > span {
                 padding: 0;
             }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .myColumn > h3 {
         font-size: 16pt;
     }
@@ -2958,7 +2963,7 @@ h3 > span {
         overflow: hidden;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .contacts tr:last-child {
         height: 550px;
     }
@@ -3057,7 +3062,7 @@ h3 > span {
             padding: 0 0 0 20px;
         }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
     .blogText {
         order: 1;
         padding: 20px;
@@ -3081,13 +3086,13 @@ h3 > span {
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     padding: 30px;
 }
 
 .otziv {
-    margin: 20px 0;
+    margin: 20px 20px ;
     width: 555px;
 }
 
@@ -3102,7 +3107,7 @@ h3 > span {
         font-weight: 100;
     }
 
-@media only screen and (max-device-width: 720px) {
+@media only screen and (max-device-width: 360px) {
 
     .myColumn h1 {
         text-align: center;

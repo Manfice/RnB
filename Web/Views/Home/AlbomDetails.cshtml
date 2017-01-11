@@ -15,7 +15,6 @@
         if (videoBlock != null && videoBlock.Photos.Any())
         {
             <div class="regionTitle">
-                <p><span>Видео с мероприятия</span></p>
             </div>
             <div class="row960w">
                 @foreach (var item in videoBlock.Photos.Where(data => data.VideoLink != null))
@@ -46,7 +45,7 @@
             @foreach (var item in Model.Photos.Where(data => data.Path!=null && data.Region.Id==video.Id))
             {
                 <div class="pvImageWr" data-photoId ="@item.Id">
-                    <a href="@item.Path" data-lightbox="@item.Region.Id" data-title="@item.Region.Description">
+                    <a href="@($"https://redblackclub.ru{item.Path}")" data-lightbox="@item.Region.Id" data-title="@(item.Region.Description??"К этому фото пока нет описания")">
                         @*<img alt="" src="/Content/img/500x350.jpg"/>*@
                         <img class="example-image" alt="" src="@($"https://redblackclub.ru{item.Path}")" />
                         <div class="pvBorder"></div>
@@ -71,7 +70,7 @@
     <div class="pageLinks">
         @Html.PageLinks(Model.PagingInfo, x => Url.Action("AlbomDetails", new {id = Model.Albom.Id, page = x}))
     </div>
-    <a href="/Galary" class="redButton" style="margin-top: 20px;">Назад к коллекции</a>
+    <a href="/Galary" class="redButton" style="margin-top: 20px;">Назад к галерее</a>
 
 </div>
 @section scripts

@@ -23,6 +23,7 @@ namespace Web.Domen.Abstract
         IEnumerable<string> GetPhotoPath(int id);
         ImageGalary GetVideoRegion(int id);
         void AddVideoToAlbom(ImageData model);
+        PatyCategory GetPatyCategoryById(int id);
         Task<string> SavePhotoToRegionAsync(ImageData photo);
     }
 }

@@ -40,7 +40,7 @@
                     <td>@item.PhotoAlboms.Count</td>
                     <td>
                         <a href="@Url.Action("CategoryPatys", new {id=item.Id})" class="greenBtn">События</a>
-                        <a class="greenBtn">Фотоальбомы</a>
+                        <a href="@Url.Action("CreateAlbom","ImageGalary", new {id=item.Id})" class="greenBtn">Фотоальбомы</a>
                         <a href="@Url.Action("AddCategory", new {id = item.Id, parent = item.ParentCategory.Id})" class="greenBtn">Изменить</a>
                         <a href="@Url.Action("DeleteCategory", new {id = item.Id})" class="redBtn" onclick="return confirm('Удалить?')">Удалить</a>
                     </td>

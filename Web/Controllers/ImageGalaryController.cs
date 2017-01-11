@@ -37,10 +37,10 @@ namespace Web.Controllers
                 Category = new PatyCategory()
             };
             if (id == 0) return View(model);
-            var patyEvent = _photo.GetPatyById(id);
+            var patyEvent = _photo.GetPatyCategoryById(id);
             model.Title = patyEvent.Title;
-            model.AlbomDate = patyEvent.PatyDate;
-            model.Category = patyEvent.Category;
+            model.AlbomDate = DateTime.Today;
+            model.Category = patyEvent;
             return View(model);
         }
         [HttpPost]

@@ -11,23 +11,21 @@
         @foreach (var item in Model.OrderBy(paty => paty.PatyDate))
         {
             <div class="patyItemDetails">
-                <a href="/sobitie/@item.RouteTitle">
+                <a href="/spisok-meropriatiy/@item.Category.RouteTitle">
                     <div class="npImgWrapper">
                         <h3>@item.PatyDate.ToString("M")</h3>
-                        @if (item.Avatar != null)
+                        @if (item.Category.Avatar != null)
                         {
-                            <img alt="" src="@item.Avatar.Path" />
+                            <img alt="" src="@($"https://redblackclub.ru{item.Category.Avatar.Path}")"  />
                         }
                         else
                         {
                             <img alt="" src="/Content/img/pList/454x312.jpg" />
                         }
-                        @*<img alt="" src="/Content/img/pList/454x312.jpg"/>*@
                         <div class="flyingButton">
                             <p class="redButton">Подробнее</p>
                         </div>
                         <div class="title">
-                            @*<a href="/sobitie/@item.RouteTitle" class="redButton">Подробнее</a>*@
                             <h3>@item.Title</h3>
                         </div>
                     </div>

@@ -46,7 +46,10 @@ namespace Web.Domen.Repositorys
         {
             return _context.Paties.Find(id);
         }
-
+        public PatyCategory GetPatyCategoryById(int id)
+        {
+            return _context.PatyCategories.Find(id);
+        }
         public IEnumerable<string> GetChildElements(int albomId)
         {
             var photos = _context.Photos.Where(p => p.Region.Albom.Id == albomId).Select(data => data.FullPath);
