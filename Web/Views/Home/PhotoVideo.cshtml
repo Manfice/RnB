@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Web.Domen.Models.ImageData>
+﻿@using Web.Helpers
+@model IEnumerable<Web.Domen.Models.ImageData>
 
 <div class="myColumn" id="photoBlock">
     <h2>Посмотрите фото и видео с наших мероприятий</h2>
@@ -38,11 +39,23 @@
         }
     </div>
     <div class="row960wsb" style="display: none;" data-bind="visible:photoView()==='VIDEO'">
-        @foreach (var video in Model.Where(data => !string.IsNullOrEmpty(data.VideoLink)))
+        @if (HttpContext.Current.Request.IsMobileBrowser())
         {
-            <div class="pvVideoWr">
-                <iframe width="430" height="220" src="@video.VideoLink" allowfullscreen frameborder="0"></iframe>
-            </div>
+            foreach (var video in Model.Where(data => !string.IsNullOrEmpty(data.VideoLink)))
+            {
+                <div class="pvVideoWr">
+                    <iframe width="300" height="170" src="@video.VideoLink" allowfullscreen frameborder="0"></iframe>
+                </div>
+            }
+        }
+        else
+        {
+            foreach (var video in Model.Where(data => !string.IsNullOrEmpty(data.VideoLink)))
+            {
+                <div class="pvVideoWr">
+                    <iframe width="430" height="220" src="@video.VideoLink" allowfullscreen frameborder="0"></iframe>
+                </div>
+            }
         }
         @*<div class="pvImageWr">
             <div class="pvBorder"></div>

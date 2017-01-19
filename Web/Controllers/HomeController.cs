@@ -304,7 +304,7 @@ namespace Web.Controllers
             return PartialView();
         }
         [HttpPost]
-        public string AskMePopUp(string fio, string phone, string email, string message)
+        public async Task<string> AskMePopUp(string fio, string phone, string email, string message)
         {
             var errors = new StringBuilder();
             if(string.IsNullOrEmpty(fio)) errors.Append($"<li>Имя это обязательное поле!</li>");
@@ -319,8 +319,8 @@ namespace Web.Controllers
             body = body.Replace("{2}", email);
             body = body.Replace("{3}", message);
 
-            PassAuth.SendMyMail(body, "info@redblackclub.ru", "Форма отбратной связи");
-            PassAuth.SendMyMail(body, "c592@yandex.ru", "Форма отбратной связи");
+            await PassAuth.SendMyMailAsync(body, "steellive@yandex.ru", "Форма отбратной связи");
+            await PassAuth.SendMyMailAsync(body, "c592@yandex.ru", "Форма отбратной связи");
 
             return "Ok";
         }

@@ -14,8 +14,6 @@
         var videoBlock = Model.Albom.Regions.FirstOrDefault(galary => galary.Title.Equals("video", StringComparison.CurrentCultureIgnoreCase));
         if (videoBlock != null && videoBlock.Photos.Any())
         {
-            <div class="regionTitle">
-            </div>
             <div class="row960w">
                 @foreach (var item in videoBlock.Photos.Where(data => data.VideoLink != null))
                 {
@@ -36,11 +34,13 @@
     }
     @foreach (var video in Model.Photos.Select(data => data.Region).Distinct())
     {
-
-        <div class="regionTitle">
-            <p><span>@video.Title</span></p>
-            <p class="regionDescr">@video.Description</p>
-        </div>
+        if (!string.IsNullOrEmpty(video.Title) && !string.IsNullOrEmpty(video.Description))
+        {
+            <div class="regionTitle">
+                <p><span>@video.Title</span></p>
+                <p class="regionDescr">@video.Description</p>
+            </div>
+        }
         <div class="rowFullw">
             @foreach (var item in Model.Photos.Where(data => data.Path!=null && data.Region.Id==video.Id))
             {

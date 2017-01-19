@@ -32,7 +32,6 @@
 		<div class="noActivePaty">
 			<h1>К сожалению, время записи на это мероприятие истекло. </h1>
 			<h2>Но вы можете заранее зарезервировать места на наши ближайшие мероприятия</h2>
-			<p>Резервируйте места заранее на наши будущие мероприятия.</p>
 			<a class="redButton" href="@Url.Action("NearDetails","Home")">Смотреть ближайшие мероприятия</a>
             <h2>Или посмотрите как прошли предыдущие наши встречи:</h2>
 
@@ -107,13 +106,18 @@
 			}(document, 'script', 'facebook-jssdk'));
 		</script>*@
 
-	<script type="text/javascript">VK.Widgets.Like("vk_like", { type: "button" });</script>
+	@*<script type="text/javascript">VK.Widgets.Like("vk_like", { type: "button" });</script>*@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 			Countdown(@Html.Raw(JsonConvert.SerializeObject(paty.PatyDate.ToUniversalTime())), ['days', 'hours', 'minutes', 'seconds'], function() {
 
 			});
+		    $(".regToPaty").submit(function(e) {
+		        if ($("#fio").val()==="") {
+		            alert("WOW");
+		        }
+		    });
 		})
 
 		@*$("#vk_share_button").tweetAction({

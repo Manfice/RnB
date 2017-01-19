@@ -1,7 +1,7 @@
 ﻿@model Web.Domen.Models.Paty
 @{
     var currUrl = $"https://redblackclub.ru/sobitie/{Model.RouteTitle}";
-    var imgUrl = $"https://redblackclub.ru{Model.Avatar.Path}";
+    var imgUrl = $"https://redblackclub.ru{Model.Category.Avatar.Path}";
     var vkUrl = $"https://vk.com/share.php?url={currUrl}&title={Model.Title}&description={Model.Descr}&image={imgUrl}&noparse=true";
 }
     <div class="grayDate">

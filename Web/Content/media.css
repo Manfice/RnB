@@ -2,20 +2,123 @@
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) {
-
+    .order {
+        width: auto;
+    }
+        .slItem {
+        height: 360px;
+    }
+    .buttonBorder.absolute {
+            position: relative;
+            bottom: 0;
+            height: 35px;
+    }
+    .buttonBorder {
+       background-color: transparent;
+    }
+    .prevelegiiItemAbout {
+        width: auto;
+    }
+        .fLogo p, .fLogo a {
+        font-size: 8pt;
+    }
+    .fLogo p a{
+        display: inline;
+    }
+    .buttonBorder>div {
+        padding: 0 20px;
+        background-color: white;
+    }
+    .patyDataImageWraper {
+        height: 85px;
+    }
+    .patyData {
+        height: auto;
+    }
+    .redline {
+        left: 20px;
+    }
+    .pD {
+        height: 100px;
+    }
 }
 /*iPad in landscape*/
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
 and (orientation : landscape) { 
-
+        .patyCarousel {
+        max-width: 930px;
+    }
+            .prevelegiiItem {
+        width: auto;
+        margin: 0 20px;
+    }
+                .fBlock {
+        width: 90px;
+    }
+    .fLogo a {
+        font-size: 8pt;
+    }
+    .fLogo p {
+        font-size: 8pt;
+    }
+    .fLogo img{ width: 120px;}
+    .fContact h3 {
+        font-size: 10pt;
+    }
+    .alItem {
+        width: auto;
+    }
+    .blogList li a {
+        flex-flow: row;
+    }
+    .contacts {
+        width: 100%;
+        max-width: 1024px;
+    }
+    .hand {
+        overflow: hidden;
+    }
+    .rootItem {
+        width: auto;
+    }
+        .albomButton {
+        height: 173px;
+            top: -173px;
+    }
+        .regFormWrapper form {
+            padding-bottom: 0;
+        }
 }
 /*iPad in portrait*/
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
 and (orientation : portrait) { 
+        .orderFormInnerBlock {
+        max-width: 300px;
+    }
+        .l {
+            max-width: 400px;
+        }
+        .grayDate .itm {
+            height: 70px;
+        }
+        .itm-day p {
+            top: -15px;
+        }
+        .itm-month-year {
+            padding-top: 7px;
+        }
+        .itm-title {
+           width: 120px;
+        }
+        .regFormWrapper form {
+            padding-bottom: 0;
+        }
+
+        
     .hRight, .hLeft {
         margin: 0 5px;
     }
@@ -46,20 +149,63 @@ and (orientation : portrait) {
     .fBlock {
         width: 90px;
     }
-    .fLogo a {
-        font-size: 8pt;
-    }
-    .fLogo p {
-        font-size: 8pt;
-    }
     .fLogo img{ width: 120px;}
     .fContact h3 {
         font-size: 10pt;
     }
-    .fBlock>.socLinks>a {
-        height: 12px;        
+    .patyCarousel {
+        max-width: 600px;
     }
+    .slideTitle {
+        font-size: 12pt;
+    }
+    .inpItem input {
+        flex: 1 0 auto;
+    }
+    .formWrapper>form {
+        width: 720px;
+    }
+    .titleBorderMobile h2{
+        position: relative;
+        line-height: 10px;
+        background-color: white;
+        top: -10px;
+        padding: 0 20px;
 
+    }
+    .nearParty h2 {
+        font-size: 16pt;
+    }
+    .prevelegiiItem {
+        width: auto;
+        margin: 0 20px;
+    }
+    .myColumn>h2 {
+        font-size: 16pt;
+    }
+    .lList:first-child {
+        flex: 0 0 auto;
+    }
+    .popUpWrapper form {
+        max-width: 650px;
+    }
+    .formLoginRow {
+        max-width: 360px;
+    }
+    .alItem{width: auto}
+    .hand {
+        overflow: hidden;
+    }
+    .rootItem {
+        width: auto;
+    }
+    .albomButton {
+        height: 178px;
+        top: -178px;
+    }
+    .absolute button {
+        font-size: 12pt;
+    }
 }
 /*Retina iPad in portrait & landscape*/
 @media only screen 
@@ -85,4 +231,574 @@ and (-webkit-min-device-pixel-ratio: 2) { /* STYLES GO HERE */ }
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) 
-and (-webkit-min-device-pixel-ratio: 1){ /* STYLES GO HERE */}
+and (-webkit-min-device-pixel-ratio: 1){ }
+/*iPhone 6 Media Queries*/
+
+/*iPhone 6 in portrait
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+    .topPicture {
+        height: 350px;
+    }
+    .patyDataImageWraper {
+        height: 128px;
+    }
+    .patyData {
+        height: auto;
+    }
+    .redline {
+        left: 20px;
+    }
+    .orderMobile {
+        max-width: 350px;
+        margin-bottom: 20px;
+    }
+    .grayDate .itm {
+        height: 70px;
+    }
+    .itm-day p{
+        top: -13px;
+    }
+    .itm-month-year {
+        padding-top: 3px;
+    }
+    .itm-month-year p {
+        font-size: 12pt;
+    }
+    .regFormWrapper {
+        margin-top: 25px;
+        margin-bottom: 30px;
+    }
+    .column {
+        margin-top: 0;
+    }
+    .column h2 {
+        text-align: center;
+    }
+    .subBlock {
+        height: 182px;
+        bottom: -182px;
+    }
+}*/
+/*iPhone 6 Plus Media Queries*/
+/*iPhone 6 Plus in portrait & landscape*/
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) { /* STYLES GO HERE */}
+/*iPhone 6 Plus in landscape*/
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : landscape) { /* STYLES GO HERE */}
+/*iPhone 6 Plus in portrait*/
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : portrait) { /* STYLES GO HERE */ }
+/*iPhone 5 & 5S Media Queries*/
+/*iPhone 5 & 5S in portrait & landscape*/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) { 
+    body {
+        width: 100%;
+    }
+    .redButton, .grayButton {
+        font-size: 10pt;
+    }
+        .hRight p{
+        font-size: 11pt;
+    }
+    .hRightWrapper>a {
+        font-size: 10pt;
+    }
+    .hLeftWrapper p {
+        font-size: 9pt;
+    }
+    .btnBlock a {
+        font-size: 12pt;
+    }
+    .nearParty h2, .myColumn h2 {
+        font-size: 14pt;
+    }
+    .prevelegiiItem {
+        width: auto;
+        max-width: 130px
+    }
+    .prevelegiiItem p {
+        font-size: 8pt;
+    }
+    .patyData {
+        height: auto;
+    }
+    .patyDataImageWraper {
+        height: 124px
+    }
+    .formWrapper form h2 {
+        font-size: 12pt;
+    } 
+    .titleBorderMobile {
+        top: -15px;
+    }
+    .formWrapper > form {
+        padding: 10px 0 0 0;
+    }
+    .offerBlock > .formWrapper > form > .buttonBorder {
+        bottom: -20px;
+    }
+    .inputRow {
+        padding: 0;
+    }
+    .inpItem {
+        width: 70%;
+    }
+    .inpItem input[placeholder] {
+        font-size: 10pt;
+    }
+    .offerBlock>p {
+        font-size: 8pt;
+    }
+        .pImgWrapper img {
+        border-top: solid 5px #808080;
+        border-top: solid 5px rgba(128, 128, 128, 0.8);
+        border-left: solid 5px #808080;
+        border-left: solid 5px rgba(128, 128, 128, 0.8);
+        -webkit-box-shadow: 5px 5px black;
+        -ms-box-shadow: 5px 5px black;
+        box-shadow: 5px 5px black;
+    }
+    .pvImageWr {
+        width: auto;
+        max-width: 125px;
+        margin: 5px 10px;
+        height: 90px;
+        position: relative;
+    }
+    .pvBorder {
+        border: solid 5px #ffffff;
+        border: solid 5px rgba(255, 255, 255, 0.7);
+        height: 90px;
+    }
+    .sDescrBlock {
+        padding: 20px 0;
+    }
+    .orderMobile {
+        max-width: 300px;
+    }
+    .discount {
+        height: auto;
+    }
+    .column h2 {
+        text-align: center;
+        padding-top: 20px;
+    }
+    .albomButton {
+        height: 158px;
+        top: -158px;
+    }
+    .alItem {
+        max-width: 290px;
+    }
+    .statItem {
+        font-size: 11pt;
+        width: 45px;
+    }
+}
+/*iPhone 5 & 5S in landscape*/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) { 
+    .patyData {
+        height: auto;
+    }
+    .patyDataImageWraper {
+        height: 173px;
+    }
+    .headerRow {
+        flex-flow: row wrap;
+    }
+    .hMidle {
+        order: 0;
+        padding: 0 0 10px 0;
+    }
+    .hLeft {
+        order: 1;
+    }
+    .hRight {
+        order: 2;
+    }
+    .hMidle h1 {
+        font-size: 17pt;
+    }
+    .hMidle h1 span {
+        font-size: 18pt;
+    }
+    .fBlock {
+        max-width: 140px;
+        font-size: 9pt
+    }
+    .fBlock img {
+        max-width: 100%;
+    }
+    .fContact h3 {
+        font-size: 10pt;
+    }
+    .fWe {
+        max-width: 100%;
+    }
+    .redBlockArea img {
+        width: 128%;
+    }
+    .plImageWrapper {
+        width: 250px;
+    }
+    .slItem {
+        height: 300px;
+    }
+    .alItem {
+        max-width: 260px;
+    }
+    .albomButton {
+        height: 148px;
+        top: -148px;
+    }
+    .rootItem {
+        max-width: 280px;
+    }
+    .subBlock {
+        height: 122px;
+        bottom: -122px;
+    }
+    .otziv {
+        width: 400px;
+    }
+}
+/*iPhone 5 & 5S in portrait*/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) { /* STYLES GO HERE */ }
+/*iPhone 6 in portrait*/
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+    .topPicture {
+        height: 350px;
+    }
+    .patyDataImageWraper {
+        height: 136px;
+    }
+    .patyData {
+        height: auto;
+    }
+    .redline {
+        left: 20px;
+    }
+    .orderMobile {
+        max-width: 350px;
+        margin-bottom: 20px;
+    }
+    .grayDate .itm {
+        height: 70px;
+    }
+    .itm-day p{
+        top: -13px;
+    }
+    .itm-month-year {
+        padding-top: 3px;
+    }
+    .itm-month-year p {
+        font-size: 12pt;
+    }
+    .regFormWrapper {
+        margin-top: 25px;
+        margin-bottom: 30px;
+    }
+    .column {
+        margin-top: 0;
+    }
+    .column h2 {
+        text-align: center;
+    }
+    .subBlock {
+        height: 189px;
+        bottom: -189px;
+    }
+
+}
+/*iPhone 6 in portrait & landscape*/
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) { 
+    .menuList > ul > li > a:hover {
+        border: none;
+    }
+    .ddMenu {
+        width: 310px;
+        right: 10px;
+        border: solid 1px;
+    }
+
+        .ddMenu li ul {
+            padding: 5px 20px;
+            font-size: 12pt;
+        }
+        .albomButton {
+        height: 169px;
+        top: -169px;
+    }
+        .regionDescr {
+            padding: 10px;
+        }
+    .hMidle {
+        order: 0;
+        padding: 0 0 10px 0;
+    }
+    .hLeft {
+        order: 1;
+    }
+    .hRight {
+        order: 2;
+    }
+    .hMidle h1 {
+        font-size: 12pt;
+    }
+    .hMidle h1 span {
+        font-size: 12pt;
+    }
+    .redButton, .grayButton {
+        font-size: 12pt;
+    }
+    .hRight p {
+        font-size: 14pt;
+    }
+    .hRightWrapper>a {
+        font-size: 13pt;
+    }
+    .redLink {
+        font-size: 13pt;
+    }
+    .slItem {
+        height: 300px;
+    }
+    .slideTitle {
+        font-size: 12pt;
+    }
+    .redBlockArea img {
+        left: -35px;
+        width: 125%;
+    }
+    .dotsLayer {
+        left: 30%;
+    }
+    .nearParty h2, .myColumn h2 {
+        font-size: 14pt;
+        text-align: center;
+    }
+    .prevelegiiItem {
+        width: auto;
+        max-width: 140px;
+        flex: 0 0 auto;
+        margin: 0 20px;
+    }
+    .prevelegiiItem h3 {
+        font-size: 8pt;
+        margin: 15px 0 0;
+    }
+    .prevelegiiItem p {
+        font-size: 8pt;
+    }
+    .pImgWrapper {
+        height: 100%;
+    }
+    .pImgWrapper img {
+        border-top: solid 5px #808080;
+        border-top: solid 5px rgba(128, 128, 128, 0.8);
+        border-left: solid 5px #808080;
+        border-left: solid 5px rgba(128, 128, 128, 0.8);
+        -webkit-box-shadow: 5px 5px black;
+        -ms-box-shadow: 5px 5px black;
+        box-shadow: 5px 5px black;
+    }
+    .pvImageWr {
+        width: auto;
+        max-width: 145px;
+        margin: 5px 10px;
+        height: 97px;
+        position: relative;
+    }
+    .pvBorder {
+        border: solid 5px #ffffff;
+        border: solid 5px rgba(255, 255, 255, 0.7);
+        height: 97px;
+    }
+    .fBlock {
+        max-width: 50%;
+        margin: 10px 0;
+    }
+    .fWe {
+        order: 5;
+        max-width: 100%;
+    }
+    .middleLogoTopMenu img {
+        width: 80px;
+        top: -10px;
+    }
+    .titleBorderMobile {
+        position: relative;
+        top: -9px;
+        background-color: white;
+        padding: 0 20px;
+        line-height: 10px;
+
+    }
+    .formWrapper>form {
+        margin: 0 0 20px 0;
+        padding: 0;
+    }
+    .actions {
+        display: none;
+    }
+    .patyItemDetails {
+        max-width: 345px;
+    }
+    .itmDescr {
+        height: 70px;
+    }
+        .fLogo p a{
+
+        display: inline;
+    }
+        .popUpWrapper form{
+            max-width: 270px;
+        }
+        .formLoginRow {
+            max-width: 310px;
+        }
+        .titleBorder h2 {
+            font-size: 10pt;
+        }
+        .descrAlingCenter {
+            padding: 0;
+        }
+        .descrAlingCenter p {
+            font-size: 16pt;
+            padding: 10px 5px;
+        }
+                .buttonBorder.absolute {
+            position: relative;
+            bottom: 0;
+            height: 35px;
+    }
+                    .buttonBorder>div {
+        padding: 0 20px;
+        background-color: white;
+    }
+    .regFormWrapper form {
+        padding-bottom: 0;
+    }
+    .formWrapper form h2 {
+        font-size: 14pt;
+    }
+    .myColumn>h1 {
+        font-size: 14pt;
+    }
+    .inpItem {
+        width: auto;
+    }
+}
+/*iPhone 6 in landscape*/
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : landscape) { 
+    body {
+        width: 667px;
+    }
+    .slItem {
+        height: 400px;
+    }
+    .redBlockArea img {
+        left: -60px;
+    }
+    .headerRow {
+        flex-flow: row nowrap;
+    }
+    .hLeft {
+        order: 0;
+    }
+    .hMidle {
+        order: 1;
+        padding: 0 10px;
+    }
+    .hMidle h1 {
+        font-size: 10pt;
+    }
+    .hMidle h1 span {
+        font-size: 11pt;
+    }
+    .hRight {
+        order: 2;
+    }
+    .hRight p{
+        font-size: 11pt;
+    }
+    .hRightWrapper>a {
+        font-size: 10pt;
+    }
+    .inpItem input {
+        width: 100%;
+    }
+    .fContact h3 {
+        font-size: 12pt;
+    }
+    .rootItem {
+        max-width: 300px;
+    }
+    .subBlock {
+        height: 136px;
+        bottom: -136px;
+    }
+    .topPicture {
+        height: 300px;
+    }
+    .topPicture img {
+        width: 100%;
+    }
+    .regFormWrapper form {
+        margin: 20px 0 30px;
+    }
+    .column {
+        margin-top: 0;
+    }
+    .column h2 {
+        margin: 20px 0 0;
+        display: block;
+    }
+        .orderMobile {
+        max-width: 450px;
+        margin-bottom: 20px;
+    }
+    .grayDate .itm {
+        height: 70px;
+    }
+    .itm-day p{
+        top: -13px;
+    }
+    .itm-month-year {
+        padding-top: 15px;
+    }
+    .itm-month-year p {
+        font-size: 12pt;
+    }
+    .regFormWrapper .inpItem {
+        width: 300px;
+    }
+    .patyDataImageWraper {
+        height: 173px
+    }
+}

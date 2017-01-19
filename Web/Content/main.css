@@ -567,12 +567,13 @@ header, footer {
     }
 
         .hMidle h1 {
-            font-size: 12pt;
+            font-size: 10pt;
             padding: 0;
         }
 
             .hMidle h1 span {
-                font-size: 12pt;
+                font-size: 11pt;
+                font-weight: bold;
             }
 
     .hLeft {
@@ -1010,15 +1011,17 @@ footer {
         }
 
 .patyCarousel {
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     margin: 40px 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    max-width: 940px;
 }
 
 .carItem {
     position: relative;
+    max-width: 300px;
 }
 
 .topString {
@@ -1072,6 +1075,8 @@ footer {
 
     .patyBlockDesctop a {
         margin: 0 20px 40px;
+        width: 273px;
+        height: 200px; 
     }
 
 .redline {
@@ -1079,7 +1084,7 @@ footer {
     width: 100px;
     position: relative;
     top: 0px;
-    left: 0px;
+    left: 20px;
 }
 
 .patyBlock {
@@ -1120,7 +1125,6 @@ footer {
     background-color: white;
     position: relative;
     padding: 20px;
-    height: 400px;
     margin: 40px 0 0 0;
 }
 
@@ -1132,7 +1136,7 @@ footer {
 
 .patyDataImageWraper {
     width: 100%;
-    height: 215px;
+    height: 85px;
     padding: 0 20px;
 }
 

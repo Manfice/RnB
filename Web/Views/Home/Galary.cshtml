@@ -43,7 +43,7 @@
                         </div>
                         <div class="statItem">
                             <i class="fa fa-photo"></i>
-                            <p>@item.Regions.Sum(galary => galary.Photos.Count)</p>
+                            <p>@item.Regions.Sum(galary => galary.Photos.Count(p => string.IsNullOrEmpty(p.VideoLink)))</p>
                         </div>
                         <div class="statItem">
                             <i class="fa fa-film"></i>
