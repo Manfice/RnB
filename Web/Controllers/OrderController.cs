@@ -92,7 +92,7 @@ namespace Web.Controllers
                     ShopSumAmount = shopSumAmount
                 };
                 _home.AcceptPayAsync(aviso, order);
-                var body = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticket.html"));
+                var body = System.IO.File.ReadAllText(Server.MapPath("/Views/Shared/ticketMobile.html"));
                 var emessageBody = MakeOrderBody(body, order);
                 PassAuth.SendMyMail(emessageBody, order.Customer.Email, "Приглашение на мероприятие с сайта redblackclub.ru");
             }
@@ -131,6 +131,7 @@ namespace Web.Controllers
             result = result.Replace("{8}", oDate[0] + " " + oDate[1]);
             result = result.Replace("{9}", order.OrderDate.ToShortTimeString());
             result = result.Replace("{10}", order.Id.ToString());
+            result = result.Replace("{11}", order.Id.ToString());
             return result;
         }
 

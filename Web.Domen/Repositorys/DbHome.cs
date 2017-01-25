@@ -46,7 +46,16 @@ namespace Web.Domen.Repositorys
         public async Task<Customer> GetCustomerAsync(OrderViewmodel model)
         {
             var customer = await _context.Customers.FirstOrDefaultAsync(c =>c.Email==model.Email);
-            if (customer != null) return customer;
+            if (customer != null)
+            {
+                if (string.IsNullOrEmpty(customer.Fio) && !string.IsNullOrEmpty(model.Fio))
+                        customer.Fio = model.Fio;
+                    if (string.IsNullOrEmpty(customer.Phone) && !string.IsNullOrEmpty(model.Phone))
+                        customer.Phone = model.Phone;
+                
+                await _context.SaveChangesAsync();
+                return customer;
+            }
             customer = new Customer
             {
                 Email = model.Email,

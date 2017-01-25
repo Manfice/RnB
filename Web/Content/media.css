@@ -523,17 +523,21 @@ and (orientation : portrait) {
     }
     .column h2 {
         text-align: center;
+        padding: 0 10px;
     }
     .subBlock {
         height: 189px;
         bottom: -189px;
     }
-
 }
 /*iPhone 6 in portrait & landscape*/
 @media only screen 
 and (min-device-width : 375px) 
 and (max-device-width : 667px) { 
+    .contacts li p {
+        display: block;
+        margin-left: 20px;
+    }
     .menuList > ul > li > a:hover {
         border: none;
     }
@@ -710,6 +714,22 @@ and (max-device-width : 667px) {
     .inpItem {
         width: auto;
     }
+    .discount p a {
+        display: inline-block;
+        margin: 5px 30px 5px 0; 
+    }
+    .tdImage > .pvBorder {
+        height: 100%
+    }
+    .regFormWrapper form .inpItem {
+        flex-flow: column;
+    }
+    .regFormWrapper form .inpItem .error {
+        color: red;
+    }
+    input:focus:required:invalid {
+        border: solid 1px red;
+    }
 }
 /*iPhone 6 in landscape*/
 @media only screen 
@@ -776,7 +796,7 @@ and (orientation : landscape) {
         margin-top: 0;
     }
     .column h2 {
-        margin: 20px 0 0;
+        margin: 20px 5px 0;
         display: block;
     }
         .orderMobile {

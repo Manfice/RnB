@@ -1,11 +1,10 @@
-﻿<div style="display: none;" data-bind="visible:askme">
+﻿<div id="askMePopUpForm" style="display: none;" data-bind="visible:askme">
     <div class="popUpWrapper">
         <div class="formWrapper">
             <div class="formClose">
                 <p data-bind="click:popUp.askmenow">x</p>
             </div>
-            @using (Html.BeginForm())
-            {
+            <form id="askMePopUp"> 
                 @Html.AntiForgeryToken()
                 <div class="titleBorder">
                     <h2>Форма обратной связи</h2>
@@ -14,21 +13,21 @@
                 <div class="inputRow">
                     <div class="inpItem">
                         <p>*</p>
-                        <input type="text" name="Title" data-bind="value:feedback.fio" placeholder="Имя, фамилия"/>
+                        <input type="text" name="Title" data-bind="value:feedback.fio" placeholder="Имя, фамилия" required/>
                     </div>
                     <div class="inpItem">
                         <p>*</p>
-                        <input type="tel" name="Phone" data-bind="value:feedback.phone" placeholder="Телефон"/>
+                        <input type="tel" name="Phone" data-bind="value:feedback.phone" placeholder="Телефон" required/>
                     </div>
                     <div class="inpItem">
-                        <input type="email" name="Email" data-bind="value:feedback.email" placeholder="E-mail"/>
+                        <input type="email" name="Email" data-bind="value:feedback.email" placeholder="E-mail" required/>
                     </div>
                 </div>
                 <textarea class="messageBox" name="message" placeholder="Сообщение" data-bind="textInput:feedback.message" rows="5"></textarea>
                 <div class="buttonBorder">
-                    <button type="button" data-bind="click:popUp.feedbackSubmit" class="redButton" href="#">Отправить</button>
+                    <button type="submit" class="redButton" href="#">Отправить</button>
                 </div>
-            }
+            </form>
 
         </div>
         <p style="color: white">* Поля, отмеченные звездочкой "*" - обязательны к заполнению</p>

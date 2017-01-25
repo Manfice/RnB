@@ -22,7 +22,7 @@
                                 <div class="bottomFade"></div>
                             </div>
                             <div class="blogPvImageWr tdImage">
-                                <img alt="" src="@(post.Avatar ?? "/Content/img/Blog.jpg")"/>
+                                <img alt="" src="@(post.Avatar!=null ? $"https://redblackclub.ru{post.Avatar}":"/Content/img/Blog.jpg")"/>
                                 <div class="pvBorder">
                                 </div>
                             </div>

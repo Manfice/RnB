@@ -93,9 +93,9 @@
 
 @section scripts
 {
-	@*<script src="~/Scripts/jquery.vkAction.js"></script>*@
-	<script src="~/Scripts/AdminJs/Countdown.js"></script>
-	@*<script>
+    @*<script src="~/Scripts/jquery.vkAction.js"></script>*@
+    <script src="~/Scripts/AdminJs/Countdown.js"></script>
+    @*<script>
 			(function(d, s, id) {
 				var js, fjs = d.getElementsByTagName(s)[0];
 				if (d.getElementById(id)) return;
@@ -106,21 +106,15 @@
 			}(document, 'script', 'facebook-jssdk'));
 		</script>*@
 
-	@*<script type="text/javascript">VK.Widgets.Like("vk_like", { type: "button" });</script>*@
+    @*<script type="text/javascript">VK.Widgets.Like("vk_like", { type: "button" });</script>*@
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			Countdown(@Html.Raw(JsonConvert.SerializeObject(paty.PatyDate.ToUniversalTime())), ['days', 'hours', 'minutes', 'seconds'], function() {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Countdown(@Html.Raw(JsonConvert.SerializeObject(paty.PatyDate.ToUniversalTime())), ['days', 'hours', 'minutes', 'seconds'], function() {});
 
-			});
-		    $(".regToPaty").submit(function(e) {
-		        if ($("#fio").val()==="") {
-		            alert("WOW");
-		        }
-		    });
-		})
+        });
 
-		@*$("#vk_share_button").tweetAction({
+        @*$("#vk_share_button").tweetAction({
 				title: '@(Model.Title)',
 				url: '@("https://redblackclub.ru" + Request.Url.PathAndQuery)',
 				description: '@Html.Raw(paty.Descr.Replace("\r\n", string.Empty))',
@@ -152,7 +146,7 @@
 				}
 			);
 		});*@
-	</script>
+    </script>
 }
 
 @*@foreach (var item in Model.Paties.OrderByDescending(paty => paty.PatyDate))

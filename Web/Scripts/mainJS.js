@@ -2,6 +2,17 @@
     $(".topMenu").click(function () {
         $(".ddMenu").slideToggle('slow');
     });
+    jQuery.extend(jQuery.validator.messages, {
+        required: "Это обязательное поле.",
+        email: "Укажите коректный E-mail"
+    });
+    $(".regToPaty").validate({ lang: "ru" });
+    $("#registerForm").validate({ lang: "ru" });
+    $("#registerPopUp").validate({ lang: "ru" });
+
+    $("#feedBackFoot").on("click", function() {
+        $("#askMePopUpForm").css("display","block");
+    });
 
     var topSlider = $("#topSlider");
 
@@ -221,19 +232,31 @@ var popUp = function () {
             data: modelPopUp.feedback,
             type: "POST",
             success: function (data) {
-                console.log(data);
-                if (data !== "Ok") {
-                    $(".validation-summary-errors").append(data);
-                } else {
+                    modelPopUp.thankYouMessage("Спасибо, ваше сообщение отправленно.");
+                    askmenow();
+                    thanks();
+            }
+        });
+    }
+    $("#askMePopUp").validate({
+        lang: "ru",
+        submitHandler: function (form) {
+            $.ajax({
+                url: "/Home/AskMePopUp",
+                data: modelPopUp.feedback,
+                type: "POST",
+                success: function (data) {
                     modelPopUp.thankYouMessage("Спасибо, ваше сообщение отправленно.");
                     askmenow();
                     thanks();
                 }
-            }
-        });
-    }
+            });
+            return false;
+        }
+    });
     var feedbackSubmit = function () {
-        sendFeedback();
+
+
     };
     var init = function () {
         ko.applyBindings(modelPopUp, document.getElementById("head"));

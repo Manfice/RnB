@@ -16,7 +16,7 @@
                         </h2>
                     </div>
                     <div class="inpItem">
-                        @Html.TextBoxFor(vm => vm.Email, new { placeholder = "E-mail" })
+                        @Html.TextBoxFor(vm => vm.Email, new { placeholder = "E-mail", required=""})
                     </div>
                     <div class="inpItem">
                         @Html.PasswordFor(vm => vm.Password, new {placeholder = "Пароль"})

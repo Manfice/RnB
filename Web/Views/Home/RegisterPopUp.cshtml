@@ -4,7 +4,7 @@
             <div class="formClose">
                 <p data-bind="click:popUp.registerMe">x</p>
             </div>
-            @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+            @using (Html.BeginForm("Register", "Auth", FormMethod.Post, new {id="registerPopUp"}))
             {
                 @Html.AntiForgeryToken()
                 <div class="visible-lg visible-md titleBorder">
@@ -18,15 +18,15 @@
                 <div class="inputRow">
                     <div class="inpItem">
                         <p>*</p>
-                        <input type="text" name="Title" value="" placeholder="Имя, фамилия" />
+                        <input type="text" name="Title" value="" placeholder="Имя, фамилия" required/>
                     </div>
                     <div class="inpItem">
                         <p>*</p>
-                        <input type="tel" name="Phone" value="" placeholder="Телефон" />
+                        <input type="tel" name="Phone" value="" placeholder="Телефон" required/>
                     </div>
                     <div class="inpItem">
                         <p>*</p>
-                        <input type="email" name="Email" value="" placeholder="E-mail" />
+                        <input type="email" name="Email" value="" placeholder="E-mail" required/>
                     </div>
                 </div>
                 <div class="inputRow">
@@ -34,11 +34,11 @@
                         <p></p>
                         <input type="text" name="City" value="" placeholder="Город"/>
                     </div>
-                    <div class="inpItem">
+                    <div class="hidden-xs inpItem">
                         <p></p>
                         <input type="text" name="Birthday" value="" placeholder="Дата рождения"/>
                     </div>
-                    <div class="inpItem">
+                    <div class="hidden-xs inpItem">
                         <p></p>
                         <input type="text" name="Workplace" value="" placeholder="Место работы, должность"/>
                     </div>
